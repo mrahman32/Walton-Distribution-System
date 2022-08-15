@@ -1,0 +1,402 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .chart {
+        width: 100%;
+        height: 350px;
+    }
+
+</style>
+<div class="row">
+    <div class="col-md-6">
+        <div id="chartdiv" class="chart"></div>
+    </div>
+    <div class="col-md-6">
+        <div id="chartdiv2" class="chart"></div>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <div id="chartdiv4" class="chart"></div>
+    </div>
+    <div class="col-md-6">
+        <div id="chartdiv3" class="chart"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div id="chartdiv5" class="chart"></div>
+    </div>
+    <div class="col-md-6">
+       
+    </div>
+</div>
+
+
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/themes/dataviz.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+
+@*2nd Chart*@
+
+
+
+
+<!-- Chart code -->
+<script>
+    am4core.ready(function () {
+        function am4themes_dataviz(target) {
+            if (target instanceof am4core.ColorSet) {
+                target.list = [
+                  am4core.color("#1BA68D"),
+                  am4core.color("#E7DA4F"),
+                  am4core.color("#E77624"),
+                  am4core.color("#DF3520"),
+                  am4core.color("#64297B"),
+                  am4core.color("#232555")
+                ];
+            }
+        }
+        // Themes begin
+        am4core.useTheme(am4themes_dataviz);
+
+        am4core.useTheme(am4themes_animated);
+        // Themes end
+
+        // Create chart instance
+        var chart = am4core.create("chartdiv", am4charts.XYChart);
+
+        // Add data
+        chart.data = [{
+            "year": 2005,
+            "income": 23.5,
+            "expenses": 18.1
+        }, {
+            "year": 2006,
+            "income": 26.2,
+            "expenses": 22.8
+        }, {
+            "year": 2007,
+            "income": 30.1,
+            "expenses": 23.9
+        }, {
+            "year": 2008,
+            "income": 29.5,
+            "expenses": 25.1
+        }, {
+            "year": 2009,
+            "income": 35.6,
+            "expenses": 25
+        }];
+
+        // Create axes
+        var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
+        categoryAxis.dataFields.category = "year";
+        categoryAxis.numberFormatter.numberFormat = "#";
+        categoryAxis.renderer.inversed = true;
+        categoryAxis.renderer.grid.template.location = 0;
+        categoryAxis.renderer.cellStartLocation = 0.1;
+        categoryAxis.renderer.cellEndLocation = 0.9;
+
+        var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
+        valueAxis.renderer.opposite = true;
+
+        // Create series
+        function createSeries(field, name) {
+            var series = chart.series.push(new am4charts.ColumnSeries());
+            series.dataFields.valueX = field;
+            series.dataFields.categoryY = "year";
+            series.name = name;
+            series.columns.template.tooltipText = "{name}: [bold]{valueX}[/]";
+            series.columns.template.height = am4core.percent(100);
+            series.sequencedInterpolation = true;
+
+            var valueLabel = series.bullets.push(new am4charts.LabelBullet());
+            valueLabel.label.text = "{valueX}";
+            valueLabel.label.horizontalCenter = "left";
+            valueLabel.label.dx = 10;
+            valueLabel.label.hideOversized = false;
+            valueLabel.label.truncate = false;
+
+            var categoryLabel = series.bullets.push(new am4charts.LabelBullet());
+            categoryLabel.label.text = "{name}";
+            categoryLabel.label.horizontalCenter = "right";
+            categoryLabel.label.dx = -10;
+            categoryLabel.label.fill = am4core.color("#fff");
+            categoryLabel.label.hideOversized = false;
+            categoryLabel.label.truncate = false;
+        }
+
+        createSeries("income", "Income");
+        createSeries("expenses", "Expenses");
+
+
+
+
+        //2nd
+
+
+        // Create chart instance
+        var chart = am4core.create("chartdiv2", am4charts.PieChart);
+
+
+        // Add data
+        chart.data = [{
+            "country": "Lithuania",
+            "litres": 501.9,
+            "pulled": false
+        }, {
+            "country": "Czechia",
+            "litres": 301.9,
+            "pulled": true
+
+        }, {
+            "country": "Ireland",
+            "litres": 201.1,
+            "pulled": false
+        }, {
+            "country": "Germany",
+            "litres": 165.8,
+            "pulled": false
+        }, {
+            "country": "Australia",
+            "litres": 139.9,
+            "pulled": false
+        }, {
+            "country": "Austria",
+            "litres": 128.3,
+            "pulled": false
+        }, {
+            "country": "UK",
+            "litres": 99,
+            "pulled": false
+        },
+        {
+            "country": "Bangladesh",
+            "litres": 501.3,
+            "pulled": false
+        }
+        ];
+
+        // Add and configure Series
+        var pieSeries = chart.series.push(new am4charts.PieSeries());
+        pieSeries.dataFields.value = "litres";
+        pieSeries.dataFields.category = "country";
+        pieSeries.slices.template.stroke = am4core.color("#fff");
+        pieSeries.slices.template.strokeOpacity = 1;
+        pieSeries.slices.template.propertyFields.isActive = "pulled";
+
+
+        // This creates initial animation
+        pieSeries.hiddenState.properties.opacity = 1;
+        pieSeries.hiddenState.properties.endAngle = -90;
+        pieSeries.hiddenState.properties.startAngle = -90;
+
+
+        chart.hiddenState.properties.radius = am4core.percent(0);
+
+
+
+        var chart = am4core.create("chartdiv3", am4charts.XYChart);
+
+        chart.data = [{
+            "country": "USA",
+            "visits": 2025
+        }, {
+            "country": "China",
+            "visits": 1882
+        }, {
+            "country": "Japan",
+            "visits": 1809
+        }, {
+            "country": "Germany",
+            "visits": 1322
+        }, {
+            "country": "UK",
+            "visits": 1122
+        }, {
+            "country": "France",
+            "visits": 1114
+        }, {
+            "country": "India",
+            "visits": 984
+        }, {
+            "country": "Spain",
+            "visits": 711
+        }, {
+            "country": "Netherlands",
+            "visits": 665
+        }, {
+            "country": "Russia",
+            "visits": 580
+        }, {
+            "country": "South Korea",
+            "visits": 443
+        }, {
+            "country": "Canada",
+            "visits": 441
+        }];
+
+        chart.padding(40, 40, 40, 40);
+
+        var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+        categoryAxis.renderer.grid.template.location = 0;
+        categoryAxis.dataFields.category = "country";
+        categoryAxis.renderer.minGridDistance = 60;
+        categoryAxis.renderer.inversed = true;
+        categoryAxis.renderer.grid.template.disabled = true;
+
+        var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+        valueAxis.min = 0;
+        valueAxis.extraMax = 0.1;
+        //valueAxis.rangeChangeEasing = am4core.ease.linear;
+        //valueAxis.rangeChangeDuration = 1500;
+
+        var series = chart.series.push(new am4charts.ColumnSeries());
+        series.dataFields.categoryX = "country";
+        series.dataFields.valueY = "visits";
+        series.tooltipText = "{valueY.value}"
+        series.columns.template.strokeOpacity = 0;
+        series.columns.template.column.cornerRadiusTopRight = 10;
+        series.columns.template.column.cornerRadiusTopLeft = 10;
+        //series.interpolationDuration = 1500;
+        //series.interpolationEasing = am4core.ease.linear;
+        var labelBullet = series.bullets.push(new am4charts.LabelBullet());
+        labelBullet.label.verticalCenter = "bottom";
+        labelBullet.label.dy = -10;
+        labelBullet.label.text = "{values.valueY.workingValue.formatNumber('#.')}";
+
+        chart.zoomOutButton.disabled = true;
+
+        // as by default columns of the same series are of the same color, we add adapter which takes colors from chart.colors color set
+        series.columns.template.adapter.add("fill", function (fill, target) {
+            return chart.colors.getIndex(target.dataItem.index);
+        });
+
+        setInterval(function () {
+            am4core.array.each(chart.data, function (item) {
+                item.visits += Math.round(Math.random() * 200 - 100);
+                item.visits = Math.abs(item.visits);
+            })
+            chart.invalidateRawData();
+        }, 2000)
+
+        categoryAxis.sortBySeries = series;
+
+
+
+
+
+        var chart = am4core.create("chartdiv4", am4charts.PieChart3D);
+        chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+        chart.legend = new am4charts.Legend();
+
+
+        chart.data = [
+          {
+              country: "Lithuania",
+              litres: 501.9
+          },
+          {
+              country: "Czech Republic",
+              litres: 301.9
+          },
+          {
+              country: "Ireland",
+              litres: 201.1
+          },
+          {
+              country: "Germany",
+              litres: 165.8
+          },
+          {
+              country: "Australia",
+              litres: 139.9
+          },
+          {
+              country: "Austria",
+              litres: 128.3
+          },
+          {
+              country: "UK",
+              litres: 99
+          },
+          {
+              country: "Belgium",
+              litres: 60
+          },
+          {
+              country: "The Netherlands",
+              litres: 50
+          }
+        ];
+
+        var series = chart.series.push(new am4charts.PieSeries3D());
+        series.dataFields.value = "litres";
+        series.dataFields.category = "country";
+
+
+
+
+
+        
+        // Themes begin
+        am4core.useTheme(am4themes_animated);
+        // Themes end
+
+        var chart = am4core.create("chartdiv5", am4charts.PieChart3D);
+        chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+        chart.data = [
+          {
+              country: "Lithuania",
+              litres: 501.9
+          },
+          {
+              country: "Czech Republic",
+              litres: 301.9
+          },
+          {
+              country: "Ireland",
+              litres: 201.1
+          },
+          {
+              country: "Germany",
+              litres: 300.8
+          },
+          {
+              country: "Australia",
+              litres: 139.9
+          },
+          {
+              country: "Austria",
+              litres: 128.3
+          }
+        ];
+
+        chart.innerRadius = am4core.percent(40);
+        chart.depth = 130;
+
+        chart.legend = new am4charts.Legend();
+
+        var series = chart.series.push(new am4charts.PieSeries3D());
+        series.dataFields.value = "litres";
+        series.dataFields.depthValue = "litres";
+        series.dataFields.category = "country";
+        series.slices.template.cornerRadius = 5;
+        series.colors.step = 3;
+
+
+    }); // end am4core.ready()
+</script>
+
+
+

@@ -1,0 +1,110 @@
+﻿@model WDS.Models.DistributorCheckListModel
+
+
+@using (Html.BeginForm("CreateTradeL", "Document", FormMethod.Post, new { id = "CreateTradeL", enctype = "multipart/form-data" }))
+{
+    <div class="col-lg-12">
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.DealerCode)
+        @Html.HiddenFor(model => model.IsCreationApproved)
+        @Html.HiddenFor(model => model.CreationApprovedBy)
+        @Html.HiddenFor(model => model.CreationApprovedDate)
+        @Html.HiddenFor(model => model.IsTheDealerBlocked)
+        @Html.HiddenFor(model => model.IsTemporaryOpen)
+        @Html.HiddenFor(model => model.TempOpenDate)
+        @Html.HiddenFor(model => model.TempExpireDate)
+        @Html.HiddenFor(model => model.AddedBy)
+        @Html.HiddenFor(model => model.AddedDate)
+        @Html.HiddenFor(model => model.UpdatedBy)
+        @Html.HiddenFor(model => model.UpdatedDate)
+        @Html.HiddenFor(model => model.UpdateName)
+        
+        
+        
+
+        @Html.HiddenFor(model=>model.TradeLicensModel.Id)
+        @Html.HiddenFor(model => model.TradeLicensModel.CheckListId)
+        @Html.HiddenFor(model => model.TradeLicensModel.AddedBy)
+        @Html.HiddenFor(model => model.TradeLicensModel.AddedDate)
+        @Html.HiddenFor(model => model.TradeLicensModel.UpdatedBy)
+        @Html.HiddenFor(model => model.TradeLicensModel.UpdatedDate)
+
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Trade License No<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(model => model.TradeLicensModel.TradeLicenseNo, null, new { @class = "form-control", @type = "number", required="required" })
+                @Html.ValidationMessageFor(model => model.TradeLicensModel.TradeLicenseNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Issue Date<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(model => model.TradeLicensModel.IssueDate, new { @class = "ddPicker form-control", @readonly = "readonly", required = "required" })
+                @Html.ValidationMessageFor(model => model.TradeLicensModel.IssueDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Expire Date<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(model => model.TradeLicensModel.ExpireDate, new { @class = "ddPicker form-control", @readonly = "readonly", required = "required" })
+                @Html.ValidationMessageFor(model => model.TradeLicensModel.ExpireDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Business Name Match with Oracle Name (Yes/No)<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.DropDownListFor(model => model.TradeLicensModel.IsBusinessNameMachedWithOracle, new List<SelectListItem>
+                {
+                    new SelectListItem { Text = "YES", Value = "true"},
+                    new SelectListItem { Text = "NO", Value = "false"},
+                }, "Select", new { @class = "selectpicker show-tick form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.TradeLicensModel.IsBusinessNameMachedWithOracle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Address match with Oracle name(Yes /No)<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.DropDownListFor(model => model.TradeLicensModel.IsAddressMachedWithOracle, new List<SelectListItem>
+                {
+                    new SelectListItem { Text = "YES", Value = "true"},
+                    new SelectListItem { Text = "NO", Value = "false"},
+                }, "Select", new { @class = "selectpicker show-tick form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.TradeLicensModel.IsBusinessNameMachedWithOracle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Business Add. Match with BS Certificate</label>
+            <div class="col-lg-6">
+                @Html.DropDownListFor(model => model.TradeLicensModel.IsAddressMatchWithBankSolvencyCertificate, new List<SelectListItem>
+                {
+                    new SelectListItem { Text = "YES", Value = "true"},
+                    new SelectListItem { Text = "NO", Value = "false"},
+                }, "Select", new { @class = "selectpicker show-tick form-control" })
+                @Html.ValidationMessageFor(model => model.TradeLicensModel.IsAddressMatchWithBankSolvencyCertificate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @if (Model != null && !Model.IsApprover)
+        {
+             <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right"></label>
+            <div class="col-lg-6 text-right">
+                <button type="submit" id="btnTradeSave" class="btn btn-outline-success"><i class="fas fa-save"></i>&nbsp;Save</button>
+            </div>
+        </div>
+        }
+
+       
+    
+    </div>
+    
+    <script type="text/javascript">
+        $(".ddPicker").datepicker({ dateFormat: 'mm-dd-yy', changeMonth: true, changeYear: true, yearRange: "-100:+00" })
+            .on('keypress paste', function (e) {
+                e.preventDefault();
+                return false;
+            });
+    </script>
+}

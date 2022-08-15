@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="WDSEntities-Web.config Connection String" description="WDSEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/DAL.WdsEntities.WdsModel.csdl|res://*/DAL.WdsEntities.WdsModel.ssdl|res://*/DAL.WdsEntities.WdsModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=103.147.182.250;initial catalog=WDS;persist security info=True;user id=sa;password=Wal_ton@20@20;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="D:\\Walton\ Projects\\walton-distribution-system\\WDS\\WDS\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='WDSEntities']/@connectionString" />
+  </parameter>
+</parameters>

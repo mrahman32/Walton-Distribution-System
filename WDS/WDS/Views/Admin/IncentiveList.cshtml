@@ -1,0 +1,61 @@
+﻿@model IEnumerable<WDS.DAL.WdsEntities.IncentiveDistribution>
+@{
+    ViewBag.Title = "IncentiveList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-header">Incentive LIST</div>
+                <div class="card-body">
+                    <table class="table table-striped table-scrollable table-bordered table-hover dtTable first" id="incentiveTable">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Model</th>
+                                <th>Retailer Amount</th>
+                                <th>Dealer Amount</th>
+                                <th>SR Amount</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Remarks</th>
+                                <th>Actions</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Any())
+                            {
+                                foreach (var model in Model)
+                                {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => model.Title)</td>
+                                    <td>@Html.DisplayFor(modelItem => model.ModelName)</td>
+                                    <td>@Html.DisplayFor(modelItem => model.RetailerAmount)</td>
+                                    <td>@Html.DisplayFor(modelItem => model.DealerAmount)</td>
+                                    <td>@Html.DisplayFor(modelItem => model.SRAmount)</td>
+                                    <td>@Html.DisplayFor(modelItem => model.StartDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => model.EndDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => model.Remarks)</td>
+                                    <td>
+                                        <input type="button" class="btn btn-sm btn-outline-warning" value="Edit" onclick="location.href = '@Url.Action("EditIncentive", "Admin", new {id = model.Id})'" />
+                                    </td>
+                                    
+                                </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#incentiveTable').DataTable();
+    });
+
+</script>

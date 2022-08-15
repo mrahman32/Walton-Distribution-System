@@ -1,0 +1,86 @@
+﻿@using WDS.DAL.WdsEntities
+
+@{
+    ViewBag.Title = "DistributorList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var Model = ViewBag.distributorList as List<Distributor>;
+}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+               
+                <div class="card-header">
+                    <p>
+                        @Html.ActionLink("Create New", "CreateDistributors", null, new { @class = "btn btn-outline-success" })
+                    </p>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped table-scrollable table-bordered table-hover dtTable first" id="distributorTable">
+                        <thead>
+                            <tr>
+                                <th>
+                                    DistributorName
+                                </th>
+                                <th>
+                                    DigitechCode
+                                </th>
+
+                                <th>
+                                    Zone
+                                </th>
+                                <th>
+                                    ImportCode
+                                </th>
+                                <th>
+                                    MobileNo
+                                </th>
+                                <th>
+                                    Address
+                                </th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            @if (Model.Any())
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DistributorNameCellCom)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.DigitechCode)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Zone)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ImportCode)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.MobileNo)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Address)
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#distributorTable').DataTable();
+    });
+
+</script>

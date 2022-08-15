@@ -1,0 +1,199 @@
+﻿@model IEnumerable<WDS.ViewModels.VmDashboardImage>
+@{
+    ViewBag.Title = "UploadList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    
+    @if (TempData["message"] != null)
+    {
+        var msgType = TempData["messageType"];
+        var msg = TempData["message"];
+        if ((int)msgType == 1)
+        {
+            TempData["message"] = null;
+            TempData["messageType"] = 0;
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Message: </strong> @msg
+                <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </a>
+            </div>
+
+        }
+        else if ((int)msgType == 2)
+        {
+            TempData["message"] = null;
+            TempData["messageType"] = 0;
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Message: </strong> @msg
+                <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </a>
+            </div>
+
+        }
+        else if ((int)msgType == 3)
+        {
+            TempData["message"] = null;
+            TempData["messageType"] = 0;
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Message: </strong> @msg
+                <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </a>
+            </div>
+        }
+    }
+    
+    
+
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-header">Offer Uploads (@Html.ActionLink("Upload New Offer Image", "AdminUpload", "Dashboard"))</div>
+                <div class="card-body">
+
+                    <table class="table table-striped table-scrollable table-bordered table-hover dtTable first" id="tbl_upload_list">
+                        <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Image</th>
+                            <th>Is-Active</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @if (Model.Any())
+                        {
+                            foreach (var model in Model)
+                            {
+                                var filePath = model.FilePath;
+                                bool ischecked = model.IsActive;
+                                <tr>
+                                    @Html.HiddenFor(modelItem => model.Id)
+                                    <td>@Html.DisplayFor(modelItem => model.ImageDescription)</td>
+                                    <td>
+                                        <img class="d-block w-100" src="@filePath" style="display: block; max-width: 100px; max-height: 70px; width: auto; height: auto;" alt=""/>
+                                    </td>
+                                    <td>
+                                        <input id="changeStatus" type="checkbox" checked="@ischecked"
+                                               style="" onchange="ChangeActiveStatus($(this))"/>
+                                    </td>
+                                    <td>
+
+                                        <input type="submit" value="Delete" class="btn btn-outline-danger" onclick="location.href = '@Url.Action("DeleteImage", "Admin", new {id = model.Id})'"/>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<link href="~/Content/iziToast.min.css" rel="stylesheet" />
+@section scripts
+{
+
+<script src="~/Scripts/iziToast.min.js"></script>
+
+    <script type="text/javascript">
+
+        $(function () {
+            $("#tbl_upload_list").DataTable();
+        });
+        function ChangeActiveStatus(ths) {
+            var id = ths.closest('tr').find('input[type="hidden"]').val();
+            var status = ths.closest('tr').find('input[type="checkbox"]').is(':checked');
+            var conditionalMsg = '';
+            if (status) {
+                conditionalMsg = 'Are you sure to activate this image again?';
+            } else {
+                conditionalMsg = 'Are you sure to deactivate ths image?';
+            }
+            iziToast.show({
+                theme: 'dark',
+                icon: 'icon-person',
+                title: 'Hey',
+                message: conditionalMsg,
+                position: 'center', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter
+                progressBarColor: 'rgb(0, 255, 184)',
+                buttons: [
+                    ['<button>Ok</button>', function (instance, toast) {
+                        instance.hide({
+                            transitionOut: 'fadeOutUp'
+                        }, toast);
+
+
+                        $.ajax({
+                            url: ' @Url.Action("ChangeImageStatus", "Admin")', //Changed For test
+                            type: 'Post',
+                            //data: JSON.stringify({ statusList: packagingQcList }),
+                            data: JSON.stringify({ id: id, status: status }),
+                            dataType: 'json',
+                            async: false,
+                            contentType: 'application/json',
+                            success: function (result) {
+                                if (result.Id === 1) {
+                                    iziToast.success({
+                                        title: 'Success',
+                                        message: result.Message
+                                    });
+                                    ths.closest('tr').find('input[type="checkbox"]').prop('checked', status);
+                                } else if (result.Id === 0) {
+                                    iziToast.error({
+                                        title: 'Error',
+                                        message: result.Message
+                                    });
+                                }
+                            },
+                            error: function (result, textStatus, jqXHR) {
+                                iziToast.error({
+                                    title: 'Error',
+                                    message: 'Connection Error !!!',
+                                });
+                            }
+                        });
+                    }, true], // true to focus
+                    ['<button>Close</button>', function (instance, toast) {
+                        
+                        if (status == true) {
+                            ths.closest('tr').find('input[type="checkbox"]').prop("checked", false);
+                        } else {
+                            ths.closest('tr').find('input[type="checkbox"]').prop("checked", true);
+                        }
+                        instance.hide({
+                            transitionOut: 'fadeOutUp',
+                            onClosing: function (instance, toast, closedBy) {
+                                console.info('closedBy: ' + closedBy); // The return will be: 'closedBy: buttonName'
+                            }
+                        }, toast, 'buttonName');
+                    }]
+                ],
+                onOpening: function (instance, toast) {
+                    console.info('callback abriu!');
+                },
+                onClosing: function (instance, toast, closedBy) {
+                    console.info('closedBy: ' + closedBy); // tells if it was closed by 'drag' or 'button'
+
+                    if (status == true) {
+                        ths.closest('tr').find('input[type="checkbox"]').prop("checked", false);
+                    } else {
+                        ths.closest('tr').find('input[type="checkbox"]').prop("checked", true);
+                    }
+                }
+            });
+
+
+
+
+
+
+        }
+</script>
+}
+

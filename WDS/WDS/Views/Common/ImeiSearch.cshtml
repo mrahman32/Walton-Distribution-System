@@ -1,0 +1,172 @@
+﻿
+@{
+    ViewBag.Title = "ImeiSearch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-header">SEARCH IMEI</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                @*<div class="card-header">Scanned IEMI List</div>*@
+                                <div class="card-body">
+                                    <div class="form-group row">
+                                        <input type="text" class="form-control" id="txtScan" placeholder="Scan Here" />
+                                    </div>
+                                    <div class="form-group row">
+                                        <table class="table table-bordered" id="tblImeiInfo">
+                                            <thead>
+                                                <tr>
+                                                    <th>Dealer Name</th>
+                                                    <th>Dealer Code</th>
+                                                    <th>Model</th>
+                                                    <th>IMEI One</th>
+                                                    <th>IMEI Two</th>
+                                                    <th>Color</th>
+                                                    <th>Dist. Date</th>
+                                                    <th>WDS Status</th>
+                                                    <th>Ret. Dist. Status</th>
+                                                    <th>Order No.</th>
+                                                    <th>Retailer Name</th>
+                                                    <th>Retailer Add.</th>
+                                                    <th>Retailer bKash</th>
+                                                    <th>Ret. Dist. Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tblImeiInfoBody"></tbody>
+                                        </table>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*@section scripts
+{*@
+
+    <script type="text/javascript">
+        window.onload = function () {
+            document.getElementById("txtScan").focus();
+            $('#txtScan').keyup(function() {
+                //debugger;
+                if ($(this).val().length === 15) {
+                    $("#tblImeiInfo tr>td").remove();
+                    var mimei = $('#txtScan').val();
+                    $.ajax({
+                        url: '@Url.Action("GetImeiDetail", "Common")', //Changed For test
+                        type: 'Post',
+                        //data: JSON.stringify({ statusList: packagingQcList }),
+                        data: JSON.stringify({ imei: mimei }),
+                        dataType: 'json',
+                        async: false,
+                        contentType: 'application/json',
+                        success: function (result) {
+
+                            console.log(result);
+                            if ((typeof result === 'string' || result instanceof String) && result.startsWith("err")) {
+                                
+                                alert(result);
+
+                                $('#txtScan').val('');
+                                document.getElementById("txtScan").focus();
+                            } else {
+                                for (var i in result) {
+                                    AddRow(result[i]);
+                                }
+                            }
+
+                        },
+                        error: function(result, textStatus, jqXHR) {
+                            //iziToast.error({
+                            //    timeout: 2000,
+                            //    imageWidth: 150,
+                            //    position: 'center',
+                            //    title: 'Error',
+                            //    message: result
+                            //});
+
+                            //return false;
+                        }
+                    });
+
+
+                } else {
+                    //iziToast.error({
+                    //    timeout: 2000,
+                    //    imageWidth: 150,
+                    //    position: 'center',
+                    //    title: 'Error',
+                    //    message: "Invalid Imei Number!"
+                    //});
+
+                    return false;
+                }
+                return false;
+            });
+
+
+        };
+
+
+
+
+        function AddRow(detail) {
+
+            var dealerDistributionString = '';
+            var retailerDistDate = '';
+            if (detail.DealerDistributionDate != null) {
+                var m1 = new Date(parseInt(detail.DealerDistributionDate.replace(/[^0-9 +]/g, '')));
+                dealerDistributionString = m1.getUTCFullYear() + "/" + (m1.getUTCMonth() + 1) + "/" + m1.getUTCDate();
+            }
+
+            if (detail.RetailerDistributionDate != null) {
+                var m2 = new Date(parseInt(detail.RetailerDistributionDate.replace(/[^0-9 +]/g, '')));
+                retailerDistDate = m2.getUTCFullYear() + "/" + (m2.getUTCMonth() + 1) + "/" + m2.getUTCDate();
+            }
+            
+            var row1 = '<tr>' +
+                '<td>' + detail.DealerName + '</td>' +
+                '<td>' + detail.DealerCode + '</td>' +
+                '<td>' + detail.Model + '</td>' +
+                '<td>' + detail.ImeiOne + '</td>' +
+                '<td>' + detail.ImeiTwo + '</td>' +
+                '<td>' + detail.Color + '</td>' +
+                '<td>' + dealerDistributionString + '</td>' +
+                '<td>' + detail.WdsStatus + '</td>' +
+                '<td>' + detail.RetailerDistributionStatus + '</td>' +
+                '<td>' + detail.OrderNo + '</td>' +
+                '<td>' + detail.RetailerName + '</td>' +
+                '<td>' + detail.RetailerAddress + '</td>' +
+                '<td>' + detail.PaymentNumber + '</td>' +
+                '<td>' + retailerDistDate + '</td>' +
+                '</tr>';
+            $('#tblImeiInfoBody').append(row1);
+
+            $('#txtScan').val('');
+            document.getElementById("txtScan").focus();
+
+        }
+        function RemoveRow(ths) {
+            var thisRow = ths.closest('tr');
+            thisRow.remove();
+            document.getElementById("txtScan").focus();
+        }
+    </script>
+
+

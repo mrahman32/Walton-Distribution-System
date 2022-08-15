@@ -1,0 +1,224 @@
+﻿@{
+    ViewBag.Title = "DoaIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-header">Return Report</div>
+            <div class="card-body">
+                <div class="form-group row">
+                    <label class=" col-lg-1 text-sm-right">Start Date:</label>
+                    <div class="col-lg-2">
+                        <input class="datepicker form-control" data-date-format="dd/mm/yyyy" id="startDate" autocomplete="off">
+                    </div>
+                    <label class=" col-lg-1 text-sm-right">End Date:</label>
+                    <div class="col-lg-2">
+                        <input class="datepicker form-control" data-date-format="dd/mm/yyyy" id="endDate" autocomplete="off">
+                    </div>
+                    <label class=" col-lg-1 text-sm-right">Dealer:</label>
+                    <div class="col-lg-3">
+                        @Html.DropDownList("dealer", new SelectList(ViewBag.Dealers, "Value", "Text"), new { @class = "selectpicker show-tick form-control", @id = "dealer", data_live_search = "true", })
+                    </div>
+
+                    <div class="col-lg-1">
+                        <button class="btn btn-outline-success btn-sm" id="btnSearch">Search</button>
+                    </div>
+
+                </div>
+                <div class="row">
+                    @*table*@
+                    <div class="col-lg-12">
+                        <table class="table table-bordered" id="tbl_doa_count">
+                            <thead>
+                                <tr>
+
+                                    <th>Model</th>
+                                    <th>Received Qty</th>
+                                    <th>Adjusted Qty</th>
+                                    <th>Pending Qty</th>
+                                    <th>Details</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbl_doa_count_body"></tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="partial_return_modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Return Details Data</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body scrollable">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        //$(".datepicker").datepicker();
+
+
+
+
+
+        $(".datepicker").datepicker({
+            dateFormat: 'yy-mm-dd'
+        });
+
+        $("#btnSearch").on('click', function () {
+            //document.getElementById('btnSearch').value = 'Please Wait!.';
+            //document.getElementById('btnSearch').style.backgroundColor = "#FF0000";
+            $('#tbl_doa_count').DataTable().destroy();
+            $("#tbl_doa_count_body").html("");
+
+
+            var startDate = $("#startDate").val();
+            var endDate = $("#endDate").val();
+            var dealerCode = $("#dealer").val();
+            if (startDate !== "" && endDate !== "") {
+                var dataList = JSON.stringify({ startDate: startDate, endDate: endDate, dealerCode: dealerCode });
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    url: '@Url.Action("GetDoaReport", "Dealer")',
+                    data: dataList,
+                    success: function (data) {
+                        if (data.length > 0) {
+                            $('#tbl_doa_count').DataTable().destroy();
+                            $("#tbl_doa_count_body").html("");
+
+                            var dataList = data.length;
+
+                            for (var i = 0; i < dataList; i++) {
+                                //var dateString = data[i].OrderDate;
+                                //var seconds = parseInt(dateString.replace(/\/Date\(([0-9]+)[^+]\//i, "$1"));
+                                //var date = new Date(seconds);
+                                //date = formatDate(date);
+                                $("#tbl_doa_count_body").append('<tr>' +
+                                    '<td>' + data[i].ITEM_NAME + '</td>' +
+                                    //'<td>' + date + '</td>' +
+                                    '<td>' + data[i].RECEIVED + '</td>' +
+                                    '<td>' + data[i].PENDING + '</td>' +
+                                    '<td>' + data[i].ADJUST + '</td>' +
+                                    '<td><input type="button" value="See Detail" class="btn btn-outline-warning btn-sm" onclick="get_return_details($(this))"</td>' +
+                                    //'<td>' + data[i].RetailerPhone + '</td>' +
+                                    //'<td>' + data[i].OrderQuantity + '</td>' +
+                                    '</tr>');
+                            }
+                            var table = $('#tbl_doa_count').DataTable();
+
+                            new $.fn.dataTable.Buttons(table, {
+                                buttons: [
+                                    { extend: 'excel', className: 'excelBtn', title: 'Distributor Return Qty', text: 'Click For Excel Export' }
+                                ]
+                            });
+
+                            table.buttons(0, null).container().prependTo(
+                                table.table().container()
+                            );
+                        } else {
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'No Data Found!.',
+                                position: 'topCenter',
+                            });
+                        }
+                    }
+                });
+            }
+
+        });
+    });
+
+
+    function get_return_details(ths) {
+        var row = ths.closest('tr');        // Finds the closest row <tr>
+        var modelName = String(row.find("td:nth-child(1)").text()); // Finds the 2nd <td> element
+        var recQty = String(row.find("td:nth-child(2)").text());
+        var adjQty = String(row.find("td:nth-child(3)").text());
+        var penQty = String(row.find("td:nth-child(4)").text());
+        var startDate = String($("#startDate").val());
+        var endDate = String($("#endDate").val());
+        var dealerCode = $("#dealer").val();
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetDoaReportDetail", "Dealer")',
+            data: JSON.stringify({ 'startDate': startDate, 'endDate': endDate, 'modelName': modelName, 'recQty': recQty, 'adjQty': adjQty, 'penQty': penQty, 'dealerCode': dealerCode }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "html",
+            success: function (response) {
+                $("#partial_return_modal").find(".modal-body").html(response);
+                $("#partial_return_modal").modal('show');
+
+
+
+
+
+
+                var tblReceive = $('#receiveTable').DataTable();
+
+                new $.fn.dataTable.Buttons(tblReceive, {
+                    buttons: [
+                        { extend: 'excel', className: 'excelBtn', title: 'Data export Retailer', text: 'Click For Excel Export' }
+                    ]
+                });
+
+                tblReceive.buttons(0, null).container().prependTo(
+                    table.table().container()
+                );
+
+
+
+                //var tblAdjust = $('#adjustTable').DataTable();
+
+                //new $.fn.dataTable.Buttons(tblAdjust, {
+                //    buttons: [
+                //        { extend: 'excel', className: 'excelBtn', title: 'Data export Retailer', text: 'Click For Excel Export' }
+                //    ]
+                //});
+
+                //tblAdjust.buttons(0, null).container().prependTo(
+                //    table.table().container()
+                //);
+
+
+                //var tblPending = $('#pendingTable').DataTable();
+
+                //new $.fn.dataTable.Buttons(tblPending, {
+                //    buttons: [
+                //        { extend: 'excel', className: 'excelBtn', title: 'Data export Retailer', text: 'Click For Excel Export' }
+                //    ]
+                //});
+
+                //tblPending.buttons(0, null).container().prependTo(
+                //    table.table().container()
+                //);
+            },
+            failure: function (response) {
+                //alert(response.responseText);
+                console.log(response.responseText);
+            },
+            error: function (response) {
+                //alert(response.responseText);
+                console.log(response.responseText);
+            }
+        });
+    }
+</script>
+

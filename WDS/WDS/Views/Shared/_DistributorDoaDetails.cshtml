@@ -1,0 +1,144 @@
+﻿@model WDS.ViewModels.DistributorDoaDetailViewModel
+
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-header"><h5>Received List</h5></div>
+            <div class="card-body">
+
+                <table class="table table-bordered table-responsive" id="receiveTable">
+                    <thead>
+                        <tr>
+                            <th>Model Name</th>
+                            <th>Service Id</th>
+                            <th>Receive Date</th>
+                            <th>Barcode</th>
+                            <th>Cust. Name</th>
+                            <th>Dealer Code</th>
+                            <th>Service Center ID</th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="receiveTableBody">
+                        @if (Model != null && Model.ReceiveList.Any())
+                        {
+                            int rLen = Model.ReceiveList.Count;
+                            for (int i = 0; i < rLen; i++)
+                            {
+                                <tr>
+                                    <td>@Model.ReceiveList[i].ITEM_NAME</td>
+                                    <td>@Model.ReceiveList[i].SERVICE_NO</td>
+                                    <td>@Model.ReceiveList[i].RECEIVE_DATE</td>
+                                    <td>@Model.ReceiveList[i].BARCODE</td>
+                                    <td>@Model.ReceiveList[i].CUST_NAME</td>
+                                    <td>@Model.ReceiveList[i].DEALER_CODE</td>
+                                    <td>@Model.ReceiveList[i].SERVICE_CENTER_ID</td>
+                                </tr>
+                            }
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-header"><h5>Adjusted List</h5></div>
+            <div class="card-body">
+
+                <table class="table table-bordered table-responsive" id="adjustTable">
+                    <thead>
+                        <tr>
+                            <th>Model Name</th>
+                            <th>Service Id</th>
+                            <th>Receive Date</th>
+                            <th>Barcode</th>
+                            <th>Cust. Name</th>
+                            <th>Dealer Code</th>
+                            <th>Service Center ID</th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="adjustTableBody">
+                        @if (Model != null && Model.AdjustList.Any())
+                        {
+                            int rLen = Model.AdjustList.Count;
+                            for (int i = 0; i < rLen; i++)
+                            {
+                                <tr>
+                                    <td>@Model.AdjustList[i].ITEM_NAME</td>
+                                    <td>@Model.AdjustList[i].SERVICE_NO</td>
+                                    <td>@Model.AdjustList[i].RECEIVE_DATE</td>
+                                    <td>@Model.AdjustList[i].BARCODE</td>
+                                    <td>@Model.AdjustList[i].CUST_NAME</td>
+                                    <td>@Model.AdjustList[i].DEALER_CODE</td>
+                                    <td>@Model.AdjustList[i].SERVICE_CENTER_ID</td>
+                                </tr>
+                            }
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-header"><h5>Pending List</h5></div>
+            <div class="card-body">
+
+                <table class="table table-bordered table-responsive" id="pendingTable">
+                    <thead>
+                        <tr>
+                            <th>Model Name</th>
+                            <th>Service Id</th>
+                            <th>Receive Date</th>
+                            <th>Barcode</th>
+                            <th>Cust. Name</th>
+                            <th>Dealer Code</th>
+                            <th>Service Center ID</th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="pendingTableBody">
+                        @if (Model != null && Model.PendingList.Any())
+                        {
+                            int rLen = Model.PendingList.Count;
+                            for (int i = 0; i < rLen; i++)
+                            {
+                                <tr>
+                                    <td>@Model.PendingList[i].ITEM_NAME</td>
+                                    <td>@Model.PendingList[i].SERVICE_NO</td>
+                                    <td>@Model.PendingList[i].RECEIVE_DATE</td>
+                                    <td>@Model.PendingList[i].BARCODE</td>
+                                    <td>@Model.PendingList[i].CUST_NAME</td>
+                                    <td>@Model.PendingList[i].DEALER_CODE</td>
+                                    <td>@Model.PendingList[i].SERVICE_CENTER_ID</td>
+                                </tr>
+                            }
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+        
+    });
+</script>

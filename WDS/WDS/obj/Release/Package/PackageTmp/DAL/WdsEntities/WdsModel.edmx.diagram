@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a1a665d5775a4f4d968b046c8c06986e" Name="Diagram1">
+        <EntityTypeShape EntityType="WDSModel.AvailabilityBroadcast" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.Bank" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.BankBranch" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.Brand" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.DashboardImage" Width="1.5" PointX="5.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.DealerDistribution" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.DealerDistributionDetail" Width="1.5" PointX="11.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.DealerPrice" Width="1.5" PointX="7.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.DealerTerritoryMapping" Width="1.5" PointX="9.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.DistributorOrderDetail" Width="1.5" PointX="11.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.DistributorOrderLog" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.DistributorOrder" Width="1.5" PointX="13.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.Distributor" Width="1.5" PointX="13.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.DistributorType" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.District" Width="1.5" PointX="7.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.Division" Width="1.5" PointX="13.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.ExtendedLimit" Width="1.5" PointX="15.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.IncentiveDistribution" Width="1.5" PointX="15.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.MainMenu" Width="1.5" PointX="9.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.MarketShare" Width="1.5" PointX="15.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.MisPerson" Width="1.5" PointX="15.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.MisUpdateLog" Width="1.5" PointX="17.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.ModelColor" Width="1.5" PointX="17.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.ModelPrice" Width="1.5" PointX="17.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.OtherDistributor" Width="1.5" PointX="17.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.OtherRetailer" Width="1.5" PointX="11.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.Party" Width="1.5" PointX="17.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.Product" Width="1.5" PointX="7.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.ProductBrand" Width="1.5" PointX="19.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.ProductMaster" Width="1.5" PointX="19.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.PromotionalMessageLog" Width="1.5" PointX="19.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.RetailerDistribution" Width="1.5" PointX="10.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.RetailerInfo" Width="1.5" PointX="19.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.RetailerOrder" Width="1.5" PointX="5.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.RetailerOrderDetail" Width="1.5" PointX="8" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.RetailerPaymemt" Width="1.5" PointX="21.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.RetailerPromotionalWinning" Width="1.5" PointX="21.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.RetailerTransferLog" Width="1.5" PointX="5.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.RetailerUpdateLog" Width="1.5" PointX="7.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.Role" Width="1.5" PointX="9.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.SalesRepresentative" Width="1.5" PointX="21.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.SalesTeam" Width="1.5" PointX="11.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.SendSmsLog" Width="1.5" PointX="13.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.SRUpdateLog" Width="1.5" PointX="15.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.SubMenu" Width="1.5" PointX="21.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.sysdiagram" Width="1.5" PointX="17.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.Target" Width="1.5" PointX="19.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.TaxZone" Width="1.5" PointX="21.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.ThanaList" Width="1.5" PointX="23.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.User" Width="1.5" PointX="23.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.Zone" Width="1.5" PointX="23.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.BankSolvency" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.BankSolvenciesUpdateLog" Width="1.5" PointX="23.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.DistributorCheckList" Width="1.5" PointX="0.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.DistributorOthersInformation" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.DistributorOthersInformationUpdateLog" Width="1.5" PointX="23.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.DistributorPersonalInformation" Width="1.5" PointX="3" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.MemorandumOfAgreement" Width="1.5" PointX="3" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.MemorandumOfAgreementUpdateLog" Width="1.5" PointX="25.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.MemorandumOfCheque" Width="1.5" PointX="3" PointY="31" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.MemorandumOfChequeUpdateLog" Width="1.5" PointX="25.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.MOA_Stamps" Width="1.5" PointX="5.25" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.MOC_Cheques" Width="1.5" PointX="5.25" PointY="30.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.MOC_Stamps" Width="1.5" PointX="5.25" PointY="34.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.TaxIdentity" Width="1.5" PointX="3" PointY="38.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.TradeLicens" Width="1.5" PointX="3" PointY="42.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.TradeLicensesUpdateLog" Width="1.5" PointX="9.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.ValueAddedTax" Width="1.5" PointX="3" PointY="46.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.ValueAddedTaxesUpdateLog" Width="1.5" PointX="11.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.VarificationApproval" Width="1.5" PointX="25.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.VarificationEntity" Width="1.5" PointX="25.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.IncentiveDistribution_Back20210627" Width="1.5" PointX="27.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.SalesZone" Width="1.5" PointX="5.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WDSModel.TaxIdentitiesUpdateLog" Width="1.5" PointX="27.75" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="WDSModel.FK_RetailerDistribution_RetailerOrderDetail" ManuallyRouted="false" />
+        <AssociationConnector Association="WDSModel.FK_RetailerOrderDetail_RetailerOrder" ManuallyRouted="false" />
+        <AssociationConnector Association="WDSModel.FK_BankSolvencies_DistributorCheckList" ManuallyRouted="false" />
+        <AssociationConnector Association="WDSModel.FK_DistributorOthersInformation_DistributorCheckList" ManuallyRouted="false" />
+        <AssociationConnector Association="WDSModel.FK_DistributorPersonalInformation_DistributorCheckList" ManuallyRouted="false" />
+        <AssociationConnector Association="WDSModel.FK_MemorandumOfAgreement_DistributorCheckList" ManuallyRouted="false" />
+        <AssociationConnector Association="WDSModel.FK_MemorandumOfCheque_DistributorCheckList" ManuallyRouted="false" />
+        <AssociationConnector Association="WDSModel.FK_TaxIdentities_DistributorCheckList" ManuallyRouted="false" />
+        <AssociationConnector Association="WDSModel.FK_TradeLicenses_DistributorCheckList" ManuallyRouted="false" />
+        <AssociationConnector Association="WDSModel.FK_ValueAddedTaxes_DistributorCheckList" ManuallyRouted="false" />
+        <AssociationConnector Association="WDSModel.FK_MOA_Stamps_MemorandumOfAgreement" ManuallyRouted="false" />
+        <AssociationConnector Association="WDSModel.FK_MOC_Cheques_MemorandumOfCheque" ManuallyRouted="false" />
+        <AssociationConnector Association="WDSModel.FK_MOC_Stamps_MemorandumOfCheque" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

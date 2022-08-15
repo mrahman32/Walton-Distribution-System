@@ -1,0 +1,142 @@
+﻿@model WDS.Models.SalesRepresentativeModel
+@{
+    ViewBag.Title = "CreateSr";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+
+
+
+    @if (TempData["message"] != null)
+    {
+        var msgType = TempData["messageType"];
+        var msg = TempData["message"];
+        if ((int)msgType == 1)
+        {
+            TempData["message"] = null;
+            TempData["messageType"] = 0;
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Message: </strong> @msg
+                <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </a>
+            </div>
+
+        }
+        else if ((int)msgType == 2)
+        {
+            TempData["message"] = null;
+            TempData["messageType"] = 0;
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Message: </strong> @msg
+                <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </a>
+            </div>
+
+        }
+        else if ((int)msgType == 3)
+        {
+            TempData["message"] = null;
+            TempData["messageType"] = 0;
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Message: </strong> @msg
+                <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </a>
+            </div>
+        }
+    }
+
+
+
+
+
+
+
+
+
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-header">Create SR</div>
+                <div class="card-body">
+                    @using (Html.BeginForm("CreateSr", "Dealer", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">Name</label>
+                            <div class="col-lg-6">
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">Email</label>
+                            <div class="col-lg-6">
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">Phone</label>
+                            <div class="col-lg-6">
+                                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">Payment Type</label>
+                            <div class="col-lg-6">
+                                @Html.DropDownListFor(model => model.PaymentNumberType, new SelectList(new[]
+                            {
+                                new SelectListItem{Value = "", Text = "Select", Selected = true},
+                                new SelectListItem{Value = "BKASH", Text = "BKASH"},
+                                new SelectListItem{Value = "NAGAD", Text = "NAGAD"},
+                                new SelectListItem{Value = "DBBL", Text = "DBBL Mobile Bangking"}
+                            }, "Value", "Text"), new { @class = "selectpicker show-tick form-control" })
+                                @Html.ValidationMessageFor(model => model.PaymentNumberType, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                        <div class="form-group row">
+
+                            <label class="col-lg-3 col-form-label text-sm-right">Payment Number</label>
+                            <div class="col-lg-6">
+                                @Html.EditorFor(model => model.PaymentNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PaymentNumber, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                        <div class="form-group row">
+
+                            <label class="col-lg-3 col-form-label text-sm-right">Dealer</label>
+                            <div class="col-lg-6">
+                                @Html.DropDownListFor(model => model.DealerCode, new SelectList(ViewBag.Dealers, "Value", "Text"), new { @class = "selectpicker show-tick form-control" })
+                                @Html.ValidationMessageFor(model => model.DealerCode, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right"></label>
+                            <div class="col-lg-6">
+                                <input type="submit" value="Save" class="btn btn-outline-success" />
+                            </div>
+
+                        </div>
+
+                    }
+                    @Html.ActionLink("Back to SR List", "SrList")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

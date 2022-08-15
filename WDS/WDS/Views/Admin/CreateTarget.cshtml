@@ -1,0 +1,256 @@
+﻿@model WDS.Models.TargetModel
+@{
+    ViewBag.Title = "CreateTarget";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="container-fluid">
+
+    @if (TempData["message"] != null)
+    {
+        var msgType = TempData["messageType"];
+        var msg = TempData["message"];
+        if ((int)msgType == 1)
+        {
+            TempData["message"] = null;
+            TempData["messageType"] = 0;
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Message: </strong> @msg
+                <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </a>
+            </div>
+
+        }
+        else if ((int)msgType == 2)
+        {
+            TempData["message"] = null;
+            TempData["messageType"] = 0;
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Message: </strong> @msg
+                <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </a>
+            </div>
+
+        }
+        else if ((int)msgType == 3)
+        {
+            TempData["message"] = null;
+            TempData["messageType"] = 0;
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Message: </strong> @msg
+                <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </a>
+            </div>
+        }
+    }
+
+
+
+
+
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-header">Create New Target</div>
+                <div class="card-body">
+                    @using (Html.BeginForm("CreateTarget", "Admin", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">Target Name</label>
+                            <div class="col-lg-6">
+                                @Html.TextBoxFor(model => model.TargetName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.TargetName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">Model</label>
+                            <div class="col-lg-6">
+
+                                @Html.DropDownListFor(model => model.ModelName, new SelectList(ViewBag.ModelList, "Value", "Text"), "Select", new
+                                {
+                                    @class = "selectpicker show-tick form-control",
+                                    data_live_search = "true",
+                                    //onchange = "LoadModel('" + @Url.Action("GetModel", "Retailer") + "')",
+
+                                })
+                                @Html.ValidationMessageFor(model => model.ModelName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">Target For</label>
+                            <div class="col-lg-6">
+                                @Html.DropDownListFor(model => model.TargetFor, new SelectList(new[]
+                                {
+                                    //new SelectListItem{Value = "", Text = "Select", Selected = true},
+                                    new SelectListItem{Value = "DEALER", Text = "DEALER"},
+                                    new SelectListItem{Value = "RETAILER", Text = "RETAILER"},
+                                    new SelectListItem{Value = "SR", Text = "SALES REPRESENTATIVE"}
+                                }, "Value", "Text"), new { @class = "selectpicker show-tick form-control" })
+                                @Html.ValidationMessageFor(model => model.TargetFor, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row dealerDiv">
+                            <label class="col-lg-3 col-form-label text-sm-right">Dealer</label>
+                            <div class="col-lg-6">
+
+                                @Html.DropDownListFor(model => model.DealerId, new SelectList(ViewBag.DealerList, "Value", "Text"),new
+                                {
+                                    @class = "selectpicker show-tick form-control",
+                                    data_live_search = "true",
+                                    //onchange = "LoadModel('" + @Url.Action("GetModel", "Retailer") + "')",
+
+                                })
+                                @Html.ValidationMessageFor(model => model.ModelName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">Target Personnel</label>
+                            <div class="col-lg-6">
+                                @Html.DropDownListFor(model => model.TargetPersonId, new SelectList(ViewBag.TargePersonList, "Value", "Text"), new
+                                {
+                                    @class = "selectpicker show-tick form-control",
+                                    data_live_search = "true",
+                                    //onchange = "LoadModel('" + @Url.Action("GetModel", "Retailer") + "')",
+
+                                })
+                                @Html.ValidationMessageFor(model => model.TargetPersonId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">Target Type</label>
+                            <div class="col-lg-6">
+                                @Html.DropDownListFor(model => model.TargetType, new SelectList(new[]
+                                {
+                                    new SelectListItem{Value = "", Text = "Select", Selected = true},
+                                    new SelectListItem{Value = "CASH", Text = "CASH"},
+                                    new SelectListItem{Value = "QUANTITY", Text = "QUANTITY"}
+                                }, "Value", "Text"), new { @class = "selectpicker show-tick form-control" })
+                                @Html.ValidationMessageFor(model => model.TargetType, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">Target Value</label>
+                            <div class="col-lg-6">
+                                @Html.TextBoxFor(model => model.TargetValue, new { @class = "form-control", @number="number"})
+                                @Html.ValidationMessageFor(model => model.TargetValue, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">From Date</label>
+                            <div class="col-lg-6">
+                                @Html.TextBoxFor(model => model.FromDate, new { @class = "form-control datepicker" })
+                                @Html.ValidationMessageFor(model => model.FromDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">To Date</label>
+                            <div class="col-lg-6">
+                                @Html.TextBoxFor(model => model.ToDate, new { @class = "form-control datepicker" })
+                                @Html.ValidationMessageFor(model => model.ToDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">Remarks</label>
+                            <div class="col-lg-6">
+                                @Html.TextBoxFor(model => model.Remarks, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group row">
+                            <div class="col-lg-3"></div>
+                            <div class="col-lg-6">
+                                <input type="submit" value="Submit" class="btn btn-outline-success" />
+                            </div>
+                        </div>
+
+
+
+
+                    }
+                    @Html.ActionLink("Back to List", "IncentiveList")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(function() {
+            $(".dealerDiv").hide();
+            $(".datepicker").datepicker({
+                dateFormat: 'yy-mm-dd'
+            });
+
+
+            $("#TargetFor").on("change",
+                function() {
+                    var targetVal = $(this).val();
+                    if (targetVal === "DEALER") {
+                        $(".dealerDiv").hide();
+                        load_data_in_target_personnel_combo(targetVal, "0");
+                    } else {
+                        $(".dealerDiv").show();
+                    }
+                });
+
+
+            $("#DealerId").on("change",
+                function() {
+                    var targetVal = $("#TargetFor").val();
+                    var dealerId = $(this).val();
+                    load_data_in_target_personnel_combo(targetVal, dealerId);
+                });
+        });
+
+
+        function load_data_in_target_personnel_combo(targetVal, dealerId) {
+            //here an ajax will load data from server depend on target value and dealer id
+            $('#TargetPersonId').empty();
+
+
+            $.ajax({
+                url: '@Url.Action("GetTargetPersonnel", "Admin")',
+                type: 'Post',
+                data: JSON.stringify({targetType:targetVal, dealerId:dealerId}),
+                async: false,
+                contentType: 'application/json',
+                success: function(result) {
+                    //console.log(result);
+                    var json = $.parseJSON(result);
+                    console.log(json);
+                    
+
+                    
+                    for (var i = 0; i < json.length; i++) {
+                        console.log(json[i].Text + '-----' + json[i].Value);
+                        $('#TargetPersonId').append("<option value='" + json[i].Value + "'>" + json[i].Text + "</option>");
+
+                    }
+
+                    $('.selectpicker').selectpicker('refresh');
+
+
+                },
+                error: function(){}
+            });
+        }
+    </script>
+
+}
+

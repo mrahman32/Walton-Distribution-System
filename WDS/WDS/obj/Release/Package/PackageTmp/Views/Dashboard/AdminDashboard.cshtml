@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "AdminDashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-lg-3" id="retailerDailySales">
+        
+    </div>
+    
+    <div class="col-lg-3" id="retailerMonthlySales">
+
+    </div>
+    <div class="col-lg-3" id="retailerDailyActivation">
+
+    </div>
+    <div class="col-lg-3" id="retailerMonthlyActivation">
+
+    </div>
+</div>
+<div class="row">
+    
+    <div class="col-lg-6" >
+        <div class="card">
+            <div class="card-header">TOP 10 SMART PHONE</div>
+            <div class="card-body">
+                <div id="topTenSmartPhone"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">TOP 10 FEATURE PHONE</div>
+            <div class="card-body">
+                <div id="topTenFeaturePhone"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/admin_dashboard_charts.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var url = '@Url.Action("GetRetailerDailySales","Dashboard")';
+        $.post(url, function (data) {
+            $('#retailerDailySales').append(data);
+        });
+        var url2 = '@Url.Action("GetRetailerMonthlySalesQty", "Dashboard")';
+        $.post(url2, function (data) {
+            $('#retailerMonthlySales').append(data);
+        });
+
+        var url3 = '@Url.Action("GetRetailerDailyActivationQuantity", "Dashboard")';
+        $.post(url3, function (data) {
+            $('#retailerDailyActivation').append(data);
+        });
+
+        var url4 = '@Url.Action("GetRetailerMonthlyActivationQuantity", "Dashboard")';
+        $.post(url4, function (data) {
+            $('#retailerMonthlyActivation').append(data);
+        });
+
+
+    });
+
+
+    am4core.ready(function () {
+        create_top_ten_smartphone_chart('@Url.Action("GetTopTenSmartPhone", "Dashboard")');
+
+        create_top_ten_featurephone_chart('@Url.Action("GetTopTenFeaturePhone", "Dashboard")');
+
+    }); // end am4core.ready()
+</script>

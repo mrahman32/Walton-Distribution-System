@@ -1,0 +1,342 @@
+﻿@model WDS.Models.DistributorCheckListModel
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    .container {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    }
+
+    .responsive-iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+</style>
+
+
+@using (Html.BeginForm("CreateDistOtherInfo", "Document", FormMethod.Post, new { id = "CreateDistOtherInfo", enctype = "multipart/form-data" }))
+{
+    <div class="col-lg-12">
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.DealerCode)
+        @Html.HiddenFor(model => model.IsCreationApproved)
+        @Html.HiddenFor(model => model.CreationApprovedBy)
+        @Html.HiddenFor(model => model.CreationApprovedDate)
+        @Html.HiddenFor(model => model.IsTheDealerBlocked)
+        @Html.HiddenFor(model => model.IsTemporaryOpen)
+        @Html.HiddenFor(model => model.TempOpenDate)
+        @Html.HiddenFor(model => model.TempExpireDate)
+        @Html.HiddenFor(model => model.AddedBy)
+        @Html.HiddenFor(model => model.AddedDate)
+        @Html.HiddenFor(model => model.UpdatedBy)
+        @Html.HiddenFor(model => model.UpdatedDate)
+        @Html.HiddenFor(model => model.UpdateName)
+
+
+
+        @Html.HiddenFor(model => model.DistributorOthersInformationModel.Id)
+        @Html.HiddenFor(model => model.DistributorOthersInformationModel.CheckListId)
+        @Html.HiddenFor(model => model.DistributorOthersInformationModel.AddedBy)
+        @Html.HiddenFor(model => model.DistributorOthersInformationModel.AddedDate)
+        @Html.HiddenFor(model => model.DistributorOthersInformationModel.UpdatedBy)
+        @Html.HiddenFor(model => model.DistributorOthersInformationModel.UpdatedDate)
+
+        @Html.HiddenFor(model => model.DistributorOthersInformationModel.NID_File)
+        @Html.HiddenFor(model => model.DistributorOthersInformationModel.DirectorPhoto)
+        @Html.HiddenFor(model => model.DistributorOthersInformationModel.NomineeNID_File)
+        @Html.HiddenFor(model => model.DistributorOthersInformationModel.MomineeMICR_ChequeFile)
+        @Html.HiddenFor(model => model.DistributorOthersInformationModel.NomineePhoto)
+
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Director NID_No<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(model => model.DistributorOthersInformationModel.DirectorNID_No, null, new { @class = "form-control", @type = "number", required = "required" })
+                @Html.ValidationMessageFor(model => model.DistributorOthersInformationModel.DirectorNID_No, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Director NID<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(m => m.DistributorOthersInformationModel.DirectorNidFile, new { type = "file", @class = "form-control", required = "required", accept = "image/x-png,image/gif,image/jpeg" })
+                @Html.ValidationMessageFor(model => model.DistributorOthersInformationModel.DirectorNidFile, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-lg-3">
+                <div class="col-lg-3">
+                    @*<img src="@Url.Content(@Model.CmnUserModel.WebServerUrl)" class="img-responsive img-rounded" alt="@Model.CmnUserModel.UserFullName">*@
+                    @*<img alt="" class="img-responsive img-rounded" src="@Model.DistributorOthersInformationModel.DirectorNIDWebserverUrl" style="display: block;max-width:100px;max-height:100px;width: auto; height: auto; " />*@
+
+
+                    <div class="container">
+                        <iframe class="responsive-iframe" src="@Model.DistributorOthersInformationModel.DirectorNIDWebserverUrl"></iframe>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Director Photo<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(m => m.DistributorOthersInformationModel.DirectorPhotoFile, new { type = "file", @class = "form-control", required = "required", accept = "image/x-png,image/gif,image/jpeg" })
+                @Html.ValidationMessageFor(model => model.DistributorOthersInformationModel.DirectorPhotoFile, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-lg-3">
+                <div class="col-lg-3">
+                    @*<img src="@Url.Content(@Model.CmnUserModel.WebServerUrl)" class="img-responsive img-rounded" alt="@Model.CmnUserModel.UserFullName">*@
+                    @*<img alt="" src="@Model.DistributorOthersInformationModel.DirectorPhotoWebserverUrl" style="display: block;max-width:100px;max-height:100px;width: auto; height: auto; " />*@
+
+
+                    <div class="container">
+                        <iframe class="responsive-iframe" src="@Model.DistributorOthersInformationModel.DirectorPhotoWebserverUrl"></iframe>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right"> Signed by Director (Yes/No)<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.DropDownListFor(model => model.DistributorOthersInformationModel.IsDirectorSealedAndSigned, new List<SelectListItem>
+                {
+                    new SelectListItem { Text = "YES", Value = "true"},
+                    new SelectListItem { Text = "NO", Value = "false"},
+                }, "Select", new { @class = "selectpicker show-tick form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.DistributorOthersInformationModel.IsDirectorSealedAndSigned, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">NomineeNID_No<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(model => model.DistributorOthersInformationModel.NomineeNID_No, null, new { @class = "form-control", required = "required", @type = "number" })
+                @Html.ValidationMessageFor(model => model.DistributorOthersInformationModel.NomineeNID_No, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Nominee NID_File</label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(m => m.DistributorOthersInformationModel.NomineeNidFile, new { type = "file", @class = "form-control", accept = "image/x-png,image/gif,image/jpeg" })
+                @Html.ValidationMessageFor(model => model.DistributorOthersInformationModel.NomineeNID_File, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-lg-3">
+                <div class="col-lg-3">
+                    @*<img src="@Url.Content(@Model.CmnUserModel.WebServerUrl)" class="img-responsive img-rounded" alt="@Model.CmnUserModel.UserFullName">*@
+                    @*<img alt="" class="img-responsive img-rounded" src="@Model.DistributorOthersInformationModel.NomineeNIDWebserverUrl" style="display: block;max-width:100px;max-height:100px;width: auto; height: auto; " />*@
+
+                    <div class="container">
+                        <iframe class="responsive-iframe" src="@Model.DistributorOthersInformationModel.NomineeNIDWebserverUrl"></iframe>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Nominee NID Signed by Nominee (Yes/No)<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.DropDownListFor(model => model.DistributorOthersInformationModel.IsSignedByNominee, new List<SelectListItem>
+                {
+                    new SelectListItem { Text = "YES", Value = "true"},
+                    new SelectListItem { Text = "NO", Value = "false"},
+                }, "Select", new { @class = "selectpicker show-tick form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.DistributorOthersInformationModel.IsSignedByNominee, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Nominee NID Seal & Signed Distributor (Yes/No)<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.DropDownListFor(model => model.DistributorOthersInformationModel.IsSignedNomineeNIDByDirector, new List<SelectListItem>
+                                                    {
+                                                        new SelectListItem { Text = "YES", Value = "true"},
+                                                        new SelectListItem { Text = "NO", Value = "false"},
+                                                    }, "Select", new { @class = "selectpicker show-tick form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.DistributorOthersInformationModel.IsSignedNomineeNIDByDirector, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Nominee Photo<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(m => m.DistributorOthersInformationModel.NominieePhotoFile, new { type = "file", @class = "form-control", required = "required", accept = "image/x-png,image/gif,image/jpeg" })
+                @Html.ValidationMessageFor(model => model.DistributorOthersInformationModel.NominieePhotoFile, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-lg-3">
+                <div class="col-lg-3">
+                    @*<img src="@Url.Content(@Model.CmnUserModel.WebServerUrl)" class="img-responsive img-rounded" alt="@Model.CmnUserModel.UserFullName">*@
+                    @*<img alt="" class="img-responsive img-rounded" src="@Model.DistributorOthersInformationModel.NomineePhotoWebserverUrl" style="display: block;max-width:100px;max-height:100px;width: auto; height: auto; " />*@
+
+
+                    <div class="container">
+                        <iframe class="responsive-iframe" src="@Model.DistributorOthersInformationModel.NomineePhotoWebserverUrl"></iframe>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Nominee Photo Signed by Nominee (Yes/No)<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.DropDownListFor(model => model.DistributorOthersInformationModel.IsNomineePhotoSignedByNominee, new List<SelectListItem>
+                {
+                    new SelectListItem { Text = "YES", Value = "true"},
+                    new SelectListItem { Text = "NO", Value = "false"},
+                }, "Select", new { @class = "selectpicker show-tick form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.DistributorOthersInformationModel.IsNomineePhotoSignedByNominee, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Nominee Photo Seal & Signed Distributor (Yes/No)<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.DropDownListFor(model => model.DistributorOthersInformationModel.IsNomineePhotoSignedByDirector, new List<SelectListItem>
+                                                    {
+                                                        new SelectListItem { Text = "YES", Value = "true"},
+                                                        new SelectListItem { Text = "NO", Value = "false"},
+                                                    }, "Select", new { @class = "selectpicker show-tick form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.DistributorOthersInformationModel.IsNomineePhotoSignedByDirector, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Bank Name<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.DropDownListFor(model => model.DistributorOthersInformationModel.NomineeChequeBank, new SelectList(ViewBag.Banks, "Value", "Text"), "Select", new
+                {
+                    @class = "selectpicker show-tick form-control",
+                    data_live_search = "true",
+                    //onchange = "submit();",
+                    required = "required"
+
+                })
+                @Html.ValidationMessageFor(model => model.DistributorOthersInformationModel.NomineeChequeBank, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Branch<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.DropDownListFor(model => model.DistributorOthersInformationModel.NomineeBankBranch, new SelectList(ViewBag.Branches, "Value", "Text"), "Select", new
+                                {
+                                    @class = "selectpicker show-tick form-control",
+                                    data_live_search = "true",
+                                    //onchange = "submit();",
+                                    required = "required"
+
+                                })
+                @Html.ValidationMessageFor(model => model.DistributorOthersInformationModel.NomineeBankBranch, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Nominee Account No<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(model => model.DistributorOthersInformationModel.NomineeAccountNo, new { @class = "form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.DistributorOthersInformationModel.NomineeAccountNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Nominee Account Name<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(model => model.DistributorOthersInformationModel.NomineeAccountName, new { @class = "form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.DistributorOthersInformationModel.NomineeAccountName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Cheue No<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(model => model.DistributorOthersInformationModel.NomineeChequeNo, new { @class = "form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.DistributorOthersInformationModel.NomineeChequeNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Cheque Amount<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(model => model.DistributorOthersInformationModel.NomineeChequeAmount, new { @class = "form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.DistributorOthersInformationModel.NomineeChequeAmount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">MICR cheque Seal/Sign (Ok/Not Ok)<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.DropDownListFor(model => model.DistributorOthersInformationModel.NomineeMICR_Cheque, new List<SelectListItem>
+                                                    {
+                                                        new SelectListItem { Text = "YES", Value = "true"},
+                                                        new SelectListItem { Text = "NO", Value = "false"},
+                                                    }, "Select", new { @class = "selectpicker show-tick form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.DistributorOthersInformationModel.NomineeMICR_Cheque, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Copy of MICR Cheque.<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(m => m.DistributorOthersInformationModel.BlankMicrChequeFile, new { type = "file", @class = "form-control", required = "required", accept = "image/x-png,image/gif,image/jpeg" })
+                @Html.ValidationMessageFor(model => model.DistributorOthersInformationModel.BlankMicrChequeFile, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-lg-3">
+                <div class="col-lg-3">
+                    @*<img src="@Url.Content(@Model.CmnUserModel.WebServerUrl)" class="img-responsive img-rounded" alt="@Model.CmnUserModel.UserFullName">*@
+                    @*<img alt="" class="img-responsive img-rounded" src="@Model.DistributorOthersInformationModel.BlankCheckWebserverUrl" style="display: block;max-width:100px;max-height:100px;width: auto; height: auto; " />*@
+
+                    <div class="container">
+                        <iframe class="responsive-iframe" src="@Model.DistributorOthersInformationModel.BlankCheckWebserverUrl"></iframe>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Shop Agreement Date<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(model => model.DistributorOthersInformationModel.DistributorShopAgreementDate, new { @class = "ddPicker form-control", required = "required", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.DistributorOthersInformationModel.DistributorShopAgreementDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Agreement End Date<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(model => model.DistributorOthersInformationModel.DistributorShopAgreementEndDate, new { @class = "ddPicker form-control", required = "required", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.DistributorOthersInformationModel.DistributorShopAgreementEndDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Is Building Owned By Dist.</label>
+            <div class="col-lg-6">
+                @Html.DropDownListFor(model => model.DistributorOthersInformationModel.IsShopOwnedByDistributor, new List<SelectListItem>
+                                                    {
+                                                        new SelectListItem { Text = "YES", Value = "true"},
+                                                        new SelectListItem { Text = "NO", Value = "false"},
+                                                    }, "Select", new { @class = "selectpicker show-tick form-control" })
+                @Html.ValidationMessageFor(model => model.DistributorOthersInformationModel.NomineeMICR_Cheque, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        @if (Model != null && !Model.IsApprover)
+        {
+            <div class="form-group row">
+                <label class="col-lg-3 col-form-label text-sm-right"></label>
+                <div class="col-lg-6 text-right">
+                    <button type="submit" id="btnDistOtherSave" class="btn btn-outline-success"><i class="fas fa-save"></i>&nbsp;Save</button>
+                </div>
+            </div>
+        }
+
+
+
+    </div>
+
+    <script type="text/javascript">
+        $(".ddPicker").datepicker({ dateFormat: 'mm-dd-yy', changeMonth: true, changeYear: true, yearRange: "-100:+00" })
+            .on('keypress paste', function (e) {
+                e.preventDefault();
+                return false;
+            });
+    </script>
+}

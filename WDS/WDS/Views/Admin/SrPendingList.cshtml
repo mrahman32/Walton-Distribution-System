@@ -1,0 +1,213 @@
+﻿@model IEnumerable<WDS.DAL.WdsEntities.SalesRepresentative>
+@{
+    ViewBag.Title = "SrPendingList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                @*<div class="card-header">SR LIST (@Html.ActionLink("Create New SR", "CreateSr"))</div>*@
+                <div class="card-body">
+                    <table class="table table-striped table-bordered" id="sr_pending_approval">
+                        <thead>
+                            <tr>
+                                <th>Dealer Code</th>
+                                <th>SR Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Is-Active</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Any())
+                            {
+                                foreach (var model in Model)
+                                {
+                                    <tr>
+                                        @Html.HiddenFor(modelItem => model.Id)
+                                        <td>@Html.DisplayFor(modelItem => model.DealerCode)</td>
+                                        <td>@Html.DisplayFor(modelItem => model.Name)</td>
+                                        <td>@Html.DisplayFor(modelItem => model.Email)</td>
+                                        <td>@Html.DisplayFor(modelItem => model.Phone)</td>
+                                        <td>@Html.DisplayFor(modelItem => model.IsActive)</td>
+                                        <td>
+                                            <input type="button" value="Approve" class="btn btn-outline-success" onclick="approve_sales_representative($(this))" />
+
+                                            <input type="button" value="Reject" class="btn btn-outline-danger" onclick="reject_sales_representative($(this))" />
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<link href="~/Content/iziToast.min.css" rel="stylesheet" />
+@section scripts
+{
+<script src="~/Scripts/iziToast.min.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+
+        //var table = $('#sr_pending_approval').DataTable();
+        var table = $("#sr_pending_approval").DataTable();
+
+        new $.fn.dataTable.Buttons(table, {
+            buttons: [
+                { extend: 'excel', className: 'excelBtn', title: 'Data export Retailer', text: 'Click For Excel Export' }
+            ]
+        });
+
+        table.buttons(0, null).container().prependTo(
+            table.table().container()
+        );
+
+    });
+
+    function approve_sales_representative(ths) {
+        var id = ths.closest('tr').find('input[type="hidden"]').val();
+
+        iziToast.show({
+            theme: 'dark',
+            icon: 'icon-person',
+            title: 'Hey',
+            message: 'Are you sure to approve this Sales Representative?',
+            position: 'center', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter
+            progressBarColor: 'rgb(0, 255, 184)',
+            buttons: [
+                ['<button>Ok</button>', function (instance, toast) {
+                        
+                    instance.hide({
+                        transitionOut: 'fadeOutUp'
+                    }, toast);
+                    $.ajax({
+                        url: ' @Url.Action("ApproveSalesRepresentative", "Admin")', //Changed For test
+                        type: 'Post',
+                        //data: JSON.stringify({ statusList: packagingQcList }),
+                        data: JSON.stringify({ id: id }),
+                        dataType: 'json',
+                        async: false,
+                        contentType: 'application/json',
+                        success: function (result) {
+                            if (result.Id == 1) {
+                                iziToast.success({
+                                    title: 'Success',
+                                    message: result.Message,
+                                });
+                                remove_row(ths);
+                            } else if (result.Id == 0) {
+                                //show error toast
+                                //toastr.error(result.Message);
+                                iziToast.error({
+                                    title: 'Error',
+                                    message: result.Message,
+                                });
+                            }
+                        },
+                        error: function (result, textStatus, jqXHR) {
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'Connection Error !!!',
+                            });
+                        }
+                    });
+                }, true], // true to focus
+                ['<button>Close</button>', function (instance, toast) {
+                        
+                    instance.hide({
+                        transitionOut: 'fadeOutUp',
+                        onClosing: function (instance, toast, closedBy) {
+                            console.info('closedBy: ' + closedBy); // The return will be: 'closedBy: buttonName'
+                        }
+                    }, toast, 'buttonName');
+                }]
+            ],
+            onOpening: function (instance, toast) {
+                console.info('callback abriu!');
+            },
+            onClosing: function (instance, toast, closedBy) {
+                console.info('closedBy: ' + closedBy); // tells if it was closed by 'drag' or 'button'
+
+                    
+            }
+        });
+
+
+            
+
+    }
+
+    function remove_row(ths) {
+        ths.closest("tr").remove();
+    }
+
+
+
+    function reject_sales_representative(ths) {
+        var id = ths.closest('tr').find('input[type="hidden"]').val();
+        iziToast.show({
+            theme: 'dark',
+            icon: 'icon-person',
+            title: 'Hey',
+            message: 'Are you sure to approve this Sales Representative?',
+            position: 'center', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter
+            progressBarColor: 'rgb(0, 255, 184)',
+            buttons: [
+                ['<button>Ok</button>', function (instance, toast) {
+
+                    instance.hide({
+                        transitionOut: 'fadeOutUp'
+                    }, toast);
+                    $.ajax({
+                        url: ' @Url.Action("RejectSalesRepresentative", "Admin")', //Changed For test
+                        type: 'Post',
+                        //data: JSON.stringify({ statusList: packagingQcList }),
+                        data: JSON.stringify({ id: id }),
+                        dataType: 'json',
+                        async: false,
+                        contentType: 'application/json',
+                        success: function (result) {
+                            if (result.Id == 1) {
+                                toastr.success(result.Message);
+                                remove_row(ths);
+                            } else if (result.Id == 0) {
+                                //show error toast
+                                toastr.error(result.Message);
+                            }
+                        },
+                        error: function (result, textStatus, jqXHR) {
+                            toastr.error("Connection Error.");
+                        }
+                    });
+                }, true], // true to focus
+                ['<button>Close</button>', function (instance, toast) {
+
+                    instance.hide({
+                        transitionOut: 'fadeOutUp',
+                        onClosing: function (instance, toast, closedBy) {
+                            console.info('closedBy: ' + closedBy); // The return will be: 'closedBy: buttonName'
+                        }
+                    }, toast, 'buttonName');
+                }]
+            ],
+            onOpening: function (instance, toast) {
+                console.info('callback abriu!');
+            },
+            onClosing: function (instance, toast, closedBy) {
+                console.info('closedBy: ' + closedBy); // tells if it was closed by 'drag' or 'button'
+
+
+            }
+        });
+            
+
+    }
+</script>
+}

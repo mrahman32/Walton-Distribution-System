@@ -1,0 +1,1381 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RBSYNERGYModelStoreContainer" CdmEntityContainer="RBSYNERGYEntities">
+    <EntitySetMapping Name="aspnet_Applications">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.aspnet_Applications">
+        <MappingFragment StoreEntitySet="aspnet_Applications">
+          <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
+          <ScalarProperty Name="LoweredApplicationName" ColumnName="LoweredApplicationName" />
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_Membership">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.aspnet_Membership">
+        <MappingFragment StoreEntitySet="aspnet_Membership">
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="PasswordFormat" ColumnName="PasswordFormat" />
+          <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+          <ScalarProperty Name="MobilePIN" ColumnName="MobilePIN" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="LoweredEmail" ColumnName="LoweredEmail" />
+          <ScalarProperty Name="PasswordQuestion" ColumnName="PasswordQuestion" />
+          <ScalarProperty Name="PasswordAnswer" ColumnName="PasswordAnswer" />
+          <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+          <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+          <ScalarProperty Name="LastPasswordChangedDate" ColumnName="LastPasswordChangedDate" />
+          <ScalarProperty Name="LastLockoutDate" ColumnName="LastLockoutDate" />
+          <ScalarProperty Name="FailedPasswordAttemptCount" ColumnName="FailedPasswordAttemptCount" />
+          <ScalarProperty Name="FailedPasswordAttemptWindowStart" ColumnName="FailedPasswordAttemptWindowStart" />
+          <ScalarProperty Name="FailedPasswordAnswerAttemptCount" ColumnName="FailedPasswordAnswerAttemptCount" />
+          <ScalarProperty Name="FailedPasswordAnswerAttemptWindowStart" ColumnName="FailedPasswordAnswerAttemptWindowStart" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_Paths">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.aspnet_Paths">
+        <MappingFragment StoreEntitySet="aspnet_Paths">
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="PathId" ColumnName="PathId" />
+          <ScalarProperty Name="Path" ColumnName="Path" />
+          <ScalarProperty Name="LoweredPath" ColumnName="LoweredPath" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_PersonalizationAllUsers">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.aspnet_PersonalizationAllUsers">
+        <MappingFragment StoreEntitySet="aspnet_PersonalizationAllUsers">
+          <ScalarProperty Name="PathId" ColumnName="PathId" />
+          <ScalarProperty Name="PageSettings" ColumnName="PageSettings" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_PersonalizationPerUser">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.aspnet_PersonalizationPerUser">
+        <MappingFragment StoreEntitySet="aspnet_PersonalizationPerUser">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PathId" ColumnName="PathId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="PageSettings" ColumnName="PageSettings" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_Profile">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.aspnet_Profile">
+        <MappingFragment StoreEntitySet="aspnet_Profile">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="PropertyNames" ColumnName="PropertyNames" />
+          <ScalarProperty Name="PropertyValuesString" ColumnName="PropertyValuesString" />
+          <ScalarProperty Name="PropertyValuesBinary" ColumnName="PropertyValuesBinary" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_Roles">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.aspnet_Roles">
+        <MappingFragment StoreEntitySet="aspnet_Roles">
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="LoweredRoleName" ColumnName="LoweredRoleName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_SchemaVersions">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.aspnet_SchemaVersions">
+        <MappingFragment StoreEntitySet="aspnet_SchemaVersions">
+          <ScalarProperty Name="Feature" ColumnName="Feature" />
+          <ScalarProperty Name="CompatibleSchemaVersion" ColumnName="CompatibleSchemaVersion" />
+          <ScalarProperty Name="IsCurrentVersion" ColumnName="IsCurrentVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_Users">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.aspnet_Users">
+        <MappingFragment StoreEntitySet="aspnet_Users">
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="LoweredUserName" ColumnName="LoweredUserName" />
+          <ScalarProperty Name="MobileAlias" ColumnName="MobileAlias" />
+          <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
+          <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_WebEvent_Events">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.aspnet_WebEvent_Events">
+        <MappingFragment StoreEntitySet="aspnet_WebEvent_Events">
+          <ScalarProperty Name="EventId" ColumnName="EventId" />
+          <ScalarProperty Name="EventTimeUtc" ColumnName="EventTimeUtc" />
+          <ScalarProperty Name="EventTime" ColumnName="EventTime" />
+          <ScalarProperty Name="EventType" ColumnName="EventType" />
+          <ScalarProperty Name="EventSequence" ColumnName="EventSequence" />
+          <ScalarProperty Name="EventOccurrence" ColumnName="EventOccurrence" />
+          <ScalarProperty Name="EventCode" ColumnName="EventCode" />
+          <ScalarProperty Name="EventDetailCode" ColumnName="EventDetailCode" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="ApplicationPath" ColumnName="ApplicationPath" />
+          <ScalarProperty Name="ApplicationVirtualPath" ColumnName="ApplicationVirtualPath" />
+          <ScalarProperty Name="MachineName" ColumnName="MachineName" />
+          <ScalarProperty Name="RequestUrl" ColumnName="RequestUrl" />
+          <ScalarProperty Name="ExceptionType" ColumnName="ExceptionType" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DealerDistributionTriggerLogs">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.DealerDistributionTriggerLog">
+        <MappingFragment StoreEntitySet="DealerDistributionTriggerLogs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="action" ColumnName="action" />
+          <ScalarProperty Name="HostName" ColumnName="HostName" />
+          <ScalarProperty Name="LoggedInUser" ColumnName="LoggedInUser" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="DealerdistributionId" ColumnName="DealerdistributionId" />
+          <ScalarProperty Name="DealerCode" ColumnName="DealerCode" />
+          <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+          <ScalarProperty Name="BarCode2" ColumnName="BarCode2" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="DONumber" ColumnName="DONumber" />
+          <ScalarProperty Name="DistributionDate" ColumnName="DistributionDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DispatchToMarketRemainingStocks">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.DispatchToMarketRemainingStock">
+        <MappingFragment StoreEntitySet="DispatchToMarketRemainingStock">
+          <ScalarProperty Name="DispatchToMarketStockId" ColumnName="DispatchToMarketStockId" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="TotalMarketDispatch" ColumnName="TotalMarketDispatch" />
+          <ScalarProperty Name="TotalMarketSell" ColumnName="TotalMarketSell" />
+          <ScalarProperty Name="TotalUnActive" ColumnName="TotalUnActive" />
+          <ScalarProperty Name="RemainingMarketStock" ColumnName="RemainingMarketStock" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="StockAfterApplyMOE" ColumnName="StockAfterApplyMOE" />
+          <ScalarProperty Name="AppliedMOE" ColumnName="AppliedMOE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DistributorNetworks">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.DistributorNetwork">
+        <MappingFragment StoreEntitySet="DistributorNetwork">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+          <ScalarProperty Name="ZoneId" ColumnName="ZoneId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Zone" ColumnName="Zone" />
+          <ScalarProperty Name="Division" ColumnName="Division" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FifteenDaysWiseMailTables">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.FifteenDaysWiseMailTable">
+        <MappingFragment StoreEntitySet="FifteenDaysWiseMailTable">
+          <ScalarProperty Name="FifteenDaysWiseMailId" ColumnName="FifteenDaysWiseMailId" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="ExcelFileName" ColumnName="ExcelFileName" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LockedImeiInventories">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.LockedImeiInventory">
+        <MappingFragment StoreEntitySet="LockedImeiInventory">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ImeiOne" ColumnName="ImeiOne" />
+          <ScalarProperty Name="ImeiTwo" ColumnName="ImeiTwo" />
+          <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+          <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ModelWiseLocks">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.ModelWiseLock">
+        <MappingFragment StoreEntitySet="ModelWiseLock">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+          <ScalarProperty Name="InventroyAddedDate" ColumnName="InventroyAddedDate" />
+          <ScalarProperty Name="OrderQuantity" ColumnName="OrderQuantity" />
+          <ScalarProperty Name="ActivationThreshold" ColumnName="ActivationThreshold" />
+          <ScalarProperty Name="IsLock" ColumnName="IsLock" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ModelWiseServiceQuantityInDays">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.ModelWiseServiceQuantityInDay">
+        <MappingFragment StoreEntitySet="ModelWiseServiceQuantityInDays">
+          <ScalarProperty Name="ModelWiseDaysIds" ColumnName="ModelWiseDaysIds" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Tendays" ColumnName="Tendays" />
+          <ScalarProperty Name="Twentydays" ColumnName="Twentydays" />
+          <ScalarProperty Name="Fortydays" ColumnName="Fortydays" />
+          <ScalarProperty Name="Sixtydays" ColumnName="Sixtydays" />
+          <ScalarProperty Name="Nintydays" ColumnName="Nintydays" />
+          <ScalarProperty Name="OneEightydays" ColumnName="OneEightydays" />
+          <ScalarProperty Name="Twoseventy" ColumnName="Twoseventy" />
+          <ScalarProperty Name="ThreeSixtyFive" ColumnName="ThreeSixtyFive" />
+          <ScalarProperty Name="RestoftheDays" ColumnName="RestoftheDays" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ModelWiseServiceQuantityInDaysByOrders">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.ModelWiseServiceQuantityInDaysByOrder">
+        <MappingFragment StoreEntitySet="ModelWiseServiceQuantityInDaysByOrder">
+          <ScalarProperty Name="ModelOrderWiseDaysIds" ColumnName="ModelOrderWiseDaysIds" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Tendays" ColumnName="Tendays" />
+          <ScalarProperty Name="Twentydays" ColumnName="Twentydays" />
+          <ScalarProperty Name="Fortydays" ColumnName="Fortydays" />
+          <ScalarProperty Name="Sixtydays" ColumnName="Sixtydays" />
+          <ScalarProperty Name="Nintydays" ColumnName="Nintydays" />
+          <ScalarProperty Name="OneEightydays" ColumnName="OneEightydays" />
+          <ScalarProperty Name="Twoseventy" ColumnName="Twoseventy" />
+          <ScalarProperty Name="ThreeSixtyFive" ColumnName="ThreeSixtyFive" />
+          <ScalarProperty Name="RestoftheDays" ColumnName="RestoftheDays" />
+          <ScalarProperty Name="Orders" ColumnName="Orders" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NonGradedImeiInventories">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.NonGradedImeiInventory">
+        <MappingFragment StoreEntitySet="NonGradedImeiInventory">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+          <ScalarProperty Name="Imei_One" ColumnName="Imei_One" />
+          <ScalarProperty Name="Imei_Two" ColumnName="Imei_Two" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+          <ScalarProperty Name="Issue" ColumnName="Issue" />
+          <ScalarProperty Name="Grade" ColumnName="Grade" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PlazaSales">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.PlazaSale">
+        <MappingFragment StoreEntitySet="PlazaSale">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PlazaName" ColumnName="PlazaName" />
+          <ScalarProperty Name="EbsCustomerId" ColumnName="EbsCustomerId" />
+          <ScalarProperty Name="SaleType" ColumnName="SaleType" />
+          <ScalarProperty Name="CType" ColumnName="CType" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
+          <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PlazaSalesAndActivationRates">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.PlazaSalesAndActivationRate">
+        <MappingFragment StoreEntitySet="PlazaSalesAndActivationRate">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="PhoneType" ColumnName="PhoneType" />
+          <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
+          <ScalarProperty Name="PlazaSaleQty" ColumnName="PlazaSaleQty" />
+          <ScalarProperty Name="Activation" ColumnName="Activation" />
+          <ScalarProperty Name="SuccessRate" ColumnName="SuccessRate" />
+          <ScalarProperty Name="ErrorRate" ColumnName="ErrorRate" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RemainingMarketDetailsWithImeis">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.RemainingMarketDetailsWithImei">
+        <MappingFragment StoreEntitySet="RemainingMarketDetailsWithImei">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RemainingMarketDetailsId" ColumnName="RemainingMarketDetailsId" />
+          <ScalarProperty Name="DealerCode" ColumnName="DealerCode" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+          <ScalarProperty Name="BarCode2" ColumnName="BarCode2" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServiceToSalesRatios">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.ServiceToSalesRatio">
+        <MappingFragment StoreEntitySet="ServiceToSalesRatio">
+          <ScalarProperty Name="ServiceToSalesRatioId" ColumnName="ServiceToSalesRatioId" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="PhoneType" ColumnName="PhoneType" />
+          <ScalarProperty Name="TotalSales" ColumnName="TotalSales" />
+          <ScalarProperty Name="TotalService" ColumnName="TotalService" />
+          <ScalarProperty Name="ServiceToSalesRatio1" ColumnName="ServiceToSalesRatio" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SIMInfoes">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.SIMInfo">
+        <MappingFragment StoreEntitySet="SIMInfo">
+          <ScalarProperty Name="SIMID" ColumnName="SIMID" />
+          <ScalarProperty Name="SIMNo" ColumnName="SIMNo" />
+          <ScalarProperty Name="IMSI" ColumnName="IMSI" />
+          <ScalarProperty Name="OperatorName" ColumnName="OperatorName" />
+          <ScalarProperty Name="ConnetionType" ColumnName="ConnetionType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sms_data_back">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.sms_data_back">
+        <MappingFragment StoreEntitySet="sms_data_back">
+          <ScalarProperty Name="SMSID" ColumnName="SMSID" />
+          <ScalarProperty Name="ReceiveDate" ColumnName="ReceiveDate" />
+          <ScalarProperty Name="Sender" ColumnName="Sender" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Addedby" ColumnName="Addedby" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="Updatedby" ColumnName="Updatedby" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SMSDetails">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.SMSDetail">
+        <MappingFragment StoreEntitySet="SMSDetails">
+          <ScalarProperty Name="DetailsNo" ColumnName="DetailsNo" />
+          <ScalarProperty Name="SMSID" ColumnName="SMSID" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="EmployeeCode" ColumnName="EmployeeCode" />
+          <ScalarProperty Name="IsSend" ColumnName="IsSend" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SMSGroups">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.SMSGroup">
+        <MappingFragment StoreEntitySet="SMSGroup">
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="GroupNo" ColumnName="GroupNo" />
+          <ScalarProperty Name="GroupDate" ColumnName="GroupDate" />
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+          <ScalarProperty Name="GroupDescription" ColumnName="GroupDescription" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="Updatedby" ColumnName="Updatedby" />
+          <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SMSMasters">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.SMSMaster">
+        <MappingFragment StoreEntitySet="SMSMaster">
+          <ScalarProperty Name="SMSID" ColumnName="SMSID" />
+          <ScalarProperty Name="SLNo" ColumnName="SLNo" />
+          <ScalarProperty Name="SMSGroup" ColumnName="SMSGroup" />
+          <ScalarProperty Name="SMSDate" ColumnName="SMSDate" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="SMSReferance" ColumnName="SMSReferance" />
+          <ScalarProperty Name="SMSType" ColumnName="SMSType" />
+          <ScalarProperty Name="Unicode" ColumnName="Unicode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SMSMembers">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.SMSMember">
+        <MappingFragment StoreEntitySet="SMSMember">
+          <ScalarProperty Name="SLNo" ColumnName="SLNo" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="EmployeeCode" ColumnName="EmployeeCode" />
+          <ScalarProperty Name="MemberName" ColumnName="MemberName" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+          <ScalarProperty Name="Factory" ColumnName="Factory" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SMSRoleDetails">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.SMSRoleDetail">
+        <MappingFragment StoreEntitySet="SMSRoleDetails">
+          <ScalarProperty Name="DetailsId" ColumnName="DetailsId" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="EmployeeCode" ColumnName="EmployeeCode" />
+          <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="SMSGroupId" ColumnName="SMSGroupId" />
+          <ScalarProperty Name="SMSGroupName" ColumnName="SMSGroupName" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="Updatedby" ColumnName="Updatedby" />
+          <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SMSRoleMasters">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.SMSRoleMaster">
+        <MappingFragment StoreEntitySet="SMSRoleMaster">
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="RoleDate" ColumnName="RoleDate" />
+          <ScalarProperty Name="RoleNo" ColumnName="RoleNo" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="RoleDescription" ColumnName="RoleDescription" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StatutoryDocumentReminders">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.StatutoryDocumentReminder">
+        <MappingFragment StoreEntitySet="StatutoryDocumentReminder">
+          <ScalarProperty Name="SDID" ColumnName="SDID" />
+          <ScalarProperty Name="Company" ColumnName="Company" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="DocumentName" ColumnName="DocumentName" />
+          <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+          <ScalarProperty Name="AchieveDate" ColumnName="AchieveDate" />
+          <ScalarProperty Name="ExpireDate" ColumnName="ExpireDate" />
+          <ScalarProperty Name="ResponsibleDepartment" ColumnName="ResponsibleDepartment" />
+          <ScalarProperty Name="RemindStart" ColumnName="RemindStart" />
+          <ScalarProperty Name="ReminderStartLevel2" ColumnName="ReminderStartLevel2" />
+          <ScalarProperty Name="EmailTo" ColumnName="EmailTo" />
+          <ScalarProperty Name="EmailCC" ColumnName="EmailCC" />
+          <ScalarProperty Name="RenewalInstruction" ColumnName="RenewalInstruction" />
+          <ScalarProperty Name="WorkPlace" ColumnName="WorkPlace" />
+          <ScalarProperty Name="Discontinue" ColumnName="Discontinue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblBarCodeInvs">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.tblBarCodeInv">
+        <MappingFragment StoreEntitySet="tblBarCodeInv">
+          <ScalarProperty Name="RecID" ColumnName="RecID" />
+          <ScalarProperty Name="PrintDate" ColumnName="PrintDate" />
+          <ScalarProperty Name="ProductType" ColumnName="ProductType" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+          <ScalarProperty Name="BarCode2" ColumnName="BarCode2" />
+          <ScalarProperty Name="DelieveredTo" ColumnName="DelieveredTo" />
+          <ScalarProperty Name="PrintSuccess" ColumnName="PrintSuccess" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="Updatedby" ColumnName="Updatedby" />
+          <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+          <ScalarProperty Name="Grade" ColumnName="Grade" />
+          <ScalarProperty Name="GradeReason" ColumnName="GradeReason" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCashIns">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.tblCashIn">
+        <MappingFragment StoreEntitySet="tblCashIn">
+          <ScalarProperty Name="CashInID" ColumnName="CashInID" />
+          <ScalarProperty Name="CashInDate" ColumnName="CashInDate" />
+          <ScalarProperty Name="SalesPointID" ColumnName="SalesPointID" />
+          <ScalarProperty Name="ReferanceNo" ColumnName="ReferanceNo" />
+          <ScalarProperty Name="CashInHeadID" ColumnName="CashInHeadID" />
+          <ScalarProperty Name="ItemQty" ColumnName="ItemQty" />
+          <ScalarProperty Name="CashInValue" ColumnName="CashInValue" />
+          <ScalarProperty Name="CurCode" ColumnName="CurCode" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCashOuts">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.tblCashOut">
+        <MappingFragment StoreEntitySet="tblCashOut">
+          <ScalarProperty Name="CashOutID" ColumnName="CashOutID" />
+          <ScalarProperty Name="CashOutDate" ColumnName="CashOutDate" />
+          <ScalarProperty Name="SalesPointID" ColumnName="SalesPointID" />
+          <ScalarProperty Name="ReferanceNo" ColumnName="ReferanceNo" />
+          <ScalarProperty Name="CashOutHeadID" ColumnName="CashOutHeadID" />
+          <ScalarProperty Name="CashOutValue" ColumnName="CashOutValue" />
+          <ScalarProperty Name="CurCode" ColumnName="CurCode" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblcdmaGSMMatchings">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.tblcdmaGSMMatching">
+        <MappingFragment StoreEntitySet="tblcdmaGSMMatching">
+          <ScalarProperty Name="cdmaGSMMatchingID" ColumnName="cdmaGSMMatchingID" />
+          <ScalarProperty Name="IMEI1" ColumnName="IMEI1" />
+          <ScalarProperty Name="IMEI2" ColumnName="IMEI2" />
+          <ScalarProperty Name="MEID" ColumnName="MEID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCellPhoneDepriciationPrices">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.tblCellPhoneDepriciationPrice">
+        <MappingFragment StoreEntitySet="tblCellPhoneDepriciationPrice">
+          <ScalarProperty Name="DepriciationPriceID" ColumnName="DepriciationPriceID" />
+          <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
+          <ScalarProperty Name="RetailPrice" ColumnName="RetailPrice" />
+          <ScalarProperty Name="InvoicePrice" ColumnName="InvoicePrice" />
+          <ScalarProperty Name="DepriciationPrice" ColumnName="DepriciationPrice" />
+          <ScalarProperty Name="IsReleaseDate" ColumnName="IsReleaseDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCellPhonePricings">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.tblCellPhonePricing">
+        <MappingFragment StoreEntitySet="tblCellPhonePricing">
+          <ScalarProperty Name="DoNumberId" ColumnName="DoNumberId" />
+          <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="MSDP" ColumnName="MSDP" />
+          <ScalarProperty Name="MSRP" ColumnName="MSRP" />
+          <ScalarProperty Name="Range" ColumnName="Range" />
+          <ScalarProperty Name="SecondaryRange" ColumnName="SecondaryRange" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblColors">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.tblColor">
+        <MappingFragment StoreEntitySet="tblColor">
+          <ScalarProperty Name="ColorID" ColumnName="ColorID" />
+          <ScalarProperty Name="ColorName" ColumnName="ColorName" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCompanyInfoes">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.tblCompanyInfo">
+        <MappingFragment StoreEntitySet="tblCompanyInfo">
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Inactive" ColumnName="Inactive" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblDailyClosingStockDetails">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.tblDailyClosingStockDetail">
+        <MappingFragment StoreEntitySet="tblDailyClosingStockDetail">
+          <ScalarProperty Name="ClosingStockID" ColumnName="ClosingStockID" />
+          <ScalarProperty Name="DeclarationDate" ColumnName="DeclarationDate" />
+          <ScalarProperty Name="SalesPointID" ColumnName="SalesPointID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="ClosingQty" ColumnName="ClosingQty" />
+          <ScalarProperty Name="UOM" ColumnName="UOM" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblDailyProductions">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.tblDailyProduction">
+        <MappingFragment StoreEntitySet="tblDailyProduction">
+          <ScalarProperty Name="DailyProductionID" ColumnName="DailyProductionID" />
+          <ScalarProperty Name="ProductionDate" ColumnName="ProductionDate" />
+          <ScalarProperty Name="ProductionUnit" ColumnName="ProductionUnit" />
+          <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblDateTimeDimantions">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.tblDateTimeDimantion">
+        <MappingFragment StoreEntitySet="tblDateTimeDimantion">
+          <ScalarProperty Name="DateTimeID" ColumnName="DateTimeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblDealerDistributionDetails">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.tblDealerDistributionDetail">
+        <MappingFragment StoreEntitySet="tblDealerDistributionDetails">
+          <ScalarProperty Name="DealerdistributionId" ColumnName="DealerdistributionId" />
+          <ScalarProperty Name="DealerCode" ColumnName="DealerCode" />
+          <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+          <ScalarProperty Name="BarCode2" ColumnName="BarCode2" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="DONumber" ColumnName="DONumber" />
+          <ScalarProperty Name="DistributionDate" ColumnName="DistributionDate" />
+          <ScalarProperty Name="IsSoldOut" ColumnName="IsSoldOut" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblDealerDistributionLogs">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.tblDealerDistributionLog">
+        <MappingFragment StoreEntitySet="tblDealerDistributionLog">
+          <ScalarProperty Name="DealerdistributionLogID" ColumnName="DealerdistributionLogID" />
+          <ScalarProperty Name="DealerCode" ColumnName="DealerCode" />
+          <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+          <ScalarProperty Name="BarCode2" ColumnName="BarCode2" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="DONumber" ColumnName="DONumber" />
+          <ScalarProperty Name="DistributionDate" ColumnName="DistributionDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblDealerInfoes">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.tblDealerInfo">
+        <MappingFragment StoreEntitySet="tblDealerInfo">
+          <ScalarProperty Name="DealerId" ColumnName="DealerId" />
+          <ScalarProperty Name="DealerCode" ColumnName="DealerCode" />
+          <ScalarProperty Name="AlternateCode" ColumnName="AlternateCode" />
+          <ScalarProperty Name="DealerName" ColumnName="DealerName" />
+          <ScalarProperty Name="EbsNewServerCode" ColumnName="EbsNewServerCode" />
+          <ScalarProperty Name="EbsPartyName" ColumnName="EbsPartyName" />
+          <ScalarProperty Name="DealerAddress" ColumnName="DealerAddress" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Division" ColumnName="Division" />
+          <ScalarProperty Name="DealerPhoneNumber" ColumnName="DealerPhoneNumber" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="DealerType" ColumnName="DealerType" />
+          <ScalarProperty Name="EbsCustomerId" ColumnName="EbsCustomerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblFixedAssetBarcodeInvs">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.tblFixedAssetBarcodeInv">
+        <MappingFragment StoreEntitySet="tblFixedAssetBarcodeInv">
+          <ScalarProperty Name="FASysID" ColumnName="FASysID" />
+          <ScalarProperty Name="FAID" ColumnName="FAID" />
+          <ScalarProperty Name="FABarcode" ColumnName="FABarcode" />
+          <ScalarProperty Name="Printed" ColumnName="Printed" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMargineOfErrors">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.tblMargineOfError">
+        <MappingFragment StoreEntitySet="tblMargineOfError">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="MarketStock" ColumnName="MarketStock" />
+          <ScalarProperty Name="ExpectedStock" ColumnName="ExpectedStock" />
+          <ScalarProperty Name="MargineOfError" ColumnName="MargineOfError" />
+          <ScalarProperty Name="AppliedMOE" ColumnName="AppliedMOE" />
+          <ScalarProperty Name="StockDate" ColumnName="StockDate" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="SampleQuantity" ColumnName="SampleQuantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblOffers">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.tblOffer">
+        <MappingFragment StoreEntitySet="tblOffer">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="UserType" ColumnName="UserType" />
+          <ScalarProperty Name="DurationInDays" ColumnName="DurationInDays" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="Addedby" ColumnName="Addedby" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProductMasters">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.tblProductMaster">
+        <MappingFragment StoreEntitySet="tblProductMaster">
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+          <ScalarProperty Name="ProductType" ColumnName="ProductType" />
+          <ScalarProperty Name="ProductModel" ColumnName="ProductModel" />
+          <ScalarProperty Name="Category1" ColumnName="Category1" />
+          <ScalarProperty Name="Category2" ColumnName="Category2" />
+          <ScalarProperty Name="Inactive" ColumnName="Inactive" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+          <ScalarProperty Name="OracleModelName" ColumnName="OracleModelName" />
+          <ScalarProperty Name="ProductManSource" ColumnName="ProductManSource" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProductRegistrations">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.tblProductRegistration">
+        <MappingFragment StoreEntitySet="tblProductRegistration">
+          <ScalarProperty Name="ProductRegID" ColumnName="ProductRegID" />
+          <ScalarProperty Name="ProductType" ColumnName="ProductType" />
+          <ScalarProperty Name="ProductModelID" ColumnName="ProductModelID" />
+          <ScalarProperty Name="SalerID" ColumnName="SalerID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+          <ScalarProperty Name="WarrantyMonths" ColumnName="WarrantyMonths" />
+          <ScalarProperty Name="WarrantyVoid" ColumnName="WarrantyVoid" />
+          <ScalarProperty Name="WarrantyID" ColumnName="WarrantyID" />
+          <ScalarProperty Name="MemoNo" ColumnName="MemoNo" />
+          <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+          <ScalarProperty Name="OwnerAddress" ColumnName="OwnerAddress" />
+          <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+          <ScalarProperty Name="EBS_Item_Code" ColumnName="EBS_Item_Code" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="SMSID" ColumnName="SMSID" />
+          <ScalarProperty Name="IsSendToOracleDb" ColumnName="IsSendToOracleDb" />
+          <ScalarProperty Name="IsCheckedInDealerDistribution" ColumnName="IsCheckedInDealerDistribution" />
+          <ScalarProperty Name="Imei_One" ColumnName="Imei_One" />
+          <ScalarProperty Name="Imei_Tow" ColumnName="Imei_Tow" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblRmReturns">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.tblRmReturn">
+        <MappingFragment StoreEntitySet="tblRmReturns">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DealerCode" ColumnName="DealerCode" />
+          <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+          <ScalarProperty Name="BarCode2" ColumnName="BarCode2" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="DONumber" ColumnName="DONumber" />
+          <ScalarProperty Name="DistributionDate" ColumnName="DistributionDate" />
+          <ScalarProperty Name="IsSoldOut" ColumnName="IsSoldOut" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblSalesPoints">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.tblSalesPoint">
+        <MappingFragment StoreEntitySet="tblSalesPoint">
+          <ScalarProperty Name="SalesPointID" ColumnName="SalesPointID" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="SalesPointName" ColumnName="SalesPointName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Inactive" ColumnName="Inactive" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblSalesPointDailyStocks">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.tblSalesPointDailyStock">
+        <MappingFragment StoreEntitySet="tblSalesPointDailyStock">
+          <ScalarProperty Name="DailyStockID" ColumnName="DailyStockID" />
+          <ScalarProperty Name="SalesPointID" ColumnName="SalesPointID" />
+          <ScalarProperty Name="StockDeclDate" ColumnName="StockDeclDate" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="StockQty" ColumnName="StockQty" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblSalesPointTransHeads">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.tblSalesPointTransHead">
+        <MappingFragment StoreEntitySet="tblSalesPointTransHead">
+          <ScalarProperty Name="SPTHID" ColumnName="SPTHID" />
+          <ScalarProperty Name="SalesPointID" ColumnName="SalesPointID" />
+          <ScalarProperty Name="TransHeadID" ColumnName="TransHeadID" />
+          <ScalarProperty Name="Inactive" ColumnName="Inactive" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblSMSInboxes">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.tblSMSInbox">
+        <MappingFragment StoreEntitySet="tblSMSInbox">
+          <ScalarProperty Name="SMSID" ColumnName="SMSID" />
+          <ScalarProperty Name="ReceiveDate" ColumnName="ReceiveDate" />
+          <ScalarProperty Name="Sender" ColumnName="Sender" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="SMS_Ref" ColumnName="SMS_Ref" />
+          <ScalarProperty Name="Processed" ColumnName="Processed" />
+          <ScalarProperty Name="GSMGateWayType" ColumnName="GSMGateWayType" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblTransectionHeads">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.tblTransectionHead">
+        <MappingFragment StoreEntitySet="tblTransectionHeads">
+          <ScalarProperty Name="TransHeadID" ColumnName="TransHeadID" />
+          <ScalarProperty Name="TransHeadName" ColumnName="TransHeadName" />
+          <ScalarProperty Name="TransHeadType" ColumnName="TransHeadType" />
+          <ScalarProperty Name="Inactive" ColumnName="Inactive" />
+          <ScalarProperty Name="IsProduct" ColumnName="IsProduct" />
+          <ScalarProperty Name="ProductType" ColumnName="ProductType" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TestImeiDataForBarcodeInvs">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.TestImeiDataForBarcodeInv">
+        <MappingFragment StoreEntitySet="TestImeiDataForBarcodeInv">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Imei1" ColumnName="Imei1" />
+          <ScalarProperty Name="Imei2" ColumnName="Imei2" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TsoWiseRegistrations">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.TsoWiseRegistration">
+        <MappingFragment StoreEntitySet="TsoWiseRegistrations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RegistrationId" ColumnName="RegistrationId" />
+          <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ImeiOne" ColumnName="ImeiOne" />
+          <ScalarProperty Name="ImeiTwo" ColumnName="ImeiTwo" />
+          <ScalarProperty Name="DealerName" ColumnName="DealerName" />
+          <ScalarProperty Name="DealerCode" ColumnName="DealerCode" />
+          <ScalarProperty Name="Zone" ColumnName="Zone" />
+          <ScalarProperty Name="Division" ColumnName="Division" />
+          <ScalarProperty Name="RSM" ColumnName="RSM" />
+          <ScalarProperty Name="RSM_EMP_ID" ColumnName="RSM_EMP_ID" />
+          <ScalarProperty Name="ASM" ColumnName="ASM" />
+          <ScalarProperty Name="ASM_EMP_ID" ColumnName="ASM_EMP_ID" />
+          <ScalarProperty Name="TSO" ColumnName="TSO" />
+          <ScalarProperty Name="TSO_EMP_ID" ColumnName="TSO_EMP_ID" />
+          <ScalarProperty Name="SystemDate" ColumnName="SystemDate" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="DigitechCode" ColumnName="DigitechCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AfterServiceReplacements">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.AfterServiceReplacement">
+        <MappingFragment StoreEntitySet="AfterServiceReplacement">
+          <ScalarProperty Name="AfterServiceRepID" ColumnName="AfterServiceRepID" />
+          <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+          <ScalarProperty Name="ServicePointName" ColumnName="ServicePointName" />
+          <ScalarProperty Name="IME" ColumnName="IME" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+          <ScalarProperty Name="ServicePlaceDate" ColumnName="ServicePlaceDate" />
+          <ScalarProperty Name="DealerName" ColumnName="DealerName" />
+          <ScalarProperty Name="CustomerMobile" ColumnName="CustomerMobile" />
+          <ScalarProperty Name="PermissionFromCoOrdinator" ColumnName="PermissionFromCoOrdinator" />
+          <ScalarProperty Name="RepalcementCause" ColumnName="RepalcementCause" />
+          <ScalarProperty Name="ServiceInchargeComment" ColumnName="ServiceInchargeComment" />
+          <ScalarProperty Name="WarrantyAvailability" ColumnName="WarrantyAvailability" />
+          <ScalarProperty Name="Invoice" ColumnName="Invoice" />
+          <ScalarProperty Name="FaultyHandetPrice" ColumnName="FaultyHandetPrice" />
+          <ScalarProperty Name="FaultyHandsetPriceByPlaza" ColumnName="FaultyHandsetPriceByPlaza" />
+          <ScalarProperty Name="NewHandsetPrice" ColumnName="NewHandsetPrice" />
+          <ScalarProperty Name="DepricationRate" ColumnName="DepricationRate" />
+          <ScalarProperty Name="AcceptFromCustomer" ColumnName="AcceptFromCustomer" />
+          <ScalarProperty Name="NewHandsetIMEI" ColumnName="NewHandsetIMEI" />
+          <ScalarProperty Name="NewHandsetModel" ColumnName="NewHandsetModel" />
+          <ScalarProperty Name="ReplacementGivenBy" ColumnName="ReplacementGivenBy" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="WastageStatus" ColumnName="WastageStatus" />
+          <ScalarProperty Name="WastageRemarks" ColumnName="WastageRemarks" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AfterServiceReplacementLogs">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.AfterServiceReplacementLog">
+        <MappingFragment StoreEntitySet="AfterServiceReplacementLog">
+          <ScalarProperty Name="AfterSalesrepLogID" ColumnName="AfterSalesrepLogID" />
+          <ScalarProperty Name="AfterServiceRepID" ColumnName="AfterServiceRepID" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ApprovalMasters">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.ApprovalMaster">
+        <MappingFragment StoreEntitySet="ApprovalMaster">
+          <ScalarProperty Name="ApprovalID" ColumnName="ApprovalID" />
+          <ScalarProperty Name="RequestID" ColumnName="RequestID" />
+          <ScalarProperty Name="RequestType" ColumnName="RequestType" />
+          <ScalarProperty Name="RecommendedBy" ColumnName="RecommendedBy" />
+          <ScalarProperty Name="RecommendedDate" ColumnName="RecommendedDate" />
+          <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+          <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FaultySparePartsDetails">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.FaultySparePartsDetail">
+        <MappingFragment StoreEntitySet="FaultySparePartsDetails">
+          <ScalarProperty Name="FaultySparePartsDetailsID" ColumnName="FaultySparePartsDetailsID" />
+          <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+          <ScalarProperty Name="FaultySpareCode" ColumnName="FaultySpareCode" />
+          <ScalarProperty Name="FaultySpareName" ColumnName="FaultySpareName" />
+          <ScalarProperty Name="SparePrice" ColumnName="SparePrice" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IMEIReplacementMasters">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.IMEIReplacementMaster">
+        <MappingFragment StoreEntitySet="IMEIReplacementMaster">
+          <ScalarProperty Name="RequestID" ColumnName="RequestID" />
+          <ScalarProperty Name="IMEI_1" ColumnName="IMEI_1" />
+          <ScalarProperty Name="IMEI_2" ColumnName="IMEI_2" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="DealerCode" ColumnName="DealerCode" />
+          <ScalarProperty Name="RequestType" ColumnName="RequestType" />
+          <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+          <ScalarProperty Name="DistributionDate" ColumnName="DistributionDate" />
+          <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+          <ScalarProperty Name="Issues" ColumnName="Issues" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="OperatorName" ColumnName="OperatorName" />
+          <ScalarProperty Name="RequestStatus" ColumnName="RequestStatus" />
+          <ScalarProperty Name="IsSeen" ColumnName="IsSeen" />
+          <ScalarProperty Name="IssueDetails" ColumnName="IssueDetails" />
+          <ScalarProperty Name="ReplaceIMEI_1" ColumnName="ReplaceIMEI_1" />
+          <ScalarProperty Name="ReplaceIMEI_2" ColumnName="ReplaceIMEI_2" />
+          <ScalarProperty Name="ReplaceModel" ColumnName="ReplaceModel" />
+          <ScalarProperty Name="ActionTakenDetails" ColumnName="ActionTakenDetails" />
+          <ScalarProperty Name="ActionTakenBy" ColumnName="ActionTakenBy" />
+          <ScalarProperty Name="AppliedSwVersion" ColumnName="AppliedSwVersion" />
+          <ScalarProperty Name="PartsRequired" ColumnName="PartsRequired" />
+          <ScalarProperty Name="PlazaCode" ColumnName="PlazaCode" />
+          <ScalarProperty Name="DuePrice" ColumnName="DuePrice" />
+          <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ManagementApprovalLogs">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.ManagementApprovalLog">
+        <MappingFragment StoreEntitySet="ManagementApprovalLog">
+          <ScalarProperty Name="ManagementApprovalID" ColumnName="ManagementApprovalID" />
+          <ScalarProperty Name="IMEI_1" ColumnName="IMEI_1" />
+          <ScalarProperty Name="IMEI_2" ColumnName="IMEI_2" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+          <ScalarProperty Name="DistributionDate" ColumnName="DistributionDate" />
+          <ScalarProperty Name="RequestID" ColumnName="RequestID" />
+          <ScalarProperty Name="WarehouseDeclinedDate" ColumnName="WarehouseDeclinedDate" />
+          <ScalarProperty Name="ManagementStatus" ColumnName="ManagementStatus" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PrimaryRecomLogs">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.PrimaryRecomLog">
+        <MappingFragment StoreEntitySet="PrimaryRecomLog">
+          <ScalarProperty Name="PrimaryRecomID" ColumnName="PrimaryRecomID" />
+          <ScalarProperty Name="IMEI_1" ColumnName="IMEI_1" />
+          <ScalarProperty Name="IMEI_2" ColumnName="IMEI_2" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+          <ScalarProperty Name="DistributionDate" ColumnName="DistributionDate" />
+          <ScalarProperty Name="RequestID" ColumnName="RequestID" />
+          <ScalarProperty Name="PrimaryRecomDate" ColumnName="PrimaryRecomDate" />
+          <ScalarProperty Name="PrimaryRecomStatus" ColumnName="PrimaryRecomStatus" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReplacementLogs">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.ReplacementLog">
+        <MappingFragment StoreEntitySet="ReplacementLog">
+          <ScalarProperty Name="ReplacementLogID" ColumnName="ReplacementLogID" />
+          <ScalarProperty Name="IMEI_1" ColumnName="IMEI_1" />
+          <ScalarProperty Name="IMEI_2" ColumnName="IMEI_2" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+          <ScalarProperty Name="DistributionDate" ColumnName="DistributionDate" />
+          <ScalarProperty Name="RequestID" ColumnName="RequestID" />
+          <ScalarProperty Name="ReplacementDate" ColumnName="ReplacementDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="AppDeclinedRemarks" ColumnName="AppDeclinedRemarks" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblDealerSales">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.tblDealerSale">
+        <MappingFragment StoreEntitySet="tblDealerSales">
+          <ScalarProperty Name="SalesID" ColumnName="SalesID" />
+          <ScalarProperty Name="DealerCode" ColumnName="DealerCode" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="SalesDate" ColumnName="SalesDate" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblDisplayProducts">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.tblDisplayProduct">
+        <MappingFragment StoreEntitySet="tblDisplayProduct">
+          <ScalarProperty Name="DisplayProductID" ColumnName="DisplayProductID" />
+          <ScalarProperty Name="IMEI_1" ColumnName="IMEI_1" />
+          <ScalarProperty Name="IMEI_2" ColumnName="IMEI_2" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="DealerCode" ColumnName="DealerCode" />
+          <ScalarProperty Name="IsApprovedByNSM" ColumnName="IsApprovedByNSM" />
+          <ScalarProperty Name="DisplayDate" ColumnName="DisplayDate" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblStockReconciliations">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.tblStockReconciliation">
+        <MappingFragment StoreEntitySet="tblStockReconciliation">
+          <ScalarProperty Name="StockReconID" ColumnName="StockReconID" />
+          <ScalarProperty Name="DealerCode" ColumnName="DealerCode" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="InHouseStock" ColumnName="InHouseStock" />
+          <ScalarProperty Name="MarketStock" ColumnName="MarketStock" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WareHouseApprovals">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.WareHouseApproval">
+        <MappingFragment StoreEntitySet="WareHouseApproval">
+          <ScalarProperty Name="WAppID" ColumnName="WAppID" />
+          <ScalarProperty Name="RequestID" ColumnName="RequestID" />
+          <ScalarProperty Name="WAppStatus" ColumnName="WAppStatus" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="ActionDate" ColumnName="ActionDate" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WareHouseCorporateStoreLogs">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.WareHouseCorporateStoreLog">
+        <MappingFragment StoreEntitySet="WareHouseCorporateStoreLog">
+          <ScalarProperty Name="WCSLogID" ColumnName="WCSLogID" />
+          <ScalarProperty Name="RequestID" ColumnName="RequestID" />
+          <ScalarProperty Name="WastageMgtDeliveryDate" ColumnName="WastageMgtDeliveryDate" />
+          <ScalarProperty Name="ReceiveDate" ColumnName="ReceiveDate" />
+          <ScalarProperty Name="ReceivedBy" ColumnName="ReceivedBy" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WastageManagementInventories">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.WastageManagementInventory">
+        <MappingFragment StoreEntitySet="WastageManagementInventory">
+          <ScalarProperty Name="WastageInventoryID" ColumnName="WastageInventoryID" />
+          <ScalarProperty Name="RequestID" ColumnName="RequestID" />
+          <ScalarProperty Name="IMEI_1" ColumnName="IMEI_1" />
+          <ScalarProperty Name="IMEI_2" ColumnName="IMEI_2" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="IsSentToStore" ColumnName="IsSentToStore" />
+          <ScalarProperty Name="WastageStatus" ColumnName="WastageStatus" />
+          <ScalarProperty Name="WastageRemarks" ColumnName="WastageRemarks" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="ServiceCenterUserID" ColumnName="ServiceCenterUserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WastageManagementMasterLogs">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.WastageManagementMasterLog">
+        <MappingFragment StoreEntitySet="WastageManagementMasterLog">
+          <ScalarProperty Name="WMgLogID" ColumnName="WMgLogID" />
+          <ScalarProperty Name="RequestID" ColumnName="RequestID" />
+          <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+          <ScalarProperty Name="DeliverTo" ColumnName="DeliverTo" />
+          <ScalarProperty Name="ServicePointID" ColumnName="ServicePointID" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Copy_Registration">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.Copy_Registration">
+        <MappingFragment StoreEntitySet="Copy_Registration">
+          <ScalarProperty Name="ProductRegID" ColumnName="ProductRegID" />
+          <ScalarProperty Name="ProductType" ColumnName="ProductType" />
+          <ScalarProperty Name="ProductModelID" ColumnName="ProductModelID" />
+          <ScalarProperty Name="SalerID" ColumnName="SalerID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+          <ScalarProperty Name="WarrantyMonths" ColumnName="WarrantyMonths" />
+          <ScalarProperty Name="WarrantyVoid" ColumnName="WarrantyVoid" />
+          <ScalarProperty Name="WarrantyID" ColumnName="WarrantyID" />
+          <ScalarProperty Name="MemoNo" ColumnName="MemoNo" />
+          <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+          <ScalarProperty Name="OwnerAddress" ColumnName="OwnerAddress" />
+          <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+          <ScalarProperty Name="EBS_Item_Code" ColumnName="EBS_Item_Code" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="SMSID" ColumnName="SMSID" />
+          <ScalarProperty Name="IsSendToOracleDb" ColumnName="IsSendToOracleDb" />
+          <ScalarProperty Name="IsCheckedInDealerDistribution" ColumnName="IsCheckedInDealerDistribution" />
+          <ScalarProperty Name="Imei_One" ColumnName="Imei_One" />
+          <ScalarProperty Name="Imei_Tow" ColumnName="Imei_Tow" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Models">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.Model">
+        <MappingFragment StoreEntitySet="Model">
+          <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+          <ScalarProperty Name="DealerName" ColumnName="DealerName" />
+          <ScalarProperty Name="DealerCode" ColumnName="DealerCode" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+          <ScalarProperty Name="Model1" ColumnName="Model" />
+          <ScalarProperty Name="DealerType" ColumnName="DealerType" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Division" ColumnName="Division" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RemainingMarketDetails">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.RemainingMarketDetail">
+        <MappingFragment StoreEntitySet="RemainingMarketDetails">
+          <ScalarProperty Name="RemainingMarketStockDetailsId" ColumnName="RemainingMarketStockDetailsId" />
+          <ScalarProperty Name="DealerCode" ColumnName="DealerCode" />
+          <ScalarProperty Name="DealerName" ColumnName="DealerName" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="RemainingStock" ColumnName="RemainingStock" />
+          <ScalarProperty Name="DealerCity" ColumnName="DealerCity" />
+          <ScalarProperty Name="DealerDivision" ColumnName="DealerDivision" />
+          <ScalarProperty Name="DealerType" ColumnName="DealerType" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RemainingMarketDetails_BACKUP">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.RemainingMarketDetails_BACKUP">
+        <MappingFragment StoreEntitySet="RemainingMarketDetails_BACKUP">
+          <ScalarProperty Name="RemainingMarketStockDetailsId" ColumnName="RemainingMarketStockDetailsId" />
+          <ScalarProperty Name="DealerCode" ColumnName="DealerCode" />
+          <ScalarProperty Name="DealerName" ColumnName="DealerName" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="RemainingStock" ColumnName="RemainingStock" />
+          <ScalarProperty Name="DealerCity" ColumnName="DealerCity" />
+          <ScalarProperty Name="DealerDivision" ColumnName="DealerDivision" />
+          <ScalarProperty Name="DealerType" ColumnName="DealerType" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblSupplierModelInfoes">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.tblSupplierModelInfo">
+        <MappingFragment StoreEntitySet="tblSupplierModelInfo">
+          <ScalarProperty Name="supplierID" ColumnName="supplierID" />
+          <ScalarProperty Name="supplierName" ColumnName="supplierName" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="addedBy" ColumnName="addedBy" />
+          <ScalarProperty Name="addedDate" ColumnName="addedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TeDDDs">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.TeDDD">
+        <MappingFragment StoreEntitySet="TeDDD">
+          <ScalarProperty Name="DealerdistributionId" ColumnName="DealerdistributionId" />
+          <ScalarProperty Name="DealerCode" ColumnName="DealerCode" />
+          <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+          <ScalarProperty Name="BarCode2" ColumnName="BarCode2" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="DONumber" ColumnName="DONumber" />
+          <ScalarProperty Name="DistributionDate" ColumnName="DistributionDate" />
+          <ScalarProperty Name="IsSoldOut" ColumnName="IsSoldOut" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TestRegs">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.TestReg">
+        <MappingFragment StoreEntitySet="TestReg">
+          <ScalarProperty Name="ProductRegID" ColumnName="ProductRegID" />
+          <ScalarProperty Name="ProductType" ColumnName="ProductType" />
+          <ScalarProperty Name="ProductModelID" ColumnName="ProductModelID" />
+          <ScalarProperty Name="SalerID" ColumnName="SalerID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+          <ScalarProperty Name="WarrantyMonths" ColumnName="WarrantyMonths" />
+          <ScalarProperty Name="WarrantyVoid" ColumnName="WarrantyVoid" />
+          <ScalarProperty Name="WarrantyID" ColumnName="WarrantyID" />
+          <ScalarProperty Name="MemoNo" ColumnName="MemoNo" />
+          <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+          <ScalarProperty Name="OwnerAddress" ColumnName="OwnerAddress" />
+          <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+          <ScalarProperty Name="EBS_Item_Code" ColumnName="EBS_Item_Code" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="SMSID" ColumnName="SMSID" />
+          <ScalarProperty Name="IsSendToOracleDb" ColumnName="IsSendToOracleDb" />
+          <ScalarProperty Name="IsCheckedInDealerDistribution" ColumnName="IsCheckedInDealerDistribution" />
+          <ScalarProperty Name="Imei_One" ColumnName="Imei_One" />
+          <ScalarProperty Name="Imei_Tow" ColumnName="Imei_Tow" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TimeTables">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.TimeTable">
+        <MappingFragment StoreEntitySet="TimeTable">
+          <ScalarProperty Name="TIME_ID" ColumnName="TIME_ID" />
+          <ScalarProperty Name="DAY_NAM" ColumnName="DAY_NAM" />
+          <ScalarProperty Name="DAY_NUMBER_IN_WEEK" ColumnName="DAY_NUMBER_IN_WEEK" />
+          <ScalarProperty Name="DAY_NUMBER_IN_MONTH" ColumnName="DAY_NUMBER_IN_MONTH" />
+          <ScalarProperty Name="CALENDAR_WEEK_NUMBER" ColumnName="CALENDAR_WEEK_NUMBER" />
+          <ScalarProperty Name="WEEK_ENDING_DAY" ColumnName="WEEK_ENDING_DAY" />
+          <ScalarProperty Name="CALENDAR_MONTH_NUMBER" ColumnName="CALENDAR_MONTH_NUMBER" />
+          <ScalarProperty Name="CALENDAR_MONTH_DESC" ColumnName="CALENDAR_MONTH_DESC" />
+          <ScalarProperty Name="DAYS_IN_CAL_MONTH" ColumnName="DAYS_IN_CAL_MONTH" />
+          <ScalarProperty Name="END_OF_CAL_MONTH" ColumnName="END_OF_CAL_MONTH" />
+          <ScalarProperty Name="CALENDAR_MONTH_NAME" ColumnName="CALENDAR_MONTH_NAME" />
+          <ScalarProperty Name="CALENDAR_QUARTER_DESC" ColumnName="CALENDAR_QUARTER_DESC" />
+          <ScalarProperty Name="DAYS_IN_CAL_QUARTER" ColumnName="DAYS_IN_CAL_QUARTER" />
+          <ScalarProperty Name="END_OF_CAL_QUARTER" ColumnName="END_OF_CAL_QUARTER" />
+          <ScalarProperty Name="CALENDAR_QUARTER_NUMBER" ColumnName="CALENDAR_QUARTER_NUMBER" />
+          <ScalarProperty Name="CALENDAR_YEAR" ColumnName="CALENDAR_YEAR" />
+          <ScalarProperty Name="DAYS_IN_CAL_YEAR" ColumnName="DAYS_IN_CAL_YEAR" />
+          <ScalarProperty Name="END_OF_CAL_YEAR" ColumnName="END_OF_CAL_YEAR" />
+          <ScalarProperty Name="PERIOD_NAME" ColumnName="PERIOD_NAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="X">
+      <EntityTypeMapping TypeName="RBSYNERGYModel.X">
+        <MappingFragment StoreEntitySet="X">
+          <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+          <ScalarProperty Name="DealerName" ColumnName="DealerName" />
+          <ScalarProperty Name="DealerCode" ColumnName="DealerCode" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="DealerType" ColumnName="DealerType" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Division" ColumnName="Division" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="aspnet_UsersInRoles" TypeName="RBSYNERGYModel.aspnet_UsersInRoles" StoreEntitySet="aspnet_UsersInRoles">
+      <EndProperty Name="aspnet_Roles">
+        <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+      </EndProperty>
+      <EndProperty Name="aspnet_Users">
+        <ScalarProperty Name="UserId" ColumnName="UserId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,301 @@
+﻿@using System.ServiceModel.Channels
+@model WDS.Models.DistributorCheckListModel
+@{
+    ViewBag.Title = "CreateDistributorCheckList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var moaIsActive = string.Empty;
+    var mocIsActive = string.Empty;
+    var bankSolvencyIsActive = string.Empty;
+    var distributorOtherInfoIsActive = string.Empty;
+    var taxIdentityIsActive = string.Empty;
+    var tradeLicensIsActive = string.Empty;
+    var valueAddedIsActive = string.Empty;
+    var nomineeIsActive = string.Empty;
+
+
+    if (Model.MemorandumOfAgreementModel.Id == 0)
+    {
+        moaIsActive = "active";
+    }
+    else if (Model.MemorandumOfChequeModel.Id == 0)
+    {
+        mocIsActive = "active";
+    }
+    else if (Model.BankSolvencyModel.Id == 0)
+    {
+        ;
+        bankSolvencyIsActive = "active";
+    }
+
+    else if (Model.TaxIdentityModel.Id == 0)
+    {
+
+        taxIdentityIsActive = "active";
+    }
+
+    else if (Model.ValueAddedTaxModel.Id == 0)
+    {
+
+        valueAddedIsActive = "active";
+    }
+
+    else if (Model.TradeLicensModel.Id == 0)
+    {
+
+        tradeLicensIsActive = "active";
+    }
+    else if (Model.DistributorOthersInformationModel.Id == 0)
+    {
+        nomineeIsActive = "active";
+    } else if (Model.DistributorPersonalInformationModel.Id == 0)
+    {
+        distributorOtherInfoIsActive = "active";
+    }
+
+
+
+
+
+}
+
+<div class="container-fluid">
+
+    @if (TempData["message"] != null)
+    {
+        var msgType = TempData["messageType"];
+        var msg = TempData["message"];
+        if ((int)msgType == 1)
+        {
+            TempData["message"] = null;
+            TempData["messageType"] = 0;
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Message: </strong> @msg
+                <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </a>
+            </div>
+
+        }
+        else if ((int)msgType == 2)
+        {
+            TempData["message"] = null;
+            TempData["messageType"] = 0;
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Message: </strong> @msg
+                <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </a>
+            </div>
+
+        }
+        else if ((int)msgType == 3)
+        {
+            TempData["message"] = null;
+            TempData["messageType"] = 0;
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Message: </strong> @msg
+                <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </a>
+            </div>
+        }
+    }
+
+
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-header">Distributor Check List Input</div>
+                <div class="card-body">
+                    @if (Model.IsApprover & Model.MemorandumOfAgreementModel.Id > 0 && Model.MemorandumOfChequeModel.Id > 0 && Model.BankSolvencyModel.Id > 0 && Model.TaxIdentityModel.Id > 0 && Model.ValueAddedTaxModel.Id > 0 && Model.TradeLicensModel.Id > 0 && Model.DistributorOthersInformationModel.Id > 0)
+                    {
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right"></label>
+                            <div class="col-lg-6 text-right">
+                                @*<button type="submit" id="btnDocApprove" onclick="location.href = '@Url.Action("ApproveDoc", "Document", new { id = Model.Id })'" class="btn btn-outline-success"><i class="fas fa-thumbs-up"></i>&nbsp;Approve</button>*@
+                                
+                                <button type="submit" id="btnDocApprove" onclick="approval_submission(@Model.Id)" class="btn btn-outline-success"><i class="fas fa-thumbs-up"></i>&nbsp;Approve</button>
+                                
+                                
+                                @*<input type="button" class="btn btn-sm btn-outline-success" value="Save" onclick="investigation_submission($(this))" />*@
+
+                            </div>
+                        </div>
+                    }
+
+
+                    @using (Html.BeginForm("CreateDistributorCheckList", "Document", FormMethod.Get, new { id = "CreateDistributorCheckList", enctype = "multipart/form-data" }))
+                    {
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-form-label text-sm-right">Select Distributor</label>
+                            <div class="col-lg-4">
+                                @Html.DropDownListFor(model => model.DealerCode, new SelectList(ViewBag.Distributors, "Value", "Text"), "Select", new
+                                {
+                                    @class = "selectpicker show-tick form-control",
+                                    data_live_search = "true",
+                                    onchange = "submit();",
+
+                                })
+                                @Html.ValidationMessageFor(model => model.DealerCode, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                    }
+
+
+
+
+                    <div class="form-group row">
+                        <div class="card col-lg-12">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link @moaIsActive" id="moa-tab" data-toggle="tab" href="#moa" role="tab" aria-controls="moa" aria-selected="true">Memorandum of Agreement (MOA)</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link @mocIsActive" id="moc-tab" data-toggle="tab" href="#moc" role="tab" aria-controls="moc" aria-selected="false">
+                                        Memorandum of Cheque (MOC)
+
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link @bankSolvencyIsActive" id="bs-tab" data-toggle="tab" href="#bs" role="tab" aria-controls="bs" aria-selected="false">
+                                        Bank Solvency
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link @taxIdentityIsActive" id="tin-tab" data-toggle="tab" href="#tin" role="tab" aria-controls="tin" aria-selected="false">
+                                        TIN
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link @valueAddedIsActive" id="vat-tab" data-toggle="tab" href="#vat" role="tab" aria-controls="vat" aria-selected="false">
+                                        VAT
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link @tradeLicensIsActive" id="trade-tab" data-toggle="tab" href="#trade" role="tab" aria-controls="trade" aria-selected="false">
+                                        Trade License
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link @nomineeIsActive" id="other-tab" data-toggle="tab" href="#other" role="tab" aria-controls="other" aria-selected="false">
+                                        Distributor & Nominee Info
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link @distributorOtherInfoIsActive" id="perInfo-tab" data-toggle="tab" href="#perInfo" role="tab" aria-controls="perInfo" aria-selected="false">
+                                        Distributor Personal Info
+                                    </a>
+                                </li>
+                            </ul>
+                            
+                            @if (Model.DealerCode !=null)
+                            {
+                                @Html.HiddenFor(model=>model.DealerCode)
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show @moaIsActive" id="moa" role="tabpanel" aria-labelledby="moa">
+                                        @Html.Partial("~/Views/Shared/_moa.cshtml", @Model)
+                                    </div>
+                                    <div class="tab-pane fade show @mocIsActive" id="moc" role="tabpanel" aria-labelledby="moc">
+                                        @Html.Partial("~/Views/Shared/_moc.cshtml", @Model)
+                                    </div>
+                                    <div class="tab-pane fade show @bankSolvencyIsActive" id="bs" role="tabpanel" aria-labelledby="bs">
+                                        @Html.Partial("~/Views/Shared/_bs.cshtml", @Model)
+                                    </div>
+                                    <div class="tab-pane fade show @taxIdentityIsActive" id="tin" role="tabpanel" aria-labelledby="tin">
+                                        @Html.Partial("~/Views/Shared/_tin.cshtml", @Model)
+                                    </div>
+                                    <div class="tab-pane fade show @valueAddedIsActive" id="vat" role="tabpanel" aria-labelledby="vat">
+                                        @Html.Partial("~/Views/Shared/_vat.cshtml", @Model)
+                                    </div>
+                                    <div class="tab-pane fade show @tradeLicensIsActive" id="trade" role="tabpanel" aria-labelledby="trade">
+                                        @Html.Partial("~/Views/Shared/_trade.cshtml", @Model)
+                                    </div>
+                                    <div class="tab-pane fade show @nomineeIsActive" id="other" role="tabpanel" aria-labelledby="other">
+                                        @Html.Partial("~/Views/Shared/_distother.cshtml", @Model)
+                                    </div>
+                                    <div class="tab-pane fade show @distributorOtherInfoIsActive" id="perInfo" role="tabpanel" aria-labelledby="perInfo">
+                                        @Html.Partial("~/Views/Shared/_distributorPersonalInfo.cshtml", @Model)
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function approval_submission(id) {
+
+
+        iziToast.show({
+            theme: 'dark',
+            icon: 'icon-person',
+            title: 'Hey',
+            message: 'Are you sure to save your opinion?',
+            position: 'center', // bottomRight, bottomLeft, topRight, topLeft, topCenter, bottomCenter
+            progressBarColor: 'rgb(0, 255, 184)',
+            buttons: [
+                ['<button>Ok</button>', function (instance, toast) {
+
+                    instance.hide({
+                        transitionOut: 'fadeOutUp'
+                    }, toast);
+
+                    
+                    $.ajax({
+                        url: '@Url.Action("ApproveDoc", "Document")',
+                        type: "POST",
+                        data: { id: id },
+                        dataType: "json",
+                        //contentType: "application/json",
+                        success: function (result) {
+                            if (result.Id == 1) {
+                                iziToast.success({
+                                    title: 'Success',
+                                    message: result.Message,
+                                });
+                            } else if (result.Id == 0) {
+                                iziToast.error({
+                                    title: 'Error',
+                                    message: result.Message,
+                                });
+                            }
+                        },
+                        error: function () { }
+                    });
+
+                }, true], // true to focus
+                ['<button>Close</button>', function (instance, toast) {
+
+                    instance.hide({
+                        transitionOut: 'fadeOutUp',
+                        onClosing: function (instance, toast, closedBy) {
+                            console.info('closedBy: ' + closedBy); // The return will be: 'closedBy: buttonName'
+                        }
+                    }, toast, 'buttonName');
+                }]
+            ],
+            onOpening: function (instance, toast) {
+                console.info('callback abriu!');
+            },
+            onClosing: function (instance, toast, closedBy) {
+                console.info('closedBy: ' + closedBy); // tells if it was closed by 'drag' or 'button'
+
+
+            }
+        });
+
+
+
+
+
+    }
+</script>

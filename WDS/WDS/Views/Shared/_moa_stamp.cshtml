@@ -1,0 +1,38 @@
+﻿@model WDS.Models.MOA_StapmsModel
+
+
+<tr id="@Model.Id">
+    @using (Html.BeginCollectionItem("MemorandumOfAgreementModel.MoaStapmsModels"))
+    {
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.MOAId)
+        @Html.HiddenFor(m => m.AddedBy)
+        @Html.HiddenFor(m => m.AddedDate)
+        <td>@Html.TextBoxFor(m => m.StampNo, null, new { @class = "form-control", required = "required" })</td>
+        <td>@Html.TextBoxFor(m => m.PurchaseDate, new { @class = "ddPicker form-control", @readonly = "readonly", required = "required" })</td>
+        <td>@Html.TextBoxFor(m => m.VendorId, null, new { @class = "form-control", required = "required" })</td>
+        <td><button type="button" id="removeProductRow" class="btn btn-primary" onclick=" removeDetailRow(this) ">Remove</button></td>
+    }
+</tr>
+
+
+
+<script type="text/javascript">
+    $(function () {
+        $(function () {
+            $(".ddPicker").datepicker({ dateFormat: 'mm-dd-yy', changeMonth: true, changeYear: true, yearRange: "-100:+00" })
+                .on('keypress paste', function (e) {
+                    e.preventDefault();
+                    return false;
+                });
+        });
+
+
+
+    });
+
+    function removeDetailRow(ths) {
+        var thisRow = ths.closest('tr');
+        thisRow.remove();
+    }
+</script>

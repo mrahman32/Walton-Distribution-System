@@ -1,0 +1,2159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RBSYNERGYModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="aspnet_Applications">
+    <Key>
+      <PropertyRef Name="ApplicationId" />
+    </Key>
+    <Property Name="ApplicationName" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="LoweredApplicationName" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="aspnet_Membership">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="PasswordFormat" Type="int" Nullable="false" />
+    <Property Name="PasswordSalt" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="MobilePIN" Type="nvarchar" MaxLength="16" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="LoweredEmail" Type="nvarchar" MaxLength="256" />
+    <Property Name="PasswordQuestion" Type="nvarchar" MaxLength="256" />
+    <Property Name="PasswordAnswer" Type="nvarchar" MaxLength="128" />
+    <Property Name="IsApproved" Type="bit" Nullable="false" />
+    <Property Name="IsLockedOut" Type="bit" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="LastLoginDate" Type="datetime" Nullable="false" />
+    <Property Name="LastPasswordChangedDate" Type="datetime" Nullable="false" />
+    <Property Name="LastLockoutDate" Type="datetime" Nullable="false" />
+    <Property Name="FailedPasswordAttemptCount" Type="int" Nullable="false" />
+    <Property Name="FailedPasswordAttemptWindowStart" Type="datetime" Nullable="false" />
+    <Property Name="FailedPasswordAnswerAttemptCount" Type="int" Nullable="false" />
+    <Property Name="FailedPasswordAnswerAttemptWindowStart" Type="datetime" Nullable="false" />
+    <Property Name="Comment" Type="ntext" />
+  </EntityType>
+  <EntityType Name="aspnet_Paths">
+    <Key>
+      <PropertyRef Name="PathId" />
+    </Key>
+    <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="PathId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Path" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="LoweredPath" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="aspnet_PersonalizationAllUsers">
+    <Key>
+      <PropertyRef Name="PathId" />
+    </Key>
+    <Property Name="PathId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="PageSettings" Type="image" Nullable="false" />
+    <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="aspnet_PersonalizationPerUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="PathId" Type="uniqueidentifier" />
+    <Property Name="UserId" Type="uniqueidentifier" />
+    <Property Name="PageSettings" Type="image" Nullable="false" />
+    <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="aspnet_Profile">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="PropertyNames" Type="ntext" Nullable="false" />
+    <Property Name="PropertyValuesString" Type="ntext" Nullable="false" />
+    <Property Name="PropertyValuesBinary" Type="image" Nullable="false" />
+    <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="aspnet_Roles">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="LoweredRoleName" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="aspnet_SchemaVersions">
+    <Key>
+      <PropertyRef Name="Feature" />
+      <PropertyRef Name="CompatibleSchemaVersion" />
+    </Key>
+    <Property Name="Feature" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CompatibleSchemaVersion" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="IsCurrentVersion" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="aspnet_Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="LoweredUserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="MobileAlias" Type="nvarchar" MaxLength="16" />
+    <Property Name="IsAnonymous" Type="bit" Nullable="false" />
+    <Property Name="LastActivityDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="aspnet_UsersInRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="aspnet_WebEvent_Events">
+    <Key>
+      <PropertyRef Name="EventId" />
+    </Key>
+    <Property Name="EventId" Type="char" MaxLength="32" Nullable="false" />
+    <Property Name="EventTimeUtc" Type="datetime" Nullable="false" />
+    <Property Name="EventTime" Type="datetime" Nullable="false" />
+    <Property Name="EventType" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="EventSequence" Type="decimal" Precision="19" Scale="0" Nullable="false" />
+    <Property Name="EventOccurrence" Type="decimal" Precision="19" Scale="0" Nullable="false" />
+    <Property Name="EventCode" Type="int" Nullable="false" />
+    <Property Name="EventDetailCode" Type="int" Nullable="false" />
+    <Property Name="Message" Type="nvarchar" MaxLength="1024" />
+    <Property Name="ApplicationPath" Type="nvarchar" MaxLength="256" />
+    <Property Name="ApplicationVirtualPath" Type="nvarchar" MaxLength="256" />
+    <Property Name="MachineName" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="RequestUrl" Type="nvarchar" MaxLength="1024" />
+    <Property Name="ExceptionType" Type="nvarchar" MaxLength="256" />
+    <Property Name="Details" Type="ntext" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'RBSYNERGY.dbo.Compare' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Compare">
+          <Property Name="TRANSACTION_DATE" Type="datetime" />
+          <Property Name="CREATION_DATE" Type="nvarchar" MaxLength="255" />
+          <Property Name="ORGANIZATION_NAME" Type="nvarchar" MaxLength="255" />
+          <Property Name="SUBINVENTORY_CODE" Type="nvarchar" MaxLength="255" />
+          <Property Name="ITEM_CODE" Type="nvarchar" MaxLength="255" />
+          <Property Name="ITEM_NAME" Type="nvarchar" MaxLength="255" />
+          <Property Name="MODEL" Type="nvarchar" MaxLength="255" />
+          <Property Name="GRADE" Type="nvarchar" MaxLength="255" />
+          <Property Name="TRANSACTION_TYPE_NAME" Type="nvarchar" MaxLength="255" />
+          <Property Name="SERIAL_NUMBER" Type="nvarchar" MaxLength="255" />
+          <Property Name="TRANSACTION_REFERENCE" Type="nvarchar" MaxLength="255" />
+          <Property Name="CREATED_BY" Type="nvarchar" MaxLength="255" />
+          <Property Name="ORDER_NUMBER" Type="float" />
+          <Property Name="CUSTOMER_NUMBER" Type="nvarchar" MaxLength="255" />
+          <Property Name="ACCOUNT_NAME" Type="nvarchar" MaxLength="255" />
+          <Property Name="ADDRESS_E" Type="nvarchar" MaxLength="255" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'RBSYNERGY.dbo.Copy_Registration' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Copy_Registration">
+    <Key>
+      <PropertyRef Name="ProductRegID" />
+      <PropertyRef Name="ProductType" />
+      <PropertyRef Name="ProductModelID" />
+      <PropertyRef Name="ProductID" />
+      <PropertyRef Name="PhoneNumber" />
+      <PropertyRef Name="RegistrationDate" />
+      <PropertyRef Name="WarrantyMonths" />
+      <PropertyRef Name="WarrantyVoid" />
+      <PropertyRef Name="AddedBy" />
+      <PropertyRef Name="DateAdded" />
+    </Key>
+    <Property Name="ProductRegID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ProductType" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ProductModelID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SalerID" Type="varchar" MaxLength="50" />
+    <Property Name="ProductID" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="RegistrationDate" Type="date" Nullable="false" />
+    <Property Name="WarrantyMonths" Type="int" Nullable="false" />
+    <Property Name="WarrantyVoid" Type="bit" Nullable="false" />
+    <Property Name="WarrantyID" Type="varchar" MaxLength="50" />
+    <Property Name="MemoNo" Type="varchar" MaxLength="50" />
+    <Property Name="OwnerName" Type="varchar" MaxLength="100" />
+    <Property Name="OwnerAddress" Type="varchar" MaxLength="500" />
+    <Property Name="DeliveryDate" Type="varchar" MaxLength="50" />
+    <Property Name="EBS_Item_Code" Type="varchar" MaxLength="50" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DateAdded" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="SMSID" Type="uniqueidentifier" />
+    <Property Name="IsSendToOracleDb" Type="bit" />
+    <Property Name="IsCheckedInDealerDistribution" Type="bit" />
+    <Property Name="Imei_One" Type="nvarchar" MaxLength="50" />
+    <Property Name="Imei_Tow" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6005: The data type 'sql_variant' is currently not supported for the target Entity Framework version; the column 'client_net_address' in the table 'RBSYNERGY.dbo.DealerDistributionTriggerLogs' was excluded.-->
+  <EntityType Name="DealerDistributionTriggerLogs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="action" Type="nvarchar(max)" />
+    <Property Name="HostName" Type="nvarchar(max)" />
+    <Property Name="LoggedInUser" Type="nvarchar(max)" />
+    <Property Name="UpdatedDate" Type="datetime2" Precision="7" />
+    <Property Name="DealerdistributionId" Type="nvarchar(max)" />
+    <Property Name="DealerCode" Type="varchar" MaxLength="50" />
+    <Property Name="BarCode" Type="varchar" MaxLength="500" />
+    <Property Name="BarCode2" Type="varchar" MaxLength="500" />
+    <Property Name="Model" Type="varchar" MaxLength="200" />
+    <Property Name="DONumber" Type="varchar" MaxLength="50" />
+    <Property Name="DistributionDate" Type="date" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'RBSYNERGY.dbo.DealerUpdateData' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="DealerUpdateData">
+          <Property Name="SL No" Type="float" />
+          <Property Name="CUSTOMER_NAME" Type="nvarchar" MaxLength="255" />
+          <Property Name="ACCOUNT_NAME" Type="nvarchar" MaxLength="255" />
+          <Property Name="LOCATION" Type="nvarchar" MaxLength="255" />
+          <Property Name="ACCOUNT_NUMBER" Type="nvarchar" MaxLength="255" />
+        </EntityType>-->
+  <EntityType Name="DispatchToMarketRemainingStock">
+    <Key>
+      <PropertyRef Name="DispatchToMarketStockId" />
+    </Key>
+    <Property Name="DispatchToMarketStockId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Model" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TotalMarketDispatch" Type="bigint" Nullable="false" />
+    <Property Name="TotalMarketSell" Type="bigint" Nullable="false" />
+    <Property Name="TotalUnActive" Type="bigint" />
+    <Property Name="RemainingMarketStock" Type="bigint" Nullable="false" />
+    <Property Name="AddedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="DateAdded" Type="date" />
+    <Property Name="StockAfterApplyMOE" Type="bigint" />
+    <Property Name="AppliedMOE" Type="decimal" Precision="18" Scale="3" />
+  </EntityType>
+  <EntityType Name="DistributorNetwork">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="EmpId" Type="nvarchar" MaxLength="50" />
+    <Property Name="Role" Type="nvarchar" MaxLength="50" />
+    <Property Name="ParentId" Type="bigint" />
+    <Property Name="ZoneId" Type="bigint" />
+    <Property Name="Status" Type="bit" />
+    <Property Name="Zone" Type="nvarchar" MaxLength="50" />
+    <Property Name="Division" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddedDate" Type="datetime" />
+    <Property Name="AddedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'RBSYNERGY.dbo.Dlrdis' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Dlrdis">
+          <Property Name="TRANSACTION_DATE" Type="datetime" />
+          <Property Name="CREATION_DATE" Type="nvarchar" MaxLength="255" />
+          <Property Name="ORGANIZATION_NAME" Type="nvarchar" MaxLength="255" />
+          <Property Name="SUBINVENTORY_CODE" Type="nvarchar" MaxLength="255" />
+          <Property Name="ITEM_CODE" Type="nvarchar" MaxLength="255" />
+          <Property Name="ITEM_NAME" Type="nvarchar" MaxLength="255" />
+          <Property Name="MODEL" Type="nvarchar" MaxLength="255" />
+          <Property Name="GRADE" Type="nvarchar" MaxLength="255" />
+          <Property Name="TRANSACTION_TYPE_NAME" Type="nvarchar" MaxLength="255" />
+          <Property Name="SERIAL_NUMBER" Type="nvarchar" MaxLength="255" />
+          <Property Name="TRANSACTION_REFERENCE" Type="nvarchar" MaxLength="255" />
+          <Property Name="CREATED_BY" Type="nvarchar" MaxLength="255" />
+          <Property Name="ORDER_NUMBER" Type="float" />
+          <Property Name="CUSTOMER_NUMBER" Type="nvarchar" MaxLength="255" />
+          <Property Name="ACCOUNT_NAME" Type="nvarchar" MaxLength="255" />
+          <Property Name="ADDRESS_E" Type="nvarchar" MaxLength="255" />
+        </EntityType>-->
+  <EntityType Name="FifteenDaysWiseMailTable">
+    <Key>
+      <PropertyRef Name="FifteenDaysWiseMailId" />
+    </Key>
+    <Property Name="FifteenDaysWiseMailId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Model" Type="nvarchar(max)" />
+    <Property Name="ReleaseDate" Type="datetime" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="ExcelFileName" Type="nvarchar(max)" />
+    <Property Name="AddedDate" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'RBSYNERGY.dbo.FinalRes' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="FinalRes">
+          <Property Name="Zone Name" Type="varchar(max)" />
+          <Property Name="Distributor Name" Type="varchar(max)" />
+          <Property Name="Mobile" Type="varchar(max)" />
+        </EntityType>-->
+  <EntityType Name="LockedImeiInventory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Model" Type="nvarchar" MaxLength="50" />
+    <Property Name="ImeiOne" Type="nvarchar" MaxLength="50" />
+    <Property Name="ImeiTwo" Type="nvarchar" MaxLength="50" />
+    <Property Name="RegistrationDate" Type="date" />
+    <Property Name="OrderNo" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'RBSYNERGY.dbo.Model' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Model">
+    <Key>
+      <PropertyRef Name="RegistrationDate" />
+      <PropertyRef Name="DealerName" />
+      <PropertyRef Name="DealerCode" />
+      <PropertyRef Name="Model" />
+    </Key>
+    <Property Name="RegistrationDate" Type="date" Nullable="false" />
+    <Property Name="DealerName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DealerCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Number" Type="int" />
+    <Property Name="TotalPrice" Type="decimal" Precision="21" Scale="2" />
+    <Property Name="Model" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="DealerType" Type="varchar" MaxLength="50" />
+    <Property Name="City" Type="varchar" MaxLength="50" />
+    <Property Name="Division" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ModelWiseLock">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Model" Type="nvarchar" MaxLength="50" />
+    <Property Name="OrderNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="InventroyAddedDate" Type="date" />
+    <Property Name="OrderQuantity" Type="bigint" />
+    <Property Name="ActivationThreshold" Type="int" />
+    <Property Name="IsLock" Type="bit" />
+    <Property Name="AddedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddedDate" Type="date" />
+  </EntityType>
+  <EntityType Name="ModelWiseServiceQuantityInDays">
+    <Key>
+      <PropertyRef Name="ModelWiseDaysIds" />
+    </Key>
+    <Property Name="ModelWiseDaysIds" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Model" Type="nvarchar(max)" />
+    <Property Name="Tendays" Type="bigint" />
+    <Property Name="Twentydays" Type="bigint" />
+    <Property Name="Fortydays" Type="bigint" />
+    <Property Name="Sixtydays" Type="bigint" />
+    <Property Name="Nintydays" Type="bigint" />
+    <Property Name="OneEightydays" Type="bigint" />
+    <Property Name="Twoseventy" Type="bigint" />
+    <Property Name="ThreeSixtyFive" Type="bigint" />
+    <Property Name="RestoftheDays" Type="bigint" />
+    <Property Name="AddedDate" Type="datetime" />
+    <Property Name="AddedBy" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="ModelWiseServiceQuantityInDaysByOrder">
+    <Key>
+      <PropertyRef Name="ModelOrderWiseDaysIds" />
+    </Key>
+    <Property Name="ModelOrderWiseDaysIds" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Model" Type="nvarchar(max)" />
+    <Property Name="Tendays" Type="bigint" />
+    <Property Name="Twentydays" Type="bigint" />
+    <Property Name="Fortydays" Type="bigint" />
+    <Property Name="Sixtydays" Type="bigint" />
+    <Property Name="Nintydays" Type="bigint" />
+    <Property Name="OneEightydays" Type="bigint" />
+    <Property Name="Twoseventy" Type="bigint" />
+    <Property Name="ThreeSixtyFive" Type="bigint" />
+    <Property Name="RestoftheDays" Type="bigint" />
+    <Property Name="Orders" Type="nvarchar(max)" />
+    <Property Name="AddedDate" Type="datetime" />
+    <Property Name="AddedBy" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="NonGradedImeiInventory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Barcode" Type="nvarchar" MaxLength="100" />
+    <Property Name="Imei_One" Type="nvarchar" MaxLength="15" />
+    <Property Name="Imei_Two" Type="nvarchar" MaxLength="15" />
+    <Property Name="Model" Type="nvarchar" MaxLength="50" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="Color" Type="nvarchar" MaxLength="50" />
+    <Property Name="OrderNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Issue" Type="nvarchar(max)" />
+    <Property Name="Grade" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddedDate" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'RBSYNERGY.dbo.PlazaCollectionInfo' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="PlazaCollectionInfo">
+          <Property Name="PlazaId" Type="nvarchar(max)" />
+          <Property Name="PlazaName" Type="nvarchar(max)" />
+          <Property Name="DealerId" Type="nvarchar(max)" />
+          <Property Name="DealerName" Type="nvarchar(max)" />
+          <Property Name="DateAdded" Type="date" />
+          <Property Name="Collection" Type="float" />
+          <Property Name="Outstanding" Type="float" />
+        </EntityType>-->
+  <EntityType Name="PlazaSale">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PlazaName" Type="nvarchar" MaxLength="100" />
+    <Property Name="EbsCustomerId" Type="nvarchar" MaxLength="50" />
+    <Property Name="SaleType" Type="nvarchar" MaxLength="50" />
+    <Property Name="CType" Type="nvarchar" MaxLength="50" />
+    <Property Name="ItemName" Type="nvarchar" MaxLength="500" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="SaleDate" Type="date" />
+    <Property Name="BarCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="Model" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddedDate" Type="date" />
+  </EntityType>
+  <EntityType Name="PlazaSalesAndActivationRate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Model" Type="nvarchar" MaxLength="50" />
+    <Property Name="PhoneType" Type="nvarchar" MaxLength="50" />
+    <Property Name="SaleDate" Type="date" />
+    <Property Name="PlazaSaleQty" Type="int" />
+    <Property Name="Activation" Type="int" />
+    <Property Name="SuccessRate" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ErrorRate" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="AddedDate" Type="date" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'RBSYNERGY.dbo.PlazaSalesToDealer' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="PlazaSalesToDealer">
+          <Property Name="PLAZA_NAME" Type="nvarchar" MaxLength="500" />
+          <Property Name="EBS_CUSTOMER_ID" Type="nvarchar" MaxLength="50" />
+          <Property Name="INVOICE_NO" Type="nvarchar" MaxLength="255" />
+          <Property Name="CODE" Type="nvarchar" MaxLength="255" />
+          <Property Name="DEALER_NAME" Type="nvarchar" MaxLength="500" />
+          <Property Name="SERIAL_NO" Type="nvarchar" MaxLength="255" />
+          <Property Name="SALE_DATE" Type="datetime" />
+          <Property Name="IMEI_ONE" Type="nvarchar" MaxLength="50" />
+          <Property Name="IMEI_TWO" Type="nvarchar" MaxLength="50" />
+          <Property Name="DEVICE_MODEL" Type="nvarchar" MaxLength="50" />
+          <Property Name="IS_REGISTERED" Type="bit" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'RBSYNERGY.dbo.RegistrationDistribution' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="RegistrationDistribution">
+          <Property Name="ProductModelID" Type="uniqueidentifier" />
+          <Property Name="ProductID" Type="varchar" MaxLength="500" />
+          <Property Name="RegistrationDate" Type="date" />
+          <Property Name="DateAdded" Type="datetime" />
+          <Property Name="Imei_One" Type="nvarchar" MaxLength="50" />
+          <Property Name="Imei_Tow" Type="nvarchar" MaxLength="50" />
+          <Property Name="DealerCode" Type="varchar" MaxLength="50" />
+          <Property Name="DistributionDate" Type="date" />
+          <Property Name="Color" Type="varchar" MaxLength="50" />
+          <Property Name="DelieveredTo" Type="varchar" MaxLength="500" />
+          <Property Name="Grade" Type="nvarchar" MaxLength="50" />
+          <Property Name="Updatedby" Type="varchar" MaxLength="50" />
+          <Property Name="Production Date" Type="datetime" />
+          <Property Name="Production Added" Type="datetime" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'RBSYNERGY.dbo.RemainingMarketDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="RemainingMarketDetails">
+    <Key>
+      <PropertyRef Name="RemainingMarketStockDetailsId" />
+    </Key>
+    <Property Name="RemainingMarketStockDetailsId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DealerCode" Type="nvarchar" MaxLength="500" />
+    <Property Name="DealerName" Type="nvarchar" MaxLength="500" />
+    <Property Name="Model" Type="nvarchar" MaxLength="50" />
+    <Property Name="RemainingStock" Type="bigint" />
+    <Property Name="DealerCity" Type="nvarchar" MaxLength="500" />
+    <Property Name="DealerDivision" Type="nvarchar" MaxLength="500" />
+    <Property Name="DealerType" Type="nvarchar" MaxLength="500" />
+    <Property Name="AddedDate" Type="date" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'RBSYNERGY.dbo.RemainingMarketDetails_BACKUP' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="RemainingMarketDetails_BACKUP">
+    <Key>
+      <PropertyRef Name="RemainingMarketStockDetailsId" />
+    </Key>
+    <Property Name="RemainingMarketStockDetailsId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DealerCode" Type="nvarchar" MaxLength="500" />
+    <Property Name="DealerName" Type="nvarchar" MaxLength="500" />
+    <Property Name="Model" Type="nvarchar" MaxLength="50" />
+    <Property Name="RemainingStock" Type="bigint" />
+    <Property Name="DealerCity" Type="nvarchar" MaxLength="500" />
+    <Property Name="DealerDivision" Type="nvarchar" MaxLength="500" />
+    <Property Name="DealerType" Type="nvarchar" MaxLength="500" />
+    <Property Name="AddedDate" Type="date" />
+  </EntityType>
+  <EntityType Name="RemainingMarketDetailsWithImei">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RemainingMarketDetailsId" Type="bigint" />
+    <Property Name="DealerCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="Model" Type="nvarchar" MaxLength="50" />
+    <Property Name="BarCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="BarCode2" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddedDate" Type="date" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'RBSYNERGY.dbo.SERVICE_BARCODE' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="SERVICE_BARCODE">
+          <Property Name="BarCode" Type="nvarchar(max)" />
+        </EntityType>-->
+  <EntityType Name="ServiceToSalesRatio">
+    <Key>
+      <PropertyRef Name="ServiceToSalesRatioId" />
+    </Key>
+    <Property Name="ServiceToSalesRatioId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Model" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PhoneType" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TotalSales" Type="int" Nullable="false" />
+    <Property Name="TotalService" Type="int" Nullable="false" />
+    <Property Name="ServiceToSalesRatio" Type="decimal" Precision="18" Scale="3" Nullable="false" />
+    <Property Name="DateAdded" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="AddedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'RBSYNERGY.dbo.Sheet1$' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Sheet1$">
+          <Property Name="Imei1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Imei2" Type="nvarchar" MaxLength="255" />
+          <Property Name="Color" Type="nvarchar" MaxLength="255" />
+          <Property Name="Model" Type="nvarchar" MaxLength="255" />
+          <Property Name="Grade" Type="nvarchar" MaxLength="255" />
+          <Property Name="GradeReason" Type="nvarchar" MaxLength="255" />
+          <Property Name="AddedDate" Type="nvarchar" MaxLength="255" />
+          <Property Name="Delivered" Type="nvarchar" MaxLength="255" />
+          <Property Name="Updated" Type="nvarchar" MaxLength="255" />
+        </EntityType>-->
+  <EntityType Name="SIMInfo">
+    <Key>
+      <PropertyRef Name="SIMID" />
+    </Key>
+    <Property Name="SIMID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SIMNo" Type="varchar" MaxLength="11" />
+    <Property Name="IMSI" Type="nvarchar" MaxLength="15" />
+    <Property Name="OperatorName" Type="nvarchar" MaxLength="50" />
+    <Property Name="ConnetionType" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sms_data_back">
+    <Key>
+      <PropertyRef Name="SMSID" />
+    </Key>
+    <Property Name="SMSID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ReceiveDate" Type="varchar" MaxLength="50" />
+    <Property Name="Sender" Type="varchar" MaxLength="50" />
+    <Property Name="Message" Type="varchar" MaxLength="50" />
+    <Property Name="Status" Type="varchar" MaxLength="50" />
+    <Property Name="Addedby" Type="varchar" MaxLength="50" />
+    <Property Name="AddedDate" Type="datetime" />
+    <Property Name="Updatedby" Type="varchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SMSDetails">
+    <Key>
+      <PropertyRef Name="DetailsNo" />
+    </Key>
+    <Property Name="DetailsNo" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SMSID" Type="varchar" MaxLength="50" />
+    <Property Name="MobileNo" Type="varchar" MaxLength="50" />
+    <Property Name="EmployeeCode" Type="varchar" MaxLength="50" />
+    <Property Name="IsSend" Type="int" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" />
+    <Property Name="AddedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SMSGroup">
+    <Key>
+      <PropertyRef Name="GroupId" />
+    </Key>
+    <Property Name="GroupId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="GroupNo" Type="int" />
+    <Property Name="GroupDate" Type="datetime" />
+    <Property Name="GroupName" Type="varchar" MaxLength="50" />
+    <Property Name="GroupDescription" Type="varchar" MaxLength="200" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" />
+    <Property Name="DateAdded" Type="datetime" />
+    <Property Name="Updatedby" Type="varchar" MaxLength="50" />
+    <Property Name="DateUpdated" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SMSMaster">
+    <Key>
+      <PropertyRef Name="SMSID" />
+    </Key>
+    <Property Name="SMSID" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="SLNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SMSGroup" Type="varchar" MaxLength="50" />
+    <Property Name="SMSDate" Type="datetime" />
+    <Property Name="Message" Type="varchar" MaxLength="1000" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" />
+    <Property Name="DateAdded" Type="datetime" />
+    <Property Name="SMSReferance" Type="varchar" MaxLength="80" />
+    <Property Name="SMSType" Type="varchar" MaxLength="50" />
+    <Property Name="Unicode" Type="bit" />
+  </EntityType>
+  <EntityType Name="SMSMember">
+    <Key>
+      <PropertyRef Name="SLNo" />
+    </Key>
+    <Property Name="SLNo" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MobileNo" Type="varchar" MaxLength="15" />
+    <Property Name="EmployeeCode" Type="varchar" MaxLength="50" />
+    <Property Name="MemberName" Type="varchar" MaxLength="50" />
+    <Property Name="Department" Type="varchar" MaxLength="100" />
+    <Property Name="Factory" Type="varchar" MaxLength="50" />
+    <Property Name="Designation" Type="varchar" MaxLength="50" />
+    <Property Name="GroupId" Type="varchar" MaxLength="50" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" />
+    <Property Name="DateAdded" Type="datetime" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="DateUpdated" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SMSRoleDetails">
+    <Key>
+      <PropertyRef Name="DetailsId" />
+    </Key>
+    <Property Name="DetailsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleId" Type="varchar" MaxLength="50" />
+    <Property Name="EmployeeCode" Type="varchar" MaxLength="50" />
+    <Property Name="EmployeeName" Type="varchar" MaxLength="50" />
+    <Property Name="UserId" Type="varchar" MaxLength="50" />
+    <Property Name="SMSGroupId" Type="varchar" MaxLength="50" />
+    <Property Name="SMSGroupName" Type="varchar" MaxLength="50" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" />
+    <Property Name="DateAdded" Type="datetime" />
+    <Property Name="Updatedby" Type="varchar" MaxLength="50" />
+    <Property Name="DateUpdated" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SMSRoleMaster">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="RoleDate" Type="datetime" />
+    <Property Name="RoleNo" Type="int" />
+    <Property Name="RoleName" Type="varchar" MaxLength="50" />
+    <Property Name="RoleDescription" Type="varchar" MaxLength="50" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" />
+    <Property Name="DateAdded" Type="datetime" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="DateUpdated" Type="datetime" />
+  </EntityType>
+  <EntityType Name="StatutoryDocumentReminder">
+    <Key>
+      <PropertyRef Name="SDID" />
+    </Key>
+    <Property Name="SDID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Company" Type="varchar" MaxLength="50" />
+    <Property Name="Category" Type="varchar" MaxLength="50" />
+    <Property Name="DocumentName" Type="varchar" MaxLength="50" />
+    <Property Name="DocumentID" Type="varchar" MaxLength="50" />
+    <Property Name="AchieveDate" Type="datetime" />
+    <Property Name="ExpireDate" Type="datetime" />
+    <Property Name="ResponsibleDepartment" Type="varchar" MaxLength="50" />
+    <Property Name="RemindStart" Type="int" />
+    <Property Name="ReminderStartLevel2" Type="int" />
+    <Property Name="EmailTo" Type="varchar" MaxLength="5000" />
+    <Property Name="EmailCC" Type="varchar" MaxLength="5000" />
+    <Property Name="RenewalInstruction" Type="varchar" MaxLength="5000" />
+    <Property Name="WorkPlace" Type="varchar" MaxLength="500" />
+    <Property Name="Discontinue" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="tblBarCodeInv">
+    <Key>
+      <PropertyRef Name="RecID" />
+    </Key>
+    <Property Name="RecID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="PrintDate" Type="datetime" Nullable="false" />
+    <Property Name="ProductType" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Model" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Color" Type="varchar" MaxLength="50" />
+    <Property Name="BarCode" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="BarCode2" Type="varchar" MaxLength="500" />
+    <Property Name="DelieveredTo" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="PrintSuccess" Type="bit" Nullable="false" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DateAdded" Type="datetime" Nullable="false" />
+    <Property Name="Updatedby" Type="varchar" MaxLength="50" />
+    <Property Name="DateUpdated" Type="nchar" MaxLength="10" />
+    <Property Name="Grade" Type="nvarchar" MaxLength="50" />
+    <Property Name="GradeReason" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tblCashIn">
+    <Key>
+      <PropertyRef Name="CashInID" />
+    </Key>
+    <Property Name="CashInID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CashInDate" Type="datetime" Nullable="false" />
+    <Property Name="SalesPointID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ReferanceNo" Type="varchar" MaxLength="50" />
+    <Property Name="CashInHeadID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ItemQty" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CashInValue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CurCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Remark" Type="varchar" MaxLength="5000" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DateAdded" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblCashOut">
+    <Key>
+      <PropertyRef Name="CashOutID" />
+    </Key>
+    <Property Name="CashOutID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CashOutDate" Type="datetime" Nullable="false" />
+    <Property Name="SalesPointID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ReferanceNo" Type="varchar" MaxLength="50" />
+    <Property Name="CashOutHeadID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CashOutValue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CurCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Remark" Type="varchar" MaxLength="50" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DateAdded" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblcdmaGSMMatching">
+    <Key>
+      <PropertyRef Name="cdmaGSMMatchingID" />
+    </Key>
+    <Property Name="cdmaGSMMatchingID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IMEI1" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IMEI2" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="MEID" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblCellPhoneDepriciationPrice">
+    <Key>
+      <PropertyRef Name="DepriciationPriceID" />
+    </Key>
+    <Property Name="DepriciationPriceID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Model" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ReleaseDate" Type="datetime" Nullable="false" />
+    <Property Name="RetailPrice" Type="decimal" Precision="7" Scale="2" Nullable="false" />
+    <Property Name="InvoicePrice" Type="decimal" Precision="7" Scale="2" Nullable="false" />
+    <Property Name="DepriciationPrice" Type="decimal" Precision="7" Scale="2" Nullable="false" />
+    <Property Name="IsReleaseDate" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblCellPhonePricing">
+    <Key>
+      <PropertyRef Name="DoNumberId" />
+    </Key>
+    <Property Name="DoNumberId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ProductCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Model" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="MSDP" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="MSRP" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Range" Type="varchar" MaxLength="50" />
+    <Property Name="SecondaryRange" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblColor">
+    <Key>
+      <PropertyRef Name="ColorID" />
+    </Key>
+    <Property Name="ColorID" Type="varchar" MaxLength="8" Nullable="false" />
+    <Property Name="ColorName" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DateAdded" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="DateUpdated" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblCompanyInfo">
+    <Key>
+      <PropertyRef Name="CompanyID" />
+    </Key>
+    <Property Name="CompanyID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CompanyName" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="Inactive" Type="bit" Nullable="false" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DateAdded" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblDailyClosingStockDetail">
+    <Key>
+      <PropertyRef Name="ClosingStockID" />
+    </Key>
+    <Property Name="ClosingStockID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DeclarationDate" Type="date" Nullable="false" />
+    <Property Name="SalesPointID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ProductID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ClosingQty" Type="int" Nullable="false" />
+    <Property Name="UOM" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DateAdded" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblDailyProduction">
+    <Key>
+      <PropertyRef Name="DailyProductionID" />
+    </Key>
+    <Property Name="DailyProductionID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ProductionDate" Type="date" Nullable="false" />
+    <Property Name="ProductionUnit" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="BarCode" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DateAdded" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblDateTimeDimantion">
+    <Key>
+      <PropertyRef Name="DateTimeID" />
+    </Key>
+    <Property Name="DateTimeID" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblDealerDistributionDetails">
+    <Key>
+      <PropertyRef Name="DealerdistributionId" />
+    </Key>
+    <Property Name="DealerdistributionId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DealerCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="BarCode" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="BarCode2" Type="varchar" MaxLength="500" />
+    <Property Name="Model" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="DONumber" Type="varchar" MaxLength="50" />
+    <Property Name="DistributionDate" Type="date" />
+    <Property Name="IsSoldOut" Type="bit" />
+    <Property Name="AddedBy" Type="bigint" />
+    <Property Name="AddedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblDealerDistributionLog">
+    <Key>
+      <PropertyRef Name="DealerdistributionLogID" />
+    </Key>
+    <Property Name="DealerdistributionLogID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DealerCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="BarCode" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="BarCode2" Type="varchar" MaxLength="500" />
+    <Property Name="Model" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="DONumber" Type="varchar" MaxLength="50" />
+    <Property Name="DistributionDate" Type="date" />
+  </EntityType>
+  <EntityType Name="tblDealerInfo">
+    <Key>
+      <PropertyRef Name="DealerId" />
+    </Key>
+    <Property Name="DealerId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DealerCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="AlternateCode" Type="varchar" MaxLength="50" />
+    <Property Name="DealerName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="EbsNewServerCode" Type="varchar" MaxLength="50" />
+    <Property Name="EbsPartyName" Type="varchar" MaxLength="150" />
+    <Property Name="DealerAddress" Type="varchar" MaxLength="150" />
+    <Property Name="City" Type="varchar" MaxLength="50" />
+    <Property Name="Division" Type="varchar" MaxLength="50" />
+    <Property Name="DealerPhoneNumber" Type="varchar" MaxLength="50" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DateAdded" Type="datetime" Nullable="false" />
+    <Property Name="DealerType" Type="varchar" MaxLength="50" />
+    <Property Name="EbsCustomerId" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblFixedAssetBarcodeInv">
+    <Key>
+      <PropertyRef Name="FASysID" />
+    </Key>
+    <Property Name="FASysID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="FAID" Type="char" MaxLength="10" />
+    <Property Name="FABarcode" Type="char" MaxLength="13" />
+    <Property Name="Printed" Type="bit" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DateAdded" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="DateUpdated" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblMargineOfError">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Model" Type="nvarchar" MaxLength="50" />
+    <Property Name="MarketStock" Type="int" />
+    <Property Name="ExpectedStock" Type="int" />
+    <Property Name="MargineOfError" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="AppliedMOE" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="StockDate" Type="date" />
+    <Property Name="AddedDate" Type="date" />
+    <Property Name="SampleQuantity" Type="int" />
+  </EntityType>
+  <EntityType Name="tblOffer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="UserType" Type="nvarchar" MaxLength="50" />
+    <Property Name="DurationInDays" Type="nvarchar" MaxLength="20" />
+    <Property Name="AddedDate" Type="datetime" Nullable="false" />
+    <Property Name="Addedby" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblProductMaster">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ProductCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ProductType" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ProductModel" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Category1" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Category2" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Inactive" Type="bit" Nullable="false" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DateAdded" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="DateUpdated" Type="datetime" />
+    <Property Name="OracleModelName" Type="varchar" MaxLength="500" />
+    <Property Name="ProductManSource" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblProductRegistration">
+    <Key>
+      <PropertyRef Name="ProductRegID" />
+    </Key>
+    <Property Name="ProductRegID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ProductType" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ProductModelID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SalerID" Type="varchar" MaxLength="50" />
+    <Property Name="ProductID" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="RegistrationDate" Type="date" Nullable="false" />
+    <Property Name="WarrantyMonths" Type="int" Nullable="false" />
+    <Property Name="WarrantyVoid" Type="bit" Nullable="false" />
+    <Property Name="WarrantyID" Type="varchar" MaxLength="50" />
+    <Property Name="MemoNo" Type="varchar" MaxLength="50" />
+    <Property Name="OwnerName" Type="varchar" MaxLength="100" />
+    <Property Name="OwnerAddress" Type="varchar" MaxLength="500" />
+    <Property Name="DeliveryDate" Type="varchar" MaxLength="50" />
+    <Property Name="EBS_Item_Code" Type="varchar" MaxLength="50" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DateAdded" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="SMSID" Type="uniqueidentifier" />
+    <Property Name="IsSendToOracleDb" Type="bit" />
+    <Property Name="IsCheckedInDealerDistribution" Type="bit" />
+    <Property Name="Imei_One" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Imei_Tow" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblRmReturns">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DealerCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="BarCode" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="BarCode2" Type="varchar" MaxLength="500" />
+    <Property Name="Model" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="DONumber" Type="varchar" MaxLength="50" />
+    <Property Name="DistributionDate" Type="date" />
+    <Property Name="IsSoldOut" Type="bit" />
+    <Property Name="AddedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddedDate" Type="datetime2" Precision="7" />
+  </EntityType>
+  <EntityType Name="tblSalesPoint">
+    <Key>
+      <PropertyRef Name="SalesPointID" />
+    </Key>
+    <Property Name="SalesPointID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CompanyID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SalesPointName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="Inactive" Type="bit" Nullable="false" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DateAdded" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblSalesPointDailyStock">
+    <Key>
+      <PropertyRef Name="DailyStockID" />
+    </Key>
+    <Property Name="DailyStockID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SalesPointID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="StockDeclDate" Type="datetime" Nullable="false" />
+    <Property Name="ProductID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="StockQty" Type="int" Nullable="false" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DateAdded" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblSalesPointTransHead">
+    <Key>
+      <PropertyRef Name="SPTHID" />
+    </Key>
+    <Property Name="SPTHID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SalesPointID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="TransHeadID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Inactive" Type="bit" Nullable="false" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DateAdded" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblSMSInbox">
+    <Key>
+      <PropertyRef Name="SMSID" />
+    </Key>
+    <Property Name="SMSID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ReceiveDate" Type="datetime" Nullable="false" />
+    <Property Name="Sender" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Message" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="250" />
+    <Property Name="SMS_Ref" Type="int" />
+    <Property Name="Processed" Type="bit" />
+    <Property Name="GSMGateWayType" Type="varchar" MaxLength="150" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DateAdded" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="DateUpdated" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'RBSYNERGY.dbo.tblSupplierModelInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tblSupplierModelInfo">
+    <Key>
+      <PropertyRef Name="supplierID" />
+    </Key>
+    <Property Name="supplierID" Type="bigint" Nullable="false" />
+    <Property Name="supplierName" Type="varchar" MaxLength="50" />
+    <Property Name="Model" Type="varchar" MaxLength="50" />
+    <Property Name="Type" Type="varchar" MaxLength="50" />
+    <Property Name="addedBy" Type="varchar" MaxLength="50" />
+    <Property Name="addedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblTransectionHeads">
+    <Key>
+      <PropertyRef Name="TransHeadID" />
+    </Key>
+    <Property Name="TransHeadID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="TransHeadName" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="TransHeadType" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Inactive" Type="bit" Nullable="false" />
+    <Property Name="IsProduct" Type="bit" Nullable="false" />
+    <Property Name="ProductType" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DateAdded" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'RBSYNERGY.dbo.TeDDD' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="TeDDD">
+    <Key>
+      <PropertyRef Name="DealerdistributionId" />
+      <PropertyRef Name="DealerCode" />
+      <PropertyRef Name="BarCode" />
+      <PropertyRef Name="Model" />
+    </Key>
+    <Property Name="DealerdistributionId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DealerCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="BarCode" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="BarCode2" Type="varchar" MaxLength="500" />
+    <Property Name="Model" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="DONumber" Type="varchar" MaxLength="50" />
+    <Property Name="DistributionDate" Type="date" />
+    <Property Name="IsSoldOut" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'RBSYNERGY.dbo.TEMPBarcode' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TEMPBarcode">
+          <Property Name="Model" Type="nvarchar" MaxLength="100" />
+          <Property Name="Barcode" Type="nvarchar" MaxLength="100" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'RBSYNERGY.dbo.TestImei' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TestImei">
+          <Property Name="IMEI1" Type="nvarchar" MaxLength="255" />
+          <Property Name="IMEI2" Type="nvarchar" MaxLength="255" />
+          <Property Name="F3" Type="nvarchar" MaxLength="255" />
+        </EntityType>-->
+  <EntityType Name="TestImeiDataForBarcodeInv">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Imei1" Type="nvarchar" MaxLength="50" />
+    <Property Name="Imei2" Type="nvarchar" MaxLength="50" />
+    <Property Name="Color" Type="nvarchar" MaxLength="50" />
+    <Property Name="Model" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddedDate" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'RBSYNERGY.dbo.TestReg' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="TestReg">
+    <Key>
+      <PropertyRef Name="ProductRegID" />
+      <PropertyRef Name="ProductType" />
+      <PropertyRef Name="ProductModelID" />
+      <PropertyRef Name="ProductID" />
+      <PropertyRef Name="PhoneNumber" />
+      <PropertyRef Name="RegistrationDate" />
+      <PropertyRef Name="WarrantyMonths" />
+      <PropertyRef Name="WarrantyVoid" />
+      <PropertyRef Name="AddedBy" />
+      <PropertyRef Name="DateAdded" />
+    </Key>
+    <Property Name="ProductRegID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ProductType" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ProductModelID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="SalerID" Type="varchar" MaxLength="50" />
+    <Property Name="ProductID" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="RegistrationDate" Type="date" Nullable="false" />
+    <Property Name="WarrantyMonths" Type="int" Nullable="false" />
+    <Property Name="WarrantyVoid" Type="bit" Nullable="false" />
+    <Property Name="WarrantyID" Type="varchar" MaxLength="50" />
+    <Property Name="MemoNo" Type="varchar" MaxLength="50" />
+    <Property Name="OwnerName" Type="varchar" MaxLength="100" />
+    <Property Name="OwnerAddress" Type="varchar" MaxLength="500" />
+    <Property Name="DeliveryDate" Type="varchar" MaxLength="50" />
+    <Property Name="EBS_Item_Code" Type="varchar" MaxLength="50" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DateAdded" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="SMSID" Type="uniqueidentifier" />
+    <Property Name="IsSendToOracleDb" Type="bit" />
+    <Property Name="IsCheckedInDealerDistribution" Type="bit" />
+    <Property Name="Imei_One" Type="nvarchar" MaxLength="50" />
+    <Property Name="Imei_Tow" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'RBSYNERGY.dbo.TimeTable' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="TimeTable">
+    <Key>
+      <PropertyRef Name="TIME_ID" />
+      <PropertyRef Name="DAY_NAM" />
+      <PropertyRef Name="DAY_NUMBER_IN_WEEK" />
+      <PropertyRef Name="DAY_NUMBER_IN_MONTH" />
+      <PropertyRef Name="CALENDAR_WEEK_NUMBER" />
+      <PropertyRef Name="WEEK_ENDING_DAY" />
+      <PropertyRef Name="CALENDAR_MONTH_NUMBER" />
+      <PropertyRef Name="CALENDAR_MONTH_DESC" />
+      <PropertyRef Name="DAYS_IN_CAL_MONTH" />
+      <PropertyRef Name="END_OF_CAL_MONTH" />
+      <PropertyRef Name="CALENDAR_MONTH_NAME" />
+      <PropertyRef Name="CALENDAR_QUARTER_DESC" />
+      <PropertyRef Name="DAYS_IN_CAL_QUARTER" />
+      <PropertyRef Name="END_OF_CAL_QUARTER" />
+      <PropertyRef Name="CALENDAR_QUARTER_NUMBER" />
+      <PropertyRef Name="CALENDAR_YEAR" />
+      <PropertyRef Name="DAYS_IN_CAL_YEAR" />
+      <PropertyRef Name="END_OF_CAL_YEAR" />
+    </Key>
+    <Property Name="TIME_ID" Type="datetime" Nullable="false" />
+    <Property Name="DAY_NAM" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DAY_NUMBER_IN_WEEK" Type="bigint" Nullable="false" />
+    <Property Name="DAY_NUMBER_IN_MONTH" Type="bigint" Nullable="false" />
+    <Property Name="CALENDAR_WEEK_NUMBER" Type="bigint" Nullable="false" />
+    <Property Name="WEEK_ENDING_DAY" Type="datetime" Nullable="false" />
+    <Property Name="CALENDAR_MONTH_NUMBER" Type="bigint" Nullable="false" />
+    <Property Name="CALENDAR_MONTH_DESC" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DAYS_IN_CAL_MONTH" Type="bigint" Nullable="false" />
+    <Property Name="END_OF_CAL_MONTH" Type="datetime" Nullable="false" />
+    <Property Name="CALENDAR_MONTH_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CALENDAR_QUARTER_DESC" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DAYS_IN_CAL_QUARTER" Type="bigint" Nullable="false" />
+    <Property Name="END_OF_CAL_QUARTER" Type="datetime" Nullable="false" />
+    <Property Name="CALENDAR_QUARTER_NUMBER" Type="bigint" Nullable="false" />
+    <Property Name="CALENDAR_YEAR" Type="bigint" Nullable="false" />
+    <Property Name="DAYS_IN_CAL_YEAR" Type="bigint" Nullable="false" />
+    <Property Name="END_OF_CAL_YEAR" Type="datetime" Nullable="false" />
+    <Property Name="PERIOD_NAME" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TsoWiseRegistrations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RegistrationId" Type="uniqueidentifier" />
+    <Property Name="RegistrationDate" Type="datetime" />
+    <Property Name="Model" Type="nvarchar" MaxLength="50" />
+    <Property Name="ImeiOne" Type="nvarchar" MaxLength="50" />
+    <Property Name="ImeiTwo" Type="nvarchar" MaxLength="50" />
+    <Property Name="DealerName" Type="nvarchar" MaxLength="50" />
+    <Property Name="DealerCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="Zone" Type="nvarchar" MaxLength="50" />
+    <Property Name="Division" Type="nvarchar" MaxLength="50" />
+    <Property Name="RSM" Type="nvarchar" MaxLength="50" />
+    <Property Name="RSM_EMP_ID" Type="nvarchar" MaxLength="50" />
+    <Property Name="ASM" Type="nvarchar" MaxLength="50" />
+    <Property Name="ASM_EMP_ID" Type="nvarchar" MaxLength="50" />
+    <Property Name="TSO" Type="nvarchar" MaxLength="50" />
+    <Property Name="TSO_EMP_ID" Type="nvarchar" MaxLength="50" />
+    <Property Name="SystemDate" Type="datetime" />
+    <Property Name="AddedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="DigitechCode" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'RBSYNERGY.dbo.X' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="X">
+    <Key>
+      <PropertyRef Name="RegistrationDate" />
+      <PropertyRef Name="DealerName" />
+      <PropertyRef Name="DealerCode" />
+      <PropertyRef Name="Model" />
+    </Key>
+    <Property Name="RegistrationDate" Type="date" Nullable="false" />
+    <Property Name="DealerName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DealerCode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Number" Type="int" />
+    <Property Name="TotalPrice" Type="decimal" Precision="21" Scale="2" />
+    <Property Name="Model" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="DealerType" Type="varchar" MaxLength="50" />
+    <Property Name="City" Type="varchar" MaxLength="50" />
+    <Property Name="Division" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="AfterServiceReplacement">
+    <Key>
+      <PropertyRef Name="AfterServiceRepID" />
+    </Key>
+    <Property Name="AfterServiceRepID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ServiceID" Type="bigint" />
+    <Property Name="ServicePointName" Type="nvarchar" MaxLength="100" />
+    <Property Name="IME" Type="varchar" MaxLength="500" />
+    <Property Name="Model" Type="varchar" MaxLength="200" />
+    <Property Name="RegistrationDate" Type="date" />
+    <Property Name="ServicePlaceDate" Type="datetime" />
+    <Property Name="DealerName" Type="varchar" MaxLength="500" />
+    <Property Name="CustomerMobile" Type="nvarchar" MaxLength="50" />
+    <Property Name="PermissionFromCoOrdinator" Type="bit" />
+    <Property Name="RepalcementCause" Type="nvarchar" MaxLength="200" />
+    <Property Name="ServiceInchargeComment" Type="nvarchar" MaxLength="500" />
+    <Property Name="WarrantyAvailability" Type="bit" />
+    <Property Name="Invoice" Type="nvarchar" MaxLength="100" />
+    <Property Name="FaultyHandetPrice" Type="money" />
+    <Property Name="FaultyHandsetPriceByPlaza" Type="money" />
+    <Property Name="NewHandsetPrice" Type="money" />
+    <Property Name="DepricationRate" Type="money" />
+    <Property Name="AcceptFromCustomer" Type="money" />
+    <Property Name="NewHandsetIMEI" Type="nvarchar" MaxLength="100" />
+    <Property Name="NewHandsetModel" Type="nvarchar" MaxLength="200" />
+    <Property Name="ReplacementGivenBy" Type="nvarchar" MaxLength="100" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="WastageStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="WastageRemarks" Type="nvarchar(max)" />
+    <Property Name="AddedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="AfterServiceReplacementLog">
+    <Key>
+      <PropertyRef Name="AfterSalesrepLogID" />
+    </Key>
+    <Property Name="AfterSalesrepLogID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AfterServiceRepID" Type="bigint" />
+    <Property Name="AddedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="ApprovalMaster">
+    <Key>
+      <PropertyRef Name="ApprovalID" />
+    </Key>
+    <Property Name="ApprovalID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RequestID" Type="int" />
+    <Property Name="RequestType" Type="varchar" MaxLength="200" />
+    <Property Name="RecommendedBy" Type="varchar" MaxLength="50" />
+    <Property Name="RecommendedDate" Type="datetime" />
+    <Property Name="ApprovedBy" Type="varchar" MaxLength="50" />
+    <Property Name="ApprovedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="FaultySparePartsDetails">
+    <Key>
+      <PropertyRef Name="FaultySparePartsDetailsID" />
+    </Key>
+    <Property Name="FaultySparePartsDetailsID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ServiceID" Type="bigint" />
+    <Property Name="FaultySpareCode" Type="nvarchar" MaxLength="100" />
+    <Property Name="FaultySpareName" Type="nvarchar" MaxLength="100" />
+    <Property Name="SparePrice" Type="money" />
+    <Property Name="AddedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="IMEIReplacementMaster">
+    <Key>
+      <PropertyRef Name="RequestID" />
+    </Key>
+    <Property Name="RequestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IMEI_1" Type="varchar" MaxLength="500" />
+    <Property Name="IMEI_2" Type="varchar" MaxLength="500" />
+    <Property Name="Model" Type="varchar" MaxLength="200" />
+    <Property Name="DealerCode" Type="varchar" MaxLength="50" />
+    <Property Name="RequestType" Type="varchar" MaxLength="200" />
+    <Property Name="RegistrationDate" Type="date" />
+    <Property Name="DistributionDate" Type="date" />
+    <Property Name="RequestDate" Type="date" />
+    <Property Name="Issues" Type="nvarchar" MaxLength="500" />
+    <Property Name="CustomerName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Address" Type="nvarchar" MaxLength="500" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="50" />
+    <Property Name="OperatorName" Type="varchar" MaxLength="50" />
+    <Property Name="RequestStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsSeen" Type="varchar" MaxLength="50" />
+    <Property Name="IssueDetails" Type="nvarchar" MaxLength="500" />
+    <Property Name="ReplaceIMEI_1" Type="varchar" MaxLength="500" />
+    <Property Name="ReplaceIMEI_2" Type="varchar" MaxLength="500" />
+    <Property Name="ReplaceModel" Type="varchar" MaxLength="200" />
+    <Property Name="ActionTakenDetails" Type="nvarchar" MaxLength="500" />
+    <Property Name="ActionTakenBy" Type="nvarchar" MaxLength="100" />
+    <Property Name="AppliedSwVersion" Type="nvarchar" MaxLength="100" />
+    <Property Name="PartsRequired" Type="nvarchar" MaxLength="500" />
+    <Property Name="PlazaCode" Type="varchar" MaxLength="500" />
+    <Property Name="DuePrice" Type="decimal" Precision="18" Scale="4" />
+    <Property Name="InvoiceNo" Type="nvarchar" MaxLength="200" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" />
+    <Property Name="AddedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="ManagementApprovalLog">
+    <Key>
+      <PropertyRef Name="ManagementApprovalID" />
+    </Key>
+    <Property Name="ManagementApprovalID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IMEI_1" Type="varchar" MaxLength="500" />
+    <Property Name="IMEI_2" Type="varchar" MaxLength="500" />
+    <Property Name="Model" Type="varchar" MaxLength="200" />
+    <Property Name="RegistrationDate" Type="date" />
+    <Property Name="DistributionDate" Type="date" />
+    <Property Name="RequestID" Type="int" />
+    <Property Name="WarehouseDeclinedDate" Type="date" />
+    <Property Name="ManagementStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" />
+    <Property Name="AddedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="PrimaryRecomLog">
+    <Key>
+      <PropertyRef Name="PrimaryRecomID" />
+    </Key>
+    <Property Name="PrimaryRecomID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IMEI_1" Type="varchar" MaxLength="500" />
+    <Property Name="IMEI_2" Type="varchar" MaxLength="500" />
+    <Property Name="Model" Type="varchar" MaxLength="200" />
+    <Property Name="RegistrationDate" Type="date" />
+    <Property Name="DistributionDate" Type="date" />
+    <Property Name="RequestID" Type="int" />
+    <Property Name="PrimaryRecomDate" Type="datetime" />
+    <Property Name="PrimaryRecomStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" />
+    <Property Name="AddedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="ReplacementLog">
+    <Key>
+      <PropertyRef Name="ReplacementLogID" />
+    </Key>
+    <Property Name="ReplacementLogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IMEI_1" Type="varchar" MaxLength="500" />
+    <Property Name="IMEI_2" Type="varchar" MaxLength="500" />
+    <Property Name="Model" Type="varchar" MaxLength="200" />
+    <Property Name="RegistrationDate" Type="date" />
+    <Property Name="DistributionDate" Type="date" />
+    <Property Name="RequestID" Type="int" />
+    <Property Name="ReplacementDate" Type="date" />
+    <Property Name="Status" Type="varchar" MaxLength="50" />
+    <Property Name="AppDeclinedRemarks" Type="varchar" MaxLength="500" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" />
+    <Property Name="AddedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblDealerSales">
+    <Key>
+      <PropertyRef Name="SalesID" />
+    </Key>
+    <Property Name="SalesID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DealerCode" Type="varchar(max)" />
+    <Property Name="Model" Type="varchar(max)" />
+    <Property Name="Quantity" Type="bigint" />
+    <Property Name="SalesDate" Type="datetime" />
+    <Property Name="AddedBy" Type="bigint" />
+    <Property Name="AddedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblDisplayProduct">
+    <Key>
+      <PropertyRef Name="DisplayProductID" />
+    </Key>
+    <Property Name="DisplayProductID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IMEI_1" Type="varchar(max)" />
+    <Property Name="IMEI_2" Type="varchar(max)" />
+    <Property Name="Model" Type="varchar(max)" />
+    <Property Name="DealerCode" Type="varchar(max)" />
+    <Property Name="IsApprovedByNSM" Type="bit" />
+    <Property Name="DisplayDate" Type="datetime" />
+    <Property Name="AddedBy" Type="bigint" />
+    <Property Name="AddedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="bigint" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblStockReconciliation">
+    <Key>
+      <PropertyRef Name="StockReconID" />
+    </Key>
+    <Property Name="StockReconID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DealerCode" Type="varchar" MaxLength="500" />
+    <Property Name="Model" Type="varchar" MaxLength="500" />
+    <Property Name="InHouseStock" Type="bigint" />
+    <Property Name="MarketStock" Type="bigint" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" />
+    <Property Name="AddedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="WareHouseApproval">
+    <Key>
+      <PropertyRef Name="WAppID" />
+    </Key>
+    <Property Name="WAppID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RequestID" Type="int" />
+    <Property Name="WAppStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="Reason" Type="varchar" MaxLength="500" />
+    <Property Name="ActionDate" Type="date" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" />
+    <Property Name="AddedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="WareHouseCorporateStoreLog">
+    <Key>
+      <PropertyRef Name="WCSLogID" />
+    </Key>
+    <Property Name="WCSLogID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RequestID" Type="int" />
+    <Property Name="WastageMgtDeliveryDate" Type="datetime" />
+    <Property Name="ReceiveDate" Type="datetime" />
+    <Property Name="ReceivedBy" Type="varchar" MaxLength="50" />
+    <Property Name="AddedDate" Type="datetime" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="WastageManagementInventory">
+    <Key>
+      <PropertyRef Name="WastageInventoryID" />
+    </Key>
+    <Property Name="WastageInventoryID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="RequestID" Type="int" />
+    <Property Name="IMEI_1" Type="varchar" MaxLength="500" />
+    <Property Name="IMEI_2" Type="varchar" MaxLength="500" />
+    <Property Name="Model" Type="varchar" MaxLength="200" />
+    <Property Name="IsSentToStore" Type="bit" />
+    <Property Name="WastageStatus" Type="nvarchar" MaxLength="50" />
+    <Property Name="WastageRemarks" Type="nvarchar(max)" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" />
+    <Property Name="AddedDate" Type="datetime" />
+    <Property Name="ServiceCenterUserID" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="WastageManagementMasterLog">
+    <Key>
+      <PropertyRef Name="WMgLogID" />
+    </Key>
+    <Property Name="WMgLogID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RequestID" Type="int" />
+    <Property Name="DeliveryDate" Type="datetime" />
+    <Property Name="DeliverTo" Type="varchar" MaxLength="50" />
+    <Property Name="ServicePointID" Type="varchar" MaxLength="50" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" />
+    <Property Name="AddedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <Association Name="FK__aspnet_Me__Appli__145C0A3F">
+    <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
+    <End Role="aspnet_Membership" Type="Self.aspnet_Membership" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Applications">
+        <PropertyRef Name="ApplicationId" />
+      </Principal>
+      <Dependent Role="aspnet_Membership">
+        <PropertyRef Name="ApplicationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Me__UserI__15502E78">
+    <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="1" />
+    <End Role="aspnet_Membership" Type="Self.aspnet_Membership" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="aspnet_Membership">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Pa__Appli__45F365D3">
+    <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
+    <End Role="aspnet_Paths" Type="Self.aspnet_Paths" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Applications">
+        <PropertyRef Name="ApplicationId" />
+      </Principal>
+      <Dependent Role="aspnet_Paths">
+        <PropertyRef Name="ApplicationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Pe__PathI__4BAC3F29">
+    <End Role="aspnet_Paths" Type="Self.aspnet_Paths" Multiplicity="1" />
+    <End Role="aspnet_PersonalizationAllUsers" Type="Self.aspnet_PersonalizationAllUsers" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Paths">
+        <PropertyRef Name="PathId" />
+      </Principal>
+      <Dependent Role="aspnet_PersonalizationAllUsers">
+        <PropertyRef Name="PathId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Pe__PathI__4F7CD00D">
+    <End Role="aspnet_Paths" Type="Self.aspnet_Paths" Multiplicity="0..1" />
+    <End Role="aspnet_PersonalizationPerUser" Type="Self.aspnet_PersonalizationPerUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Paths">
+        <PropertyRef Name="PathId" />
+      </Principal>
+      <Dependent Role="aspnet_PersonalizationPerUser">
+        <PropertyRef Name="PathId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Pe__UserI__5070F446">
+    <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="0..1" />
+    <End Role="aspnet_PersonalizationPerUser" Type="Self.aspnet_PersonalizationPerUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="aspnet_PersonalizationPerUser">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Pr__UserI__29572725">
+    <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="1" />
+    <End Role="aspnet_Profile" Type="Self.aspnet_Profile" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="aspnet_Profile">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Ro__Appli__32E0915F">
+    <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
+    <End Role="aspnet_Roles" Type="Self.aspnet_Roles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Applications">
+        <PropertyRef Name="ApplicationId" />
+      </Principal>
+      <Dependent Role="aspnet_Roles">
+        <PropertyRef Name="ApplicationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Us__Appli__0425A276">
+    <End Role="aspnet_Applications" Type="Self.aspnet_Applications" Multiplicity="1" />
+    <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Applications">
+        <PropertyRef Name="ApplicationId" />
+      </Principal>
+      <Dependent Role="aspnet_Users">
+        <PropertyRef Name="ApplicationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Us__RoleI__37A5467C">
+    <End Role="aspnet_Roles" Type="Self.aspnet_Roles" Multiplicity="1" />
+    <End Role="aspnet_UsersInRoles" Type="Self.aspnet_UsersInRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Roles">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="aspnet_UsersInRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__aspnet_Us__UserI__36B12243">
+    <End Role="aspnet_Users" Type="Self.aspnet_Users" Multiplicity="1" />
+    <End Role="aspnet_UsersInRoles" Type="Self.aspnet_UsersInRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="aspnet_UsersInRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DistributorNetwork_DistributorNetwork1">
+    <End Role="DistributorNetwork" Type="Self.DistributorNetwork" Multiplicity="0..1" />
+    <End Role="DistributorNetwork1" Type="Self.DistributorNetwork" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DistributorNetwork">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DistributorNetwork1">
+        <PropertyRef Name="ParentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SMSDetails_SMSMaster">
+    <End Role="SMSMaster" Type="Self.SMSMaster" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SMSDetails" Type="Self.SMSDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SMSMaster">
+        <PropertyRef Name="SMSID" />
+      </Principal>
+      <Dependent Role="SMSDetails">
+        <PropertyRef Name="SMSID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SMSMember_SMSGroup">
+    <End Role="SMSGroup" Type="Self.SMSGroup" Multiplicity="0..1" />
+    <End Role="SMSMember" Type="Self.SMSMember" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SMSGroup">
+        <PropertyRef Name="GroupId" />
+      </Principal>
+      <Dependent Role="SMSMember">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SMSRoleDetails_SMSRoleMaster">
+    <End Role="SMSRoleMaster" Type="Self.SMSRoleMaster" Multiplicity="0..1" />
+    <End Role="SMSRoleDetails" Type="Self.SMSRoleDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SMSRoleMaster">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="SMSRoleDetails">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblCashIn_tblSalesPoint">
+    <End Role="tblSalesPoint" Type="Self.tblSalesPoint" Multiplicity="1" />
+    <End Role="tblCashIn" Type="Self.tblCashIn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSalesPoint">
+        <PropertyRef Name="SalesPointID" />
+      </Principal>
+      <Dependent Role="tblCashIn">
+        <PropertyRef Name="SalesPointID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblCashIn_tblTransectionHeads">
+    <End Role="tblTransectionHeads" Type="Self.tblTransectionHeads" Multiplicity="1" />
+    <End Role="tblCashIn" Type="Self.tblCashIn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblTransectionHeads">
+        <PropertyRef Name="TransHeadID" />
+      </Principal>
+      <Dependent Role="tblCashIn">
+        <PropertyRef Name="CashInHeadID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblCashOut_tblSalesPoint">
+    <End Role="tblSalesPoint" Type="Self.tblSalesPoint" Multiplicity="1" />
+    <End Role="tblCashOut" Type="Self.tblCashOut" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSalesPoint">
+        <PropertyRef Name="SalesPointID" />
+      </Principal>
+      <Dependent Role="tblCashOut">
+        <PropertyRef Name="SalesPointID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblCashOut_tblTransectionHeads">
+    <End Role="tblTransectionHeads" Type="Self.tblTransectionHeads" Multiplicity="1" />
+    <End Role="tblCashOut" Type="Self.tblCashOut" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblTransectionHeads">
+        <PropertyRef Name="TransHeadID" />
+      </Principal>
+      <Dependent Role="tblCashOut">
+        <PropertyRef Name="CashOutHeadID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblDailyClosingStockDetail_tblDailyClosingStockMaster">
+    <End Role="tblSalesPoint" Type="Self.tblSalesPoint" Multiplicity="1" />
+    <End Role="tblDailyClosingStockDetail" Type="Self.tblDailyClosingStockDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSalesPoint">
+        <PropertyRef Name="SalesPointID" />
+      </Principal>
+      <Dependent Role="tblDailyClosingStockDetail">
+        <PropertyRef Name="SalesPointID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblDailyClosingStockDetail_tblProductMaster">
+    <End Role="tblProductMaster" Type="Self.tblProductMaster" Multiplicity="1" />
+    <End Role="tblDailyClosingStockDetail" Type="Self.tblDailyClosingStockDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProductMaster">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="tblDailyClosingStockDetail">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'FK_tblDailyProduction_tblBarCodeInv' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK_tblDailyProduction_tblBarCodeInv" />-->
+  <Association Name="FK_tblProductRegistration_tblProductMaster">
+    <End Role="tblProductMaster" Type="Self.tblProductMaster" Multiplicity="1" />
+    <End Role="tblProductRegistration" Type="Self.tblProductRegistration" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProductMaster">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="tblProductRegistration">
+        <PropertyRef Name="ProductModelID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSalesPoint_tblCompanyInfo">
+    <End Role="tblCompanyInfo" Type="Self.tblCompanyInfo" Multiplicity="1" />
+    <End Role="tblSalesPoint" Type="Self.tblSalesPoint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCompanyInfo">
+        <PropertyRef Name="CompanyID" />
+      </Principal>
+      <Dependent Role="tblSalesPoint">
+        <PropertyRef Name="CompanyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSalesPointDailyStock_tblSalesPoint">
+    <End Role="tblSalesPoint" Type="Self.tblSalesPoint" Multiplicity="1" />
+    <End Role="tblSalesPointDailyStock" Type="Self.tblSalesPointDailyStock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSalesPoint">
+        <PropertyRef Name="SalesPointID" />
+      </Principal>
+      <Dependent Role="tblSalesPointDailyStock">
+        <PropertyRef Name="SalesPointID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSalesPointDailyStock_tblTransectionHeads">
+    <End Role="tblTransectionHeads" Type="Self.tblTransectionHeads" Multiplicity="1" />
+    <End Role="tblSalesPointDailyStock" Type="Self.tblSalesPointDailyStock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblTransectionHeads">
+        <PropertyRef Name="TransHeadID" />
+      </Principal>
+      <Dependent Role="tblSalesPointDailyStock">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSalesPointTransHead_tblSalesPoint">
+    <End Role="tblSalesPoint" Type="Self.tblSalesPoint" Multiplicity="1" />
+    <End Role="tblSalesPointTransHead" Type="Self.tblSalesPointTransHead" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblSalesPoint">
+        <PropertyRef Name="SalesPointID" />
+      </Principal>
+      <Dependent Role="tblSalesPointTransHead">
+        <PropertyRef Name="SalesPointID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblSalesPointTransHead_tblTransectionHeads">
+    <End Role="tblTransectionHeads" Type="Self.tblTransectionHeads" Multiplicity="1" />
+    <End Role="tblSalesPointTransHead" Type="Self.tblSalesPointTransHead" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblTransectionHeads">
+        <PropertyRef Name="TransHeadID" />
+      </Principal>
+      <Dependent Role="tblSalesPointTransHead">
+        <PropertyRef Name="TransHeadID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RBSYNERGYModelStoreContainer">
+    <EntitySet Name="aspnet_Applications" EntityType="Self.aspnet_Applications" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="aspnet_Membership" EntityType="Self.aspnet_Membership" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="aspnet_Paths" EntityType="Self.aspnet_Paths" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="aspnet_PersonalizationAllUsers" EntityType="Self.aspnet_PersonalizationAllUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="aspnet_PersonalizationPerUser" EntityType="Self.aspnet_PersonalizationPerUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="aspnet_Profile" EntityType="Self.aspnet_Profile" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="aspnet_Roles" EntityType="Self.aspnet_Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="aspnet_SchemaVersions" EntityType="Self.aspnet_SchemaVersions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="aspnet_Users" EntityType="Self.aspnet_Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="aspnet_UsersInRoles" EntityType="Self.aspnet_UsersInRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="aspnet_WebEvent_Events" EntityType="Self.aspnet_WebEvent_Events" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DealerDistributionTriggerLogs" EntityType="Self.DealerDistributionTriggerLogs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DispatchToMarketRemainingStock" EntityType="Self.DispatchToMarketRemainingStock" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DistributorNetwork" EntityType="Self.DistributorNetwork" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FifteenDaysWiseMailTable" EntityType="Self.FifteenDaysWiseMailTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LockedImeiInventory" EntityType="Self.LockedImeiInventory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ModelWiseLock" EntityType="Self.ModelWiseLock" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ModelWiseServiceQuantityInDays" EntityType="Self.ModelWiseServiceQuantityInDays" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ModelWiseServiceQuantityInDaysByOrder" EntityType="Self.ModelWiseServiceQuantityInDaysByOrder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NonGradedImeiInventory" EntityType="Self.NonGradedImeiInventory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PlazaSale" EntityType="Self.PlazaSale" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PlazaSalesAndActivationRate" EntityType="Self.PlazaSalesAndActivationRate" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RemainingMarketDetailsWithImei" EntityType="Self.RemainingMarketDetailsWithImei" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ServiceToSalesRatio" EntityType="Self.ServiceToSalesRatio" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SIMInfo" EntityType="Self.SIMInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sms_data_back" EntityType="Self.sms_data_back" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SMSDetails" EntityType="Self.SMSDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SMSGroup" EntityType="Self.SMSGroup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SMSMaster" EntityType="Self.SMSMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SMSMember" EntityType="Self.SMSMember" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SMSRoleDetails" EntityType="Self.SMSRoleDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SMSRoleMaster" EntityType="Self.SMSRoleMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StatutoryDocumentReminder" EntityType="Self.StatutoryDocumentReminder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblBarCodeInv" EntityType="Self.tblBarCodeInv" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblCashIn" EntityType="Self.tblCashIn" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblCashOut" EntityType="Self.tblCashOut" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblcdmaGSMMatching" EntityType="Self.tblcdmaGSMMatching" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblCellPhoneDepriciationPrice" EntityType="Self.tblCellPhoneDepriciationPrice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblCellPhonePricing" EntityType="Self.tblCellPhonePricing" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblColor" EntityType="Self.tblColor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblCompanyInfo" EntityType="Self.tblCompanyInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblDailyClosingStockDetail" EntityType="Self.tblDailyClosingStockDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblDailyProduction" EntityType="Self.tblDailyProduction" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblDateTimeDimantion" EntityType="Self.tblDateTimeDimantion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblDealerDistributionDetails" EntityType="Self.tblDealerDistributionDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblDealerDistributionLog" EntityType="Self.tblDealerDistributionLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblDealerInfo" EntityType="Self.tblDealerInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblFixedAssetBarcodeInv" EntityType="Self.tblFixedAssetBarcodeInv" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblMargineOfError" EntityType="Self.tblMargineOfError" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblOffer" EntityType="Self.tblOffer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProductMaster" EntityType="Self.tblProductMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProductRegistration" EntityType="Self.tblProductRegistration" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblRmReturns" EntityType="Self.tblRmReturns" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblSalesPoint" EntityType="Self.tblSalesPoint" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblSalesPointDailyStock" EntityType="Self.tblSalesPointDailyStock" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblSalesPointTransHead" EntityType="Self.tblSalesPointTransHead" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblSMSInbox" EntityType="Self.tblSMSInbox" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblTransectionHeads" EntityType="Self.tblTransectionHeads" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TestImeiDataForBarcodeInv" EntityType="Self.TestImeiDataForBarcodeInv" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TsoWiseRegistrations" EntityType="Self.TsoWiseRegistrations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AfterServiceReplacement" EntityType="Self.AfterServiceReplacement" Schema="IMEIReplacementMaster" store:Type="Tables" />
+    <EntitySet Name="AfterServiceReplacementLog" EntityType="Self.AfterServiceReplacementLog" Schema="IMEIReplacementMaster" store:Type="Tables" />
+    <EntitySet Name="ApprovalMaster" EntityType="Self.ApprovalMaster" Schema="IMEIReplacementMaster" store:Type="Tables" />
+    <EntitySet Name="FaultySparePartsDetails" EntityType="Self.FaultySparePartsDetails" Schema="IMEIReplacementMaster" store:Type="Tables" />
+    <EntitySet Name="IMEIReplacementMaster" EntityType="Self.IMEIReplacementMaster" Schema="IMEIReplacementMaster" store:Type="Tables" />
+    <EntitySet Name="ManagementApprovalLog" EntityType="Self.ManagementApprovalLog" Schema="IMEIReplacementMaster" store:Type="Tables" />
+    <EntitySet Name="PrimaryRecomLog" EntityType="Self.PrimaryRecomLog" Schema="IMEIReplacementMaster" store:Type="Tables" />
+    <EntitySet Name="ReplacementLog" EntityType="Self.ReplacementLog" Schema="IMEIReplacementMaster" store:Type="Tables" />
+    <EntitySet Name="tblDealerSales" EntityType="Self.tblDealerSales" Schema="IMEIReplacementMaster" store:Type="Tables" />
+    <EntitySet Name="tblDisplayProduct" EntityType="Self.tblDisplayProduct" Schema="IMEIReplacementMaster" store:Type="Tables" />
+    <EntitySet Name="tblStockReconciliation" EntityType="Self.tblStockReconciliation" Schema="IMEIReplacementMaster" store:Type="Tables" />
+    <EntitySet Name="WareHouseApproval" EntityType="Self.WareHouseApproval" Schema="IMEIReplacementMaster" store:Type="Tables" />
+    <EntitySet Name="WareHouseCorporateStoreLog" EntityType="Self.WareHouseCorporateStoreLog" Schema="IMEIReplacementMaster" store:Type="Tables" />
+    <EntitySet Name="WastageManagementInventory" EntityType="Self.WastageManagementInventory" Schema="IMEIReplacementMaster" store:Type="Tables" />
+    <EntitySet Name="WastageManagementMasterLog" EntityType="Self.WastageManagementMasterLog" Schema="IMEIReplacementMaster" store:Type="Tables" />
+    <EntitySet Name="Copy_Registration" EntityType="Self.Copy_Registration" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Copy_Registration].[ProductRegID] AS [ProductRegID], 
+    [Copy_Registration].[ProductType] AS [ProductType], 
+    [Copy_Registration].[ProductModelID] AS [ProductModelID], 
+    [Copy_Registration].[SalerID] AS [SalerID], 
+    [Copy_Registration].[ProductID] AS [ProductID], 
+    [Copy_Registration].[PhoneNumber] AS [PhoneNumber], 
+    [Copy_Registration].[RegistrationDate] AS [RegistrationDate], 
+    [Copy_Registration].[WarrantyMonths] AS [WarrantyMonths], 
+    [Copy_Registration].[WarrantyVoid] AS [WarrantyVoid], 
+    [Copy_Registration].[WarrantyID] AS [WarrantyID], 
+    [Copy_Registration].[MemoNo] AS [MemoNo], 
+    [Copy_Registration].[OwnerName] AS [OwnerName], 
+    [Copy_Registration].[OwnerAddress] AS [OwnerAddress], 
+    [Copy_Registration].[DeliveryDate] AS [DeliveryDate], 
+    [Copy_Registration].[EBS_Item_Code] AS [EBS_Item_Code], 
+    [Copy_Registration].[AddedBy] AS [AddedBy], 
+    [Copy_Registration].[DateAdded] AS [DateAdded], 
+    [Copy_Registration].[UpdatedBy] AS [UpdatedBy], 
+    [Copy_Registration].[UpdatedDate] AS [UpdatedDate], 
+    [Copy_Registration].[SMSID] AS [SMSID], 
+    [Copy_Registration].[IsSendToOracleDb] AS [IsSendToOracleDb], 
+    [Copy_Registration].[IsCheckedInDealerDistribution] AS [IsCheckedInDealerDistribution], 
+    [Copy_Registration].[Imei_One] AS [Imei_One], 
+    [Copy_Registration].[Imei_Tow] AS [Imei_Tow]
+    FROM [dbo].[Copy_Registration] AS [Copy_Registration]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Model" EntityType="Self.Model" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Model].[RegistrationDate] AS [RegistrationDate], 
+    [Model].[DealerName] AS [DealerName], 
+    [Model].[DealerCode] AS [DealerCode], 
+    [Model].[Number] AS [Number], 
+    [Model].[TotalPrice] AS [TotalPrice], 
+    [Model].[Model] AS [Model], 
+    [Model].[DealerType] AS [DealerType], 
+    [Model].[City] AS [City], 
+    [Model].[Division] AS [Division]
+    FROM [dbo].[Model] AS [Model]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="RemainingMarketDetails" EntityType="Self.RemainingMarketDetails" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [RemainingMarketDetails].[RemainingMarketStockDetailsId] AS [RemainingMarketStockDetailsId], 
+    [RemainingMarketDetails].[DealerCode] AS [DealerCode], 
+    [RemainingMarketDetails].[DealerName] AS [DealerName], 
+    [RemainingMarketDetails].[Model] AS [Model], 
+    [RemainingMarketDetails].[RemainingStock] AS [RemainingStock], 
+    [RemainingMarketDetails].[DealerCity] AS [DealerCity], 
+    [RemainingMarketDetails].[DealerDivision] AS [DealerDivision], 
+    [RemainingMarketDetails].[DealerType] AS [DealerType], 
+    [RemainingMarketDetails].[AddedDate] AS [AddedDate]
+    FROM [dbo].[RemainingMarketDetails] AS [RemainingMarketDetails]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="RemainingMarketDetails_BACKUP" EntityType="Self.RemainingMarketDetails_BACKUP" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [RemainingMarketDetails_BACKUP].[RemainingMarketStockDetailsId] AS [RemainingMarketStockDetailsId], 
+    [RemainingMarketDetails_BACKUP].[DealerCode] AS [DealerCode], 
+    [RemainingMarketDetails_BACKUP].[DealerName] AS [DealerName], 
+    [RemainingMarketDetails_BACKUP].[Model] AS [Model], 
+    [RemainingMarketDetails_BACKUP].[RemainingStock] AS [RemainingStock], 
+    [RemainingMarketDetails_BACKUP].[DealerCity] AS [DealerCity], 
+    [RemainingMarketDetails_BACKUP].[DealerDivision] AS [DealerDivision], 
+    [RemainingMarketDetails_BACKUP].[DealerType] AS [DealerType], 
+    [RemainingMarketDetails_BACKUP].[AddedDate] AS [AddedDate]
+    FROM [dbo].[RemainingMarketDetails_BACKUP] AS [RemainingMarketDetails_BACKUP]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tblSupplierModelInfo" EntityType="Self.tblSupplierModelInfo" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tblSupplierModelInfo].[supplierID] AS [supplierID], 
+    [tblSupplierModelInfo].[supplierName] AS [supplierName], 
+    [tblSupplierModelInfo].[Model] AS [Model], 
+    [tblSupplierModelInfo].[Type] AS [Type], 
+    [tblSupplierModelInfo].[addedBy] AS [addedBy], 
+    [tblSupplierModelInfo].[addedDate] AS [addedDate]
+    FROM [dbo].[tblSupplierModelInfo] AS [tblSupplierModelInfo]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="TeDDD" EntityType="Self.TeDDD" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [TeDDD].[DealerdistributionId] AS [DealerdistributionId], 
+    [TeDDD].[DealerCode] AS [DealerCode], 
+    [TeDDD].[BarCode] AS [BarCode], 
+    [TeDDD].[BarCode2] AS [BarCode2], 
+    [TeDDD].[Model] AS [Model], 
+    [TeDDD].[DONumber] AS [DONumber], 
+    [TeDDD].[DistributionDate] AS [DistributionDate], 
+    [TeDDD].[IsSoldOut] AS [IsSoldOut]
+    FROM [dbo].[TeDDD] AS [TeDDD]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="TestReg" EntityType="Self.TestReg" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [TestReg].[ProductRegID] AS [ProductRegID], 
+    [TestReg].[ProductType] AS [ProductType], 
+    [TestReg].[ProductModelID] AS [ProductModelID], 
+    [TestReg].[SalerID] AS [SalerID], 
+    [TestReg].[ProductID] AS [ProductID], 
+    [TestReg].[PhoneNumber] AS [PhoneNumber], 
+    [TestReg].[RegistrationDate] AS [RegistrationDate], 
+    [TestReg].[WarrantyMonths] AS [WarrantyMonths], 
+    [TestReg].[WarrantyVoid] AS [WarrantyVoid], 
+    [TestReg].[WarrantyID] AS [WarrantyID], 
+    [TestReg].[MemoNo] AS [MemoNo], 
+    [TestReg].[OwnerName] AS [OwnerName], 
+    [TestReg].[OwnerAddress] AS [OwnerAddress], 
+    [TestReg].[DeliveryDate] AS [DeliveryDate], 
+    [TestReg].[EBS_Item_Code] AS [EBS_Item_Code], 
+    [TestReg].[AddedBy] AS [AddedBy], 
+    [TestReg].[DateAdded] AS [DateAdded], 
+    [TestReg].[UpdatedBy] AS [UpdatedBy], 
+    [TestReg].[UpdatedDate] AS [UpdatedDate], 
+    [TestReg].[SMSID] AS [SMSID], 
+    [TestReg].[IsSendToOracleDb] AS [IsSendToOracleDb], 
+    [TestReg].[IsCheckedInDealerDistribution] AS [IsCheckedInDealerDistribution], 
+    [TestReg].[Imei_One] AS [Imei_One], 
+    [TestReg].[Imei_Tow] AS [Imei_Tow]
+    FROM [dbo].[TestReg] AS [TestReg]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="TimeTable" EntityType="Self.TimeTable" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [TimeTable].[TIME_ID] AS [TIME_ID], 
+    [TimeTable].[DAY_NAM] AS [DAY_NAM], 
+    [TimeTable].[DAY_NUMBER_IN_WEEK] AS [DAY_NUMBER_IN_WEEK], 
+    [TimeTable].[DAY_NUMBER_IN_MONTH] AS [DAY_NUMBER_IN_MONTH], 
+    [TimeTable].[CALENDAR_WEEK_NUMBER] AS [CALENDAR_WEEK_NUMBER], 
+    [TimeTable].[WEEK_ENDING_DAY] AS [WEEK_ENDING_DAY], 
+    [TimeTable].[CALENDAR_MONTH_NUMBER] AS [CALENDAR_MONTH_NUMBER], 
+    [TimeTable].[CALENDAR_MONTH_DESC] AS [CALENDAR_MONTH_DESC], 
+    [TimeTable].[DAYS_IN_CAL_MONTH] AS [DAYS_IN_CAL_MONTH], 
+    [TimeTable].[END_OF_CAL_MONTH] AS [END_OF_CAL_MONTH], 
+    [TimeTable].[CALENDAR_MONTH_NAME] AS [CALENDAR_MONTH_NAME], 
+    [TimeTable].[CALENDAR_QUARTER_DESC] AS [CALENDAR_QUARTER_DESC], 
+    [TimeTable].[DAYS_IN_CAL_QUARTER] AS [DAYS_IN_CAL_QUARTER], 
+    [TimeTable].[END_OF_CAL_QUARTER] AS [END_OF_CAL_QUARTER], 
+    [TimeTable].[CALENDAR_QUARTER_NUMBER] AS [CALENDAR_QUARTER_NUMBER], 
+    [TimeTable].[CALENDAR_YEAR] AS [CALENDAR_YEAR], 
+    [TimeTable].[DAYS_IN_CAL_YEAR] AS [DAYS_IN_CAL_YEAR], 
+    [TimeTable].[END_OF_CAL_YEAR] AS [END_OF_CAL_YEAR], 
+    [TimeTable].[PERIOD_NAME] AS [PERIOD_NAME]
+    FROM [dbo].[TimeTable] AS [TimeTable]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="X" EntityType="Self.X" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [X].[RegistrationDate] AS [RegistrationDate], 
+    [X].[DealerName] AS [DealerName], 
+    [X].[DealerCode] AS [DealerCode], 
+    [X].[Number] AS [Number], 
+    [X].[TotalPrice] AS [TotalPrice], 
+    [X].[Model] AS [Model], 
+    [X].[DealerType] AS [DealerType], 
+    [X].[City] AS [City], 
+    [X].[Division] AS [Division]
+    FROM [dbo].[X] AS [X]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__aspnet_Me__Appli__145C0A3F" Association="Self.FK__aspnet_Me__Appli__145C0A3F">
+      <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+      <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Me__UserI__15502E78" Association="Self.FK__aspnet_Me__UserI__15502E78">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Pa__Appli__45F365D3" Association="Self.FK__aspnet_Pa__Appli__45F365D3">
+      <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+      <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Pe__PathI__4BAC3F29" Association="Self.FK__aspnet_Pe__PathI__4BAC3F29">
+      <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
+      <End Role="aspnet_PersonalizationAllUsers" EntitySet="aspnet_PersonalizationAllUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Pe__PathI__4F7CD00D" Association="Self.FK__aspnet_Pe__PathI__4F7CD00D">
+      <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
+      <End Role="aspnet_PersonalizationPerUser" EntitySet="aspnet_PersonalizationPerUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Pe__UserI__5070F446" Association="Self.FK__aspnet_Pe__UserI__5070F446">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="aspnet_PersonalizationPerUser" EntitySet="aspnet_PersonalizationPerUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Pr__UserI__29572725" Association="Self.FK__aspnet_Pr__UserI__29572725">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="aspnet_Profile" EntitySet="aspnet_Profile" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Ro__Appli__32E0915F" Association="Self.FK__aspnet_Ro__Appli__32E0915F">
+      <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+      <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Us__Appli__0425A276" Association="Self.FK__aspnet_Us__Appli__0425A276">
+      <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Us__RoleI__37A5467C" Association="Self.FK__aspnet_Us__RoleI__37A5467C">
+      <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
+      <End Role="aspnet_UsersInRoles" EntitySet="aspnet_UsersInRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK__aspnet_Us__UserI__36B12243" Association="Self.FK__aspnet_Us__UserI__36B12243">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="aspnet_UsersInRoles" EntitySet="aspnet_UsersInRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DistributorNetwork_DistributorNetwork1" Association="Self.FK_DistributorNetwork_DistributorNetwork1">
+      <End Role="DistributorNetwork" EntitySet="DistributorNetwork" />
+      <End Role="DistributorNetwork1" EntitySet="DistributorNetwork" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SMSDetails_SMSMaster" Association="Self.FK_SMSDetails_SMSMaster">
+      <End Role="SMSMaster" EntitySet="SMSMaster" />
+      <End Role="SMSDetails" EntitySet="SMSDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SMSMember_SMSGroup" Association="Self.FK_SMSMember_SMSGroup">
+      <End Role="SMSGroup" EntitySet="SMSGroup" />
+      <End Role="SMSMember" EntitySet="SMSMember" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SMSRoleDetails_SMSRoleMaster" Association="Self.FK_SMSRoleDetails_SMSRoleMaster">
+      <End Role="SMSRoleMaster" EntitySet="SMSRoleMaster" />
+      <End Role="SMSRoleDetails" EntitySet="SMSRoleDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblCashIn_tblSalesPoint" Association="Self.FK_tblCashIn_tblSalesPoint">
+      <End Role="tblSalesPoint" EntitySet="tblSalesPoint" />
+      <End Role="tblCashIn" EntitySet="tblCashIn" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblCashIn_tblTransectionHeads" Association="Self.FK_tblCashIn_tblTransectionHeads">
+      <End Role="tblTransectionHeads" EntitySet="tblTransectionHeads" />
+      <End Role="tblCashIn" EntitySet="tblCashIn" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblCashOut_tblSalesPoint" Association="Self.FK_tblCashOut_tblSalesPoint">
+      <End Role="tblSalesPoint" EntitySet="tblSalesPoint" />
+      <End Role="tblCashOut" EntitySet="tblCashOut" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblCashOut_tblTransectionHeads" Association="Self.FK_tblCashOut_tblTransectionHeads">
+      <End Role="tblTransectionHeads" EntitySet="tblTransectionHeads" />
+      <End Role="tblCashOut" EntitySet="tblCashOut" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblDailyClosingStockDetail_tblDailyClosingStockMaster" Association="Self.FK_tblDailyClosingStockDetail_tblDailyClosingStockMaster">
+      <End Role="tblSalesPoint" EntitySet="tblSalesPoint" />
+      <End Role="tblDailyClosingStockDetail" EntitySet="tblDailyClosingStockDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblDailyClosingStockDetail_tblProductMaster" Association="Self.FK_tblDailyClosingStockDetail_tblProductMaster">
+      <End Role="tblProductMaster" EntitySet="tblProductMaster" />
+      <End Role="tblDailyClosingStockDetail" EntitySet="tblDailyClosingStockDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblProductRegistration_tblProductMaster" Association="Self.FK_tblProductRegistration_tblProductMaster">
+      <End Role="tblProductMaster" EntitySet="tblProductMaster" />
+      <End Role="tblProductRegistration" EntitySet="tblProductRegistration" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSalesPoint_tblCompanyInfo" Association="Self.FK_tblSalesPoint_tblCompanyInfo">
+      <End Role="tblCompanyInfo" EntitySet="tblCompanyInfo" />
+      <End Role="tblSalesPoint" EntitySet="tblSalesPoint" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSalesPointDailyStock_tblSalesPoint" Association="Self.FK_tblSalesPointDailyStock_tblSalesPoint">
+      <End Role="tblSalesPoint" EntitySet="tblSalesPoint" />
+      <End Role="tblSalesPointDailyStock" EntitySet="tblSalesPointDailyStock" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSalesPointDailyStock_tblTransectionHeads" Association="Self.FK_tblSalesPointDailyStock_tblTransectionHeads">
+      <End Role="tblTransectionHeads" EntitySet="tblTransectionHeads" />
+      <End Role="tblSalesPointDailyStock" EntitySet="tblSalesPointDailyStock" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSalesPointTransHead_tblSalesPoint" Association="Self.FK_tblSalesPointTransHead_tblSalesPoint">
+      <End Role="tblSalesPoint" EntitySet="tblSalesPoint" />
+      <End Role="tblSalesPointTransHead" EntitySet="tblSalesPointTransHead" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblSalesPointTransHead_tblTransectionHeads" Association="Self.FK_tblSalesPointTransHead_tblTransectionHeads">
+      <End Role="tblTransectionHeads" EntitySet="tblTransectionHeads" />
+      <End Role="tblSalesPointTransHead" EntitySet="tblSalesPointTransHead" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

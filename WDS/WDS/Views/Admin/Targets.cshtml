@@ -1,0 +1,116 @@
+﻿@model IEnumerable<WDS.Models.TargetModel>
+@{
+    ViewBag.Title = "Targets";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-header">Targets
+                    <div class="col-md-4">
+                        <button class="btn btn-outline-info" id="exportToExel" onclick="tableToExcel('tblTargets', 'TargetList')">Export to Excel</button>
+                    </div>
+                    </div>
+                <div class="card-body" id="mainDiv">
+                    <table class="table table-bordered" id="tblTargets">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Model</th>
+                                <th>For</th>
+                                <th>Personnel</th>
+                                <th>Value</th>
+                                <th>Type</th>
+                                <th>From</th>
+                                <th>To</th>
+                                <th>A.D</th>
+                                <th>A.B</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="stockTableBody" class="stockTableBody">
+                            @if (Model.Any())
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Id</td>
+                                        <td>@item.TargetName</td>
+                                        <td>@item.ModelName</td>
+                                        <td>@item.TargetFor</td>
+                                        <td>@item.TargetPersonnel</td>
+                                        <td>@item.TargetValue</td>
+                                        <td>@item.TargetType</td>
+                                        <td>@item.FromDate</td>
+                                        <td>@item.ToDate</td>
+                                        <td>@item.AddedDate</td>
+                                        <td>@item.AddedByName</td>
+                                        <td>
+                                            <input type="submit" value="Edit" class="btn btn-outline-info" onclick="location.href = '@Url.Action("EditTarget", "Admin",new { id = item.Id })'" />
+                                        </td>
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#tblTargets').DataTable();
+        
+    });
+
+
+
+
+    function exportTableToExcel(tableId, filename) {
+        var downloadLink;
+        var dataType = 'application/vnd.ms-excel';
+        var tableSelect = document.getElementById(tableId);
+        var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+        // Specify file name
+        filename = filename ? filename + '.xls' : 'excel_data.xls';
+
+        // Create download link element
+        downloadLink = document.createElement("a");
+
+        document.body.appendChild(downloadLink);
+
+        if (navigator.msSaveOrOpenBlob) {
+            var blob = new Blob(['\ufeff', tableHTML], {
+                type: dataType
+            });
+            navigator.msSaveOrOpenBlob(blob, filename);
+        } else {
+            // Create a link to the file
+            downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+            // Setting the file name
+            downloadLink.download = filename;
+
+            //triggering the function
+            downloadLink.click();
+        }
+    }
+
+    var tableToExcel = (function () {
+        var uri = 'data:application/vnd.ms-excel;base64,', template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><meta http-equiv="content-type" content="text/plain; charset=UTF-8"/></head><body><table>{table}</table></body></html>', base64 = function (s) { return window.btoa(unescape(encodeURIComponent(s))) }, format = function (s, c) { return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; }) }
+        return function (table, name) {
+            if (!table.nodeType) table = document.getElementById(table)
+            var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
+            window.location.href = uri + base64(format(template, ctx))
+        };
+    })();
+
+</script>
+

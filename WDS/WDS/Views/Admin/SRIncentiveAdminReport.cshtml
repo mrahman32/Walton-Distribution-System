@@ -1,0 +1,297 @@
+﻿@{
+    ViewBag.Title = "SRIncentiveAdminReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-header">SR Incentive </div>
+            <div class="card-body">
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label text-sm-right">Start Date</label>
+                    <div class="col-lg-6">
+                        @*<input type="text" class="form-control datepicker" id="startDate" readonly />*@
+                        <input class="datepicker form-control" data-date-format="dd/mm/yyyy" id="startDate" autocomplete="off" placeholder="Start Date">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label text-sm-right">End Date</label>
+                    <div class="col-lg-6">
+                        @*<input type="text" class="form-control datepicker" id="endDate" readonly />*@
+                        <input class="datepicker form-control" data-date-format="dd/mm/yyyy" id="endDate" autocomplete="off" placeholder="End Date">
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label text-sm-right">Distributor</label>
+                    <div class="col-lg-6">
+                        @Html.DropDownList("DigitechCode", new SelectList(ViewBag.DistributorSelectList, "Value", "Text"), new { @class = "selectpicker show-tick form-control", @id = "DigitechCode", data_live_search = "true", })
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label text-sm-right">SR</label>
+                    <div class="col-lg-6">
+                        @Html.DropDownList("SR", new SelectList(ViewBag.SalesRepresentativeSelectList, "Value", "Text"), new { @class = "selectpicker show-tick form-control", @id = "SRid", data_live_search = "true", })
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label text-sm-right">Model</label>
+                    <div class="col-lg-6">
+                        @Html.DropDownList("model", new SelectList(ViewBag.modelList, "Value", "Text"), new { @class = "selectpicker show-tick form-control", @id = "model", data_live_search = "true", })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-3"></div>
+                    <div class="col-lg-6">
+                        <input type="button" class="btn btn-outline-info" value="Submit" id="btnSubmit" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-header">List</div>
+            <div class="card-body">
+                <table class="table table-bordered" id="srAdminIncentiveTable">
+                    <thead>
+                        <tr>
+                            <th>SL</th>
+                            <th>Dealer Name</th>
+                            <th>SR Name</th>
+                            <th>Contact No</th>
+                            <th>Model</th>
+                            <th>Issue QTY</th>
+                            <th>Value</th>
+                            <th>Incentive</th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="srAdminIncentiveTableBody"></tbody>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+<link href="~/Content/iziToast.min.css" rel="stylesheet" />
+<script src="~/Scripts/iziToast.min.js"></script>
+
+<script>
+
+    $(function () {
+        //$(".datepicker").datepicker();
+
+        $(".datepicker").datepicker({
+            dateFormat: 'yy-mm-dd'
+        });
+
+        $("#srAdminIncentiveTable").DataTable();
+
+        $("#btnSubmit").click(function () {
+            document.getElementById('btnSubmit').value = 'Please Wait!.';
+            document.getElementById('btnSubmit').className = 'btn btn-outline-danger';
+            $('#srAdminIncentiveTable').DataTable().destroy();
+            $("#srAdminIncentiveTableBody").html("");
+            var startDate = $("#startDate").val();
+            var endDate = $("#endDate").val();
+            var dCode = $("#DigitechCode").val();
+            var SRid = $("#SRid").val();
+            var model = $("#model").val();
+
+            getAllDatabyParameter(startDate, endDate, dCode, SRid, model);
+
+        });
+
+        $("#DigitechCode").on("change", function () {
+
+            var dCode = $(this).val();
+            load_sr_by_distributor_code(dCode);
+        });
+
+
+    });
+
+    function load_sr_by_distributor_code(dCode) {
+        if (dCode != null) {
+            $.ajax({
+
+                type: 'POST',
+                //contentType: 'application/json',
+                dataType: 'json',
+                url: '@Url.Action("GetSrByDealerCode", "Admin")',
+                data: { 'dCode': dCode },
+                success: function (data) {
+                    if (data != null) {
+                        $('#SRid').empty();
+                        //$("#dealer").selectpicker("refresh");
+                        for (var i = 0; i < data.length; i++) {
+                            $('#SRid').append('<option value="' + data[i].Value + '">' + data[i].Text + '</option>');
+                        }
+                        $("#SRid").selectpicker("refresh");
+                    }
+                }
+
+            });
+        }
+    }
+
+    function getAllDatabyParameter(startDate, endDate, dCode, SRid, model) {
+
+        if (startDate != "" && endDate != "") {
+            var dataList = JSON.stringify({ fromDate: startDate, toDate: endDate, dCode: dCode, srId: SRid, model: model });
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json',
+                dataType: 'json',
+                url: '@Url.Action("GetSRIncentiveAdminData", "Admin")',
+                data: dataList,
+                success: function (data) {
+                    document.getElementById('btnSubmit').value = 'Submit';
+                    document.getElementById('btnSubmit').className = 'btn btn-outline-info';
+                    if (data.length > 0) {
+                        $('#srAdminIncentiveTable').DataTable().destroy();
+                        var dataList = data.length;
+                        $("#srIncentiveTableBody").html("");
+                        for (var i = 0; i < dataList; i++) {
+                            var incentinullCheck = data[i].Incentive == null ? 0 : data[i].Incentive
+                            $("#srAdminIncentiveTableBody").append('<tr>' +
+                                '<td>' + (i + 1) + '</td>' +
+                                '<td>' + data[i].DealerName + '</td>' +
+                                '<td>' + data[i].SRName + '</td>' +
+                                '<td>' + data[i].Phone + '</td>' +
+                                '<td>' + data[i].Model + '</td>' +
+                                '<td>' + data[i].IssueQty + '</td>' +
+                                '<td>' + data[i].Value + '</td>' +
+                                '<td>' + incentinullCheck + '</td>' +
+
+                                '</tr>');
+                        }
+                        var table = $('#srAdminIncentiveTable').DataTable(
+                            {
+                                "footerCallback": function (row, data, start, end, display) {
+                                    var api = this.api(), data;
+
+                                    // Remove the formatting to get integer data for summation
+                                    var intVal = function (i) {
+                                        return typeof i === 'string' ?
+                                            i.replace(/[\$,]/g, '') * 1 :
+                                            typeof i === 'number' ?
+                                            i : 0;
+                                    };
+
+                                    // Total over all pages
+                                    GtotalQty = api
+                                        .column(5)
+                                        .data()
+                                        .reduce(function (a, b) {
+                                            return intVal(a) + intVal(b);
+                                        }, 0);
+
+                                    GtotalValue = api
+                                       .column(6)
+                                       .data()
+                                       .reduce(function (a, b) {
+                                           return intVal(a) + intVal(b);
+                                       }, 0);
+
+
+                                    GtotalIncentive = api
+                                      .column(7)
+                                      .data()
+                                      .reduce(function (a, b) {
+                                          return intVal(a) + intVal(b);
+                                      }, 0);
+
+
+
+                                    // Total over this page
+                                    pageTotalQty = api
+                                        .column(5, { page: 'current' })
+                                        .data()
+                                        .reduce(function (a, b) {
+                                            return intVal(a) + intVal(b);
+                                        }, 0);
+
+                                    pageTotalValue = api
+                                       .column(6, { page: 'current' })
+                                       .data()
+                                       .reduce(function (a, b) {
+                                           return intVal(a) + intVal(b);
+                                       }, 0);
+
+
+                                    pageTotalIncentive = api
+                                      .column(7, { page: 'current' })
+                                      .data()
+                                      .reduce(function (a, b) {
+                                          return intVal(a) + intVal(b);
+                                      }, 0);
+
+
+                                    // Update footer
+                                    $(api.column(4).footer()).html('Total');
+                                    $(api.column(5).footer()).html(
+                                        pageTotalQty + ' (' + GtotalQty + ' Total)'
+                                    );
+                                    $(api.column(6).footer()).html(
+                                       pageTotalValue + ' (' + GtotalValue + ' Total Value)'
+                                   );
+
+                                    $(api.column(7).footer()).html(
+                                       pageTotalIncentive + ' (' + GtotalIncentive + ' Total Incentive)'
+                                   );
+
+                                }
+                            }
+
+                            );
+
+                        new $.fn.dataTable.Buttons(table, {
+                            buttons: [
+                                { extend: 'excel', className: 'excelBtn', title: 'SR Incentive  ' + startDate + ' to  ' + endDate + ' ', text: 'Click For Excel Export' }
+                            ]
+                        });
+
+                        table.buttons(0, null).container().prependTo(
+                            table.table().container()
+                        );
+                    } else {
+                        iziToast.error({
+                            title: 'Error',
+                            message: 'No Data Found!.',
+                            position: 'topCenter',
+                        });
+                    }
+                }
+            });
+        } else {
+            iziToast.error({
+                title: 'Error',
+                message: 'Select Date!.',
+                position: 'topCenter',
+            });
+        }
+
+    }
+
+</script>

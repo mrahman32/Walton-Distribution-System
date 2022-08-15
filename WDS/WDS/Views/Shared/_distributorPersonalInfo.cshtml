@@ -1,0 +1,384 @@
+﻿@model WDS.Models.DistributorCheckListModel
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    .container {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    }
+
+    .responsive-iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+</style>
+
+
+@using (Html.BeginForm("CreatePersonalInfo", "Document", FormMethod.Post, new { id = "CreateBS", enctype = "multipart/form-data", onsubmit = "return validateForm()" }))
+{
+    <div class="col-lg-12">
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.DealerCode)
+        @Html.HiddenFor(model => model.IsCreationApproved)
+        @Html.HiddenFor(model => model.CreationApprovedBy)
+        @Html.HiddenFor(model => model.CreationApprovedDate)
+        @Html.HiddenFor(model => model.IsTheDealerBlocked)
+        @Html.HiddenFor(model => model.IsTemporaryOpen)
+        @Html.HiddenFor(model => model.TempOpenDate)
+        @Html.HiddenFor(model => model.TempExpireDate)
+        @Html.HiddenFor(model => model.AddedBy)
+        @Html.HiddenFor(model => model.AddedDate)
+        @Html.HiddenFor(model => model.UpdatedBy)
+        @Html.HiddenFor(model => model.UpdatedDate)
+        @Html.HiddenFor(model => model.UpdateName)
+
+
+
+        @Html.HiddenFor(model => model.DistributorPersonalInformationModel.Id)
+        @Html.HiddenFor(model => model.DistributorPersonalInformationModel.CheckListId)
+        @Html.HiddenFor(model => model.DistributorPersonalInformationModel.AddedBy)
+        @Html.HiddenFor(model => model.DistributorPersonalInformationModel.AddedDate)
+        @Html.HiddenFor(model => model.DistributorPersonalInformationModel.UpdatedBy)
+        @Html.HiddenFor(model => model.DistributorPersonalInformationModel.UpdatedDate)
+        @Html.HiddenFor(model => model.DistributorPersonalInformationModel.ShopPictureUrl)
+
+
+        <br />
+        <div class="card">
+            <div class="card-header bg-primary">Personal Info</div>
+            <div class="card-body">
+
+                <div class="form-group row">
+                    <label class="col-lg-2 col-form-label text-sm-right">Full Name <i class="fas fa-asterisk" style="color: red"></i></label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(model => model.DistributorPersonalInformationModel.FullName, new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.FullName, "", new { @class = "text-danger" })
+                    </div>
+
+                    <label class="col-lg-2 col-form-label text-sm-right">Distributor DOB <i class="fas fa-asterisk" style="color: red"></i></label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(model => model.DistributorPersonalInformationModel.DistributorDOB, new { @class = "form-control", @readonly = "readonly", required = "required" })
+                        @Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.DistributorDOB, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-2 col-form-label text-sm-right">Father's Name <i class="fas fa-asterisk" style="color: red"></i></label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(model => model.DistributorPersonalInformationModel.FathersName, new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.FathersName, "", new { @class = "text-danger" })
+                    </div>
+
+                    <label class="col-lg-2 col-form-label text-sm-right">Father's Occupation</label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(model => model.DistributorPersonalInformationModel.FathersOccupation, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.FathersOccupation, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-2 col-form-label text-sm-right">Mother's Name <i class="fas fa-asterisk" style="color: red"></i></label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(model => model.DistributorPersonalInformationModel.MothersName, new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.MothersName, "", new { @class = "text-danger" })
+                    </div>
+
+                    <label class="col-lg-2 col-form-label text-sm-right">Mother's Occupation</label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(model => model.DistributorPersonalInformationModel.MothersOccupation, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.MothersOccupation, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-2 col-form-label text-sm-right">Brother's Name</label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(model => model.DistributorPersonalInformationModel.BrothersName, new { @class = "form-control", @placeholder = "Comma separte if multiple" })
+                        @Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.BrothersName, "", new { @class = "text-danger", @placeholder = "Comma separte if multiple" })
+                    </div>
+
+                    <label class="col-lg-2 col-form-label text-sm-right">Brother's Occupation</label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(model => model.DistributorPersonalInformationModel.BrothersOccupation, new { @class = "form-control", @placeholder = "Comma separte if multiple" })
+                        @Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.BrothersOccupation, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-2 col-form-label text-sm-right">Sister's Name</label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(model => model.DistributorPersonalInformationModel.SistersName, new { @class = "form-control", @placeholder = "Comma separte if multiple" })
+                        @Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.SistersName, "", new { @class = "text-danger" })
+                    </div>
+
+                    <label class="col-lg-2 col-form-label text-sm-right">Sister's Occupation</label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(model => model.DistributorPersonalInformationModel.SistersOccupation, new { @class = "form-control", @placeholder = "Comma separte if multiple" })
+                        @Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.SistersOccupation, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header bg-primary">Bank Loan, Property & Education</div>
+            <div class="card-body">
+
+                <div class="form-group row">
+                    <label class="col-lg-2 col-form-label text-sm-right">Bank</label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(model => model.DistributorPersonalInformationModel.BankId, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.BankId, "", new { @class = "text-danger" })
+                    </div>
+
+                    <label class="col-lg-2 col-form-label text-sm-right">Branch</label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(model => model.DistributorPersonalInformationModel.BranchId, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.BranchId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-lg-2 col-form-label text-sm-right">Loan Amount</label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(model => model.DistributorPersonalInformationModel.LoanAmount, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.LoanAmount, "", new { @class = "text-danger" })
+                    </div>
+
+
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-lg-2 col-form-label text-sm-right">Property Detail</label>
+                    <div class="col-lg-4">
+                        @Html.TextAreaFor(model => model.DistributorPersonalInformationModel.PropertyDetail, 5, 1, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.PropertyDetail, "", new { @class = "text-danger" })
+                    </div>
+
+                    <label class="col-lg-2 col-form-label text-sm-right">Education Detail</label>
+                    <div class="col-lg-4">
+                        @Html.TextAreaFor(model => model.DistributorPersonalInformationModel.EducationDetail, 5, 1, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.EducationDetail, "", new { @class = "text-danger" })
+                    </div>
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="card">
+            <div class="card-header bg-primary">Contact Information</div>
+            <div class="card-body">
+                <div class="form-group row">
+                    <label class="col-lg-2 col-form-label text-sm-right">Present Address <i class="fas fa-asterisk" style="color: red"></i></label>
+                    <div class="col-lg-4">
+                        @Html.TextAreaFor(model => model.DistributorPersonalInformationModel.PresentAddress, 5, 1, new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.PresentAddress, "", new { @class = "text-danger" })
+                    </div>
+
+                    <label class="col-lg-2 col-form-label text-sm-right">Permanent Address <i class="fas fa-asterisk" style="color: red"></i></label>
+                    <div class="col-lg-4">
+                        @Html.TextAreaFor(model => model.DistributorPersonalInformationModel.PermanentAddress, 5, 1, new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.PermanentAddress, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-2 col-form-label text-sm-right">Contact Name <i class="fas fa-asterisk" style="color: red"></i></label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(model => model.DistributorPersonalInformationModel.ContactName, new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.ContactName, "", new { @class = "text-danger" })
+                    </div>
+
+                    <label class="col-lg-2 col-form-label text-sm-right">Contact Number <i class="fas fa-asterisk" style="color: red"></i></label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(model => model.DistributorPersonalInformationModel.ContactNumber, new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.ContactNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-lg-2 col-form-label text-sm-right">Emergency Contact Name 1 <i class="fas fa-asterisk" style="color: red"></i></label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(model => model.DistributorPersonalInformationModel.EmergencyName1, new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.PresentAddress, "", new { @class = "text-danger" })
+                    </div>
+
+                    <label class="col-lg-2 col-form-label text-sm-right">Emergency Contact No. 1 <i class="fas fa-asterisk" style="color: red"></i></label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(model => model.DistributorPersonalInformationModel.EmergencyNumber1, new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.EmergencyNumber1, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-2 col-form-label text-sm-right">Emergency Contact Name 2 <i class="fas fa-asterisk" style="color: red"></i></label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(model => model.DistributorPersonalInformationModel.EmergencyName1, new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.PresentAddress, "", new { @class = "text-danger" })
+                    </div>
+
+                    <label class="col-lg-2 col-form-label text-sm-right">Emergency Contact No. 2 <i class="fas fa-asterisk" style="color: red"></i></label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(model => model.DistributorPersonalInformationModel.EmergencyNumber1, new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.EmergencyNumber1, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header bg-primary">Business Information</div>
+            <div class="card-body">
+
+
+                <div class="form-group row">
+                    <label class="col-lg-2 col-form-label text-sm-right">Business Type</label>
+                    <div class="col-lg-4">
+                        @Html.DropDownListFor(model => model.DistributorPersonalInformationModel.Ownership, new SelectList(new[]
+                                {
+                                    new SelectListItem{Value = "", Text = "Select", Selected = true},
+                                    new SelectListItem{Value = "EXCLUSIVE", Text = "EXCLUSIVE"},
+                                    new SelectListItem{Value = "NON-EXCLUSIVE", Text = "NON-EXCLUSIVE"},
+                                }, "Value", "Text"), new { @class = "selectpicker show-tick form-control" })
+                        @Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.BusinessType, "", new { @class = "text-danger" })
+                    </div>
+
+                    <label class="col-lg-2 col-form-label text-sm-right">Party Category</label>
+                    <div class="col-lg-4">
+                        @Html.DropDownListFor(model => model.DistributorPersonalInformationModel.Ownership, new SelectList(new[]
+                                {
+                                    new SelectListItem{Value = "", Text = "Select", Selected = true},
+                                    new SelectListItem{Value = "A", Text = "A"},
+                                    new SelectListItem{Value = "B", Text = "B"},
+                                    new SelectListItem{Value = "C", Text = "C"},
+                                    new SelectListItem{Value = "D", Text = "B"}
+                                }, "Value", "Text"), new { @class = "selectpicker show-tick form-control" })
+                        @Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.PartyCategory, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-lg-2 col-form-label text-sm-right">Business Address <i class="fas fa-asterisk" style="color: red"></i></label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(model => model.DistributorPersonalInformationModel.BusinessAddress, new { @class = "form-control", required = "required" })
+                        @Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.BusinessAddress, "", new { @class = "text-danger" })
+                    </div>
+
+                    <label class="col-lg-2 col-form-label text-sm-right">Shop Image <i class="fas fa-asterisk" style="color: red"></i></label>
+                    <div class="col-lg-3">
+                        @Html.TextBoxFor(model => model.DistributorPersonalInformationModel.ShopPictureFile, new { required = "required", type = "file", @class = "form-control", accept = "image/x-png,image/gif,image/jpeg" })
+                        @*@Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.ShopPictureFile, "", new { @class = "text-danger" })*@
+                    </div>
+                    <div class="col-lg-1">
+                        @*<img alt="" class="img-responsive img-rounded" src="@Model.DistributorPersonalInformationModel.ShopPictureWebServerUrl" style="display: block;max-width:100px;max-height:100px;width: auto; height: auto; " />*@
+
+
+                        <div class="container">
+                            <iframe class="responsive-iframe" src="@Model.DistributorPersonalInformationModel.ShopPictureWebServerUrl"></iframe>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-2 col-form-label text-sm-right">Running Business Age (Mobile)</label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(model => model.DistributorPersonalInformationModel.RunningBusinessDetail_WaltonAge, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.RunningBusinessDetail_WaltonAge, "", new { @class = "text-danger" })
+                    </div>
+
+                    <label class="col-lg-2 col-form-label text-sm-right">Running Business Investment (Mobile)</label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(model => model.DistributorPersonalInformationModel.RunningBusinessDetail_WaltonInvestment, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.RunningBusinessDetail_WaltonInvestment, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-lg-2 col-form-label text-sm-right">Running Business Age (Others)</label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(model => model.DistributorPersonalInformationModel.RunningBusinessDetail_OthersAge, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.RunningBusinessDetail_WaltonAge, "", new { @class = "text-danger" })
+                    </div>
+
+                    <label class="col-lg-2 col-form-label text-sm-right">Running Business Investment (Others)</label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(model => model.DistributorPersonalInformationModel.RunningBusinessDetail_OthersInvestment, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.RunningBusinessDetail_WaltonInvestment, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label class="col-lg-2 col-form-label text-sm-right">Reference</label>
+                    <div class="col-lg-4">
+                        @Html.TextBoxFor(model => model.DistributorPersonalInformationModel.Reference, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.Reference, "", new { @class = "text-danger" })
+                    </div>
+
+                    <label class="col-lg-2 col-form-label text-sm-right">Ownership</label>
+                    <div class="col-lg-4">
+                        @Html.DropDownListFor(model => model.DistributorPersonalInformationModel.Ownership, new SelectList(new[]
+                                {
+                                    new SelectListItem{Value = "", Text = "Select", Selected = true},
+                                    new SelectListItem{Value = "SINGLE", Text = "SINGLE"},
+                                    new SelectListItem{Value = "JOINT", Text = "JOINT"},
+                                }, "Value", "Text"), new { @class = "selectpicker show-tick form-control" })
+                        @Html.ValidationMessageFor(model => model.DistributorPersonalInformationModel.Ownership, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        @if (Model != null && !Model.IsApprover)
+        {
+            <div class="form-group row">
+                <label class="col-lg-3 col-form-label text-sm-right"></label>
+                <div class="col-lg-6 text-right">
+                    <button type="submit" id="btnBsSave" class="btn btn-outline-success"><i class="fas fa-save"></i>&nbsp;Save</button>
+                </div>
+            </div>
+        }
+
+
+    </div>
+
+    <script type="text/javascript">
+        //document.getElementById("CreatePersonalInfo").addEventListener("submit", validateForm);
+        $(function () {
+            $("#DistributorPersonalInformationModel_DistributorDOB").datepicker({
+                dateFormat: 'mm-dd-yy',
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-80:+00"
+            })
+                .on('keypress paste', function (e) {
+                    e.preventDefault();
+                    return false;
+                });
+        });
+
+            //function validateForm(e) {
+            //    //e.preventDefault();
+            //    debugger;
+
+
+
+
+            //    var solvencyDate = document.forms["CreateBS"]["BankSolvencyModel_SolvencyDate"].value;
+            //    if (solvencyDate == "") {
+            //        alert("Name must be filled out");
+            //        return false;
+            //    }
+            //};
+
+    </script>
+}
+

@@ -1,0 +1,131 @@
+﻿@using Antlr.Runtime
+@model WDS.ViewModels.VmRetailerOrder
+@{
+    ViewBag.Title = "RetailerOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-header">Create Order</div>
+                <div class="card-body">
+                    @using (Html.BeginForm("RetailerOrder", "Retailer", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model=>model.DealerCode)
+                        @Html.HiddenFor(model=>model.DealerName)
+                        @Html.HiddenFor(model=>model.RetailerId)
+                        @Html.HiddenFor(model=>model.RetailerName)
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-form-label text-sm-right">Distributor Name</label>
+                            <div class="col-lg-4">
+                                @Html.TextBoxFor(model => model.DealerName, new { @class = "form-control" })
+                            </div>
+                            <label class="col-lg-2 col-form-label text-sm-right">Retailer Name</label>
+                            <div class="col-lg-4">
+                                @Html.TextBoxFor(model => model.RetailerName, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-form-label text-sm-right">Product Type</label>
+                            <div class="col-lg-4">
+                                @Html.DropDownListFor(model => model.ProductTypeId, new SelectList(ViewBag.ProductTypes, "Value", "Text"), "Select", new
+                                {
+                                    @class = "selectpicker show-tick form-control", 
+                                    data_live_search = "true",
+                                    onchange = "LoadModel('"+@Url.Action("GetModel", "Retailer")+"')",
+                                
+                                })
+                                @Html.ValidationMessageFor(model => model.ProductTypeId, "", new { @class = "text-danger" })
+                            </div>
+                            <label class="col-lg-2 col-form-label text-sm-right">Model</label>
+                            <div class="col-lg-4">
+                                @Html.DropDownListFor(m => m.ModelName, Enumerable.Empty<SelectListItem>(), "Please Select", new { @class = "selectpicker show-tick form-control", data_live_search = "true"})
+                               
+                                @Html.ValidationMessageFor(model => model.ModelName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            
+                            <label class="col-lg-2 col-form-label text-sm-right">Quantity</label>
+                            <div class="col-lg-4">
+                                @Html.TextBoxFor(model => model.Quantity, new { @class = "form-control", @type="number" })
+                            </div>
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-4">
+                                <button class="btn btn-outline-secondary" id="btnAdd">Add</button>
+                                @*<input type="button" class="btn btn-outline-secondary" id="btnAdd" value="Add"/>*@
+                            </div>
+                        </div>
+                        <div class="row">
+                            <table class="table table-bordered" id="productTable">
+                                <thead>
+                                    <tr>
+                                        <th>Model</th>
+                                        <th>Quantity</th>
+                                        <th>Unit Price</th>
+                                        <th>Total</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tcBody" class="tcBody">
+                                    @if (Model.RetailerOrderDetails != null && Model.RetailerOrderDetails.Any())
+                                    {
+                                        foreach (var conditionModel in Model.RetailerOrderDetails)
+                                        {
+                                            Html.RenderPartial("~/Views/Shared/_RetailerOrderDetail.cshtml", conditionModel);
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div class="form-group row">
+
+                            <div class="col-lg-8"></div>
+                            <div class="col-lg-2">Grand Total</div>
+                            <div class="col-lg-2">
+                                @Html.TextBoxFor(i=>i.GrandTotal, new{@class="form-control"})
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+
+                            
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-4">
+                                @*<button class="btn btn-outline-secondary" id="btnAdd">Add</button>*@
+                                <input type="submit" class="btn btn-outline-success" value="Submit"/>
+                            </div>
+                        </div>
+                        
+
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/CustomScripts/RetailerOrder.js"></script>
+
+<script type="text/javascript">
+    document.getElementById("btnAdd").addEventListener("click", function (event) {
+        event.preventDefault();
+
+        var url = '@Url.Action("AddRow", "Retailer")';
+        var typeId = $('#ProductTypeId').val();
+        var model = $('#ModelName').val();
+        var quantity = $('#Quantity').val();
+        $.post(url, { typeId: typeId, model: model, quantity: quantity }, function (data) {
+            $('#tcBody').append(data);
+            SumTotal();
+        });
+    });
+    
+
+    
+
+</script>

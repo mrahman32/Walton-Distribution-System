@@ -1,0 +1,27 @@
+﻿@model WDS.ViewModels.VmDashboardCard
+
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="text-muted">@Model.CardTitle</h5>
+        <div class="metric-value d-inline-block">
+            <h1 class="mb-1 text-primary">@Model.CardQuantity </h1>
+        </div>
+        
+        @if (Model.Percentage > 0)
+        {
+            <div class="metric-label d-inline-block float-right text-success">
+                <i class="fa fa-fw fa-caret-up"></i><span>@Model.Percentage%</span>
+            </div>
+
+        }
+        else
+        {
+            var pp = (-1)*Model.Percentage;
+            <div class="metric-label d-inline-block float-right text-danger">
+                <i class="fa fa-fw fa-caret-down"></i><span>@pp%</span>
+            </div>
+        }
+    </div>
+    <div id="sparkline-1"><canvas width="232" height="100" style="display: inline-block; width: 232.578px; height: 100px; vertical-align: top;"></canvas></div>
+</div>

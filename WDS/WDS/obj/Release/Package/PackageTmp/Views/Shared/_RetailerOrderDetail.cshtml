@@ -1,0 +1,16 @@
+﻿@model WDS.DAL.WdsEntities.RetailerOrderDetail
+
+<tr id="@Model.Id">
+    @using (Html.BeginCollectionItem("RetailerOrderDetails"))
+    {
+        @Html.HiddenFor(m => m.Model)
+        @Html.HiddenFor(m => m.OrderQuantity)
+        @Html.HiddenFor(m => m.UnitPrice)
+        @Html.HiddenFor(m => m.OrderTotalPrice)
+        <td>@Html.DisplayFor(m => m.Model)</td>
+        <td>@Html.DisplayFor(m => m.OrderQuantity)</td>
+        <td>@Html.DisplayFor(m => m.UnitPrice)</td>
+        <td>@Html.DisplayFor(m => m.OrderTotalPrice)</td>
+        <td><button type="button" id="removeProductRow" class="btn btn-primary" onclick="removeDetailRow(this)">Remove</button></td>
+    }
+</tr>

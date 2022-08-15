@@ -1,0 +1,246 @@
+﻿@model WDS.ViewModels.vmDistributors
+@{
+    ViewBag.Title = "CreateDistributors";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        @if (TempData["message"] != null)
+        {
+            var msgType = TempData["messageType"];
+            var msg = TempData["message"];
+            if ((int)msgType == 1)
+            {
+                TempData["message"] = null;
+                TempData["messageType"] = 0;
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Message: </strong> @msg
+                    <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </a>
+                </div>
+
+            }
+            else if ((int)msgType == 2)
+            {
+                TempData["message"] = null;
+                TempData["messageType"] = 0;
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Message: </strong> @msg
+                    <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </a>
+                </div>
+
+            }
+            else if ((int)msgType == 3)
+            {
+                TempData["message"] = null;
+                TempData["messageType"] = 0;
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Message: </strong> @msg
+                    <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </a>
+                </div>
+            }
+        }
+        <div class="card">
+            <div class="card-header">Create New Incentive</div>
+            <div class="card-body">
+                @using (Html.BeginForm("CreateDistributors", "Admin", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label text-sm-right">Distributor Name</label>
+                                <div class="col-lg-6">
+                                    @Html.TextBoxFor(model => model.DistributorNameCellCom, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.DistributorNameCellCom, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label text-sm-right">Digitech Code</label>
+                                <div class="col-lg-6">
+                                    @Html.TextBoxFor(model => model.DigitechCode, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.DigitechCode, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                           
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label text-sm-right">Import Code</label>
+                                <div class="col-lg-6">
+                                    @Html.TextBoxFor(model => model.ImportCode, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.ImportCode, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label text-sm-right">MobileNo</label>
+                                <div class="col-lg-6">
+                                    @Html.TextBoxFor(model => model.MobileNo, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label text-sm-right">Address</label>
+                                <div class="col-lg-6">
+                                    @Html.TextAreaFor(model => model.Address, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label text-sm-right">DistributorType</label>
+                                <div class="col-lg-6">
+
+                                    @Html.DropDownListFor(model => model.DistributorTypeId, new SelectList(ViewBag.distributorTypeList, "Value", "Text"), "Select", new
+                                {
+                                    @class = "selectpicker show-tick form-control",
+                                    data_live_search = "true",
+                                })
+                                    @Html.ValidationMessageFor(model => model.DistributorTypeId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label text-sm-right">Product Brand</label>
+                                <div class="col-lg-6">
+
+                                    @Html.DropDownListFor(model => model.ProductBrandId, new SelectList(ViewBag.brandList, "Value", "Text"), "Select", new
+                                {
+                                    @class = "selectpicker show-tick form-control",
+                                    data_live_search = "true",
+                                })
+                                    @Html.ValidationMessageFor(model => model.ProductBrandId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label text-sm-right">Zone</label>
+                                <div class="col-lg-6">
+
+                                    @Html.DropDownListFor(model => model.ZoneId, new SelectList(ViewBag.zoneList, "Value", "Text"), "Select", new
+                                {
+                                    @class = "selectpicker show-tick form-control",
+                                    data_live_search = "true",
+                                })
+                                    @Html.ValidationMessageFor(model => model.ZoneId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label text-sm-right">Division</label>
+                                <div class="col-lg-6">
+
+                                    @Html.DropDownListFor(model => model.DivisionId, new SelectList(ViewBag.divisionList, "Value", "Text"), "Select", new
+                                {
+                                    @class = "selectpicker show-tick form-control",
+                                    data_live_search = "true",
+                                })
+                                    @Html.ValidationMessageFor(model => model.DivisionId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label text-sm-right">District</label>
+                                <div class="col-lg-6">
+
+                                    @Html.DropDownListFor(model => model.DistrictId, new SelectList(ViewBag.districtList, "Value", "Text"), "Select", new
+                                {
+                                    @class = "selectpicker show-tick form-control",
+                                    data_live_search = "true",
+                                })
+                                    @Html.ValidationMessageFor(model => model.DistrictId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label text-sm-right">Upazila</label>
+                                <div class="col-lg-6">
+
+                                    @Html.DropDownListFor(model => model.UpazilaId, new SelectList(ViewBag.thanaList, "Value", "Text"), "Select", new
+                                {
+                                    @class = "selectpicker show-tick form-control",
+                                    data_live_search = "true",
+                                })
+                                    @Html.ValidationMessageFor(model => model.UpazilaId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-3 text-left">
+                            <input type="submit" value="Save" class="btn btn-outline-success" />
+                        </div>
+                    </div>
+
+
+
+
+                }
+                <p>
+                    @Html.ActionLink("Back to List", "DistributorList", null, new { @class = "btn btn-outline-danger" })
+                </p>
+              
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+@Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#DivisionId').change(function () {
+                $.ajax({
+                    type: "post",
+                    url: '@Url.Action("GetDistrictList", "Dealer")',
+                    data: { divisionId: $('#DivisionId').val() },
+                    datatype: "json",
+                    traditional: true,
+                    success: function (data) {
+                        $("#DistrictId").empty();
+                        $("#DistrictId").append('<option value="">--SELECT--</option>');
+                        $.each(data, function (i, dds) {
+                            $("#DistrictId").append('<option value="' + dds.Value + '">' + dds.Text + '</option>');
+                        });
+                        $('.selectpicker').selectpicker('refresh');
+                    }
+                });
+            });
+
+
+
+            $('#DistrictId').change(function () {
+                $.ajax({
+                    type: "post",
+                    url: '@Url.Action("GetThanaListByDistrict", "Dealer")',
+                    data: { districtId: $('#DistrictId').val() },
+                    datatype: "json",
+                    traditional: true,
+                    success: function (data) {
+                        $("#UpazilaId").empty();
+                        $("#UpazilaId").append('<option value="">--SELECT--</option>');
+                        //$.each(data, function (i, dds) {
+                        //    $("#UpazilaId").append('<option value="' + dds.Value + '">' + dds.Text + '</option>');
+                        //});
+
+                        for (var i = 0; i < data.length; ++i) {
+                            console.log(data[i].NameGerman);
+                            $("#UpazilaId").append('<option value="' + data[i].Value + '">' + data[i].Text + '</option>');
+                        }
+                        $('.selectpicker').selectpicker('refresh');
+                    }
+                });
+            });
+        });
+    </script>
+}

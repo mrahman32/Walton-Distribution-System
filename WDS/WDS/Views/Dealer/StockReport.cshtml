@@ -1,0 +1,99 @@
+﻿@model IEnumerable<WDS.DAL.WdsEntities.DealerStockCheck_Result>
+@{
+    ViewBag.Title = "StockReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <button class="btn btn-outline-info" id="exportToExel" onclick="tableToExcel('stockTable', 'StockReport')">Export to Excel</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-header">Dealer Stock</div>
+                <div class="card-body">
+
+                    <table class="table table-bordered" id="stockTable">
+                        <thead>
+                            <tr>
+                                <th>Model</th>
+                                <th>Color</th>
+                                <th>Stock Qty</th>
+                                <th>Sold Qty</th>
+                            </tr>
+                        </thead>
+                        <tbody id="stockTableBody" class="stockTableBody">
+                            @if (Model.Any())
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Model</td>
+                                        <td>@item.Color</td>
+                                        <td>@item.StockQuantity</td>
+                                        <td>@item.SoldQuantity</td>
+
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#stockTable').DataTable({"scrillX":true});
+    });
+
+    function exportTableToExcel(tableId, filename) {
+        var downloadLink;
+        var dataType = 'application/vnd.ms-excel';
+        var tableSelect = document.getElementById(tableId);
+        var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+        // Specify file name
+        filename = filename ? filename + '.xls' : 'excel_data.xls';
+
+        // Create download link element
+        downloadLink = document.createElement("a");
+
+        document.body.appendChild(downloadLink);
+
+        if (navigator.msSaveOrOpenBlob) {
+            var blob = new Blob(['\ufeff', tableHTML], {
+                type: dataType
+            });
+            navigator.msSaveOrOpenBlob(blob, filename);
+        } else {
+            // Create a link to the file
+            downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+            // Setting the file name
+            downloadLink.download = filename;
+
+            //triggering the function
+            downloadLink.click();
+        }
+    }
+    var tableToExcel = (function () {
+        var uri = 'data:application/vnd.ms-excel;base64,', template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><meta http-equiv="content-type" content="text/plain; charset=UTF-8"/></head><body><table>{table}</table></body></html>', base64 = function (s) { return window.btoa(unescape(encodeURIComponent(s))) }, format = function (s, c) { return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; }) }
+        return function (table, name) {
+            if (!table.nodeType) table = document.getElementById(table)
+            var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
+            window.location.href = uri + base64(format(template, ctx))
+        };
+    })();
+
+</script>

@@ -1,0 +1,598 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RetailerMotivationProgramModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="DailyIssuedComponent">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ComponentName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="AddedBy" Type="Int64" />
+    <Property Name="AddedDate" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="DayWiseSpecialRetailer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="District" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DistributorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DistributorCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RetailerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RetailerAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OwnerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MonthlyAverageSale" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MonthlyAverageSaleOfWalton" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="7" />
+  </EntityType>
+  <EntityType Name="Deleted_Winners">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RetailerMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DealerMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MessageType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Imei" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Msdp" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="InvoicePrice" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="WinningAmount" Type="Int32" />
+    <Property Name="RetailerId" Type="Int64" />
+    <Property Name="RetailerPhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RetailerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DealerPhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DealerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DealerCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MessageSendingDate" Type="DateTime" Precision="7" />
+    <Property Name="IsSmsSent" Type="Boolean" />
+    <Property Name="IsRetailerGotSms" Type="Boolean" />
+    <Property Name="IsDealerGotSms" Type="Boolean" />
+    <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="AddedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="7" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SmsSentVia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FirstSegmentBenifit" Type="Int32" />
+    <Property Name="SecondSegmentBenifit" Type="Int32" />
+    <Property Name="BackWordBenifit" Type="Int32" />
+    <Property Name="OfferId" Type="Int64" />
+    <Property Name="DealerBenefit" Type="Int32" />
+    <Property Name="SpecialPrizeType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SpecialPrizeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SpecialPrizeValue" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="OracleModelName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="SpecialPrizeMSDP" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="FlashSaleBenifit">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TotalBenifitAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="RetailerNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DealerNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Position" Type="Int32" />
+    <Property Name="RetailerMessage" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="DealerMessage" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="SaleCount" Type="Int32" />
+    <Property Name="CellPhoneModel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AddedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="garbage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="District" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="DistributorName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="DistributorCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="RetailerName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="RetailerAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Owner" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Sale" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="AverageSaleOfWalton" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Bkash" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Action" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="NewDealer" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="NewDealerCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ObsoleteModel">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="FirstSegmentBenifit" Type="Int32" />
+    <Property Name="SecondSegmentBenifit" Type="Int32" />
+    <Property Name="BackMargin" Type="Int32" />
+    <Property Name="OfferId" Type="Int64" />
+    <Property Name="RetailerBenefitUsingApp" Type="Int32" />
+    <Property Name="RetailerBenefitThroughDealer" Type="Int32" />
+    <Property Name="DealerBenefit" Type="Int32" />
+    <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="OfferMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OfferName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Precision="0" />
+    <Property Name="EndDate" Type="DateTime" Precision="0" />
+    <Property Name="OfferFor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Duration" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="AddedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="0" />
+  </EntityType>
+  <EntityType Name="Plaza">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PlazaName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Zone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Area" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="AddedDate" Type="DateTime" Precision="3" />
+    <Property Name="AddedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="RetailerComplain">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RetailerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="RetailerPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DealerCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ComplainType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ComplainDetails" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ComplainSection" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AddedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AddedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="RetailerMessageBundle">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MessageCount" Type="Int32" />
+    <Property Name="MessagingDate" Type="DateTime" Precision="0" />
+    <Property Name="RequestCreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RequestForwardedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Comment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Added" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Retailer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="District" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DistributorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DistributorCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RetailerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RetailerAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OwnerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MonthlyAverageSale" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MonthlyAverageSaleOfWalton" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="DistributorCode2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Retailers_Backup_20180115952_1">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="District" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DistributorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DistributorCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RetailerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RetailerAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OwnerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MonthlyAverageSale" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MonthlyAverageSaleOfWalton" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="7" />
+  </EntityType>
+  <EntityType Name="Retailers_Depricated">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="District" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DistributorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DistributorCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RetailerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RetailerAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OwnerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MonthlyAverageSale" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MonthlyAverageSaleOfWalton" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="RetailersSpecialBenifit">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TotalSaleAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="RetailerNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DealerNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Position" Type="Int32" />
+    <Property Name="RetailerMessage" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="DealerMessage" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="Benifit" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="AddedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+    <Property Name="IsSmsSend" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="SelectedRetailer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="District" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DistributorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DistributorCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RetailerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RetailerAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OwnerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MonthlyAverageSale" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MonthlyAverageSaleOfWalton" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="7" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tblLogin">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MobileNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DealerCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="AddedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="AddedDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tblRetailerAd">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AdName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AdType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AdCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AdSize" Type="Int64" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Active" Type="Boolean" />
+    <Property Name="Seen" Type="Boolean" />
+    <Property Name="AddedBy" Type="Int64" />
+    <Property Name="AddedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tblRetailerAdSize" Relationship="Self.FK_tblRetailerAd_tblRetailerAdSize" FromRole="tblRetailerAd" ToRole="tblRetailerAdSize" />
+  </EntityType>
+  <EntityType Name="tblRetailerAdSize">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SizeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblRetailerAds" Relationship="Self.FK_tblRetailerAd_tblRetailerAdSize" FromRole="tblRetailerAdSize" ToRole="tblRetailerAd" />
+  </EntityType>
+  <EntityType Name="Toss">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TossAmount" Type="Int32" />
+    <Property Name="TossDate" Type="DateTime" Precision="7" />
+    <Property Name="GeneratedDate" Type="DateTime" Precision="7" />
+    <Property Name="Imei" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AddedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="7" />
+  </EntityType>
+  <EntityType Name="Trash">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Sender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Imei" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AddedDate" Type="DateTime" Precision="7" />
+  </EntityType>
+  <EntityType Name="Winner">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RetailerMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DealerMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MessageType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Imei" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Msdp" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="InvoicePrice" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="WinningAmount" Type="Int32" />
+    <Property Name="RetailerId" Type="Int64" />
+    <Property Name="RetailerPhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RetailerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DealerPhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DealerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DealerCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MessageSendingDate" Type="DateTime" Precision="7" />
+    <Property Name="IsSmsSent" Type="Boolean" />
+    <Property Name="IsRetailerGotSms" Type="Boolean" />
+    <Property Name="IsDealerGotSms" Type="Boolean" />
+    <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="AddedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="7" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SmsSentVia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FirstSegmentBenifit" Type="Int32" />
+    <Property Name="SecondSegmentBenifit" Type="Int32" />
+    <Property Name="BackWordBenifit" Type="Int32" />
+    <Property Name="OfferId" Type="Int64" />
+    <Property Name="DealerBenefit" Type="Int32" />
+    <Property Name="SpecialPrizeType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SpecialPrizeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SpecialPrizeValue" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="OracleModelName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="SpecialPrizeMSDP" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IsValidOffer" Type="Boolean" />
+    <Property Name="DealerCode2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Backup_20180503_Retailers">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="AddedDate" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="District" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DistributorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DistributorCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RetailerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RetailerAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OwnerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MonthlyAverageSale" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MonthlyAverageSaleOfWalton" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="7" />
+  </EntityType>
+  <EntityType Name="RetailerModified">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" />
+    <Property Name="District" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DistributorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DistributorCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RetailerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RetailerAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OwnerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MonthlyAverageSale" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MonthlyAverageSaleOfWalton" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Retailers_Backup_20180111">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="AddedDate" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="District" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DistributorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DistributorCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RetailerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RetailerAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OwnerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MonthlyAverageSale" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MonthlyAverageSaleOfWalton" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="7" />
+  </EntityType>
+  <EntityType Name="Retailers_Backup_20180115952">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="AddedDate" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="District" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DistributorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DistributorCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RetailerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RetailerAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OwnerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MonthlyAverageSale" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MonthlyAverageSaleOfWalton" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="7" />
+  </EntityType>
+  <EntityType Name="Retailers_Backup_201801171041">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="AddedDate" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="District" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DistributorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DistributorCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RetailerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RetailerAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OwnerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MonthlyAverageSale" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MonthlyAverageSaleOfWalton" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="7" />
+  </EntityType>
+  <EntityType Name="Winner_Deleted">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="AddedDate" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RetailerMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DealerMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MessageType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Imei" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Msdp" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="InvoicePrice" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="WinningAmount" Type="Int32" />
+    <Property Name="RetailerId" Type="Int64" />
+    <Property Name="RetailerPhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RetailerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DealerPhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DealerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DealerCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MessageSendingDate" Type="DateTime" Precision="7" />
+    <Property Name="IsSmsSent" Type="Boolean" />
+    <Property Name="IsRetailerGotSms" Type="Boolean" />
+    <Property Name="IsDealerGotSms" Type="Boolean" />
+    <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="AddedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="7" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SmsSentVia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FirstSegmentBenifit" Type="Int32" />
+    <Property Name="SecondSegmentBenifit" Type="Int32" />
+    <Property Name="BackWordBenifit" Type="Int32" />
+    <Property Name="OfferId" Type="Int64" />
+    <Property Name="DealerBenefit" Type="Int32" />
+    <Property Name="SpecialPrizeType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SpecialPrizeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SpecialPrizeValue" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="OracleModelName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="SpecialPrizeMSDP" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="Winner_Fake_Offer">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="AddedDate" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RetailerMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DealerMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MessageType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Imei" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Msdp" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="InvoicePrice" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="WinningAmount" Type="Int32" />
+    <Property Name="RetailerId" Type="Int64" />
+    <Property Name="RetailerPhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RetailerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DealerPhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DealerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DealerCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MessageSendingDate" Type="DateTime" Precision="7" />
+    <Property Name="IsSmsSent" Type="Boolean" />
+    <Property Name="IsRetailerGotSms" Type="Boolean" />
+    <Property Name="IsDealerGotSms" Type="Boolean" />
+    <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="AddedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UpdatedDate" Type="DateTime" Precision="7" />
+    <Property Name="UpdatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SmsSentVia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FirstSegmentBenifit" Type="Int32" />
+    <Property Name="SecondSegmentBenifit" Type="Int32" />
+    <Property Name="BackWordBenifit" Type="Int32" />
+    <Property Name="OfferId" Type="Int64" />
+    <Property Name="SpecialPrizeType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SpecialPrizeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SpecialPrizeValue" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="OracleModelName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="SpecialPrizeMSDP" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <Association Name="FK_tblRetailerAd_tblRetailerAdSize">
+    <End Role="tblRetailerAdSize" Type="Self.tblRetailerAdSize" Multiplicity="0..1" />
+    <End Role="tblRetailerAd" Type="Self.tblRetailerAd" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblRetailerAdSize">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblRetailerAd">
+        <PropertyRef Name="AdSize" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RetailerMotivationProgramEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="DailyIssuedComponents" EntityType="Self.DailyIssuedComponent" />
+    <EntitySet Name="DayWiseSpecialRetailers" EntityType="Self.DayWiseSpecialRetailer" />
+    <EntitySet Name="Deleted_Winners" EntityType="Self.Deleted_Winners" />
+    <EntitySet Name="FlashSaleBenifits" EntityType="Self.FlashSaleBenifit" />
+    <EntitySet Name="garbages" EntityType="Self.garbage" />
+    <EntitySet Name="ObsoleteModels" EntityType="Self.ObsoleteModel" />
+    <EntitySet Name="OfferMasters" EntityType="Self.OfferMaster" />
+    <EntitySet Name="Plazas" EntityType="Self.Plaza" />
+    <EntitySet Name="RetailerComplains" EntityType="Self.RetailerComplain" />
+    <EntitySet Name="RetailerMessageBundles" EntityType="Self.RetailerMessageBundle" />
+    <EntitySet Name="Retailers" EntityType="Self.Retailer" />
+    <EntitySet Name="Retailers_Backup_20180115952_1" EntityType="Self.Retailers_Backup_20180115952_1" />
+    <EntitySet Name="Retailers_Depricated" EntityType="Self.Retailers_Depricated" />
+    <EntitySet Name="RetailersSpecialBenifits" EntityType="Self.RetailersSpecialBenifit" />
+    <EntitySet Name="SelectedRetailers" EntityType="Self.SelectedRetailer" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="tblLogins" EntityType="Self.tblLogin" />
+    <EntitySet Name="tblRetailerAds" EntityType="Self.tblRetailerAd" />
+    <EntitySet Name="tblRetailerAdSizes" EntityType="Self.tblRetailerAdSize" />
+    <EntitySet Name="Tosses" EntityType="Self.Toss" />
+    <EntitySet Name="Trashes" EntityType="Self.Trash" />
+    <EntitySet Name="Winners" EntityType="Self.Winner" />
+    <EntitySet Name="Backup_20180503_Retailers" EntityType="Self.Backup_20180503_Retailers" />
+    <EntitySet Name="RetailerModifieds" EntityType="Self.RetailerModified" />
+    <EntitySet Name="Retailers_Backup_20180111" EntityType="Self.Retailers_Backup_20180111" />
+    <EntitySet Name="Retailers_Backup_20180115952" EntityType="Self.Retailers_Backup_20180115952" />
+    <EntitySet Name="Retailers_Backup_201801171041" EntityType="Self.Retailers_Backup_201801171041" />
+    <EntitySet Name="Winner_Deleted" EntityType="Self.Winner_Deleted" />
+    <EntitySet Name="Winner_Fake_Offer" EntityType="Self.Winner_Fake_Offer" />
+    <AssociationSet Name="FK_tblRetailerAd_tblRetailerAdSize" Association="Self.FK_tblRetailerAd_tblRetailerAdSize">
+      <End Role="tblRetailerAdSize" EntitySet="tblRetailerAdSizes" />
+      <End Role="tblRetailerAd" EntitySet="tblRetailerAds" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

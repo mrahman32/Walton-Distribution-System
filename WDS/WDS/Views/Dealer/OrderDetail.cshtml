@@ -1,0 +1,346 @@
+﻿@model WDS.ViewModels.VmImeiDelivery
+@{
+    ViewBag.Title = "OrderDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-lg-6">
+        <div class="row">
+            <div class="card col-lg-12">
+                <div class="card-header">General</div>
+                <div class="card-body">
+                    @Html.HiddenFor(model => model.OrderId)
+                    @Html.HiddenFor(model => model.RetailerId)
+                    @Html.HiddenFor(model => model.RetailerName)
+                    @Html.HiddenFor(model => model.DealerCode)
+                    @Html.HiddenFor(model => model.DealerName)
+                    @Html.HiddenFor(model => model.RetailerPhone)
+                    @Html.HiddenFor(model => model.OrderDate)
+                    @Html.HiddenFor(model => model.GrandTotal)
+
+
+
+                    <div class="form-group row">
+                        <label class=" col-lg-4 text-sm-right">Distributor Name:</label>
+                        <div class="col-lg-8">
+                            @Html.DisplayFor(model => model.DealerName, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-4 text-sm-right">Distributor Code:</label>
+                        <div class="col-lg-8">
+                            @Html.DisplayFor(model => model.DealerCode, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-lg-4 text-sm-right">Retailer Name:</label>
+                        <div class="col-lg-8">
+                            @Html.DisplayFor(model => model.RetailerName, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-4 text-sm-right">Retailer Phone:</label>
+                        <div class="col-lg-8">
+                            @Html.DisplayFor(model => model.RetailerPhone, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-4 text-sm-right">Order Date:</label>
+                        <div class="col-lg-8">
+                            @Html.DisplayFor(model => model.OrderDate, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-4 text-sm-right">Grand Total:</label>
+                        <div class="col-lg-8">
+                            @Html.DisplayFor(model => model.GrandTotal, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="card col-lg-12">
+                <div class="card-header">General</div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <input type="text" class="form-control" id="txtScan" placeholder="Scan Here" />
+                    </div>
+                    <div class="form-group row">
+                        <table class="table table-bordered" id="deliveryTable">
+                            <thead>
+                                <tr>
+                                    <th>Model</th>
+                                    <th>IMEI One</th>
+                                    <th>IMEI Two</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dtbody"></tbody>
+                        </table>
+                    </div>
+                    <div class="form-group row">
+                        <button class="btn btn-outline-success" id="btnDeliver">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">Order Info</div>
+            <div class="card-body">
+                <div class="form-group row">
+                    <table class="table table-bordered" id="orderTable">
+                        <thead>
+                            <tr>
+                                <th>Model</th>
+                                <th>Order Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orderBody">
+                            @foreach (var item in Model.RetailerOrderDetails)
+                            {
+                                <tr>
+                                    @Html.HiddenFor(model => item.Id)
+                                    @Html.HiddenFor(model => item.OrderId)
+                                    <td>@item.Model</td>
+                                    <td>@item.OrderQuantity</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+    window.onload = function () {
+        document.getElementById("txtScan").focus();
+
+
+        $('#txtScan').keyup(function () {
+            //debugger;
+            if ($(this).val().length == 15) {
+                var mimei = $('#txtScan').val();
+                $.ajax({
+                    url: ' @Url.Action("GetImeiInformation", "Dealer")', //Changed For test
+                    type: 'Post',
+                    //data: JSON.stringify({ statusList: packagingQcList }),
+                    data: JSON.stringify({ imei: mimei }),
+                    dataType: 'json',
+                    async: false,
+                    contentType: 'application/json',
+                    success: function (result) {
+
+                        console.log(result);
+                        CheckAllConstraints(result);
+
+                    },
+                    error: function (result, textStatus, jqXHR) {
+                        //iziToast.error({
+                        //    timeout: 2000,
+                        //    imageWidth: 150,
+                        //    position: 'center',
+                        //    title: 'Error',
+                        //    message: result
+                        //});
+
+                        //return false;
+                    }
+                });
+
+
+            } else {
+                //iziToast.error({
+                //    timeout: 2000,
+                //    imageWidth: 150,
+                //    position: 'center',
+                //    title: 'Error',
+                //    message: "Invalid Imei Number!"
+                //});
+
+                return false;
+            }
+        });
+
+
+        $('#btnDeliver').on('click', function (e) {
+            e.preventDefault();
+
+            var vmImeiDelivery = {};
+            vmImeiDelivery.OrderId = $('#OrderId').val();
+            vmImeiDelivery.RetailerId = $('#RetailerId').val();
+            vmImeiDelivery.RetailerName = $('#RetailerName').val();
+            vmImeiDelivery.DealerCode = $('#DealerCode').val();
+            vmImeiDelivery.DealerName = $('#DealerName').val();
+            vmImeiDelivery.RetailerPhone = $('#RetailerPhone').val();
+            vmImeiDelivery.OrderDate = $('#OrderDate').val();
+            vmImeiDelivery.GrandTotal = $('#GrandTotal').val();
+
+
+            var RetailerOrderDetails = [];
+
+
+
+            var tableElem = window.document.getElementById("orderTable");
+            var tableBody = tableElem.getElementsByTagName("tbody").item(0);
+            var i;
+            var howManyRows = tableBody.rows.length;
+            var isFound = false;
+            for (i = 0; i < (howManyRows) ; i++) {
+                var RetailerOrderDetail = {};
+
+                var thisTrElem = tableBody.rows[i];
+                var modelName = thisTrElem.cells[0];
+                var qty = thisTrElem.cells[1];
+                var id = thisTrElem.children[0].value;
+                var orderId = thisTrElem.children[1].value;
+                var modelTxt = modelName.childNodes.item(0);
+                var qtyTxt = qty.childNodes.item(0);
+                var m = modelTxt.data;
+                var q = parseFloat(qtyTxt.data);
+                RetailerOrderDetail.Model = m;
+                RetailerOrderDetail.OrderQuantity = q;
+                RetailerOrderDetail.OrderId = orderId;
+                RetailerOrderDetail.ID = id;
+
+                RetailerOrderDetails.push(RetailerOrderDetail);
+
+            }
+            vmImeiDelivery.RetailerOrderDetails = RetailerOrderDetails;
+
+
+            var ImeiDeliveryModels = [];
+
+            var deliveryTable = window.document.getElementById("deliveryTable");
+            var deliveryTableBody = deliveryTable.getElementsByTagName("tbody").item(0);
+            var j;
+            var tblLen = deliveryTableBody.rows.length;
+            for (j = 0; j < (tblLen) ; j++) {
+                var ImeiDeliveryModel = {};
+                var deliveryTr = deliveryTableBody.rows[j];
+                var dmodelName = deliveryTr.cells[0];
+                var imeiOneCell = deliveryTr.cells[1];
+                var imeiTowCell = deliveryTr.cells[2];
+
+                var dModelTxt = dmodelName.childNodes.item(0).data;
+                var imeiOne = imeiOneCell.childNodes.item(0).data;
+                var imeiTwo = imeiTowCell.childNodes.item(0).data;
+                //var dm = dModelTxt.data;
+                //var diOne = parseFloat(qtyTxt.data);
+                ImeiDeliveryModel.Model = dModelTxt;
+                ImeiDeliveryModel.ImeiOne = imeiOne;
+                ImeiDeliveryModel.ImeiTwo = imeiTwo;
+
+                ImeiDeliveryModels.push(ImeiDeliveryModel);
+
+            }
+
+            vmImeiDelivery.ImeiDeliveryModels = ImeiDeliveryModels;
+            console.log(vmImeiDelivery);
+
+
+            var url = '@Url.Action("SaveDelivery", "Dealer")';
+            $.post(url, { vmImeiDelivery: vmImeiDelivery }, function (data) {
+                alert(data);
+            });
+        });
+    };
+
+    function CheckAllConstraints(detail) {
+        var result = 0;
+        var tableElem = window.document.getElementById("orderTable");
+        var tableBody = tableElem.getElementsByTagName("tbody").item(0);
+        var i;
+        var howManyRows = tableBody.rows.length;
+        var isFound = false;
+        for (i = 0; i < (howManyRows) ; i++) {
+            var thisTrElem = tableBody.rows[i];
+            var modelName = thisTrElem.cells[0];
+            var qty = thisTrElem.cells[1];
+            var modelTxt = modelName.childNodes.item(0);
+            var qtyTxt = qty.childNodes.item(0);
+            var m = modelTxt.data;
+            var q = parseFloat(qtyTxt.data);
+            console.log(m + "--" + q);
+            if (detail.Model === m) {
+                isFound = true;
+                break;
+            }
+
+        }
+
+        if (isFound) {
+            var tblDelivery = window.document.getElementById("deliveryTable");
+            var tblDeliveryBody = tblDelivery.getElementsByTagName("tbody").item(0);
+            var j;
+            var deliveryRow = tblDeliveryBody.rows.length;
+            var modelQ = 0;
+            var isImeiExist = false;
+            if (deliveryRow > 0) {
+
+                for (j = 0; j < (deliveryRow) ; j++) {
+
+                    var deliveryTr = tblDeliveryBody.rows[j];
+                    var deliveryModel = deliveryTr.cells[0];
+                    var dmTxt = deliveryModel.childNodes.item(0).data;
+                    var imeiOne = deliveryTr.cells[1].childNodes.item(0).data;
+                    if (imeiOne === detail.ImeiOne) {
+                        isImeiExist = true;
+                        break;
+                    }
+                    if (detail.Model === dmTxt) {
+                        modelQ = modelQ + 1;
+                    }
+                }
+
+                if (isImeiExist) {
+                    alert("This IMEI already exist in the delivery table");
+                    $('#txtScan').val('');
+                    return false;
+                }
+                if (modelQ >= q) {
+                    //iziToast.error({
+                    //    timeout: 2000,
+                    //    imageWidth: 150,
+                    //    position: 'center',
+                    //    title: 'Error',
+                    //    message: detail.Model + "can not be delivered more then " + q + "pcs"
+                    //});
+                    alert(detail.Model + "can not be delivered more then " + q + "pcs");
+                    $('#txtScan').val('');
+                } else {
+                    var row = '<tr><td>' + detail.Model + '</td><td>' + detail.ImeiOne + '</td><td>' + detail.ImeiTwo + '</td></tr>';
+                    $('#dtbody').append(row);
+                    $('#txtScan').val('');
+                }
+            } else {
+                var row = '<tr><td>' + detail.Model + '</td><td>' + detail.ImeiOne + '</td><td>' + detail.ImeiTwo + '</td></tr>';
+                $('#dtbody').append(row);
+                $('#txtScan').val('');
+            }
+
+        } else {
+            //iziToast.error({
+            //    timeout: 2000,
+            //    imageWidth: 150,
+            //    position: 'center',
+            //    title: 'Error',
+            //    message: "Invalid Model!"
+            //});
+
+            alert("Invalid Model!");
+            $('#txtScan').val('');
+            return false;
+        }
+    }
+</script>

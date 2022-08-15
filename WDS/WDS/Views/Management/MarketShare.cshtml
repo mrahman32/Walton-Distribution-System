@@ -1,0 +1,324 @@
+﻿@{
+    ViewBag.Title = "MarketShare";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .ui-datepicker-calendar {
+        display: none;
+    }
+</style>
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-header">Create New</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">Priod</label>
+                            <div class="col-lg-6">
+                                <input class="form-control datepicker" id="Priod" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">Zone</label>
+                            <div class="col-lg-6">
+                                @Html.DropDownList("Zone", ViewBag.AllZoneList as List<SelectListItem>, new { @class = "selectpicker show-tick form-control", data_live_search = "true", id = "zone" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        @*<div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">Year</label>
+                            <div class="col-lg-6">
+                                <input class="form-control datepicker" id="year" readonly>
+                            </div>
+                        </div>*@
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">Brand</label>
+                            <div class="col-lg-6">
+                                @Html.DropDownList("Brand", ViewBag.AllBrandList as List<SelectListItem>, new { @class = "selectpicker show-tick form-control", data_live_search = "true", id = "brand" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">Market Share Amt.</label>
+                            <div class="col-lg-6">
+                                <input class="form-control" id="shareAmount" type="number">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+
+
+                <div class="form-group row">
+                    <div class="col-lg-3"></div>
+                    <div class="col-lg-6">
+                        <input type="button" value="Add Now" id="addNow" class="btn btn-outline-success">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-header"><input type="button" value="SaveAll" id="saveAll" class="btn btn-outline-success"></div>
+            <div class="card-body">
+                <div class="row">
+                    <table class="table table-striped table-scrollable table-bordered table-hover dtTable first" id="marketShareAppandTable">
+                        <thead>
+                            <tr>
+                                <th>Month</th>
+                                <th>Year</th>
+                                <th>Zone</th>
+                                <th>Brand</th>
+                                <th>Share Amt.</th>
+                            </tr>
+                        </thead>
+                        <tbody id="marketShareAppandTableBody"></tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<link href="~/Content/iziToast.min.css" rel="stylesheet" />
+<script src="~/Scripts/iziToast.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#Priod").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            dateFormat: 'MM yy',
+            onClose: function (dateText, inst) {
+                $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+            }
+        });
+        //$("#year").datepicker({
+        //    //changeMonth: true,
+        //    changeYear: true,
+        //    showButtonPanel: true,
+        //    dateFormat: 'yy',
+        //    onClose: function (dateText, inst) {
+        //        $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+        //    }
+        //});
+        
+        $("#addNow").click(function () {
+
+            var Priod = $("#Priod").val();
+            var dformate = new Date(Priod);
+            var monthNumber = dformate.getMonth() + 1;
+            var month = Priod.split(' ')[0];
+            var year = Priod.split(' ')[1];
+            var zoneId = $("#zone").val();
+            var brandId = $("#brand").val();
+            var zonetext = $("#zone option:selected").text();
+            var brandext = $("#brand option:selected").text();
+            var shareAmount = $("#shareAmount").val();
+            if (validation()) {
+                var objData = {
+                    'ZoneId': zoneId,
+                    'BrandId': brandId,
+                    'MonthName': month,
+                    'YearNumber': year,
+                    'ShareAmount': shareAmount,
+                }
+                var dataList = JSON.stringify({ objMarketShare: objData });
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    url: '@Url.Action("DubValueCheck", "Management")',
+                    data: dataList,
+                    success: function (data) {
+                        if (data) { // Check With Database
+                            iziToast.error({
+                                title: 'Error',
+                                position: 'center',
+                                message: 'This Data IS Already Exist in Database!.',
+                            });
+                        } else {
+                            var dupcount = 0;
+                            var TablerowCount = $('#marketShareAppandTableBody tr').length;
+                            if (TablerowCount > 0) {
+                            $.each($("#marketShareAppandTableBody tr"), function () {
+                                MoNameV= $(this).find('td:eq(1)').html();
+                                YeNumberV= $(this).find('td:eq(2)').html();
+                                zoneV= $(this).find('td:eq(3)').html();
+                                brandV = $(this).find('td:eq(4)').html();
+                                if (MoNameV == month && YeNumberV == year && zoneV == zoneId && brandV == brandId) {//Chack With Appand Table
+                                    dupcount += 1;
+                                    iziToast.error({
+                                        title: 'Error',
+                                        position: 'center',
+                                        message: 'Already Added!.',
+                                    });
+
+
+                                } 
+                            });
+
+                            if (dupcount==0) {
+                                tableAppand(monthNumber, month, year, zoneId, brandId, zonetext, brandext, shareAmount);
+                            }
+                           
+                            } else {
+                                tableAppand(monthNumber, month, year, zoneId, brandId, zonetext, brandext, shareAmount);
+                            }
+                        }
+                    }
+                });
+
+
+
+            }
+           
+
+        });
+        $("#saveAll").click(function () {
+            var allDataInfo = [];
+            allDataInfo.length = 0;
+            $.each($("#marketShareAppandTableBody tr"),
+               function () {
+                   allDataInfo.push({
+                       MonthNumber: $(this).find('td:eq(0)').html(),
+                       MonthName: $(this).find('td:eq(1)').html(),
+                       YearNumber: $(this).find('td:eq(2)').html(),
+                       ZoneId: $(this).find('td:eq(3)').html(),
+                       BrandId: $(this).find('td:eq(4)').html(),
+                       ShareAmount: $(this).find('td:eq(7)').html(),
+                      
+                   });
+
+               });
+            if (allDataInfo.length > 0) {
+                var dataList = JSON.stringify({ marketShareList: allDataInfo });
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    url: '@Url.Action("SaveMarketShareData", "Management")',
+                    data: dataList,
+                    success: function(data) {
+                        if (data.isRedirect && data.m) {
+                            window.setTimeout(function() {
+                                window.location = data.redirectUrl;
+                            }, 1000);
+                            iziToast.success({
+                                title: 'Success',
+                                position: 'center',
+                                message: data.Message,
+                            });
+                        } else {
+                            iziToast.error({
+                                title: 'Error',
+                                position: 'center',
+                                message: data.Message,
+                            });
+                        }
+                    }
+                });
+            } else {
+                iziToast.error({
+                    title: 'Error',
+                    position: 'center',
+                    message: 'Table Data Must Select!.',
+                });
+            }
+        });
+        });
+
+
+
+ 
+    function reset() {
+        //$("#Priod").val("");
+        $("#zone").val("");
+       $("#brand").val("");
+       //$("#brand option:selected").empty();
+       $("#shareAmount").val("");
+
+       var xB = document.getElementById("brand");
+      // xB.querySelector("div.filter-option > div.filter-option-inner > div:first-child").innerHTML = 'dsfds';
+       $("div.filter-option > div.filter-option-inner > div:first-child").text("--Select--");
+    }
+    function validation() {
+        var month = $("#month").val();
+        if (month == "") {
+            iziToast.error({
+                title: 'error',
+                position: 'center',
+                message: 'select month',
+            });
+            return false;
+        }
+        
+        var zoneId = $("#zone").val();
+        if (zoneId == "") {
+            iziToast.error({
+                title: 'error',
+                position: 'center',
+                message: 'select Zone',
+            });
+            return false;
+        }
+        var brandId = $("#brand").val();
+        if (brandId == "") {
+            iziToast.error({
+                title: 'error',
+                position: 'center',
+                message: 'select Brand ',
+            });
+            return false;
+        }
+        var shareAmount = $("#shareAmount").val();
+        if (shareAmount == "") {
+            iziToast.error({
+                title: 'error',
+                position: 'center',
+                message: 'Enter Amount',
+            });
+            return false;
+        }
+        return true;
+    }
+
+
+
+    function tableAppand(monthNumber, month, year, zoneId, brandId, zonetext, brandext, shareAmount) {
+            $("#marketShareAppandTableBody").append('<tr>' +
+                    '<td style="display:none;">' +
+                    monthNumber +
+                    '</td>' +
+                    '<td>' +
+                    month +
+                    '</td>' +
+                    '<td>' +
+                    year +
+                    '</td>' +
+                    '<td style="display:none;">' +
+                    zoneId +
+                    '</td>' +
+                    '<td style="display:none;">' +
+                    brandId +
+                    '</td>' +
+                    '<td>' +
+                    zonetext +
+                    '</td>' +
+                    '<td>' +
+                    brandext +
+                    '</td>' +
+                    '<td>' +
+                    shareAmount +
+                    '</td>' +
+                    '</tr>');
+                    reset();
+    }
+    
+</script>

@@ -1,0 +1,115 @@
+﻿@using WDS.Models
+@model WDS.Models.DistributorCheckListModel
+
+
+@using (Html.BeginForm("CreateMOA", "Document", FormMethod.Post, new { id = "CreateMOA", enctype = "multipart/form-data" }))
+{
+    <div class="col-lg-12">
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.DealerCode)
+        @Html.HiddenFor(model => model.IsCreationApproved)
+        @Html.HiddenFor(model => model.CreationApprovedBy)
+        @Html.HiddenFor(model => model.CreationApprovedDate)
+        @Html.HiddenFor(model => model.IsTheDealerBlocked)
+        @Html.HiddenFor(model => model.IsTemporaryOpen)
+        @Html.HiddenFor(model => model.TempOpenDate)
+        @Html.HiddenFor(model => model.TempExpireDate)
+        @Html.HiddenFor(model => model.AddedBy)
+        @Html.HiddenFor(model => model.AddedDate)
+        @Html.HiddenFor(model => model.UpdatedBy)
+        @Html.HiddenFor(model => model.UpdatedDate)
+        @Html.HiddenFor(model => model.UpdateName)
+        @Html.HiddenFor(model=>model.MemorandumOfAgreementModel.Id)
+        @Html.HiddenFor(model => model.MemorandumOfAgreementModel.CheckListId)
+        @Html.HiddenFor(model => model.MemorandumOfAgreementModel.AddedBy)
+        @Html.HiddenFor(model => model.MemorandumOfAgreementModel.AddedDate)
+        @Html.HiddenFor(model => model.MemorandumOfAgreementModel.UpdatedBy)
+        @Html.HiddenFor(model => model.MemorandumOfAgreementModel.UpdatedDate)
+
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Investmnet Amount<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(model => model.MemorandumOfAgreementModel.InvestmnetAmount, null, new { @class = "form-control", @type = "number", required = "required" })
+                @Html.ValidationMessageFor(model => model.MemorandumOfAgreementModel.InvestmnetAmount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Agreement Start Date<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(model => model.MemorandumOfAgreementModel.AgreementStartDate, new { @class = "ddPicker form-control", @readonly = "readonly", required = "required" })
+                @Html.ValidationMessageFor(model => model.MemorandumOfAgreementModel.AgreementStartDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Agreement End Date</label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(model => model.MemorandumOfAgreementModel.AgreementEndDate, new { @class = "ddPicker form-control", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.MemorandumOfAgreementModel.AgreementEndDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-warning btn-sm" id="btnAddStamp">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            <span style="font-weight: bold">Add Stamp</span>
+        </button>
+
+        <br />
+        <br />
+
+        <div class="form-group row">
+
+            <table class="table table-bordered" id="tbl_moa_stamp">
+                <thead>
+                    <tr>
+                        <th>Stamp No.</th>
+                        <th>Purchase Date</th>
+                        <th>Vendor ID</th>
+                    </tr>
+                </thead>
+                <tbody id="tbl_moa_stamp_body">
+                    @if (Model != null && Model.MemorandumOfAgreementModel.MoaStapmsModels.Count > 0)
+                    {
+                        foreach (MOA_StapmsModel t in Model.MemorandumOfAgreementModel.MoaStapmsModels)
+                        {
+                            Html.RenderPartial("~/Views/Shared/_moa_stamp.cshtml", t);
+                        }
+                    }
+                </tbody>
+            </table>
+
+        </div>
+        
+        @if (Model != null && !Model.IsApprover)
+        {
+             <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right"></label>
+            <div class="col-lg-6 text-right">
+                <button type="submit" id="btnMoaSave" class="btn btn-outline-success" ><i class="fas fa-save"></i>&nbsp;Save</button>
+            </div>
+        </div>
+        }
+    </div>
+    
+    <script type="text/javascript">
+        
+        $(function () {
+
+            $("#btnAddStamp").on('click', function () {
+                $('.fa-plus').attr('hidden', true);
+                $.post('@Url.Action("GetStampPartial", "Document")', {}, function (data) {
+                    $('#tbl_moa_stamp_body').append(data);
+                    $('.fa-plus').attr('hidden', false);
+                    $('.spinner-border').attr('hidden', true);
+                });
+            });
+            $(".ddPicker").datepicker({ dateFormat: 'mm-dd-yy', changeMonth: true, changeYear: true, yearRange: "-100:+00" })
+           .on('keypress paste', function (e) {
+               e.preventDefault();
+               return false;
+           });
+
+        });
+
+       
+    </script>
+}

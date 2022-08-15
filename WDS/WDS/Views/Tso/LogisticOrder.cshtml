@@ -1,0 +1,295 @@
+﻿@model WDS.Models.LogisticsOrderModel
+@{
+    ViewBag.Title = "LogisticOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-header">Logistics Order</div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label class="col-lg-1 col-form-label text-sm-right">Distributor</label>
+                        <div class="col-lg-2">
+                            @Html.DropDownListFor(model => model.DistributorOrder.DistributorCode, new SelectList(ViewBag.Distributors, "Value", "Text"), new
+                            {
+                                @class = "selectpicker show-tick form-control",
+                                data_live_search = "true",
+                                @id = "DistributorCode",
+                                //onchange = "LoadModel('" + @Url.Action("GetModel", "Retailer") + "')",
+
+                            })
+                            @Html.ValidationMessageFor(model => model.DistributorOrder.DistributorCode, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-lg-1 col-form-label text-sm-right">Model</label>
+                        <div class="col-lg-2">
+                            @Html.DropDownList("ModelName", new SelectList(ViewBag.Models, "Value", "Text"), new
+                            {
+                                @class = "selectpicker show-tick form-control",
+                                data_live_search = "true",
+                                //onchange = "LoadModel('" + @Url.Action("GetModel", "Retailer") + "')",
+
+                            })
+                        </div>
+
+                        <label class="col-lg-1 col-form-label text-sm-right">Color</label>
+                        <div class="col-lg-2">
+                            @Html.DropDownList("Color", new SelectList("", "Value", "Text"), "--Select--", new
+                            {
+                                @class = "selectpicker show-tick form-control",
+                                data_live_search = "true",
+                                //onchange = "LoadModel('" + @Url.Action("GetModel", "Retailer") + "')",
+
+                            })
+                        </div>
+
+                        <label class="col-lg-1 col-form-label text-sm-right">Quantity</label>
+                        <div class="col-lg-2">
+                            @Html.TextBox("Quantity", 0, new { @class = "form-control", type = "number" })
+                        </div>
+                   
+                    
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-lg-1 col-form-label text-sm-right">Price</label>
+                        <div class="col-lg-2">
+                            <input type="number" class="form-control" id="modelPrice" readonly/>
+                        </div>
+                        <div class="col-lg-2">
+                            <button class="btn btn-outline-warning" id="btnAdd">Add to Order</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                            <div class="col-lg-10"></div>
+                            <div class="col-lg-2 text-right"><button class="btn btn-outline-success" id="btnSubmit">Submit</button></div>
+                        <br />
+                        <br />
+                        <table class="table table-bordered table-scrollable" id="tblOrder">
+                            <thead>
+                                <tr>
+                                    <th style="width: 35%">Model</th>
+                                    <th>Color</th>
+                                    <th>Quantity</th>
+                                    <th>Unit Price</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tblOrderBody"></tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<link href="~/Content/iziToast.min.css" rel="stylesheet" />
+<script src="~/Scripts/iziToast.min.js"></script>
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+
+            scrollStopNumberField();
+            $('#btnAdd').on('click', function () {
+                    var model = $('#ModelName').val();
+                    var color = $('#Color').val();
+                    var qty = $('#Quantity').val();
+                    var modelPrice = $('#modelPrice').val();
+                    if (validation()) {
+                        var addedFound = false;
+                        $("#tblOrderBody tr").each(function () {
+                            tblmodel = $(this).find('td:eq(0)').text();
+                            tblcolor = $(this).find('td:eq(1)').text();
+                            if (tblmodel == model && tblcolor == color) {
+                                iziToast.error({
+                                    title: 'Error',
+                                    message: 'This Model is Already Added!.',
+                                    position: 'topCenter',
+                                });
+                                addedFound = true;
+                                return false;
+                            }
+                        });
+                        if (!addedFound) {
+                            $("#tblOrderBody").append('<tr>' +
+                                '<td  style="width: 35%">' +
+                                model +
+                                '</td>' +
+                                '<td>' +
+                                color +
+                                '</td>' +
+                                '<td>' +
+                                qty +
+                                '</td>' +
+                                '<td>' +
+                                modelPrice +
+                                '</td>' +
+                                 '<td><a href="#" class="deleteItem btn btn-danger btn-xs"><i class="fas fa-trash"></i></a></td>' +
+                                '</tr>');
+                            reset();
+                          
+                        }
+                    } 
+            });
+
+            $(document).on('click', 'a.deleteItem', function (e) {
+                e.preventDefault();
+                var self = $(this);
+                if (self != null) {
+                    $(this).parents('tr').css("background-color", "#dc143c").fadeOut(500, function () {
+                        $(this).remove();
+                    });
+                } else {
+                    toastr.error("Data cann't delete");
+                }
+            });
+            $('#btnSubmit').on('click', function () {
+
+                var distributorCode = $('#DistributorCode').val();
+                var totalPrice = 0;
+                var orderDetails = [];
+                orderDetails.length = 0;
+                $.each($("#tblOrderBody tr"),
+                    function () {
+                        totalPrice += parseFloat($(this).find('td:eq(3)').text());
+                        orderDetails.push({
+                            ModelName: $(this).find('td:eq(0)').text(),
+                            Color: $(this).find('td:eq(1)').text(),
+                            RequestedQuantity: $(this).find('td:eq(2)').text(),
+                            UnitPrice: $(this).find('td:eq(3)').text(),
+                        });
+
+                    });
+
+                var dataMainObject = {
+                    'DistributorCode': distributorCode,
+                    'TotalPrice': totalPrice
+                }
+                var dataList = JSON.stringify({ objDistributorOrder: dataMainObject,orderDetailsList:orderDetails });
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    url: '@Url.Action("SaveDate", "Tso")',
+                    data: dataList,
+                    success: function (data) {
+                        if (data) {
+                            window.setTimeout(function () {
+                                location.reload();
+                            }, 2000);
+                            iziToast.success({
+                                title: 'Error',
+                                message: 'Save Success!.',
+                                position: 'topCenter',
+                            });
+                        }
+                    }
+                });
+               
+            });
+                
+            $('#ModelName').on('change',
+                function () {
+                    reset();
+                    var model = $('#ModelName').val();
+
+
+                    $.ajax({
+                        url: '@Url.Action("GetModelColor", "Tso")', 
+                        type: 'Post',
+                        data: JSON.stringify({ model: model }),
+                        dataType: 'json',
+                        async: false,
+                        contentType: 'application/json',
+                        
+                        success: function (data) {
+                            $("#Color").empty();
+                          
+                            $.each(data.colorItems, function (i, dds) {
+                                $("#Color").append('<option value="' + dds.Value + '">' + dds.Text + '</option>');
+                            });
+                            $('.selectpicker').selectpicker('refresh');
+                            $('#modelPrice').val(data.modelprice.InvoicePrice);
+                            
+                        },
+                        error: function (result, textStatus, jqXHR) {
+                            
+                        }
+                    });
+                });
+        });
+
+
+
+        function reset() {
+            $('#Quantity').val(0);
+        }
+
+
+      
+        function validation() {
+            var distributorCode = $('#DistributorCode').val();
+            if (distributorCode == "") {
+                iziToast.error({
+                    title: 'Error',
+                    message: 'Select Distributor',
+                    position: 'topCenter',
+                });
+                return false;
+            }
+            
+            var model = $('#ModelName').val();
+            if (model == "") {
+                iziToast.error({
+                    title: 'Error',
+                    message: 'Select Model.',
+                    position: 'topCenter',
+                });
+                return false;
+            }
+            var color = $('#Color').val();
+            if (color == "") {
+                iziToast.error({
+                    title: 'Error',
+                    message: 'Select Color.',
+                    position: 'topCenter',
+                });
+                return false;
+            }
+            var qty = parseInt($('#Quantity').val());
+            if (qty<0 || qty==0) {
+                iziToast.error({
+                    title: 'Error',
+                    message: 'Quantity is required.',
+                    position: 'topCenter',
+                });
+                $('#Quantity').focus();
+
+                return false;
+            }
+            var modelPrice = $('#modelPrice').val();
+            if (modelPrice == "") {
+                iziToast.error({
+                    title: 'Error',
+                    message: 'Price is required.',
+                    position: 'topCenter',
+                });
+                return false;
+            }
+
+            return true;
+        }
+
+
+        function scrollStopNumberField() {
+            $('input[type=number]').on('mousewheel', function (e) {
+                $(e.target).blur();
+            });
+        }
+    </script>
+}
+

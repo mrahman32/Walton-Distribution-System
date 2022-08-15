@@ -1,0 +1,174 @@
+﻿
+@{
+    ViewBag.Title = "DistributorAchievement";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <button class="btn btn-outline-info" id="exportToExel" onclick="tableToExcel('achievementTable', 'Dealer_Achievement_Report')">Export to Excel</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-header">Distributor Target VS Achievement</div>
+                <div class="card-body">
+
+                    <div class="form-group row">
+                        
+                        <label class=" col-lg-1 text-sm-right">Target Type</label>
+                        <div class="col-lg-2">
+                            @Html.DropDownList("TargetType", new SelectList(new[]
+                            {
+                                new SelectListItem{Value = "", Text = "Select", Selected = true},
+                                new SelectListItem{Value = "CASH", Text = "CASH"},
+                                new SelectListItem{Value = "QUANTITY", Text = "QUANTITY"}
+                            }, "Value", "Text"), new { @class = "selectpicker show-tick form-control" })
+                        </div>
+
+                        @*<div class="col-lg-2">
+                            <input type="button" class="btn btn-outline-success btn-sm" value="Search" onclick="location.href = '@Url.Action("DistributorAchievement", "Admin")?srId=' + $('option:selected', $('#TargetType')).val()" />
+                        </div>*@
+                    </div>
+
+
+                    <table class="table table-bordered" id="achievementTable">
+                        <thead>
+                            <tr>
+                                <th>Target For</th>
+                                <th>Target Name</th>
+                                <th>Dealer</th>
+                                <th>Digitech Code</th>
+                                <th>Import Code</th>
+                                <th>Mobile No.</th>
+                                <th>Zone</th>
+                                <th>Model Name</th>
+                                <th>Target Type</th>
+                                <th>Target Value</th>
+                                <th>Ach. Value</th>
+                                <th>Ach. Percent</th>
+                                <th>From Date</th>
+                                <th>To Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblDealerAchievement" class="stockTableBody">
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#TargetType').on('change', function () {
+            var targetVal = $('#TargetType').val();
+            $('#achievementTable tbody').empty();
+            $.ajax({
+                url: '@Url.Action("GetDistributionAchievements", "Admin")',
+                type: 'Post',
+                data: JSON.stringify({ targetType: targetVal }),
+                async: false,
+                contentType: 'application/json',
+                success: function (result) {
+                    //console.log(result);
+                    //var json = $.parseJSON(result);
+                    console.log(result);
+                    for (var i = 0; i < result.length; i++) {
+
+                        var dateString = result[i].FromDate;
+                        var seconds = parseInt(dateString.replace(/\/Date\(([0-9]+)[^+]\//i, "$1"));
+                        var date = new Date(seconds);
+                        date = formatDate(date);
+
+                        var toDateString = result[i].ToDate;
+                        var toSec = parseInt(toDateString.replace(/\/Date\(([0-9]+)[^+]\//i, "$1"));
+                        var toDt = new Date(toSec);
+                        toDt = formatDate(toDt);
+
+
+                        var row = '<tr>' +
+                            '<td>' + result[i].TargetFor + '</td>' +
+                            '<td>' + result[i].TargetName + '</td>' +
+                            '<td>' + result[i].DealerName + '</td>' +
+                            '<td>' + result[i].DigitechCode + '</td>' +
+                            '<td>' + result[i].ImportCode + '</td>' +
+                            '<td>' + result[i].MobileNo + '</td>' +
+                            '<td>' + result[i].Zone + '</td>' +
+                            '<td>' + result[i].ModelName + '</td>' +
+                            '<td>' + result[i].TargetType + '</td>' +
+                            '<td>' + result[i].TargetValue + '</td>' +
+                            '<td>' + result[i].AchievementValue + '</td>' +
+                            '<td>' + result[i].AchievementInPercent +'%' + '</td>' +
+                            '<td>' + date + '</td>' +
+                            '<td>' + toDt + '</td>' +
+                            '</tr>';
+                        $('#tblDealerAchievement').append(row);
+                    }
+
+                },
+                error: function () { }
+            });
+        });
+        //$('#stockTable').DataTable();
+
+
+        //$(".datepicker").datepicker({
+        //    dateFormat: 'yy-mm-dd'
+        //});
+    });
+    function formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+        return [day, month, year].join('-');
+    }
+    function exportTableToExcel(tableId, filename) {
+        var downloadLink;
+        var dataType = 'application/vnd.ms-excel';
+        var tableSelect = document.getElementById(tableId);
+        var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+        // Specify file name
+        filename = filename ? filename + '.xls' : 'excel_data.xls';
+
+        // Create download link element
+        downloadLink = document.createElement("a");
+
+        document.body.appendChild(downloadLink);
+
+        if (navigator.msSaveOrOpenBlob) {
+            var blob = new Blob(['\ufeff', tableHTML], {
+                type: dataType
+            });
+            navigator.msSaveOrOpenBlob(blob, filename);
+        } else {
+            // Create a link to the file
+            downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+            // Setting the file name
+            downloadLink.download = filename;
+
+            //triggering the function
+            downloadLink.click();
+        }
+    }
+    var tableToExcel = (function () {
+        var uri = 'data:application/vnd.ms-excel;base64,', template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><meta http-equiv="content-type" content="text/plain; charset=UTF-8"/></head><body><table>{table}</table></body></html>', base64 = function (s) { return window.btoa(unescape(encodeURIComponent(s))) }, format = function (s, c) { return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; }) }
+        return function (table, name) {
+            if (!table.nodeType) table = document.getElementById(table)
+            var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
+            window.location.href = uri + base64(format(template, ctx))
+        };
+    })();
+
+</script>
+

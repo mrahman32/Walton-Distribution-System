@@ -1,0 +1,91 @@
+﻿@using DocumentFormat.OpenXml.Drawing.Charts
+@model IEnumerable<WDS.ViewModels.VmRetailerOrders>
+@{
+    ViewBag.Title = "RetailerOrderList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-header">Retailer Orders</div>
+                <div class="card-body">
+                    <div class="col-lg-12">
+                        <div class="form-group row">
+                            <label class=" col-lg-1 text-sm-right">Start Date:</label>
+                            <div class="col-lg-2">
+                                <input class="datepicker form-control" data-date-format="dd/mm/yyyy" id="startDate" autocomplete="off" placeholder="Start Date">
+                            </div>
+                            <label class=" col-lg-1 text-sm-right">End Date:</label>
+                            <div class="col-lg-2">
+                                <input class="datepicker form-control" data-date-format="dd/mm/yyyy" id="endDate" autocomplete="off" placeholder="End Date">
+                            </div>
+                            <div class="col-lg-2">
+                                @*<input type="button" value="Search" class="btn btn-sm btn-success" id="btn_retailer_order_search" 
+                                       onclick="location.href='@Url.Action("GetRetailerOrderListByDate", "Dealer")?startDate='+$('#startDate').val()+'&'+'endDate='+$('#endDate').val()" />*@
+                                
+                                
+                                <input type="button" class="btn btn-outline-success btn-sm" value="Search"
+                                       onclick="location.href = '@Url.Action("GetRetailerOrderListByDate", "Dealer")?startDate=' + $('#startDate').val() +'&endDate='+$('#endDate').val()" />
+                            </div>
+                        </div>
+                       
+                        
+                        <table class="table table-bordered" id="productTable">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Retailer Name</th>
+                                    <th>Retailer Address</th>
+                                    <th>Retailer Phone</th>
+                                    <th>Order Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tcBody" class="tcBody">
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.OrderId</td>
+                                        <td>@item.RetailerName</td>
+                                        <td>@item.RetailerAddress</td>
+                                        <td>@item.RetailerPhone</td>
+                                        <td>@item.OrderDate</td>
+                                        <td>
+                                            @if (item.IsCompleted)
+                                            {
+                                                <span class="badge badge-success">Completed</span>
+                                            }
+                                            else
+                                            {
+                                                <input type="submit" class="btn btn-outline-info" value="Details" onclick="location.href='@Url.Action("OrderDetail", "Dealer", new { orderId = item.OrderId })'" />
+                                            }
+                                            <input type="button" class="btn btn-sm btn-outline-warning" value="Print" onclick="location.href='@Url.Action("Print", "Dealer", new { oid = item.OrderId })'" />
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+
+                        
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function() {
+        $(".datepicker").datepicker({
+            dateFormat: 'yy-mm-dd'
+        });
+
+        $('#productTable').DataTable();
+
+
+        
+    });
+</script>

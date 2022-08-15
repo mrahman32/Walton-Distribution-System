@@ -1,0 +1,787 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RetailerMotivationProgramModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'RetailerMotivationProgram.dbo.Backup_20180503_Retailers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Backup_20180503_Retailers">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="AddedDate" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="District" Type="nvarchar(max)" />
+    <Property Name="DistributorName" Type="nvarchar(max)" />
+    <Property Name="DistributorCode" Type="nvarchar(max)" />
+    <Property Name="RetailerName" Type="nvarchar(max)" />
+    <Property Name="RetailerAddress" Type="nvarchar(max)" />
+    <Property Name="OwnerName" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="MonthlyAverageSale" Type="nvarchar(max)" />
+    <Property Name="MonthlyAverageSaleOfWalton" Type="nvarchar(max)" />
+    <Property Name="Status" Type="nvarchar(max)" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="AddedDate" Type="datetime2" Precision="7" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DailyIssuedComponents">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ComponentName" Type="nvarchar" MaxLength="100" />
+    <Property Name="AddedBy" Type="bigint" />
+    <Property Name="AddedDate" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="DayWiseSpecialRetailers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="District" Type="nvarchar(max)" />
+    <Property Name="DistributorName" Type="nvarchar(max)" />
+    <Property Name="DistributorCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="RetailerName" Type="nvarchar(max)" />
+    <Property Name="RetailerAddress" Type="nvarchar(max)" />
+    <Property Name="OwnerName" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="MonthlyAverageSale" Type="nvarchar(max)" />
+    <Property Name="MonthlyAverageSaleOfWalton" Type="nvarchar(max)" />
+    <Property Name="Status" Type="nchar" MaxLength="10" />
+    <Property Name="AddedDate" Type="datetime2" Precision="7" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Deleted_Winners">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RetailerMessage" Type="nvarchar(max)" />
+    <Property Name="DealerMessage" Type="nvarchar(max)" />
+    <Property Name="MessageType" Type="nvarchar" MaxLength="50" />
+    <Property Name="Imei" Type="nvarchar" MaxLength="50" />
+    <Property Name="Model" Type="nvarchar" MaxLength="50" />
+    <Property Name="Brand" Type="nvarchar" MaxLength="50" />
+    <Property Name="Msdp" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="InvoicePrice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="WinningAmount" Type="int" />
+    <Property Name="RetailerId" Type="bigint" />
+    <Property Name="RetailerPhoneNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="RetailerName" Type="nvarchar(max)" />
+    <Property Name="DealerPhoneNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="DealerName" Type="nvarchar" MaxLength="50" />
+    <Property Name="DealerCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="MessageSendingDate" Type="datetime2" Precision="7" />
+    <Property Name="IsSmsSent" Type="bit" />
+    <Property Name="IsRetailerGotSms" Type="bit" />
+    <Property Name="IsDealerGotSms" Type="bit" />
+    <Property Name="AddedDate" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="AddedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime2" Precision="7" />
+    <Property Name="UpdatedBy" Type="nvarchar(max)" />
+    <Property Name="SmsSentVia" Type="nvarchar(max)" />
+    <Property Name="FirstSegmentBenifit" Type="int" />
+    <Property Name="SecondSegmentBenifit" Type="int" />
+    <Property Name="BackWordBenifit" Type="int" />
+    <Property Name="OfferId" Type="bigint" />
+    <Property Name="DealerBenefit" Type="int" />
+    <Property Name="SpecialPrizeType" Type="nvarchar" MaxLength="50" />
+    <Property Name="SpecialPrizeName" Type="nvarchar" MaxLength="50" />
+    <Property Name="SpecialPrizeValue" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="OracleModelName" Type="nvarchar" MaxLength="100" />
+    <Property Name="SpecialPrizeMSDP" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="FlashSaleBenifit">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TotalBenifitAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="RetailerNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="DealerNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="Position" Type="int" />
+    <Property Name="RetailerMessage" Type="nvarchar" MaxLength="1000" />
+    <Property Name="DealerMessage" Type="nvarchar" MaxLength="1000" />
+    <Property Name="SaleCount" Type="int" />
+    <Property Name="CellPhoneModel" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddedDate" Type="datetime" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="garbage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="District" Type="nvarchar" MaxLength="255" />
+    <Property Name="DistributorName" Type="nvarchar" MaxLength="255" />
+    <Property Name="DistributorCode" Type="nvarchar" MaxLength="255" />
+    <Property Name="RetailerName" Type="nvarchar" MaxLength="255" />
+    <Property Name="RetailerAddress" Type="nvarchar" MaxLength="255" />
+    <Property Name="Owner" Type="nvarchar" MaxLength="255" />
+    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="255" />
+    <Property Name="Sale" Type="nvarchar" MaxLength="255" />
+    <Property Name="AverageSaleOfWalton" Type="nvarchar" MaxLength="255" />
+    <Property Name="Status" Type="nvarchar" MaxLength="255" />
+    <Property Name="Bkash" Type="nvarchar" MaxLength="255" />
+    <Property Name="Action" Type="nvarchar" MaxLength="255" />
+    <Property Name="NewDealer" Type="nvarchar" MaxLength="255" />
+    <Property Name="NewDealerCode" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'RetailerMotivationProgram.dbo.LatestDealerCode' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="LatestDealerCode">
+          <Property Name="SL" Type="float" />
+          <Property Name="Zone" Type="nvarchar" MaxLength="255" />
+          <Property Name="DistributorName" Type="nvarchar" MaxLength="255" />
+          <Property Name="ImportCode" Type="float" />
+          <Property Name="DigiTechCode" Type="float" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'RetailerMotivationProgram.dbo.LatestDealerCode2' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="LatestDealerCode2">
+          <Property Name="Distributor" Type="nvarchar" MaxLength="255" />
+          <Property Name="ImportCode" Type="float" />
+          <Property Name="DigiTechCode" Type="float" />
+          <Property Name="Zone" Type="nvarchar" MaxLength="255" />
+        </EntityType>-->
+  <EntityType Name="ObsoleteModels">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Model" Type="varchar" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="FirstSegmentBenifit" Type="int" />
+    <Property Name="SecondSegmentBenifit" Type="int" />
+    <Property Name="BackMargin" Type="int" />
+    <Property Name="OfferId" Type="bigint" />
+    <Property Name="RetailerBenefitUsingApp" Type="int" />
+    <Property Name="RetailerBenefitThroughDealer" Type="int" />
+    <Property Name="DealerBenefit" Type="int" />
+    <Property Name="AddedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OfferMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OfferName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="300" />
+    <Property Name="StartDate" Type="date" />
+    <Property Name="EndDate" Type="date" />
+    <Property Name="OfferFor" Type="nvarchar" MaxLength="50" />
+    <Property Name="Duration" Type="int" StoreGeneratedPattern="Computed" />
+    <Property Name="AddedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddedDate" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Plazas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PlazaName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Code" Type="varchar" MaxLength="20" />
+    <Property Name="Zone" Type="varchar" MaxLength="50" />
+    <Property Name="Area" Type="varchar" MaxLength="50" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="AddedDate" Type="datetime" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="RetailerComplain">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RetailerName" Type="nvarchar" MaxLength="100" />
+    <Property Name="RetailerPhone" Type="nvarchar" MaxLength="20" />
+    <Property Name="DealerCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="ComplainType" Type="nvarchar" MaxLength="50" />
+    <Property Name="ComplainDetails" Type="nvarchar" MaxLength="500" />
+    <Property Name="ComplainSection" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="RetailerMessageBundles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Message" Type="nvarchar(max)" />
+    <Property Name="MessageCount" Type="int" />
+    <Property Name="MessagingDate" Type="date" />
+    <Property Name="RequestCreatedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="RequestForwardedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="Comment" Type="nvarchar" MaxLength="500" />
+    <Property Name="Added" Type="datetime" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'RetailerMotivationProgram.dbo.RetailerModified' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="RetailerModified">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="District" Type="nvarchar(max)" />
+    <Property Name="DistributorName" Type="nvarchar(max)" />
+    <Property Name="DistributorCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="RetailerName" Type="nvarchar(max)" />
+    <Property Name="RetailerAddress" Type="nvarchar(max)" />
+    <Property Name="OwnerName" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="MonthlyAverageSale" Type="nvarchar(max)" />
+    <Property Name="MonthlyAverageSaleOfWalton" Type="nvarchar(max)" />
+    <Property Name="Status" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Retailers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="District" Type="nvarchar(max)" />
+    <Property Name="DistributorName" Type="nvarchar(max)" />
+    <Property Name="DistributorCode" Type="nvarchar(max)" />
+    <Property Name="RetailerName" Type="nvarchar(max)" />
+    <Property Name="RetailerAddress" Type="nvarchar(max)" />
+    <Property Name="OwnerName" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="MonthlyAverageSale" Type="nvarchar(max)" />
+    <Property Name="MonthlyAverageSaleOfWalton" Type="nvarchar(max)" />
+    <Property Name="Status" Type="nvarchar(max)" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="AddedDate" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="DistributorCode2" Type="nvarchar(max)" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'RetailerMotivationProgram.dbo.Retailers_Backup_20180111' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Retailers_Backup_20180111">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="AddedDate" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="District" Type="nvarchar(max)" />
+    <Property Name="DistributorName" Type="nvarchar(max)" />
+    <Property Name="DistributorCode" Type="nvarchar(max)" />
+    <Property Name="RetailerName" Type="nvarchar(max)" />
+    <Property Name="RetailerAddress" Type="nvarchar(max)" />
+    <Property Name="OwnerName" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="MonthlyAverageSale" Type="nvarchar(max)" />
+    <Property Name="MonthlyAverageSaleOfWalton" Type="nvarchar(max)" />
+    <Property Name="Status" Type="nvarchar(max)" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="AddedDate" Type="datetime2" Precision="7" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'RetailerMotivationProgram.dbo.Retailers_Backup_20180115952' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Retailers_Backup_20180115952">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="AddedDate" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="District" Type="nvarchar(max)" />
+    <Property Name="DistributorName" Type="nvarchar(max)" />
+    <Property Name="DistributorCode" Type="nvarchar(max)" />
+    <Property Name="RetailerName" Type="nvarchar(max)" />
+    <Property Name="RetailerAddress" Type="nvarchar(max)" />
+    <Property Name="OwnerName" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="MonthlyAverageSale" Type="nvarchar(max)" />
+    <Property Name="MonthlyAverageSaleOfWalton" Type="nvarchar(max)" />
+    <Property Name="Status" Type="nvarchar(max)" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="AddedDate" Type="datetime2" Precision="7" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Retailers_Backup_20180115952_1">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="District" Type="nvarchar(max)" />
+    <Property Name="DistributorName" Type="nvarchar(max)" />
+    <Property Name="DistributorCode" Type="nvarchar(max)" />
+    <Property Name="RetailerName" Type="nvarchar(max)" />
+    <Property Name="RetailerAddress" Type="nvarchar(max)" />
+    <Property Name="OwnerName" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="MonthlyAverageSale" Type="nvarchar(max)" />
+    <Property Name="MonthlyAverageSaleOfWalton" Type="nvarchar(max)" />
+    <Property Name="Status" Type="nvarchar(max)" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="AddedDate" Type="datetime2" Precision="7" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'RetailerMotivationProgram.dbo.Retailers_Backup_201801171041' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Retailers_Backup_201801171041">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="AddedDate" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="District" Type="nvarchar(max)" />
+    <Property Name="DistributorName" Type="nvarchar(max)" />
+    <Property Name="DistributorCode" Type="nvarchar(max)" />
+    <Property Name="RetailerName" Type="nvarchar(max)" />
+    <Property Name="RetailerAddress" Type="nvarchar(max)" />
+    <Property Name="OwnerName" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="MonthlyAverageSale" Type="nvarchar(max)" />
+    <Property Name="MonthlyAverageSaleOfWalton" Type="nvarchar(max)" />
+    <Property Name="Status" Type="nvarchar(max)" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="AddedDate" Type="datetime2" Precision="7" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Retailers_Depricated">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="District" Type="nvarchar(max)" />
+    <Property Name="DistributorName" Type="nvarchar(max)" />
+    <Property Name="DistributorCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="RetailerName" Type="nvarchar(max)" />
+    <Property Name="RetailerAddress" Type="nvarchar(max)" />
+    <Property Name="OwnerName" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="MonthlyAverageSale" Type="nvarchar(max)" />
+    <Property Name="MonthlyAverageSaleOfWalton" Type="nvarchar(max)" />
+    <Property Name="Status" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="RetailersSpecialBenifits">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TotalSaleAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="RetailerNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="DealerNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="Position" Type="int" />
+    <Property Name="RetailerMessage" Type="nvarchar" MaxLength="1000" />
+    <Property Name="DealerMessage" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Benifit" Type="nvarchar" MaxLength="500" />
+    <Property Name="AddedDate" Type="datetime" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="IsSmsSend" Type="bit" />
+  </EntityType>
+  <EntityType Name="SelectedRetailer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="District" Type="nvarchar(max)" />
+    <Property Name="DistributorName" Type="nvarchar(max)" />
+    <Property Name="DistributorCode" Type="nvarchar(max)" />
+    <Property Name="RetailerName" Type="nvarchar(max)" />
+    <Property Name="RetailerAddress" Type="nvarchar(max)" />
+    <Property Name="OwnerName" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="MonthlyAverageSale" Type="nvarchar(max)" />
+    <Property Name="MonthlyAverageSaleOfWalton" Type="nvarchar(max)" />
+    <Property Name="Status" Type="nvarchar(max)" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="AddedDate" Type="datetime2" Precision="7" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="tblLogin">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MobileNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" MaxLength="100" />
+    <Property Name="UserType" Type="nvarchar" MaxLength="50" />
+    <Property Name="DealerCode" Type="nvarchar" MaxLength="100" />
+    <Property Name="AddedBy" Type="nvarchar" MaxLength="100" />
+    <Property Name="AddedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="100" />
+    <Property Name="UpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblRetailerAd">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AdName" Type="nvarchar" MaxLength="50" />
+    <Property Name="AdType" Type="nvarchar" MaxLength="50" />
+    <Property Name="AdCategory" Type="nvarchar" MaxLength="50" />
+    <Property Name="AdSize" Type="bigint" />
+    <Property Name="Image" Type="nvarchar(max)" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="Seen" Type="bit" />
+    <Property Name="AddedBy" Type="bigint" />
+    <Property Name="AddedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblRetailerAdSize">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SizeName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'RetailerMotivationProgram.dbo.Tempasif' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Tempasif">
+          <Property Name="WinnerImei" Type="nvarchar" MaxLength="50" />
+          <Property Name="Barcode1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Barcode2" Type="varchar" MaxLength="50" />
+        </EntityType>-->
+  <EntityType Name="Tosses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TossAmount" Type="int" />
+    <Property Name="TossDate" Type="datetime2" Precision="7" />
+    <Property Name="GeneratedDate" Type="datetime2" Precision="7" />
+    <Property Name="Imei" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime2" Precision="7" />
+  </EntityType>
+  <EntityType Name="Trash">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Message" Type="nvarchar(max)" />
+    <Property Name="Sender" Type="nvarchar" MaxLength="50" />
+    <Property Name="Imei" Type="nvarchar" MaxLength="50" />
+    <Property Name="AddedDate" Type="datetime2" Precision="7" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'RetailerMotivationProgram.dbo.Winner_Deleted' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Winner_Deleted">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="AddedDate" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RetailerMessage" Type="nvarchar(max)" />
+    <Property Name="DealerMessage" Type="nvarchar(max)" />
+    <Property Name="MessageType" Type="nvarchar" MaxLength="50" />
+    <Property Name="Imei" Type="nvarchar" MaxLength="50" />
+    <Property Name="Model" Type="nvarchar" MaxLength="50" />
+    <Property Name="Brand" Type="nvarchar" MaxLength="50" />
+    <Property Name="Msdp" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="InvoicePrice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="WinningAmount" Type="int" />
+    <Property Name="RetailerId" Type="bigint" />
+    <Property Name="RetailerPhoneNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="RetailerName" Type="nvarchar(max)" />
+    <Property Name="DealerPhoneNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="DealerName" Type="nvarchar" MaxLength="50" />
+    <Property Name="DealerCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="MessageSendingDate" Type="datetime2" Precision="7" />
+    <Property Name="IsSmsSent" Type="bit" />
+    <Property Name="IsRetailerGotSms" Type="bit" />
+    <Property Name="IsDealerGotSms" Type="bit" />
+    <Property Name="AddedDate" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="AddedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime2" Precision="7" />
+    <Property Name="UpdatedBy" Type="nvarchar(max)" />
+    <Property Name="SmsSentVia" Type="nvarchar(max)" />
+    <Property Name="FirstSegmentBenifit" Type="int" />
+    <Property Name="SecondSegmentBenifit" Type="int" />
+    <Property Name="BackWordBenifit" Type="int" />
+    <Property Name="OfferId" Type="bigint" />
+    <Property Name="DealerBenefit" Type="int" />
+    <Property Name="SpecialPrizeType" Type="nvarchar" MaxLength="50" />
+    <Property Name="SpecialPrizeName" Type="nvarchar" MaxLength="50" />
+    <Property Name="SpecialPrizeValue" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="OracleModelName" Type="nvarchar" MaxLength="100" />
+    <Property Name="SpecialPrizeMSDP" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'RetailerMotivationProgram.dbo.Winner_Fake_Offer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Winner_Fake_Offer">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="AddedDate" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RetailerMessage" Type="nvarchar(max)" />
+    <Property Name="DealerMessage" Type="nvarchar(max)" />
+    <Property Name="MessageType" Type="nvarchar" MaxLength="50" />
+    <Property Name="Imei" Type="nvarchar" MaxLength="50" />
+    <Property Name="Model" Type="nvarchar" MaxLength="50" />
+    <Property Name="Brand" Type="nvarchar" MaxLength="50" />
+    <Property Name="Msdp" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="InvoicePrice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="WinningAmount" Type="int" />
+    <Property Name="RetailerId" Type="bigint" />
+    <Property Name="RetailerPhoneNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="RetailerName" Type="nvarchar(max)" />
+    <Property Name="DealerPhoneNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="DealerName" Type="nvarchar" MaxLength="50" />
+    <Property Name="DealerCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="MessageSendingDate" Type="datetime2" Precision="7" />
+    <Property Name="IsSmsSent" Type="bit" />
+    <Property Name="IsRetailerGotSms" Type="bit" />
+    <Property Name="IsDealerGotSms" Type="bit" />
+    <Property Name="AddedDate" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="AddedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime2" Precision="7" />
+    <Property Name="UpdatedBy" Type="nvarchar(max)" />
+    <Property Name="SmsSentVia" Type="nvarchar(max)" />
+    <Property Name="FirstSegmentBenifit" Type="int" />
+    <Property Name="SecondSegmentBenifit" Type="int" />
+    <Property Name="BackWordBenifit" Type="int" />
+    <Property Name="OfferId" Type="bigint" />
+    <Property Name="SpecialPrizeType" Type="nvarchar" MaxLength="50" />
+    <Property Name="SpecialPrizeName" Type="nvarchar" MaxLength="50" />
+    <Property Name="SpecialPrizeValue" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="OracleModelName" Type="nvarchar" MaxLength="100" />
+    <Property Name="SpecialPrizeMSDP" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="Winners">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RetailerMessage" Type="nvarchar(max)" />
+    <Property Name="DealerMessage" Type="nvarchar(max)" />
+    <Property Name="MessageType" Type="nvarchar" MaxLength="50" />
+    <Property Name="Imei" Type="nvarchar" MaxLength="50" />
+    <Property Name="Model" Type="nvarchar" MaxLength="50" />
+    <Property Name="Brand" Type="nvarchar" MaxLength="50" />
+    <Property Name="Msdp" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="InvoicePrice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="WinningAmount" Type="int" />
+    <Property Name="RetailerId" Type="bigint" />
+    <Property Name="RetailerPhoneNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="RetailerName" Type="nvarchar(max)" />
+    <Property Name="DealerPhoneNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="DealerName" Type="nvarchar" MaxLength="50" />
+    <Property Name="DealerCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="MessageSendingDate" Type="datetime2" Precision="7" />
+    <Property Name="IsSmsSent" Type="bit" />
+    <Property Name="IsRetailerGotSms" Type="bit" />
+    <Property Name="IsDealerGotSms" Type="bit" />
+    <Property Name="AddedDate" Type="datetime2" Precision="7" Nullable="false" />
+    <Property Name="AddedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime2" Precision="7" />
+    <Property Name="UpdatedBy" Type="nvarchar(max)" />
+    <Property Name="SmsSentVia" Type="nvarchar(max)" />
+    <Property Name="FirstSegmentBenifit" Type="int" />
+    <Property Name="SecondSegmentBenifit" Type="int" />
+    <Property Name="BackWordBenifit" Type="int" />
+    <Property Name="OfferId" Type="bigint" />
+    <Property Name="DealerBenefit" Type="int" />
+    <Property Name="SpecialPrizeType" Type="nvarchar" MaxLength="50" />
+    <Property Name="SpecialPrizeName" Type="nvarchar" MaxLength="50" />
+    <Property Name="SpecialPrizeValue" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="OracleModelName" Type="nvarchar" MaxLength="100" />
+    <Property Name="SpecialPrizeMSDP" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IsValidOffer" Type="bit" />
+    <Property Name="DealerCode2" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_tblRetailerAd_tblRetailerAdSize">
+    <End Role="tblRetailerAdSize" Type="Self.tblRetailerAdSize" Multiplicity="0..1" />
+    <End Role="tblRetailerAd" Type="Self.tblRetailerAd" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblRetailerAdSize">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tblRetailerAd">
+        <PropertyRef Name="AdSize" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RetailerMotivationProgramModelStoreContainer">
+    <EntitySet Name="DailyIssuedComponents" EntityType="Self.DailyIssuedComponents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DayWiseSpecialRetailers" EntityType="Self.DayWiseSpecialRetailers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Deleted_Winners" EntityType="Self.Deleted_Winners" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FlashSaleBenifit" EntityType="Self.FlashSaleBenifit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="garbage" EntityType="Self.garbage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ObsoleteModels" EntityType="Self.ObsoleteModels" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OfferMaster" EntityType="Self.OfferMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Plazas" EntityType="Self.Plazas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RetailerComplain" EntityType="Self.RetailerComplain" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RetailerMessageBundles" EntityType="Self.RetailerMessageBundles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Retailers" EntityType="Self.Retailers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Retailers_Backup_20180115952_1" EntityType="Self.Retailers_Backup_20180115952_1" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Retailers_Depricated" EntityType="Self.Retailers_Depricated" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RetailersSpecialBenifits" EntityType="Self.RetailersSpecialBenifits" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SelectedRetailer" EntityType="Self.SelectedRetailer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblLogin" EntityType="Self.tblLogin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblRetailerAd" EntityType="Self.tblRetailerAd" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblRetailerAdSize" EntityType="Self.tblRetailerAdSize" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tosses" EntityType="Self.Tosses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Trash" EntityType="Self.Trash" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Winners" EntityType="Self.Winners" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Backup_20180503_Retailers" EntityType="Self.Backup_20180503_Retailers" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Backup_20180503_Retailers].[Id] AS [Id], 
+    [Backup_20180503_Retailers].[District] AS [District], 
+    [Backup_20180503_Retailers].[DistributorName] AS [DistributorName], 
+    [Backup_20180503_Retailers].[DistributorCode] AS [DistributorCode], 
+    [Backup_20180503_Retailers].[RetailerName] AS [RetailerName], 
+    [Backup_20180503_Retailers].[RetailerAddress] AS [RetailerAddress], 
+    [Backup_20180503_Retailers].[OwnerName] AS [OwnerName], 
+    [Backup_20180503_Retailers].[PhoneNumber] AS [PhoneNumber], 
+    [Backup_20180503_Retailers].[MonthlyAverageSale] AS [MonthlyAverageSale], 
+    [Backup_20180503_Retailers].[MonthlyAverageSaleOfWalton] AS [MonthlyAverageSaleOfWalton], 
+    [Backup_20180503_Retailers].[Status] AS [Status], 
+    [Backup_20180503_Retailers].[IsActive] AS [IsActive], 
+    [Backup_20180503_Retailers].[AddedDate] AS [AddedDate]
+    FROM [dbo].[Backup_20180503_Retailers] AS [Backup_20180503_Retailers]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="RetailerModified" EntityType="Self.RetailerModified" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [RetailerModified].[Id] AS [Id], 
+    [RetailerModified].[District] AS [District], 
+    [RetailerModified].[DistributorName] AS [DistributorName], 
+    [RetailerModified].[DistributorCode] AS [DistributorCode], 
+    [RetailerModified].[RetailerName] AS [RetailerName], 
+    [RetailerModified].[RetailerAddress] AS [RetailerAddress], 
+    [RetailerModified].[OwnerName] AS [OwnerName], 
+    [RetailerModified].[PhoneNumber] AS [PhoneNumber], 
+    [RetailerModified].[MonthlyAverageSale] AS [MonthlyAverageSale], 
+    [RetailerModified].[MonthlyAverageSaleOfWalton] AS [MonthlyAverageSaleOfWalton], 
+    [RetailerModified].[Status] AS [Status]
+    FROM [dbo].[RetailerModified] AS [RetailerModified]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Retailers_Backup_20180111" EntityType="Self.Retailers_Backup_20180111" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Retailers_Backup_20180111].[Id] AS [Id], 
+    [Retailers_Backup_20180111].[District] AS [District], 
+    [Retailers_Backup_20180111].[DistributorName] AS [DistributorName], 
+    [Retailers_Backup_20180111].[DistributorCode] AS [DistributorCode], 
+    [Retailers_Backup_20180111].[RetailerName] AS [RetailerName], 
+    [Retailers_Backup_20180111].[RetailerAddress] AS [RetailerAddress], 
+    [Retailers_Backup_20180111].[OwnerName] AS [OwnerName], 
+    [Retailers_Backup_20180111].[PhoneNumber] AS [PhoneNumber], 
+    [Retailers_Backup_20180111].[MonthlyAverageSale] AS [MonthlyAverageSale], 
+    [Retailers_Backup_20180111].[MonthlyAverageSaleOfWalton] AS [MonthlyAverageSaleOfWalton], 
+    [Retailers_Backup_20180111].[Status] AS [Status], 
+    [Retailers_Backup_20180111].[IsActive] AS [IsActive], 
+    [Retailers_Backup_20180111].[AddedDate] AS [AddedDate]
+    FROM [dbo].[Retailers_Backup_20180111] AS [Retailers_Backup_20180111]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Retailers_Backup_20180115952" EntityType="Self.Retailers_Backup_20180115952" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Retailers_Backup_20180115952].[Id] AS [Id], 
+    [Retailers_Backup_20180115952].[District] AS [District], 
+    [Retailers_Backup_20180115952].[DistributorName] AS [DistributorName], 
+    [Retailers_Backup_20180115952].[DistributorCode] AS [DistributorCode], 
+    [Retailers_Backup_20180115952].[RetailerName] AS [RetailerName], 
+    [Retailers_Backup_20180115952].[RetailerAddress] AS [RetailerAddress], 
+    [Retailers_Backup_20180115952].[OwnerName] AS [OwnerName], 
+    [Retailers_Backup_20180115952].[PhoneNumber] AS [PhoneNumber], 
+    [Retailers_Backup_20180115952].[MonthlyAverageSale] AS [MonthlyAverageSale], 
+    [Retailers_Backup_20180115952].[MonthlyAverageSaleOfWalton] AS [MonthlyAverageSaleOfWalton], 
+    [Retailers_Backup_20180115952].[Status] AS [Status], 
+    [Retailers_Backup_20180115952].[IsActive] AS [IsActive], 
+    [Retailers_Backup_20180115952].[AddedDate] AS [AddedDate]
+    FROM [dbo].[Retailers_Backup_20180115952] AS [Retailers_Backup_20180115952]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Retailers_Backup_201801171041" EntityType="Self.Retailers_Backup_201801171041" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Retailers_Backup_201801171041].[Id] AS [Id], 
+    [Retailers_Backup_201801171041].[District] AS [District], 
+    [Retailers_Backup_201801171041].[DistributorName] AS [DistributorName], 
+    [Retailers_Backup_201801171041].[DistributorCode] AS [DistributorCode], 
+    [Retailers_Backup_201801171041].[RetailerName] AS [RetailerName], 
+    [Retailers_Backup_201801171041].[RetailerAddress] AS [RetailerAddress], 
+    [Retailers_Backup_201801171041].[OwnerName] AS [OwnerName], 
+    [Retailers_Backup_201801171041].[PhoneNumber] AS [PhoneNumber], 
+    [Retailers_Backup_201801171041].[MonthlyAverageSale] AS [MonthlyAverageSale], 
+    [Retailers_Backup_201801171041].[MonthlyAverageSaleOfWalton] AS [MonthlyAverageSaleOfWalton], 
+    [Retailers_Backup_201801171041].[Status] AS [Status], 
+    [Retailers_Backup_201801171041].[IsActive] AS [IsActive], 
+    [Retailers_Backup_201801171041].[AddedDate] AS [AddedDate]
+    FROM [dbo].[Retailers_Backup_201801171041] AS [Retailers_Backup_201801171041]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Winner_Deleted" EntityType="Self.Winner_Deleted" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Winner_Deleted].[Id] AS [Id], 
+    [Winner_Deleted].[RetailerMessage] AS [RetailerMessage], 
+    [Winner_Deleted].[DealerMessage] AS [DealerMessage], 
+    [Winner_Deleted].[MessageType] AS [MessageType], 
+    [Winner_Deleted].[Imei] AS [Imei], 
+    [Winner_Deleted].[Model] AS [Model], 
+    [Winner_Deleted].[Brand] AS [Brand], 
+    [Winner_Deleted].[Msdp] AS [Msdp], 
+    [Winner_Deleted].[InvoicePrice] AS [InvoicePrice], 
+    [Winner_Deleted].[WinningAmount] AS [WinningAmount], 
+    [Winner_Deleted].[RetailerId] AS [RetailerId], 
+    [Winner_Deleted].[RetailerPhoneNumber] AS [RetailerPhoneNumber], 
+    [Winner_Deleted].[RetailerName] AS [RetailerName], 
+    [Winner_Deleted].[DealerPhoneNumber] AS [DealerPhoneNumber], 
+    [Winner_Deleted].[DealerName] AS [DealerName], 
+    [Winner_Deleted].[DealerCode] AS [DealerCode], 
+    [Winner_Deleted].[MessageSendingDate] AS [MessageSendingDate], 
+    [Winner_Deleted].[IsSmsSent] AS [IsSmsSent], 
+    [Winner_Deleted].[IsRetailerGotSms] AS [IsRetailerGotSms], 
+    [Winner_Deleted].[IsDealerGotSms] AS [IsDealerGotSms], 
+    [Winner_Deleted].[AddedDate] AS [AddedDate], 
+    [Winner_Deleted].[AddedBy] AS [AddedBy], 
+    [Winner_Deleted].[UpdatedDate] AS [UpdatedDate], 
+    [Winner_Deleted].[UpdatedBy] AS [UpdatedBy], 
+    [Winner_Deleted].[SmsSentVia] AS [SmsSentVia], 
+    [Winner_Deleted].[FirstSegmentBenifit] AS [FirstSegmentBenifit], 
+    [Winner_Deleted].[SecondSegmentBenifit] AS [SecondSegmentBenifit], 
+    [Winner_Deleted].[BackWordBenifit] AS [BackWordBenifit], 
+    [Winner_Deleted].[OfferId] AS [OfferId], 
+    [Winner_Deleted].[DealerBenefit] AS [DealerBenefit], 
+    [Winner_Deleted].[SpecialPrizeType] AS [SpecialPrizeType], 
+    [Winner_Deleted].[SpecialPrizeName] AS [SpecialPrizeName], 
+    [Winner_Deleted].[SpecialPrizeValue] AS [SpecialPrizeValue], 
+    [Winner_Deleted].[OracleModelName] AS [OracleModelName], 
+    [Winner_Deleted].[SpecialPrizeMSDP] AS [SpecialPrizeMSDP]
+    FROM [dbo].[Winner_Deleted] AS [Winner_Deleted]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Winner_Fake_Offer" EntityType="Self.Winner_Fake_Offer" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Winner_Fake_Offer].[Id] AS [Id], 
+    [Winner_Fake_Offer].[RetailerMessage] AS [RetailerMessage], 
+    [Winner_Fake_Offer].[DealerMessage] AS [DealerMessage], 
+    [Winner_Fake_Offer].[MessageType] AS [MessageType], 
+    [Winner_Fake_Offer].[Imei] AS [Imei], 
+    [Winner_Fake_Offer].[Model] AS [Model], 
+    [Winner_Fake_Offer].[Brand] AS [Brand], 
+    [Winner_Fake_Offer].[Msdp] AS [Msdp], 
+    [Winner_Fake_Offer].[InvoicePrice] AS [InvoicePrice], 
+    [Winner_Fake_Offer].[WinningAmount] AS [WinningAmount], 
+    [Winner_Fake_Offer].[RetailerId] AS [RetailerId], 
+    [Winner_Fake_Offer].[RetailerPhoneNumber] AS [RetailerPhoneNumber], 
+    [Winner_Fake_Offer].[RetailerName] AS [RetailerName], 
+    [Winner_Fake_Offer].[DealerPhoneNumber] AS [DealerPhoneNumber], 
+    [Winner_Fake_Offer].[DealerName] AS [DealerName], 
+    [Winner_Fake_Offer].[DealerCode] AS [DealerCode], 
+    [Winner_Fake_Offer].[MessageSendingDate] AS [MessageSendingDate], 
+    [Winner_Fake_Offer].[IsSmsSent] AS [IsSmsSent], 
+    [Winner_Fake_Offer].[IsRetailerGotSms] AS [IsRetailerGotSms], 
+    [Winner_Fake_Offer].[IsDealerGotSms] AS [IsDealerGotSms], 
+    [Winner_Fake_Offer].[AddedDate] AS [AddedDate], 
+    [Winner_Fake_Offer].[AddedBy] AS [AddedBy], 
+    [Winner_Fake_Offer].[UpdatedDate] AS [UpdatedDate], 
+    [Winner_Fake_Offer].[UpdatedBy] AS [UpdatedBy], 
+    [Winner_Fake_Offer].[SmsSentVia] AS [SmsSentVia], 
+    [Winner_Fake_Offer].[FirstSegmentBenifit] AS [FirstSegmentBenifit], 
+    [Winner_Fake_Offer].[SecondSegmentBenifit] AS [SecondSegmentBenifit], 
+    [Winner_Fake_Offer].[BackWordBenifit] AS [BackWordBenifit], 
+    [Winner_Fake_Offer].[OfferId] AS [OfferId], 
+    [Winner_Fake_Offer].[SpecialPrizeType] AS [SpecialPrizeType], 
+    [Winner_Fake_Offer].[SpecialPrizeName] AS [SpecialPrizeName], 
+    [Winner_Fake_Offer].[SpecialPrizeValue] AS [SpecialPrizeValue], 
+    [Winner_Fake_Offer].[OracleModelName] AS [OracleModelName], 
+    [Winner_Fake_Offer].[SpecialPrizeMSDP] AS [SpecialPrizeMSDP]
+    FROM [dbo].[Winner_Fake_Offer] AS [Winner_Fake_Offer]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_tblRetailerAd_tblRetailerAdSize" Association="Self.FK_tblRetailerAd_tblRetailerAdSize">
+      <End Role="tblRetailerAdSize" EntitySet="tblRetailerAdSize" />
+      <End Role="tblRetailerAd" EntitySet="tblRetailerAd" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

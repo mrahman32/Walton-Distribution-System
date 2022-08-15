@@ -1,0 +1,456 @@
+﻿@using WDS.DAL.WdsEntities
+@model WDS.Models.LogisticsOrderModel
+@{
+    ViewBag.Title = "GetAllLogisticOrder";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var listdata = ViewBag.orderList as List<WDS.ViewModels.vmDistributorOrder>;
+    var user = Session["user"] as User;
+    var role = ViewBag.roleInfo as Role;
+}
+
+<style>
+
+   
+    body.modal-open {
+        overflow: auto;
+    }
+
+    .modal-footer {
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .modal-dialog {
+        height: 100vh !important;
+        display: flex;
+        overflow-y: initial !important;
+    }
+
+    .modal-content {
+        width: auto !important;
+        margin: auto !important;
+        height: fit-content !important;
+    }
+
+    .modal-body {
+        height: 550px;
+        width: 950px;
+        overflow-y: auto;
+        overflow-x: auto;
+    }
+</style>
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-header">Logistics Order List</div>
+                <div class="card-body">
+
+                    <div class="form-group row">
+                        
+                        <table class="table table-bordered table-scrollable" id="tblOrderList">
+                            <thead>
+                                <tr>
+                                    <th>SL</th>
+                                    <th>OrderID</th>
+                                    <th>DistributorCode</th>
+                                    <th>Total Price</th>
+                                    <th>AddedBy</th>
+                                    <th>AddedDate</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tblOrderListBody">
+                                @if (listdata != null)
+                                {
+                                    int count = 1;
+                                    foreach (var item in listdata)
+                                    {
+                                <tr>
+                                    <td>@count</td>
+                                    <td>@item.Id</td>
+                                    <td>@item.DistributorCode</td>
+                                    <td>@item.TotalPrice</td>
+                                    <td>@item.AddedByName</td>
+                                    <td>@item.AddedDate.ToString("dd-MMM-yyyy")</td>
+                                    <td><button class="btn btn-outline-warning btnSelectOrder" data-id="@item.Id" data-disCode="@item.DistributorCode" id="btnSelectOrder">Select</button></td>
+
+                                </tr>
+                                        count++;
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="orderDetailsModal" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="col-lg-2  text-center">Order No: </div>
+                <div class="col-lg-1  text-left"><p id="txtOrderNo"></p></div>
+                <div class="col-lg-3  text-center"><button class="btn btn-sm btn-outline-success" id="modalbtnSubmit">Update</button></div>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                </button>
+            </div>
+            <div class="modal-body scrollable">
+                <div class="card">
+                    <div class="card-body">
+                        <input type="hidden" id="hiddenDistributorCode" />
+                        @if (role.RoleName.ToLower()=="nsm")
+                        {
+                            <div class="form-group row">
+
+                                
+                                <label class="col-lg-1 col-form-label text-sm-right">Model</label>
+                                <div class="col-lg-2">
+                                    @Html.DropDownList("ModalModelName", new SelectList("", "Value", "Text"),"--Select--", new { @class = "selectpicker show-tick form-control",data_live_search = "true"})
+                                </div>
+
+                                <label class="col-lg-1 col-form-label text-sm-right">Color</label>
+                                <div class="col-lg-2">
+                                    @Html.DropDownList("ModalColor", new SelectList("", "Value", "Text"), "--Select--", new{@class = "selectpicker show-tick form-control",data_live_search = "true"})
+                                </div>
+
+                                <label class="col-lg-1 col-form-label text-sm-right">Quantity</label>
+                                <div class="col-lg-2">
+                                    @Html.TextBox("ModalQuantity", 0, new { @class = "form-control", type = "number" })
+                                </div>
+                                <label class="col-lg-1 col-form-label text-sm-right">Price</label>
+                                <div class="col-lg-2">
+                                    <input type="number" class="form-control" id="modalmodelPrice" readonly />
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+                              
+                                <div class="col-lg-12 text-right">
+                                    <button class="btn btn-outline-warning" id="ModalbtnAdd">Add to Order</button>
+                                </div>
+                            </div>
+                        }
+
+
+                            <div class="form-group row">
+                               
+                                <table class="table table-bordered" id="DisOrderDetailsTtable">
+                                    <thead>
+                                        <tr>
+                                           
+                                            <th>Model Name</th>
+                                            <th>Color</th>
+                                            <th>Unit Price</th>
+                                            <th>Request Qty</th>
+                                            <th>NSM  Approved Qty</th>
+                                            <th>Logic.  Approved Qty</th>
+                                            <th>IS Delete</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="DisOrderDetailsTtableBody"></tbody>
+                                </table>
+                            </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<link href="~/Content/iziToast.min.css" rel="stylesheet" />
+<script src="~/Scripts/iziToast.min.js"></script>
+@section scripts
+{
+    <script>
+    $(function () {
+        function scrollStopNumberField() {
+            $('input[type=number]').on('mousewheel', function (e) {
+                $(e.target).blur();
+            });
+        }
+        $(document).on('click', '.btnSelectOrder', function (e) {
+            var orderId = $(this).attr("data-id");
+            var distributorCode = $(this).attr("data-disCode");
+            $("#txtOrderNo").text(orderId);
+            $("#hiddenDistributorCode").val(distributorCode);
+
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json',
+                dataType: 'json',
+                url: '@Url.Action("GetDistributorOrderDetailsByOrderId", "Tso")',
+                data: JSON.stringify({ orderId: orderId }),
+                success: function (data) {
+                    $("#ModalModelName").empty();
+                    $.each(data.modelItems, function (i, dds) {
+                        $("#ModalModelName").append('<option value="' + dds.Value + '">' + dds.Text + '</option>');
+                    });
+                    $('.selectpicker').selectpicker('refresh');
+
+                    var oDetailsList = data.orderDetailsList == null ? 0 : data.orderDetailsList.length;
+                    if (oDetailsList > 0) {
+                        $('#DisOrderDetailsTtableBody').empty();
+                        for (var i = 0; i < oDetailsList; i++) {
+                            $("#DisOrderDetailsTtableBody").append('<tr>' +
+                                 '<td style="display: none;">' +
+                                data.orderDetailsList[i].Id +
+                                '</td>' +
+                                '<td style="width: 25%">' +
+                                data.orderDetailsList[i].ModelName +
+                                '</td>' +
+                                '<td>' +
+                                data.orderDetailsList[i].Color +
+                                '</td>' +
+                                '<td>' +
+                                data.orderDetailsList[i].UnitPrice +
+                                '</td>' +
+                                '<td>' +
+                                data.orderDetailsList[i].RequestedQuantity +
+                                '</td>' +
+                                '<td><input type="number" class="form-control nsmAppQty" value="' + data.orderDetailsList[i].NsmApprovedQty + '" id="nsmAppQty" /></td>' +
+                                '<td><input type="number" class="form-control LogicAppQty" id="LogicAppQty" /></td>' +
+                                '<td><input type="text" class="form-control isdeleteCheck" value="'+data.orderDetailsList[i].IsDeleted+'" id="isdeleteCheck" readonly /></td>' +
+                                '<td><a href="#" class="deleteItem btn btn-danger btn-xs"><i class="fas fa-trash"></i></a></td>' +
+                                '</tr>');
+                        }
+                        scrollStopNumberField();
+
+                        if ('@role.RoleName.ToLower()'=='nsm')//For NSM
+                        {
+                            $(".LogicAppQty").prop("readonly", true);
+                        } else if('@role.RoleName.ToLower()'=='gl') {
+                            $(".nsmAppQty").prop("readonly", true);
+                            $(".deleteItem").prop("disabled", true);
+                        }else{
+                            $(".nsmAppQty").prop("readonly", true);
+                            $(".LogicAppQty").prop("readonly", true);
+                            $(".deleteItem").prop("disabled", true);
+                        }
+                    }
+                }
+            });
+            $("#orderDetailsModal").modal('show');
+        });
+
+
+        $('#ModalModelName').on('change',function () {
+            var model = $('#ModalModelName').val();
+            $.ajax({
+                url: '@Url.Action("GetModelColor", "Tso")',
+                type: 'Post',
+                data: JSON.stringify({ model: model }),
+                dataType: 'json',
+                async: false,
+                contentType: 'application/json',
+
+                success: function (data) {
+                    $("#ModalColor").empty();
+
+                    $.each(data.colorItems, function (i, dds) {
+                        $("#ModalColor").append('<option value="' + dds.Value + '">' + dds.Text + '</option>');
+                    });
+                    $('.selectpicker').selectpicker('refresh');
+                    $('#modalmodelPrice').val(data.modelprice.Price);
+
+                },
+                error: function (result, textStatus, jqXHR) {
+
+                }
+            });
+        });
+
+
+        $(document).on('click', 'a.deleteItem', function (e) {
+            e.preventDefault();
+            var self = $(this);
+            if (self != null) {
+                $(this).parents('tr').css("background-color", "#ffdce9");
+                $(this).parents('tr').find('#isdeleteCheck').val(true);
+                $(this).parents('tr').find(".nsmAppQty").prop("readonly", true);
+                $(this).parents('tr').find(".LogicAppQty").prop("readonly", true);
+
+            }
+        });
+
+        $('#ModalbtnAdd').on('click', function () {
+            var model = $('#ModalModelName').val();
+            var color = $('#ModalColor').val();
+            var qty = $('#ModalQuantity').val();
+            var modelPrice = $('#modalmodelPrice').val();
+            if (validation()) {
+                var addedFound = false;
+                $("#DisOrderDetailsTtableBody tr").each(function () {
+                    tblmodel = $(this).find('td:eq(1)').text();
+                    tblcolor = $(this).find('td:eq(2)').text();
+                    if (tblmodel == model && tblcolor == color) {
+                        iziToast.error({
+                            title: 'Error',
+                            message: 'This Model is Already Added!.',
+                            position: 'topCenter',
+                        });
+                        addedFound = true;
+                        return false;
+                    }
+                });
+                if (!addedFound) {
+                    $("#DisOrderDetailsTtableBody").append('<tr>' +
+                        '<td style="display: none;">' +
+                        0 +
+                        '</td>' +
+                        '<td  style="width: 35%">' +
+                        model +
+                        '</td>' +
+                        '<td>' +
+                        color +
+                        '</td>' +
+                          '<td>' +
+                        modelPrice +
+                        '</td>' +
+                        '<td>' +
+                         0 +
+                        '</td>' +
+                         '<td><input type="number" class="form-control nsmAppQty" value="'+qty+'" id="nsmAppQty" /></td>' +
+                        '<td><input type="number" class="form-control LogicAppQty" id="LogicAppQty" readonly /></td>' +
+                        '<td><input type="text" class="form-control isdeleteCheck" value="false" id="isdeleteCheck" readonly /></td>' +
+                         '<td><a href="#" class="deleteItem btn btn-danger btn-xs"><i class="fas fa-trash"></i></a></td>' +
+                        '</tr>');
+                    $('#ModalQuantity').val("");
+
+                }
+            }
+        });
+
+
+        $('#modalbtnSubmit').on('click', function () {
+            var orderId = parseInt($("#txtOrderNo").text());
+            var distributorCode = $('#hiddenDistributorCode').val();
+
+            if (validationForSubmit()) {
+                var totalPrice = 0;
+                var orderDetails = [];
+                orderDetails.length = 0;
+                $.each($("#DisOrderDetailsTtableBody tr"),function () {
+                    totalPrice += parseFloat($(this).find('td:eq(3)').text());
+                    orderDetails.push({
+                        Id:$(this).find('td:eq(0)').text(),
+                        DistributorOrderId:orderId,
+                        ModelName: $(this).find('td:eq(1)').text(),
+                        Color: $(this).find('td:eq(2)').text(),
+                        UnitPrice: $(this).find('td:eq(3)').text(),
+                        RequestedQuantity: $(this).find('td:eq(4)').text(),
+                        NsmApprovedQty: $(this).find('#nsmAppQty').val(),
+                        LogisticsApprovedQty: $(this).find('#LogicAppQty').val(),
+                        IsDeleted:$(this).find('#isdeleteCheck').val(),
+                    });
+
+                });
+
+                var dataMainObject = {
+                    'Id':orderId,
+                    'DistributorCode': distributorCode,
+                    'TotalPrice': totalPrice
+                }
+                var dataList = JSON.stringify({ objDistributorOrder: dataMainObject,orderDetailsList:orderDetails });
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    url: '@Url.Action("UpdateOrderDetails", "Tso")',
+                    data: dataList,
+                    success: function (data) {
+                        if (data) {
+                            window.setTimeout(function () {
+                                location.reload();
+                            }, 2000);
+                            iziToast.success({
+                                title: 'Success',
+                                message: 'Save Success!.',
+                                position: 'topCenter',
+                            });
+                        }
+                    }
+                });
+            }
+
+        });
+
+    })
+
+    function validation() {
+        var model = $('#ModalModelName').val();
+        if (model == "") {
+            iziToast.error({
+                title: 'Error',
+                message: 'Select Model.',
+                position: 'topCenter',
+            });
+            return false;
+        }
+        var color = $('#ModalColor').val();
+        if (color == "") {
+            iziToast.error({
+                title: 'Error',
+                message: 'Select Color.',
+                position: 'topCenter',
+            });
+            return false;
+        }
+        var qty = parseInt($('#ModalQuantity').val());
+        if (qty<0 || qty==0) {
+            iziToast.error({
+                title: 'Error',
+                message: 'Quantity is required.',
+                position: 'topCenter',
+            });
+            $('#ModalQuantity').focus();
+
+            return false;
+        }
+        var modelPrice = $('#modalmodelPrice').val();
+        if (modelPrice == "") {
+            iziToast.error({
+                title: 'Error',
+                message: 'Price is required.',
+                position: 'topCenter',
+            });
+            return false;
+        }
+
+        return true;
+    }
+
+
+    function validationForSubmit() {
+        var nsmQtyCheck = false;
+        $.each($("#DisOrderDetailsTtableBody tr"),function () {
+            var nsmQty =  $(this).find('#nsmAppQty').val();
+            var isDe = $(this).find('#isdeleteCheck').val();
+
+            if ((nsmQty =="" || nsmQty==0) && isDe =="false") {
+                nsmQtyCheck =true;
+            }
+
+        });
+        if (nsmQtyCheck) {
+            alert("Qty Is Required!.");
+            return false;
+        }else{
+            return true;
+        }
+    }
+    </script>
+}

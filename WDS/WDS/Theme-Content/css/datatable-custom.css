@@ -1,0 +1,42 @@
+﻿.dataTables_processing {
+        top: 64px !important;
+        z-index: 11000 !important;
+    }
+
+
+  #dtFromDate {
+        font-size: 18px;
+    }
+
+    #dtToDate {
+        font-size: 18px;
+    }
+
+    .form-control-label {
+        font-size: 18px;
+    }
+
+    table.dataTable thead tr {
+        background-color: #a3d0ef;
+        color: whitesmoke;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    th.dt-center, td.dt-center {
+        text-align: center;
+    }
+
+    table.dataTable tbody tr {
+        color: black;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    #tblBrandSubCategoryDatatable thead tr th {
+        text-align: center;
+    }
+
+    .dataTables_scrollBody {
+        height: auto !important;
+    }

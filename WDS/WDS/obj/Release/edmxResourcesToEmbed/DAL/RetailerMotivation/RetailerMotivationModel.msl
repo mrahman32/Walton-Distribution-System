@@ -1,0 +1,574 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RetailerMotivationProgramModelStoreContainer" CdmEntityContainer="RetailerMotivationProgramEntities">
+    <EntitySetMapping Name="DailyIssuedComponents">
+      <EntityTypeMapping TypeName="RetailerMotivationProgramModel.DailyIssuedComponent">
+        <MappingFragment StoreEntitySet="DailyIssuedComponents">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ComponentName" ColumnName="ComponentName" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DayWiseSpecialRetailers">
+      <EntityTypeMapping TypeName="RetailerMotivationProgramModel.DayWiseSpecialRetailer">
+        <MappingFragment StoreEntitySet="DayWiseSpecialRetailers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="District" ColumnName="District" />
+          <ScalarProperty Name="DistributorName" ColumnName="DistributorName" />
+          <ScalarProperty Name="DistributorCode" ColumnName="DistributorCode" />
+          <ScalarProperty Name="RetailerName" ColumnName="RetailerName" />
+          <ScalarProperty Name="RetailerAddress" ColumnName="RetailerAddress" />
+          <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="MonthlyAverageSale" ColumnName="MonthlyAverageSale" />
+          <ScalarProperty Name="MonthlyAverageSaleOfWalton" ColumnName="MonthlyAverageSaleOfWalton" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Deleted_Winners">
+      <EntityTypeMapping TypeName="RetailerMotivationProgramModel.Deleted_Winners">
+        <MappingFragment StoreEntitySet="Deleted_Winners">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RetailerMessage" ColumnName="RetailerMessage" />
+          <ScalarProperty Name="DealerMessage" ColumnName="DealerMessage" />
+          <ScalarProperty Name="MessageType" ColumnName="MessageType" />
+          <ScalarProperty Name="Imei" ColumnName="Imei" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="Msdp" ColumnName="Msdp" />
+          <ScalarProperty Name="InvoicePrice" ColumnName="InvoicePrice" />
+          <ScalarProperty Name="WinningAmount" ColumnName="WinningAmount" />
+          <ScalarProperty Name="RetailerId" ColumnName="RetailerId" />
+          <ScalarProperty Name="RetailerPhoneNumber" ColumnName="RetailerPhoneNumber" />
+          <ScalarProperty Name="RetailerName" ColumnName="RetailerName" />
+          <ScalarProperty Name="DealerPhoneNumber" ColumnName="DealerPhoneNumber" />
+          <ScalarProperty Name="DealerName" ColumnName="DealerName" />
+          <ScalarProperty Name="DealerCode" ColumnName="DealerCode" />
+          <ScalarProperty Name="MessageSendingDate" ColumnName="MessageSendingDate" />
+          <ScalarProperty Name="IsSmsSent" ColumnName="IsSmsSent" />
+          <ScalarProperty Name="IsRetailerGotSms" ColumnName="IsRetailerGotSms" />
+          <ScalarProperty Name="IsDealerGotSms" ColumnName="IsDealerGotSms" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="SmsSentVia" ColumnName="SmsSentVia" />
+          <ScalarProperty Name="FirstSegmentBenifit" ColumnName="FirstSegmentBenifit" />
+          <ScalarProperty Name="SecondSegmentBenifit" ColumnName="SecondSegmentBenifit" />
+          <ScalarProperty Name="BackWordBenifit" ColumnName="BackWordBenifit" />
+          <ScalarProperty Name="OfferId" ColumnName="OfferId" />
+          <ScalarProperty Name="DealerBenefit" ColumnName="DealerBenefit" />
+          <ScalarProperty Name="SpecialPrizeType" ColumnName="SpecialPrizeType" />
+          <ScalarProperty Name="SpecialPrizeName" ColumnName="SpecialPrizeName" />
+          <ScalarProperty Name="SpecialPrizeValue" ColumnName="SpecialPrizeValue" />
+          <ScalarProperty Name="OracleModelName" ColumnName="OracleModelName" />
+          <ScalarProperty Name="SpecialPrizeMSDP" ColumnName="SpecialPrizeMSDP" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FlashSaleBenifits">
+      <EntityTypeMapping TypeName="RetailerMotivationProgramModel.FlashSaleBenifit">
+        <MappingFragment StoreEntitySet="FlashSaleBenifit">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TotalBenifitAmount" ColumnName="TotalBenifitAmount" />
+          <ScalarProperty Name="RetailerNumber" ColumnName="RetailerNumber" />
+          <ScalarProperty Name="DealerNumber" ColumnName="DealerNumber" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="RetailerMessage" ColumnName="RetailerMessage" />
+          <ScalarProperty Name="DealerMessage" ColumnName="DealerMessage" />
+          <ScalarProperty Name="SaleCount" ColumnName="SaleCount" />
+          <ScalarProperty Name="CellPhoneModel" ColumnName="CellPhoneModel" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="garbages">
+      <EntityTypeMapping TypeName="RetailerMotivationProgramModel.garbage">
+        <MappingFragment StoreEntitySet="garbage">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="District" ColumnName="District" />
+          <ScalarProperty Name="DistributorName" ColumnName="DistributorName" />
+          <ScalarProperty Name="DistributorCode" ColumnName="DistributorCode" />
+          <ScalarProperty Name="RetailerName" ColumnName="RetailerName" />
+          <ScalarProperty Name="RetailerAddress" ColumnName="RetailerAddress" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Sale" ColumnName="Sale" />
+          <ScalarProperty Name="AverageSaleOfWalton" ColumnName="AverageSaleOfWalton" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Bkash" ColumnName="Bkash" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="NewDealer" ColumnName="NewDealer" />
+          <ScalarProperty Name="NewDealerCode" ColumnName="NewDealerCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ObsoleteModels">
+      <EntityTypeMapping TypeName="RetailerMotivationProgramModel.ObsoleteModel">
+        <MappingFragment StoreEntitySet="ObsoleteModels">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="FirstSegmentBenifit" ColumnName="FirstSegmentBenifit" />
+          <ScalarProperty Name="SecondSegmentBenifit" ColumnName="SecondSegmentBenifit" />
+          <ScalarProperty Name="BackMargin" ColumnName="BackMargin" />
+          <ScalarProperty Name="OfferId" ColumnName="OfferId" />
+          <ScalarProperty Name="RetailerBenefitUsingApp" ColumnName="RetailerBenefitUsingApp" />
+          <ScalarProperty Name="RetailerBenefitThroughDealer" ColumnName="RetailerBenefitThroughDealer" />
+          <ScalarProperty Name="DealerBenefit" ColumnName="DealerBenefit" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OfferMasters">
+      <EntityTypeMapping TypeName="RetailerMotivationProgramModel.OfferMaster">
+        <MappingFragment StoreEntitySet="OfferMaster">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="OfferName" ColumnName="OfferName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="OfferFor" ColumnName="OfferFor" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Plazas">
+      <EntityTypeMapping TypeName="RetailerMotivationProgramModel.Plaza">
+        <MappingFragment StoreEntitySet="Plazas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PlazaName" ColumnName="PlazaName" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Zone" ColumnName="Zone" />
+          <ScalarProperty Name="Area" ColumnName="Area" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RetailerComplains">
+      <EntityTypeMapping TypeName="RetailerMotivationProgramModel.RetailerComplain">
+        <MappingFragment StoreEntitySet="RetailerComplain">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RetailerName" ColumnName="RetailerName" />
+          <ScalarProperty Name="RetailerPhone" ColumnName="RetailerPhone" />
+          <ScalarProperty Name="DealerCode" ColumnName="DealerCode" />
+          <ScalarProperty Name="ComplainType" ColumnName="ComplainType" />
+          <ScalarProperty Name="ComplainDetails" ColumnName="ComplainDetails" />
+          <ScalarProperty Name="ComplainSection" ColumnName="ComplainSection" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RetailerMessageBundles">
+      <EntityTypeMapping TypeName="RetailerMotivationProgramModel.RetailerMessageBundle">
+        <MappingFragment StoreEntitySet="RetailerMessageBundles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="MessageCount" ColumnName="MessageCount" />
+          <ScalarProperty Name="MessagingDate" ColumnName="MessagingDate" />
+          <ScalarProperty Name="RequestCreatedBy" ColumnName="RequestCreatedBy" />
+          <ScalarProperty Name="RequestForwardedBy" ColumnName="RequestForwardedBy" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Added" ColumnName="Added" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Retailers">
+      <EntityTypeMapping TypeName="RetailerMotivationProgramModel.Retailer">
+        <MappingFragment StoreEntitySet="Retailers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="District" ColumnName="District" />
+          <ScalarProperty Name="DistributorName" ColumnName="DistributorName" />
+          <ScalarProperty Name="DistributorCode" ColumnName="DistributorCode" />
+          <ScalarProperty Name="RetailerName" ColumnName="RetailerName" />
+          <ScalarProperty Name="RetailerAddress" ColumnName="RetailerAddress" />
+          <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="MonthlyAverageSale" ColumnName="MonthlyAverageSale" />
+          <ScalarProperty Name="MonthlyAverageSaleOfWalton" ColumnName="MonthlyAverageSaleOfWalton" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="DistributorCode2" ColumnName="DistributorCode2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Retailers_Backup_20180115952_1">
+      <EntityTypeMapping TypeName="RetailerMotivationProgramModel.Retailers_Backup_20180115952_1">
+        <MappingFragment StoreEntitySet="Retailers_Backup_20180115952_1">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="District" ColumnName="District" />
+          <ScalarProperty Name="DistributorName" ColumnName="DistributorName" />
+          <ScalarProperty Name="DistributorCode" ColumnName="DistributorCode" />
+          <ScalarProperty Name="RetailerName" ColumnName="RetailerName" />
+          <ScalarProperty Name="RetailerAddress" ColumnName="RetailerAddress" />
+          <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="MonthlyAverageSale" ColumnName="MonthlyAverageSale" />
+          <ScalarProperty Name="MonthlyAverageSaleOfWalton" ColumnName="MonthlyAverageSaleOfWalton" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Retailers_Depricated">
+      <EntityTypeMapping TypeName="RetailerMotivationProgramModel.Retailers_Depricated">
+        <MappingFragment StoreEntitySet="Retailers_Depricated">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="District" ColumnName="District" />
+          <ScalarProperty Name="DistributorName" ColumnName="DistributorName" />
+          <ScalarProperty Name="DistributorCode" ColumnName="DistributorCode" />
+          <ScalarProperty Name="RetailerName" ColumnName="RetailerName" />
+          <ScalarProperty Name="RetailerAddress" ColumnName="RetailerAddress" />
+          <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="MonthlyAverageSale" ColumnName="MonthlyAverageSale" />
+          <ScalarProperty Name="MonthlyAverageSaleOfWalton" ColumnName="MonthlyAverageSaleOfWalton" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RetailersSpecialBenifits">
+      <EntityTypeMapping TypeName="RetailerMotivationProgramModel.RetailersSpecialBenifit">
+        <MappingFragment StoreEntitySet="RetailersSpecialBenifits">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TotalSaleAmount" ColumnName="TotalSaleAmount" />
+          <ScalarProperty Name="RetailerNumber" ColumnName="RetailerNumber" />
+          <ScalarProperty Name="DealerNumber" ColumnName="DealerNumber" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="RetailerMessage" ColumnName="RetailerMessage" />
+          <ScalarProperty Name="DealerMessage" ColumnName="DealerMessage" />
+          <ScalarProperty Name="Benifit" ColumnName="Benifit" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="IsSmsSend" ColumnName="IsSmsSend" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SelectedRetailers">
+      <EntityTypeMapping TypeName="RetailerMotivationProgramModel.SelectedRetailer">
+        <MappingFragment StoreEntitySet="SelectedRetailer">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="District" ColumnName="District" />
+          <ScalarProperty Name="DistributorName" ColumnName="DistributorName" />
+          <ScalarProperty Name="DistributorCode" ColumnName="DistributorCode" />
+          <ScalarProperty Name="RetailerName" ColumnName="RetailerName" />
+          <ScalarProperty Name="RetailerAddress" ColumnName="RetailerAddress" />
+          <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="MonthlyAverageSale" ColumnName="MonthlyAverageSale" />
+          <ScalarProperty Name="MonthlyAverageSaleOfWalton" ColumnName="MonthlyAverageSaleOfWalton" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="RetailerMotivationProgramModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblLogins">
+      <EntityTypeMapping TypeName="RetailerMotivationProgramModel.tblLogin">
+        <MappingFragment StoreEntitySet="tblLogin">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserType" ColumnName="UserType" />
+          <ScalarProperty Name="DealerCode" ColumnName="DealerCode" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblRetailerAds">
+      <EntityTypeMapping TypeName="RetailerMotivationProgramModel.tblRetailerAd">
+        <MappingFragment StoreEntitySet="tblRetailerAd">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AdName" ColumnName="AdName" />
+          <ScalarProperty Name="AdType" ColumnName="AdType" />
+          <ScalarProperty Name="AdCategory" ColumnName="AdCategory" />
+          <ScalarProperty Name="AdSize" ColumnName="AdSize" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Seen" ColumnName="Seen" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblRetailerAdSizes">
+      <EntityTypeMapping TypeName="RetailerMotivationProgramModel.tblRetailerAdSize">
+        <MappingFragment StoreEntitySet="tblRetailerAdSize">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="SizeName" ColumnName="SizeName" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tosses">
+      <EntityTypeMapping TypeName="RetailerMotivationProgramModel.Toss">
+        <MappingFragment StoreEntitySet="Tosses">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TossAmount" ColumnName="TossAmount" />
+          <ScalarProperty Name="TossDate" ColumnName="TossDate" />
+          <ScalarProperty Name="GeneratedDate" ColumnName="GeneratedDate" />
+          <ScalarProperty Name="Imei" ColumnName="Imei" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Trashes">
+      <EntityTypeMapping TypeName="RetailerMotivationProgramModel.Trash">
+        <MappingFragment StoreEntitySet="Trash">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="Sender" ColumnName="Sender" />
+          <ScalarProperty Name="Imei" ColumnName="Imei" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Winners">
+      <EntityTypeMapping TypeName="RetailerMotivationProgramModel.Winner">
+        <MappingFragment StoreEntitySet="Winners">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RetailerMessage" ColumnName="RetailerMessage" />
+          <ScalarProperty Name="DealerMessage" ColumnName="DealerMessage" />
+          <ScalarProperty Name="MessageType" ColumnName="MessageType" />
+          <ScalarProperty Name="Imei" ColumnName="Imei" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="Msdp" ColumnName="Msdp" />
+          <ScalarProperty Name="InvoicePrice" ColumnName="InvoicePrice" />
+          <ScalarProperty Name="WinningAmount" ColumnName="WinningAmount" />
+          <ScalarProperty Name="RetailerId" ColumnName="RetailerId" />
+          <ScalarProperty Name="RetailerPhoneNumber" ColumnName="RetailerPhoneNumber" />
+          <ScalarProperty Name="RetailerName" ColumnName="RetailerName" />
+          <ScalarProperty Name="DealerPhoneNumber" ColumnName="DealerPhoneNumber" />
+          <ScalarProperty Name="DealerName" ColumnName="DealerName" />
+          <ScalarProperty Name="DealerCode" ColumnName="DealerCode" />
+          <ScalarProperty Name="MessageSendingDate" ColumnName="MessageSendingDate" />
+          <ScalarProperty Name="IsSmsSent" ColumnName="IsSmsSent" />
+          <ScalarProperty Name="IsRetailerGotSms" ColumnName="IsRetailerGotSms" />
+          <ScalarProperty Name="IsDealerGotSms" ColumnName="IsDealerGotSms" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="SmsSentVia" ColumnName="SmsSentVia" />
+          <ScalarProperty Name="FirstSegmentBenifit" ColumnName="FirstSegmentBenifit" />
+          <ScalarProperty Name="SecondSegmentBenifit" ColumnName="SecondSegmentBenifit" />
+          <ScalarProperty Name="BackWordBenifit" ColumnName="BackWordBenifit" />
+          <ScalarProperty Name="OfferId" ColumnName="OfferId" />
+          <ScalarProperty Name="DealerBenefit" ColumnName="DealerBenefit" />
+          <ScalarProperty Name="SpecialPrizeType" ColumnName="SpecialPrizeType" />
+          <ScalarProperty Name="SpecialPrizeName" ColumnName="SpecialPrizeName" />
+          <ScalarProperty Name="SpecialPrizeValue" ColumnName="SpecialPrizeValue" />
+          <ScalarProperty Name="OracleModelName" ColumnName="OracleModelName" />
+          <ScalarProperty Name="SpecialPrizeMSDP" ColumnName="SpecialPrizeMSDP" />
+          <ScalarProperty Name="IsValidOffer" ColumnName="IsValidOffer" />
+          <ScalarProperty Name="DealerCode2" ColumnName="DealerCode2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Backup_20180503_Retailers">
+      <EntityTypeMapping TypeName="RetailerMotivationProgramModel.Backup_20180503_Retailers">
+        <MappingFragment StoreEntitySet="Backup_20180503_Retailers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="District" ColumnName="District" />
+          <ScalarProperty Name="DistributorName" ColumnName="DistributorName" />
+          <ScalarProperty Name="DistributorCode" ColumnName="DistributorCode" />
+          <ScalarProperty Name="RetailerName" ColumnName="RetailerName" />
+          <ScalarProperty Name="RetailerAddress" ColumnName="RetailerAddress" />
+          <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="MonthlyAverageSale" ColumnName="MonthlyAverageSale" />
+          <ScalarProperty Name="MonthlyAverageSaleOfWalton" ColumnName="MonthlyAverageSaleOfWalton" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RetailerModifieds">
+      <EntityTypeMapping TypeName="RetailerMotivationProgramModel.RetailerModified">
+        <MappingFragment StoreEntitySet="RetailerModified">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="District" ColumnName="District" />
+          <ScalarProperty Name="DistributorName" ColumnName="DistributorName" />
+          <ScalarProperty Name="DistributorCode" ColumnName="DistributorCode" />
+          <ScalarProperty Name="RetailerName" ColumnName="RetailerName" />
+          <ScalarProperty Name="RetailerAddress" ColumnName="RetailerAddress" />
+          <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="MonthlyAverageSale" ColumnName="MonthlyAverageSale" />
+          <ScalarProperty Name="MonthlyAverageSaleOfWalton" ColumnName="MonthlyAverageSaleOfWalton" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Retailers_Backup_20180111">
+      <EntityTypeMapping TypeName="RetailerMotivationProgramModel.Retailers_Backup_20180111">
+        <MappingFragment StoreEntitySet="Retailers_Backup_20180111">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="District" ColumnName="District" />
+          <ScalarProperty Name="DistributorName" ColumnName="DistributorName" />
+          <ScalarProperty Name="DistributorCode" ColumnName="DistributorCode" />
+          <ScalarProperty Name="RetailerName" ColumnName="RetailerName" />
+          <ScalarProperty Name="RetailerAddress" ColumnName="RetailerAddress" />
+          <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="MonthlyAverageSale" ColumnName="MonthlyAverageSale" />
+          <ScalarProperty Name="MonthlyAverageSaleOfWalton" ColumnName="MonthlyAverageSaleOfWalton" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Retailers_Backup_20180115952">
+      <EntityTypeMapping TypeName="RetailerMotivationProgramModel.Retailers_Backup_20180115952">
+        <MappingFragment StoreEntitySet="Retailers_Backup_20180115952">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="District" ColumnName="District" />
+          <ScalarProperty Name="DistributorName" ColumnName="DistributorName" />
+          <ScalarProperty Name="DistributorCode" ColumnName="DistributorCode" />
+          <ScalarProperty Name="RetailerName" ColumnName="RetailerName" />
+          <ScalarProperty Name="RetailerAddress" ColumnName="RetailerAddress" />
+          <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="MonthlyAverageSale" ColumnName="MonthlyAverageSale" />
+          <ScalarProperty Name="MonthlyAverageSaleOfWalton" ColumnName="MonthlyAverageSaleOfWalton" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Retailers_Backup_201801171041">
+      <EntityTypeMapping TypeName="RetailerMotivationProgramModel.Retailers_Backup_201801171041">
+        <MappingFragment StoreEntitySet="Retailers_Backup_201801171041">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="District" ColumnName="District" />
+          <ScalarProperty Name="DistributorName" ColumnName="DistributorName" />
+          <ScalarProperty Name="DistributorCode" ColumnName="DistributorCode" />
+          <ScalarProperty Name="RetailerName" ColumnName="RetailerName" />
+          <ScalarProperty Name="RetailerAddress" ColumnName="RetailerAddress" />
+          <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="MonthlyAverageSale" ColumnName="MonthlyAverageSale" />
+          <ScalarProperty Name="MonthlyAverageSaleOfWalton" ColumnName="MonthlyAverageSaleOfWalton" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Winner_Deleted">
+      <EntityTypeMapping TypeName="RetailerMotivationProgramModel.Winner_Deleted">
+        <MappingFragment StoreEntitySet="Winner_Deleted">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RetailerMessage" ColumnName="RetailerMessage" />
+          <ScalarProperty Name="DealerMessage" ColumnName="DealerMessage" />
+          <ScalarProperty Name="MessageType" ColumnName="MessageType" />
+          <ScalarProperty Name="Imei" ColumnName="Imei" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="Msdp" ColumnName="Msdp" />
+          <ScalarProperty Name="InvoicePrice" ColumnName="InvoicePrice" />
+          <ScalarProperty Name="WinningAmount" ColumnName="WinningAmount" />
+          <ScalarProperty Name="RetailerId" ColumnName="RetailerId" />
+          <ScalarProperty Name="RetailerPhoneNumber" ColumnName="RetailerPhoneNumber" />
+          <ScalarProperty Name="RetailerName" ColumnName="RetailerName" />
+          <ScalarProperty Name="DealerPhoneNumber" ColumnName="DealerPhoneNumber" />
+          <ScalarProperty Name="DealerName" ColumnName="DealerName" />
+          <ScalarProperty Name="DealerCode" ColumnName="DealerCode" />
+          <ScalarProperty Name="MessageSendingDate" ColumnName="MessageSendingDate" />
+          <ScalarProperty Name="IsSmsSent" ColumnName="IsSmsSent" />
+          <ScalarProperty Name="IsRetailerGotSms" ColumnName="IsRetailerGotSms" />
+          <ScalarProperty Name="IsDealerGotSms" ColumnName="IsDealerGotSms" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="SmsSentVia" ColumnName="SmsSentVia" />
+          <ScalarProperty Name="FirstSegmentBenifit" ColumnName="FirstSegmentBenifit" />
+          <ScalarProperty Name="SecondSegmentBenifit" ColumnName="SecondSegmentBenifit" />
+          <ScalarProperty Name="BackWordBenifit" ColumnName="BackWordBenifit" />
+          <ScalarProperty Name="OfferId" ColumnName="OfferId" />
+          <ScalarProperty Name="DealerBenefit" ColumnName="DealerBenefit" />
+          <ScalarProperty Name="SpecialPrizeType" ColumnName="SpecialPrizeType" />
+          <ScalarProperty Name="SpecialPrizeName" ColumnName="SpecialPrizeName" />
+          <ScalarProperty Name="SpecialPrizeValue" ColumnName="SpecialPrizeValue" />
+          <ScalarProperty Name="OracleModelName" ColumnName="OracleModelName" />
+          <ScalarProperty Name="SpecialPrizeMSDP" ColumnName="SpecialPrizeMSDP" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Winner_Fake_Offer">
+      <EntityTypeMapping TypeName="RetailerMotivationProgramModel.Winner_Fake_Offer">
+        <MappingFragment StoreEntitySet="Winner_Fake_Offer">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RetailerMessage" ColumnName="RetailerMessage" />
+          <ScalarProperty Name="DealerMessage" ColumnName="DealerMessage" />
+          <ScalarProperty Name="MessageType" ColumnName="MessageType" />
+          <ScalarProperty Name="Imei" ColumnName="Imei" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="Msdp" ColumnName="Msdp" />
+          <ScalarProperty Name="InvoicePrice" ColumnName="InvoicePrice" />
+          <ScalarProperty Name="WinningAmount" ColumnName="WinningAmount" />
+          <ScalarProperty Name="RetailerId" ColumnName="RetailerId" />
+          <ScalarProperty Name="RetailerPhoneNumber" ColumnName="RetailerPhoneNumber" />
+          <ScalarProperty Name="RetailerName" ColumnName="RetailerName" />
+          <ScalarProperty Name="DealerPhoneNumber" ColumnName="DealerPhoneNumber" />
+          <ScalarProperty Name="DealerName" ColumnName="DealerName" />
+          <ScalarProperty Name="DealerCode" ColumnName="DealerCode" />
+          <ScalarProperty Name="MessageSendingDate" ColumnName="MessageSendingDate" />
+          <ScalarProperty Name="IsSmsSent" ColumnName="IsSmsSent" />
+          <ScalarProperty Name="IsRetailerGotSms" ColumnName="IsRetailerGotSms" />
+          <ScalarProperty Name="IsDealerGotSms" ColumnName="IsDealerGotSms" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+          <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+          <ScalarProperty Name="SmsSentVia" ColumnName="SmsSentVia" />
+          <ScalarProperty Name="FirstSegmentBenifit" ColumnName="FirstSegmentBenifit" />
+          <ScalarProperty Name="SecondSegmentBenifit" ColumnName="SecondSegmentBenifit" />
+          <ScalarProperty Name="BackWordBenifit" ColumnName="BackWordBenifit" />
+          <ScalarProperty Name="OfferId" ColumnName="OfferId" />
+          <ScalarProperty Name="SpecialPrizeType" ColumnName="SpecialPrizeType" />
+          <ScalarProperty Name="SpecialPrizeName" ColumnName="SpecialPrizeName" />
+          <ScalarProperty Name="SpecialPrizeValue" ColumnName="SpecialPrizeValue" />
+          <ScalarProperty Name="OracleModelName" ColumnName="OracleModelName" />
+          <ScalarProperty Name="SpecialPrizeMSDP" ColumnName="SpecialPrizeMSDP" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,268 @@
+﻿@{
+    ViewBag.Title = "AddStock";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-header">Add to stock</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                @*<div class="card-header">Scanned IEMI List</div>*@
+                                <div class="card-body">
+                                    <div class="form-group row">
+                                        <input type="text" class="form-control" id="txtScan" placeholder="Scan Here"/>
+                                    </div>
+                                    <div class="form-group row">
+                                        <table class="table table-bordered" id="stockTable">
+                                            <thead>
+                                            <tr>
+                                                <th>Dealer Name</th>
+                                                <th>Dealer Code</th>
+                                                <th>Model</th>
+                                                <th>IMEI One</th>
+                                                <th>IMEI Two</th>
+                                                <th>Color</th>
+                                                <th>Dist. Date</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="stockTableBody"></tbody>
+                                        </table>
+                                    </div>
+                                    <div class="form-group row">
+                                        <button class="btn btn-outline-success" id="btnAddStock">Add to Stock    <div id='loader' style='display: none;'>
+
+                                            <img src="~/Content/images/ajax-loader.gif" />
+                                        </div></button>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts
+{
+    
+    <script type="text/javascript">
+        window.onload = function () {
+            document.getElementById("txtScan").focus();
+            $('#txtScan').keyup(function() {
+                //debugger;
+                if ($(this).val().length === 15) {
+                    var mimei = $('#txtScan').val();
+                    $.ajax({
+                        url: '@Url.Action("GetDistribution", "Dealer")', //Changed For test
+                        type: 'Post',
+                        //data: JSON.stringify({ statusList: packagingQcList }),
+                        data: JSON.stringify({ imei: mimei }),
+                        dataType: 'json',
+                        async: false,
+                        contentType: 'application/json',
+                        success: function (result) {
+                            
+                            if (result === "exist") {
+                                alert("IMEI already added to your stock.");
+                                $('#txtScan').val('');
+                                document.getElementById("txtScan").focus();
+                            }
+                            else if (result === "notExist") {
+                                alert("IMEI not found or not distributed to this distributor");
+                                $('#txtScan').val('');
+                                document.getElementById("txtScan").focus();
+                            }
+                            else if (result !== "exist" && result != null) {
+                                AddRowIfValid(result);
+                            } else {
+                                alert("IMEI not found in your distribution list !!");
+                                $('#txtScan').val('');
+                                document.getElementById("txtScan").focus();
+                            }
+
+
+                        },
+                        error: function(result, textStatus, jqXHR) {
+                            //iziToast.error({
+                            //    timeout: 2000,
+                            //    imageWidth: 150,
+                            //    position: 'center',
+                            //    title: 'Error',
+                            //    message: result
+                            //});
+
+                            //return false;
+                        }
+                    });
+
+
+                } else {
+                    //iziToast.error({
+                    //    timeout: 2000,
+                    //    imageWidth: 150,
+                    //    position: 'center',
+                    //    title: 'Error',
+                    //    message: "Invalid Imei Number!"
+                    //});
+
+                    return false;
+                }
+                return false;
+            });
+
+
+            $('#btnAddStock').on('click', function () {
+                $('#btnAddStock').prop('disabled', true);
+                $("#loader").show();
+                var tableElem = window.document.getElementById("stockTable");
+                var tableBody = tableElem.getElementsByTagName("tbody").item(0);
+                var i;
+                var howManyRows = tableBody.rows.length;
+                if (howManyRows <= 0) {
+                    alert("No IMEI found in the table !!!");
+                    $('#btnAddStock').prop('disabled', false);
+                    $("#loader").hide();
+                    return false;
+                }
+
+                var stockModelList = [];
+                for (j = 0; j < (howManyRows) ; j++) {
+                    var stockModel = {};
+                    var tblRows = tableBody.rows[j];
+                    var dealerName = tblRows.cells[0].childNodes.item(0).data;
+                    var dealerCode = tblRows.cells[1].childNodes.item(0).data;
+                    var model = tblRows.cells[2].childNodes.item(0).data;
+                    var imeiOne = tblRows.cells[3].childNodes.item(0).data;
+                    var imeiTwo = tblRows.cells[4].childNodes.item(0).data;
+                    var color = tblRows.cells[5].childNodes.item(0).data;
+                    var distDate = tblRows.cells[6].childNodes.item(0).data;
+
+                    stockModel.DealerName = dealerName;
+                    stockModel.DealerCode = dealerCode;
+                    stockModel.Model = model;
+                    stockModel.ImeiOne = imeiOne;
+                    stockModel.ImeiTwo = imeiTwo;
+                    stockModel.Color = color;
+                    stockModel.DistributionDate = distDate;
+
+                    stockModelList.push(stockModel);
+
+                }
+                
+                var url = '@Url.Action("SaveStock", "Dealer")';
+                $.post(url, { vmDealerStockAddList: stockModelList }, function (result) {
+                    if (result.Id == 1) {
+                        toastr.success(result.Message);
+                        $("#stockTable tr").remove();
+                        $('#btnAddStock').prop('disabled', false);
+                        $("#loader").hide();
+                    } else if (result.Id == 0) {
+                        //show error toast
+                        toastr.error(result.Message);
+                        $('#btnAddStock').prop('disabled', false);
+                        $("#loader").hide();
+                    }
+                });
+            });
+        };
+        
+
+
+
+        function AddRowIfValid(detail) {
+            var deliveryModel;
+            var tblDelivery = window.document.getElementById("stockTable");
+            var tblDeliveryBody = tblDelivery.getElementsByTagName("tbody").item(0);
+            var j;
+            var rowCount = tblDeliveryBody.rows.length;
+            var modelQ = 0;
+            var isImeiExist = false;
+            if (rowCount > 0) {
+
+                for (j = 0; j < (rowCount) ; j++) {
+
+                    var tblRows = tblDeliveryBody.rows[j];
+                    //var dealerName = tblRows.cells[0].childNodes.item(0).data;
+                    //var dealerCode = tblRows.cells[1].childNodes.item(0).data;
+                    //var model = tblRows.cells[2].childNodes.item(0).data;
+                    var imeiOne = tblRows.cells[3].childNodes.item(0).data;
+                    //var imeiTwo = tblRows.cells[4].childNodes.item(0).data;
+                    //var color = tblRows.cells[5].childNodes.item(0).data;
+                    //var distDate = tblRows.cells[6].childNodes.item(0).data;
+                    if (imeiOne === detail.ImeiOne) {
+                        isImeiExist = true;
+                        break;
+                    }
+                }
+
+                if (isImeiExist) {
+                    alert("This IMEI already exist in the delivery table");
+                    $('#txtScan').val('');
+                    document.getElementById("txtScan").focus();
+                    return false;
+                } else {
+                    var cSharpDate = detail.DistributionDate;
+                    var m = new Date(parseInt(cSharpDate.replace(/[^0-9 +]/g, '')));
+                    var dateString = m.getUTCFullYear() + "/" + (m.getUTCMonth() + 1) + "/" + m.getUTCDate();
+                    var row = '<tr>' +
+                                    '<td>'+detail.DealerName+'</td>'+
+                                    '<td>'+detail.DealerCode+'</td>'+
+                                    '<td>'+detail.Model+'</td>'+
+                                    '<td>'+detail.ImeiOne+'</td>'+
+                                    '<td>'+detail.ImeiTwo+'</td>'+
+                                    '<td>'+detail.Color+'</td>'+
+                                    '<td>' + dateString + '</td>' +
+                                    '<td><input type="button" value="Remove" class="btn btn-outline-danger" onclick="RemoveRow($(this))"/></td>'+
+                              '</tr>';
+                    $('#stockTableBody').append(row);
+
+                    $('#txtScan').val('');
+                    document.getElementById("txtScan").focus();
+                    //AddModelTable(detail.Model, detail.Color);
+                    //SumTotal();
+                }
+            } else {
+                var cSharpDate1 = detail.DistributionDate;
+                var m1 = new Date(parseInt(cSharpDate1.replace(/[^0-9 +]/g, '')));
+                var dateString1 = m1.getUTCFullYear() + "/" + (m1.getUTCMonth() + 1) + "/" + m1.getUTCDate();
+                var row1 = '<tr>' +
+                                '<td>' + detail.DealerName + '</td>' +
+                                '<td>' + detail.DealerCode + '</td>' +
+                                '<td>' + detail.Model + '</td>' +
+                                '<td>' + detail.ImeiOne + '</td>' +
+                                '<td>' + detail.ImeiTwo + '</td>' +
+                                '<td>' + detail.Color + '</td>' +
+                                '<td>' + dateString1 + '</td>' +
+                                '<td><input type="button" value="Remove" class="btn btn-outline-danger" onclick="RemoveRow($(this))"/></td>'+
+                          '</tr>';
+                $('#stockTableBody').append(row1);
+
+                $('#txtScan').val('');
+                document.getElementById("txtScan").focus();
+            }
+            return true;
+        }
+        function RemoveRow(ths) {
+            var thisRow = ths.closest('tr');
+            thisRow.remove();
+            document.getElementById("txtScan").focus();
+        }
+    </script>
+
+}
+

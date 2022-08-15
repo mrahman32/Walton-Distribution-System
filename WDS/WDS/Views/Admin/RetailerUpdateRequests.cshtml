@@ -1,0 +1,130 @@
+﻿@model  IEnumerable<WDS.Models.RetailerUpdateModel>
+@{
+    ViewBag.Title = "RetailerUpdateRequests";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (TempData["message"] != null)
+{
+    var msgType = TempData["messageType"];
+    var msg = TempData["message"];
+    if ((int)msgType == 1)
+    {
+        TempData["message"] = null;
+        TempData["messageType"] = 0;
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Message: </strong> @msg
+            <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </a>
+        </div>
+
+    }
+    else if ((int)msgType == 2)
+    {
+        TempData["message"] = null;
+        TempData["messageType"] = 0;
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Message: </strong> @msg
+            <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </a>
+        </div>
+
+    }
+    else if ((int)msgType == 3)
+    {
+        TempData["message"] = null;
+        TempData["messageType"] = 0;
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Message: </strong> @msg
+            <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </a>
+        </div>
+    }
+}
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-lg-8">
+                        Pending Recommendations
+                    </div>
+                    <div class="col-lg-4">
+                        @*<span style="text-align: right">Total Retailer: 50</span>*@
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="card-body">
+                <table class="table table-striped table-bordered" id="sample_1">
+                    <thead>
+                    <tr>
+                        @*<th>#</th>*@
+                        <th>Retailer Name</th>
+                        <th>Address Old</th>
+                        <th>Mobile Number Old</th>
+                        <th>Payment No. Old</th>
+                        <th>Payment No. Type Old</th>
+                            
+                        <th>Address New</th>
+                        <th>Mobile Number New</th>
+                        <th>Payment No. New</th>
+                        <th>Payment No. Type New</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @if (Model.Any())
+                    {
+                        foreach (var model in Model)
+                        {
+                            <tr>
+                                @Html.HiddenFor(modelItem => model.Id)
+                                @*<td></td>*@
+                                <td>@Html.DisplayFor(modelItem => model.RetailerName)</td>
+                                <td>@Html.DisplayFor(modelItem => model.RetailerOldAddress)</td>
+                                <td>@Html.DisplayFor(modelItem => model.RetailerOldPhoneNumber)</td>
+                                <td>@Html.DisplayFor(modelItem => model.RetailerOldPaymentNumber)</td>
+                                <td>@Html.DisplayFor(modelItem => model.RetailerOldPaymentNumberType)</td>
+                                <td>@Html.DisplayFor(modelItem => model.NewAddress )</td>
+                                <td>@Html.DisplayFor(modelItem => model.NewPhoneNumber)</td>
+                                <td>@Html.DisplayFor(modelItem => model.NewPaymentNumber)</td>
+                                <td>@Html.DisplayFor(modelItem => model.NewPaymentType)</td>
+                                    
+                                <td>
+                                        
+                                    <input type="button" class="btn btn-sm btn-outline-warning" value="Approve" onclick="location.href = '@Url.Action("RecommendRetailerUpdate", "Admin", new {rId = model.Id})'" />
+
+                                </td>
+                            </tr>
+                        }
+                    }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+        
+        var table = $('#sample_1').DataTable();
+        
+        new $.fn.dataTable.Buttons(table, {
+            buttons: [
+                { extend: 'excel', className: 'excelBtn', title: 'Retailer Update Request List', text: 'Click For Excel Export' }
+            ]
+        });
+
+        table.buttons(0, null).container().prependTo(
+            table.table().container()
+        );
+    });
+</script>
+

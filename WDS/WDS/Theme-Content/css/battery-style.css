@@ -1,0 +1,87 @@
+﻿  body {
+        font-family: "Times New Roman", Times, serif;
+        font-style: normal;
+        font-size: 16px;
+        color: #333;
+    }
+
+    .table-bordered > tbody > tr > td, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > td, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > thead > tr > th {
+        border: 1px solid #555;
+    }
+
+    .table th, .table td, .table > tbody > tr > td {
+        color: #333;
+    }
+    .div-head {
+        background-color: #1abc9c;
+        padding: 15px;
+        text-align: center;
+    }
+    .scan-field {
+        width: 60%;
+        height: 54px;
+        border-radius: 15px;
+        border:2px solid #1abc9c;
+        color: #ff0000;
+        font-size: 18px; 
+    }
+
+
+     .scan-field::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+          color: #FF0000;
+          opacity: 1; /* Firefox */
+         font-size: 18px;
+    }
+
+    .sticky-container-org {
+        padding: 0px;
+        margin: 0px;
+        position: fixed;
+        right: -130px;
+        top: 100px;
+        width: 310px;
+        z-index: 1100;
+    }
+
+    .sticky-org li {
+        list-style-type: none;
+        background-color: red;
+        font-size: 25px;
+        color: #efefef;
+        height: 43px;
+        padding: 0px;
+        margin: 0px 0px 1px 0px;
+        -webkit-transition: all 0.25s ease-in-out;
+        -moz-transition: all 0.25s ease-in-out;
+        -o-transition: all 0.25s ease-in-out;
+        transition: all 0.25s ease-in-out;
+        cursor: pointer;
+    }
+
+        .sticky-org li:hover {
+            margin-left: -120px;
+        }
+
+        .sticky-org li i {
+            float: left;
+            margin: 6px 5px;
+            margin-right: 15px;
+        }
+
+        .sticky-org li p {
+            padding-top: 5px;
+            margin: 0px;
+            line-height: 16px;
+            font-size: 18px;
+        }
+
+            .sticky-org li p a {
+                text-decoration: none;
+                color: white;
+                font-weight: bold;
+            }
+
+            .sticky-org li p a:hover {
+                text-decoration: underline;
+            }
+    

@@ -1,0 +1,149 @@
+﻿@model WDS.Models.ExtendedLimitModel
+@{
+    ViewBag.Title = "ExtendLimit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+
+
+
+    @if (TempData["message"] != null)
+    {
+        var msgType = TempData["messageType"];
+        var msg = TempData["message"];
+        if ((int)msgType == 1)
+        {
+            TempData["message"] = null;
+            TempData["messageType"] = 0;
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Message: </strong> @msg
+                <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </a>
+            </div>
+
+        }
+        else if ((int)msgType == 2)
+        {
+            TempData["message"] = null;
+            TempData["messageType"] = 0;
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Message: </strong> @msg
+                <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </a>
+            </div>
+
+        }
+        else if ((int)msgType == 3)
+        {
+            TempData["message"] = null;
+            TempData["messageType"] = 0;
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Message: </strong> @msg
+                <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </a>
+            </div>
+        }
+    }
+
+
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-header">Create SR</div>
+                <div class="card-body">
+                    @using (Html.BeginForm("ExtendLimit", "Admin", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">Distributor</label>
+                            <div class="col-lg-6">
+                                @Html.DropDownListFor(model => model.DistributorId, new SelectList(ViewBag.Distributors, "Value", "Text"), new { @class = "selectpicker show-tick form-control", data_live_search = "true" })
+                                @Html.ValidationMessageFor(model => model.DistributorId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">Retailer</label>
+                            <div class="col-lg-6">
+                                @Html.DropDownListFor(model => model.RetailerId, Enumerable.Empty<SelectListItem>(), "--Select one--", new { @class = "selectpicker show-tick form-control", data_live_search = "true" })
+                                @Html.ValidationMessageFor(model => model.RetailerId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">Limit Type</label>
+                            <div class="col-lg-6">
+                                @Html.DropDownListFor(model => model.LimitType, new SelectList(new[]
+                                {
+                                    new SelectListItem{Value = "", Text = "--Select--", Selected = true},
+                                    new SelectListItem{Value = "Smart All", Text = "Overall Smart Phone"},
+                                    new SelectListItem{Value = "Smart", Text = "Model Wise Smart Phone"},
+                                    new SelectListItem{Value = "Feature All", Text = "Overall Feature Phone"},
+                                    new SelectListItem{Value = "Feature", Text = "Model Wise  Feature Phone"}
+                                }, "Value", "Text"), new { @class = "selectpicker show-tick form-control" })
+                                @Html.ValidationMessageFor(model => model.LimitType, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">New Limit</label>
+                            <div class="col-lg-6">
+                                @Html.TextBoxFor(model => model.NewLimit, new { @class = "form-control", type = "number" })
+                                @Html.ValidationMessageFor(model => model.NewLimit, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">Remarks</label>
+                            <div class="col-lg-6">
+                                @Html.TextAreaFor(model => model.Remarks, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right"></label>
+                            <div class="col-lg-6">
+                                <input type="submit" value="Save" class="btn btn-outline-success" />
+                            </div>
+
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    
+    <script type="text/javascript">
+        $(function() {
+            $('#DistributorId').on('change', function () {
+                $.ajax({
+                    type: "post",
+                    url: '@Url.Action("GetRetailerByDealer", "Admin")',
+                    data: { distributorId: $('#DistributorId').val() },
+                    datatype: "json",
+                    traditional: true,
+                    success: function (data) {
+                        $("#RetailerId").empty();
+                        //$("#RetailerId").append('<option value="">--SELECT--</option>');
+                        $.each(data, function (i, dds) {
+                            $("#RetailerId").append('<option value="' + dds.Value + '">' + dds.Text + '</option>');
+                        });
+                        $('.selectpicker').selectpicker('refresh');
+                    }
+                });
+            });
+        })
+    </script>
+}
+

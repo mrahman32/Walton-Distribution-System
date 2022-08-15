@@ -1,0 +1,165 @@
+﻿
+@{
+    ViewBag.Title = "RetailerInformations";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-header"></div>
+            <div class="card-body">
+                <div class="row">
+                    @*<div class="col-md-4">
+                        <div class="form-group row">
+                            <label class="col-lg-4 col-form-label text-sm-right">Priod</label>
+                            <div class="col-lg-6">
+                                <input class="form-control datepicker" id="Priod" readonly>
+                            </div>
+                        </div>
+                    </div>*@
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <label class="col-lg-4 col-form-label text-sm-right">Zone</label>
+                            <div class="col-lg-6">
+                                @Html.DropDownList("Zone", ViewBag.AllZoneList as List<SelectListItem>, new { @class = "selectpicker show-tick form-control", data_live_search = "true", id = "zone" })
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="col-md-4">
+
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">Brand</label>
+                            <div class="col-lg-6">
+                                @Html.DropDownList("Brand", ViewBag.AllBrandList as List<SelectListItem>, new {@class = "selectpicker show-tick form-control", data_live_search = "true", id = "brand"})
+                            </div>
+                            <button class="btn btn-default" id="btnSubmit">Search</button>
+                        </div>
+
+                    </div>*@
+                </div>
+                <hr />
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="card" style="border-radius: 20px; background-color:whitesmoke">
+                            <div class="card-body">
+                                <div class="rotate">
+                                    <div>
+                                        <h2 id="wRetailers">0</h2>
+                                    </div>
+                                </div>
+                                <h4 class="text-uppercase text-right">All Retailers</h4>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card" style="border-radius: 20px; background-color:whitesmoke">
+                            <div class="card-body">
+                                <div>
+                                    <h2 id="oRetailers">0</h2>
+                                </div>
+                                <h4 class="text-uppercase text-right">Walton Retailers</h4>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <table class="table table-bordered" id="tblRetailers">
+                    <thead>
+                    <tr>
+                        <th>Retailer Name</th>
+                        <th>Phone</th>
+                        <th>Distributor Code</th>
+                        <th>Distributor Name</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tcBody"></tbody>
+                </table>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    $(function () {
+        $("#tblRetailers").DataTable();
+
+        GetRetailerCount('');
+        GetRetailers('');
+
+        $('#zone').on('change', function() {
+            var zone = $(this).val();
+            GetRetailerCount(zone);
+            GetRetailers(zone);
+        });
+    });
+
+    function GetRetailerCount(zone) {
+        $.ajax({
+            type: 'POST',
+
+            url: '@Url.Action("GetRetailerCount", "Management")',
+            dataType: 'json',
+            data: { zone: zone },
+            success: function (data) {
+                if (data!=null) {
+                    $('#wRetailers').html(data.AllRetailer);
+                    $('#oRetailers').html(data.WaltonRetailer);
+                } else {
+                    $('#wRetailers').html('No Data Found');
+                    $('#oRetailers').html('No Data Found');
+                }
+
+            }
+        });
+    }
+
+
+    function GetRetailers(zone) {
+        $.ajax({
+            type: 'POST',
+
+            url: '@Url.Action("GetRetailers", "Management")',
+            dataType: 'json',
+            data: { zone: zone },
+            success: function (data) {
+                $('#tblRetailers').DataTable().destroy();
+                $("#tcBody").html("");
+                if (data.length > 0) {
+                    $('#tblRetailers').DataTable().destroy();
+                    $("#tcBody").html("");
+
+                    var dataList = data.length;
+
+                    for (var i = 0; i < dataList; i++) {
+                        $("#tcBody").append('<tr>' +
+                            '<td>' + data[i].RetailerName + '</td>' +
+                            '<td>' + data[i].PhoneNumber + '</td>' +
+                            '<td>' + data[i].DistributorCode + '</td>' +
+                            '<td>' + data[i].DistributorName + '</td>' +
+                            '</tr>');
+
+                    }
+                    var table = $('#tblRetailers').DataTable();
+
+                    new $.fn.dataTable.Buttons(table, {
+                        buttons: [
+                            { extend: 'excel', className: 'excelBtn', title: 'Sales Report', text: 'Click For Excel Export' }
+                        ]
+                    });
+
+                    table.buttons(0, null).container().prependTo(
+                        table.table().container()
+                    );
+                }
+            }
+        });
+    }
+</script>
+

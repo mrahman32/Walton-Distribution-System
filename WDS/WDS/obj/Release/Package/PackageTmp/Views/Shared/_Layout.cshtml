@@ -1,0 +1,186 @@
+﻿@using System.Diagnostics
+@using WDS.DAL.WdsEntities
+@using WDS.Models
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - </title>
+
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @*@Scripts.Render("~/bundles/jquery")*@
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/amchart")
+    @RenderSection("scripts", required: false)
+
+    <link href="~/Content/PreloaderCustom.css" rel="stylesheet" />
+    <link href="~/Content/buttons.dataTables.min.css" rel="stylesheet" />
+    <script src="~/Scripts/dataTables.buttons.min.js"></script>
+    <script src="~/Scripts/jszip.min.js"></script>
+    <script src="~/Scripts/pdfmake.min.js"></script>
+    <script src="~/Scripts/vfs_fonts.js"></script>
+    <script src="~/Scripts/buttons.html5.min.js"></script>
+    <style>
+        .excelBtn {
+            color: #f8f9fa !important;
+            background-color: #28a745 !important;
+            border-color: #28a745 !important;
+            font-size: 15px !important;
+        }
+    </style>
+
+    @{
+        User user = new User();
+        if (Session["user"] != null)
+        {
+            user = Session["user"] as User;
+        }
+
+        string companyName = "";
+        if (Session["company"] != null)
+        {
+            companyName = Session["company"] as string;
+        }
+        string imageSource = "";
+        if (companyName.ToLower().Equals("walton"))
+        {
+            imageSource = @"~/Content/images/Walton_Mobile_logo.png";
+        }
+        else if (companyName.ToLower().Equals("marcel"))
+        {
+            imageSource = @"~/Content/images/Marcel_New_Logo.png";
+        }
+    }
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Concept - Bootstrap 4 Admin Dashboard Template</title>
+
+</head>
+<body>
+    <div class="dashboard-main-wrapper">
+        <!-- ============================================================== -->
+        <!-- navbar -->
+        <!-- ============================================================== -->
+        <div class="dashboard-header">
+            <nav class="navbar navbar-expand-lg bg-white fixed-top">
+                <a class="navbar-brand">
+                    <img src="@Url.Content(imageSource)" style="max-height: 50px" />
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto navbar-right-top font-bold font-20"><span class="navbar-right-top">@user.Name</span></ul>
+                    
+                    <ul class="navbar-nav ml-auto navbar-right-top">
+
+                        <li class="nav-item dropdown nav-user">
+                            <a class="nav-link" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="user-avatar-md rounded-circle"><i class="fas fa-user"></i></a>
+                            <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
+                                <div class="nav-user-info">
+                                    <h5 class="mb-0 text-white nav-user-name">
+                                        @if (user != null)
+                                        {
+                                            @user.UserName
+                                        }
+
+                                    </h5>
+                                    <span class="status"></span><span class="ml-2">Available</span>
+                                </div>
+                                <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>
+                                <a class="dropdown-item" href="@Url.Action("ChangePassword", "Auth")"><i class="fas fa-key mr-2"></i>Change Password</a>
+                                <a class="dropdown-item" href="@Url.Action("Logoff", "Auth")"><i class="fas fa-power-off mr-2"></i>Logout</a>
+
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!-- ============================================================== -->
+        <!-- end navbar -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- left sidebar -->
+        <!-- ============================================================== -->
+        
+        @Html.Partial("_LeftSideBar", new List<PermissionModel>());
+        <!-- ============================================================== -->
+        <!-- end left sidebar -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- wrapper  -->
+        <!-- ============================================================== -->
+        
+       
+        <div class="dashboard-wrapper">
+            
+            
+            <div class="container-fluid dashboard-content">
+                @if (user.UserName != null && user.UserName == user.Password)
+                {
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Message: </strong> Please Change your password. It is not safe to use default password. @Html.ActionLink("Change Password", "ChangePassword", "Auth")
+                        <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </a>
+                    </div>
+                }
+                <div id="cover-spin">
+                </div>
+                @RenderBody()
+            </div>
+
+               
+                <!-- ============================================================== -->
+                <!-- footer -->
+
+
+            <div class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                            Copyright © @DateTime.Now.Year Concept. All rights reserved by <a href="https://waltonbd.com/">Walton</a>.
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                            <div class="text-md-right footer-links d-none d-sm-block">
+                                <a href="javascript: void(0);">About</a>
+                                <a href="javascript: void(0);">Support</a>
+                                <a href="javascript: void(0);">Contact Us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- end footer -->
+                <!-- ============================================================== -->
+            </div>
+      
+        <!-- ============================================================== -->
+        <!-- end wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    
+
+
+
+
+
+    
+</body>
+</html>
+@*<script type="text/javascript">
+    $('.dtTable').DataTable({
+        select: true
+    });
+</script>*@

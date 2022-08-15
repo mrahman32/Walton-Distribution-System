@@ -1,0 +1,197 @@
+﻿@model WDS.ViewModels.VmPrintProductIssue
+@{
+    ViewBag.Title = "Print";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    
+    .borderless td, .borderless th {
+    border: none;
+
+}
+
+    body {
+
+        color: black;
+
+    }
+    
+</style>
+<div class="container" id="printData">
+    
+    <table class="table borderless" style="align-content: center; width: 100%">
+
+        <thead>
+            <tr>
+
+                <th style="width: 20%"></th>
+                <th style="font-size: 25px;text-align: center; width: 60%">@Model.DealerName</th>
+                <th style="width: 20%"></th>
+            </tr>
+
+        </thead>
+        <tbody>
+            <tr>
+                <th style="width: 20%"></th>
+                <td style="font-size: 17px;text-align: center; width: 60%"> Mobile:@Model.DealerPhone</td>
+                <th style="width: 20%"></th>
+            </tr>
+            <tr>
+                <th style="width: 20%"></th>
+                <td style="font-size: 17px;text-align: center; width: 60%">Dealer Code:@Model.DealerCode</td>
+                <th style="width: 20%"></th>
+            </tr>
+        </tbody>
+
+    </table>    
+    <div class="clearfix" style="border-bottom: 1px solid black"></div>
+    
+    <table class="" style="align-content: center; width: 100%">
+
+
+        <tbody>
+            <tr>
+                <td style="text-align: left;width: 12%"><span style="float:left ">Retailer Name</span><span style="float:right">:</span></td>
+                <td style="text-align: left; width: 30%">@Model.RetailerName</td>
+                <td style="width: 16%"></td>
+                <td style="text-align: right; width: 12%"><span style="float:left ">Order Date</span><span style="float:right">:</span></td>
+                <td style="text-align: left; width: 30%">@Model.OrderDate</td>
+            </tr>
+            
+            <tr>
+                <td style="text-align: right; width: 12%"><span style="float:left ">SR Name</span><span style="float:right">:</span></td>
+                <td style="text-align: left; width: 30%">@Model.SrName</td>
+                <td style="width: 16%"></td>
+                <td style="text-align: right; width: 12%"><span style="float:left ">Print Date</span><span style="float:right">:</span></td>
+                <td style="text-align: left; width: 30%">@Model.PrintDate</td>
+            </tr>
+            
+            <tr>
+                <td style="text-align: right; width: 12%"><span style="float:left ">Order Sl.</span><span style="float:right">:</span></td>
+                <td style="text-align: left; width: 30%">@Model.OrderSerial</td>
+                <td style="width: 16%"></td>
+                <td style="text-align: right; width: 12%"><span style="float:left ">Order ID</span><span style="float:right">:</span></td>
+                <td style="text-align: left; width: 30%">@Model.OrderId</td>
+            </tr>
+        </tbody>
+
+    </table>    
+    
+    <div class="clearfix"></div>
+    
+    <table class="" style="width: 100%; border: black">
+        <thead>
+            <tr>
+
+                <th style="width: 20%; border: 1px solid black" >Model</th>
+                <th style="width: 20%; border: 1px solid black">Color</th>
+                <th style="width: 15%; border: 1px solid black">Quantity</th>
+                <th style="width: 15%; border: 1px solid black">Unit Price</th>
+                <th style="width: 15%; border: 1px solid black">Discount Price</th>
+                <th style="width: 15%; border: 1px solid black">Total Price</th>
+            </tr>
+
+        </thead>
+
+        <tbody style="border: 1px solid black">
+        @if (Model != null && Model.RetailerOrderDetails != null)
+        {
+            foreach (var item in Model.RetailerOrderDetails)
+            {
+                decimal abc = Convert.ToDecimal(item.OrderTotalPrice) - (Convert.ToDecimal(item.OrderTotalPrice) * (Convert.ToDecimal(item.Discount) / 100));
+                decimal totalPrice = item.DiscountType == "CASH" ? Convert.ToDecimal(item.OrderTotalPrice) - Convert.ToDecimal(item.Discount) : abc;
+                string extn = item.DiscountType == "CASH" ? "/-" : "%";
+                string dscnt = item.Discount.ToString() + extn;
+                <tr>
+                    <td style="width: 20%; border: 1px solid black">@item.Model</td>
+                    <td style="width: 20%; border: 1px solid black">@item.Color</td>
+                    <td style="width: 15%; border: 1px solid black">@item.GivenQuantity</td>
+                    <td style="width: 15%; border: 1px solid black">@item.UnitPrice</td>
+                    <td style="width: 15%; border: 1px solid black">@dscnt </td>
+                    <td style="width: 15%; border: 1px solid black">@totalPrice</td>
+                </tr>
+            }
+        }
+        
+
+        </tbody>
+
+    </table>
+
+
+    
+     
+    
+    <table class="" style="width: 100%">
+
+        <thead>
+            <tr>
+
+                <th style="width: 20%"></th>
+                <th style="width: 20%"></th>
+                <th style="width: 15%"></th>
+                <th style="width: 15%"></th>
+                <th style="width: 15%"></th>
+                <th style="width: 15%"></th>
+            </tr>
+
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="5" style="text-align:right">Grand Total:&nbsp;</td>
+                <td >@Model.GrandTotal</td>
+            </tr>
+            @*<tr>
+                <td colspan="5" style="text-align:right">Paid:&nbsp;</td>
+                <td>@Model.PaidAmount</td>
+                
+            </tr>
+
+            <tr>
+                <td colspan="5" style="text-align:right">Due:&nbsp;</td>
+                <td>@Model.DueAmount</td>
+            </tr>
+
+            <tr style="text-align: left">
+                <td colspan="4" style="text-align:left">This Invoice printed from WDS. Walton Mobile</td>
+                <td style="text-align:right">Payment Type:&nbsp;</td>
+                <td>@Model.PaymentType</td>
+            </tr>*@
+        </tbody>
+
+    </table>    
+    
+</div>
+<div class="container">
+    <input type="button" value="Print   " id="printbtn" class="btn btn-success">  
+</div>
+
+
+
+<script src="~/Scripts/CustomScripts/jQuery.print.min.js"></script>
+<script>
+    window.addEventListener('contextmenu', function (e) {
+        // do something here... 
+        e.preventDefault();
+    }, false);
+    $(function () {
+        $('#printbtn').click(function () {
+            $('#printData').print();
+
+        });
+    });
+
+
+    function printDiv() {
+        var divContents = document.getElementById("divData").innerHTML;
+        var a = window.open('', '', 'height=500, width=500');
+        a.document.write('<html>');
+        a.document.write('<body > <h1>Div contents are <br>');
+        a.document.write(divContents);
+        a.document.write('</body></html>');
+        a.document.close();
+        a.print();
+    }
+
+</script>

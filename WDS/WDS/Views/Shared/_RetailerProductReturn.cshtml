@@ -1,0 +1,25 @@
+﻿@model WDS.ViewModels.VmProductReturn
+
+<tr id="@Model.Id">
+    @using (Html.BeginCollectionItem("VmProductReturns"))
+    {
+        @Html.HiddenFor(m => m.OrderId)
+        @Html.HiddenFor(m => m.DealerCode)
+        @Html.HiddenFor(m => m.DealerName)
+        @Html.HiddenFor(m => m.RetailerId)
+        @Html.HiddenFor(m => m.RetailerName)
+        @Html.HiddenFor(m => m.Model)
+        @Html.HiddenFor(m => m.ImeiOne)
+        @Html.HiddenFor(m => m.ImeiTwo)
+        @Html.HiddenFor(m => m.DistributionDate)
+        <td>@Html.DisplayFor(m => m.DealerCode)</td>
+        <td>@Html.DisplayFor(m => m.DealerName)</td>
+        <td>@Html.DisplayFor(m => m.RetailerName)</td>
+        <td>@Html.DisplayFor(m => m.Model)</td>
+        <td>@Html.DisplayFor(m => m.ImeiOne)</td>
+        <td>@Html.DisplayFor(m => m.ImeiTwo)</td>
+        <td>@Html.DisplayFor(m => m.DistributionDate)</td>
+        <td><button type="button" id="removeProductRow" class="btn btn-primary" onclick="removeDetailRow(this)">Remove</button></td>
+    }
+</tr>
+

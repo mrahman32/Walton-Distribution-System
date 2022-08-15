@@ -1,0 +1,342 @@
+﻿@model WDS.Models.RetailerStockReportSearchBoxModel
+@{
+    ViewBag.Title = "RetailerStockData";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-header">Retailer Stock</div>
+                <div class="card-body">
+                    @using (Html.BeginForm("RetailerStockData", "Retailer", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group row">
+
+                            <label class=" col-lg-2 text-sm-right">Start Date:</label>
+                            <div class="col-lg-2">
+                                @Html.TextBoxFor(model => model.StartDate, null, new { @class = "datepicker form-control", placeholder = "Start Date" })
+                                @*<input class="datepicker form-control" data-date-format="dd/mm/yyyy" id="startDate" autocomplete="off" placeholder="Start Date">*@
+                            </div>
+                            <label class=" col-lg-2 text-sm-right">End Date:</label>
+                            <div class="col-lg-2">
+                                @Html.TextBoxFor(model => model.EndDate, null, new { @class = "datepicker form-control", placeholder = "End Date" })
+                                @*<input class="datepicker form-control" data-date-format="dd/mm/yyyy" id="endDate" autocomplete="off" placeholder="End Date">*@
+                            </div>
+                            <label class=" col-lg-2 text-sm-right">Dealer:</label>
+                            <div class="col-lg-2">
+                                @Html.DropDownListFor(model=>model.DealerCode, new SelectList(ViewBag.Dealers, "Value", "Text"), new { @class = "selectpicker show-tick form-control", data_live_search = "true", })
+                            </div>
+
+
+                        </div>
+                        <div class="from-group row">
+                            <label class=" col-lg-2 text-sm-right">Retailer</label>
+                            <div class="col-lg-2">
+                                @Html.DropDownListFor(model=>model.RetailerId, new SelectList(""), new { @class = "selectpicker show-tick form-control", data_live_search = "true", })
+                            </div>
+                            <label class=" col-lg-2 text-sm-right">Model</label>
+                            <div class="col-lg-2">
+                                @Html.DropDownListFor(model=>model.ModelName, new SelectList(ViewBag.modelList, "Value", "Text"), new { @class = "selectpicker show-tick form-control",  data_live_search = "true", })
+                            </div>
+
+                            <div class="col-lg-2">
+                                <input type="submit" class="btn btn-info" value="Excel Dwonload" id="btnReSubmit1" />
+                            </div>
+
+
+                        </div>
+                    }
+
+                    <br />
+                    <div class="text-center"><h4 style="color:red">NB: This report is only compatible for EXCEL download.</h4></div>
+                    <br />
+                    <table class="table table-bordered" id="RetailerStockTable">
+                        <thead>
+                            <tr>
+                                <th>SL</th>
+                                <th>Dealer Name</th>
+                                <th>Dealer Code</th>
+                                <th>Retailer Name</th>
+                                <th>Retailer Address</th>
+                                <th>Phone No.</th>
+                                <th>Model</th>
+                                <th>Unit Price</th>
+                                <th>Stock Qty</th>
+                                <th>Stock Value</th>
+                                <th>Lifting Qty</th>
+                                <th>Lifting Value</th>
+                                <th>Sale Qty</th>
+                                <th>Sales Value</th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="RetailerStockTableBody"></tbody>
+                        <tfoot>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $(".datepicker").datepicker({
+            dateFormat: 'yy-mm-dd'
+        });
+
+
+        $("#btnReSubmit").on('click', function () {
+            document.getElementById('btnReSubmit').value = 'Please Wait!.';
+            document.getElementById('btnReSubmit').style.backgroundColor = "#FF0000";
+            $('#RetailerStockTable').DataTable().destroy();
+            $("#RetailerStockTableBody").html("");
+
+            var startDate = $("#startDate").val();
+            var endDate = $("#endDate").val();
+            var model = $("#model").val() == "" ? "0" : $("#model").val();
+            var dealer = $("#dealer").val(); 
+            var retailer = $("#retailer").val() == null ? "0" : $("#retailer").val();
+
+            var modelItem = {
+                'StartDate': startDate,
+                'EndDate': endDate,
+                'Dealer': dealer,
+                'Model': model,
+                'Retailer': retailer
+            };
+
+            if (startDate !== "" && endDate !== "") {
+                var dataList = JSON.stringify({ fromDate: startDate, toDate: endDate, dealerCode: dealer, modelName: model, retailerId: retailer });
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    url: '@Url.Action("RetailerStockData", "Retailer")',
+                    data: dataList,
+                    success: function (data) {
+                        document.getElementById('btnReSubmit').value = 'Submit';
+                        document.getElementById('btnReSubmit').style.backgroundColor = "#25d5f2";
+                        if (data.length > 0) {
+                            //$('#RetailerStockTable').DataTable().destroy();
+                            $("#RetailerStockTableBody").html("");
+
+                            var dataList = data.length;
+
+                            for (var i = 0; i < dataList; i++) {
+                                var sl = i + 1;
+                                    $("#RetailerStockTableBody").append('<tr>' +
+                                          '<td>' + sl + '</td>' +
+                                        '<td>' + data[i].Dealername + '</td>' +
+                                        '<td>' + data[i].DigitechCode + '</td>' +
+                                        '<td>' + data[i].RetailerName + '</td>' +
+                                        '<td>' + data[i].RetailerAddress + '</td>' +
+                                        '<td>' + data[i].PhoneNumber + '</td>' +
+                                        '<td>' + data[i].Model + '</td>' +
+                                        '<td>' + data[i].UnitPrice + '</td>' +
+                                        '<td>' + data[i].StockQty + '</td>' +
+                                        '<td>' + data[i].StockValue + '</td>' +
+                                        '<td>' + data[i].LiftingQty + '</td>' +
+                                        '<td>' + data[i].LiftingValue + '</td>' +
+                                        '<td>' + data[i].SaleQty + '</td>' +
+                                        '<td>' + data[i].SaleValue + '</td>' +
+                                        '</tr>');
+                                }
+                                //var table = $('#RetailerStockTable').DataTable({
+                                //    "footerCallback": function (row, data, start, end, display) {
+                                //        var api = this.api(), data;
+
+                                //        // Remove the formatting to get integer data for summation
+                                //        var intVal = function (i) {
+                                //            return typeof i === 'string' ?
+                                //                i.replace(/[\$,]/g, '') * 1 :
+                                //                typeof i === 'number' ?
+                                //                i : 0;
+                                //        };
+
+                                //        // Total over all pages
+                                //        total_stock_qty = api
+                                //            .column(8)
+                                //            .data()
+                                //            .reduce(function (a, b) {
+                                //                return intVal(a) + intVal(b);
+                                //            }, 0);
+
+                                //        total_stock_value = api
+                                //           .column(9)
+                                //           .data()
+                                //           .reduce(function (a, b) {
+                                //               return intVal(a) + intVal(b);
+                                //           }, 0);
+
+
+                                //        total_lift_qty = api
+                                //          .column(10)
+                                //          .data()
+                                //          .reduce(function (a, b) {
+                                //              return intVal(a) + intVal(b);
+                                //          }, 0);
+
+                                //        total_lift_value = api
+                                //            .column(11)
+                                //            .data()
+                                //            .reduce(function (a, b) {
+                                //                return intVal(a) + intVal(b);
+                                //            }, 0);
+                                //        total_sales_qty = api
+                                //            .column(12)
+                                //            .data()
+                                //            .reduce(function (a, b) {
+                                //                return intVal(a) + intVal(b);
+                                //            }, 0);
+                                //        total_sales_value = api
+                                //            .column(13)
+                                //            .data()
+                                //            .reduce(function (a, b) {
+                                //                return intVal(a) + intVal(b);
+                                //            }, 0);
+
+
+
+                                //        // Total over this page
+                                //        page_stock_qty = api
+                                //            .column(8, { page: 'current' })
+                                //            .data()
+                                //            .reduce(function (a, b) {
+                                //                return intVal(a) + intVal(b);
+                                //            }, 0);
+
+                                //        page_stock_value = api
+                                //           .column(9, { page: 'current' })
+                                //           .data()
+                                //           .reduce(function (a, b) {
+                                //               return intVal(a) + intVal(b);
+                                //           }, 0);
+
+
+                                //        page_lift_qty = api
+                                //          .column(10, { page: 'current' })
+                                //          .data()
+                                //          .reduce(function (a, b) {
+                                //              return intVal(a) + intVal(b);
+                                //          }, 0);
+
+                                //        page_lift_value = api
+                                //            .column(11, { page: 'current' })
+                                //            .data()
+                                //            .reduce(function (a, b) {
+                                //                return intVal(a) + intVal(b);
+                                //            }, 0);
+                                //        page_sales_qty = api
+                                //            .column(12, { page: 'current' })
+                                //            .data()
+                                //            .reduce(function (a, b) {
+                                //                return intVal(a) + intVal(b);
+                                //            }, 0);
+                                //        page_sales_value = api
+                                //            .column(13, { page: 'current' })
+                                //            .data()
+                                //            .reduce(function (a, b) {
+                                //                return intVal(a) + intVal(b);
+                                //            }, 0);
+
+
+                                //        // Update footer
+                                //        $(api.column(7).footer()).html('Total');
+                                //        $(api.column(8).footer()).html(
+                                //            page_stock_qty + ' (' + total_stock_qty + ' Total Stock)'
+                                //        );
+                                //        $(api.column(9).footer()).html(
+                                //           page_stock_value + ' (' + total_stock_value + ' Total Stock Value)'
+                                //       );
+
+                                //        $(api.column(10).footer()).html(
+                                //           page_lift_qty + ' (' + total_lift_qty + ' Total Lifting)'
+                                //       );
+                                //        $(api.column(11).footer()).html(
+                                //            page_lift_value + ' (' + total_lift_value + ' Total Lifting Value)'
+                                //        );
+                                //        $(api.column(12).footer()).html(
+                                //            page_sales_qty + ' (' + total_sales_qty + ' Total Sales)'
+                                //        );
+                                //        $(api.column(13).footer()).html(
+                                //            page_sales_value + ' (' + total_sales_value + ' Total Sales Value)'
+                                //        );
+                                        
+                                //    }
+                                //}
+//);
+
+                                //new $.fn.dataTable.Buttons(table, {
+                                //    buttons: [
+                                //        { extend: 'excel', className: 'excelBtn', title: 'Sales Report', text: 'Click For Excel Export' }
+                                //    ]
+                                //});
+
+                                //table.buttons(0, null).container().prependTo(
+                                //    table.table().container()
+                                //);
+                            } else {
+                                iziToast.error({
+                                    title: 'Error',
+                                    message: 'No Data Found!.',
+                                    position: 'topCenter',
+                                });
+
+                        }
+                    }
+                });
+            } else {
+                alert("Select Date!");
+                document.getElementById('btnReSubmit').value = 'Submit';
+                document.getElementById('btnReSubmit').style.backgroundColor = "#25d5f2";
+            }
+
+        });
+
+        $('#DealerCode').change(function () {
+            var dealerCode = $('#DealerCode').val();
+            $.ajax({
+                type: "post",
+                url: '@Url.Action("GetRetailerListbydealer", "Retailer")',
+                data: { "dealerCode": dealerCode },
+                datatype: "json",
+                traditional: true,
+                success: function (data) {
+                    $("#RetailerId").empty();
+                    $("#RetailerId").append('<option value="0">--SELECT--</option>');
+                    $.each(data, function (i, dds) {
+                        $("#RetailerId").append('<option value="' + dds.Value + '">' + dds.Text + '</option>');
+                    });
+                    $('.selectpicker').selectpicker('refresh');
+                }
+            });
+        });
+
+
+    });
+
+
+</script>
+

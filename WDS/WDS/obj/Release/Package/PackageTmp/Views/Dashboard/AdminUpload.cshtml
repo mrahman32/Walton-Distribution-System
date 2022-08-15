@@ -1,0 +1,68 @@
+﻿@model WDS.ViewModels.VmDashboardImage
+@{
+    ViewBag.Title = "AdminUpload";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("AdminUpload", "Dashboard", FormMethod.Post, new {id="uploadForm", enctype="multipart/form-data"}))
+{
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card">
+                    <div class="card-header">Create Retailer (@Html.ActionLink("Back To Upload List", "UploadList", "Admin"))</div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">Offer Description</label>
+                            <div class="col-lg-6">
+                                @Html.TextAreaFor(model => model.ImageDescription, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">Image Upload</label>
+                            <div class="col-lg-6">
+                                @Html.TextBoxFor(m => m.FileBase, new { type = "file", @class = "form-control", accept = "image/x-png,image/gif,image/jpeg" })
+                            </div>
+                        </div>
+                        
+
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">Is-PopUp</label>
+                            <div class="col-lg-6">
+                                @Html.DropDownListFor(model => model.IsPopUp, new List<SelectListItem>
+                                {
+                                    new SelectListItem { Text = "Yes", Value = "true"},
+                                    new SelectListItem { Text = "No", Value = "false"}
+                                }, new { @class = "selectpicker show-tick form-control" })
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right"></label>
+                            <div class="col-lg-6">
+                                <input type="submit" class="btn btn-outline-success" value="Save" id="idMyBtn" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<script>
+
+    $(document).ready(function () {
+
+        $('#idMyBtn').on('click',
+            function (event) {
+                $('#idMyBtn').prop('disabled', true);
+                $('#uploadForm').submit();
+            });
+    });
+
+</script>
+
+

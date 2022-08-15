@@ -1,0 +1,2249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1B24621C-9224-4825-94A3-49F162CDD115}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WDS</RootNamespace>
+    <AssemblyName>WDS</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="BeginCollectionItem, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BeginCollectionItem.1.2.1.0\lib\net35\BeginCollectionItem.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ClosedXML">
+      <HintPath>..\packages\ClosedXML.0.95.4\lib\net40\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.7.2\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ExcelNumberFormat">
+      <HintPath>..\packages\ExcelNumberFormat.1.0.10\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="SimpleInjector, Version=4.9.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.4.9.0\lib\net45\SimpleInjector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SimpleInjector.Integration.Web, Version=4.9.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.Integration.Web.4.9.0\lib\net40\SimpleInjector.Integration.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SimpleInjector.Integration.Web.Mvc, Version=4.9.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.Integration.Web.Mvc.4.9.0\lib\net40\SimpleInjector.Integration.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Activities" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\BillingController.cs" />
+    <Compile Include="Controllers\ChartAndGraphTestController.cs" />
+    <Compile Include="Controllers\CommonController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\DealerController.cs" />
+    <Compile Include="Controllers\DocumentController.cs" />
+    <Compile Include="Controllers\ManagementController.cs" />
+    <Compile Include="Controllers\RetailerController.cs" />
+    <Compile Include="Controllers\TsoController.cs" />
+    <Compile Include="DAL\WdsEntities\AvailabilityBroadcast.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\Bank.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\BankBranch.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\BankSolvenciesUpdateLog.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\BankSolvency.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\Brand.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\DashboardImage.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\DASHBOARD_SALE_INFO_Result.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\DealerDistribution.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\DealerDistributionDetail.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\DealerPrice.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\DealerStockCheck_Result.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\DealerTerritoryMapping.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\Distributor.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\DistributorCheckList.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\DistributorOrder.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\DistributorOrderDetail.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\DistributorOrderLog.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\DistributorOthersInformation.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\DistributorOthersInformationUpdateLog.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\DistributorPersonalInformation.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\DistributorType.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\District.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\Division.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\ExtendedLimit.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\IncentiveDistribution.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\IncentiveDistribution_Back20210627.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\MainMenu.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\MarketShare.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\MemorandumOfAgreement.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\MemorandumOfAgreementUpdateLog.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\MemorandumOfCheque.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\MemorandumOfChequeUpdateLog.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\MisPerson.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\MisUpdateLog.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\MOA_Stamps.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\MOC_Cheques.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\MOC_Stamps.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\ModelColor.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\ModelPrice.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\OtherDistributor.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\OtherRetailer.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\Party.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\Product.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\ProductBrand.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\ProductMaster.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\PromotionalMessageLog.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\RetailerDistribution.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\RetailerInfo.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\RetailerOrder.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\RetailerOrderDetail.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\RetailerPaymemt.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\RetailerPromotionalWinning.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\RetailerTransferLog.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\RetailerUpdateLog.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\Role.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\SalesRepresentative.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\SalesTeam.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\SalesZone.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\SendSmsLog.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\sp_helpdiagrams_Result.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\SRUpdateLog.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\stp_check_imei_status_Result.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\stp_dealer_target_achievement_report_Result.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\stp_distributor_sales_and_stock_Result.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\stp_distributor_wise_sale_Result.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\stp_management_area_wise_market_share_Result.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\stp_management_area_wise_market_share_walton_Result.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\stp_management_area_wise_top_brand_Result.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\stp_management_retailer_count_Result.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\stp_management_retailer_list_zone_Result.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\stp_market_size_Result.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\stp_retailer_date_wise_incentive_Result.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\stp_retailer_model_wise_lifiting_Result.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\stp_retailer_sales_stock_Result.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\stp_retailer_stock_Result.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\stp_sr_date_wise_incentive_Result.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\stp_sr_report_Result.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\stp_sr_sales_incentive_Result.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\stp_sr_sales_report_Result.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\stp_sr_three_months_incentive_Result.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\SubMenu.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\sysdiagram.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\Target.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\TaxIdentitiesUpdateLog.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\TaxIdentity.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\TaxZone.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\ThanaList.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\TradeLicens.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\TradeLicensesUpdateLog.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\User.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\ValueAddedTax.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\ValueAddedTaxesUpdateLog.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\VarificationApproval.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\VarificationEntity.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\WdsModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WdsModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\WdsModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\WdsModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WdsModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\Zone.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\WdsEntities\ZoneWiseSales_Result.cs">
+      <DependentUpon>WdsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Helper\ArrayOfServiceClass.cs" />
+    <Compile Include="Infrastructure\Helper\FileManager.cs" />
+    <Compile Include="Infrastructure\Helper\MemberAuthorization.cs" />
+    <Compile Include="Infrastructure\Helper\ServiceClass.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\AvailabilityBroadcastRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\BankSolvenciesUpdateLogRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\BankSolvencyRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\BrandRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\DashboardImageRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\DealerDistributionDetailsRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\DealerDistributionRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\DistributorCheckListRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\DistributorOrderDetailRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\DistributorOrderLogRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\DistributorOrderRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\DistributorOthersInformationRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\DistributorOthersInformationUpdateLogRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\DistributorPersonalInformationRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\DistributorRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\DistributorTypeRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\DistrictsRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\DivisionRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\ExtendedLimitRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\IncentiveDistributionRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\MainMenuRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\MarketShareRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\MemorandumOfAgreementRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\MemorandumOfAgreementUpdateLogRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\MemorandumOfChequeRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\MemorandumOfChequeUpdateLogRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\MisPersonRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\MOA_StampsRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\MOC_ChequesRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\ModelColorRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\ModelPriceRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\OtherDistributorRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\OtherRetailerRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\PartyRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\ProductBrandRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\ProductMasterWdsRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\ProductRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\Repository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\RetailerDistributionRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\RetailerInfoRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\RetailerOrderDetailRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\RetailerOrderRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\RetailerUpdateLogRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\RoleRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\SalesRepresentativeRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\SalesTeamRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\SalesZoneRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\SendSmsLogRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\SubMenuRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\TargetRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\TaxIdentitiesUpdateLogRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\TaxIdentityRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\ThanaRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\TradeLicensesUpdateLogRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\TradeLicensRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\Unit.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\UserRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\ValueAddedTaxesUpdateLogRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\ValueAddedTaxRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\VarificationApprovalRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\VarificationEntityRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryClasses\ZoneRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IAvailabilityBroadcastRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IBankSolvenciesUpdateLogRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IBankSolvencyRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IBrandRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IDashboardImageRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IDealerDistributionDetailsRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IDealerDistributionRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IDistributorCheckListRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IDistributorOrderDetailRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IDistributorOrderRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IDistributorOthersInformationRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IDistributorOthersInformationUpdateLogRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IDistributorPersonalInformationRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IDistributorRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IDistributorTypeRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IDistrictsRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IDivisionRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IExtendedLimitRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IIncentiveDistributionRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IMainMenuRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IMarketShareRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IMemorandumOfAgreementRepostory.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IMemorandumOfAgreementUpdateLogRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IMemorandumOfChequeRepostory.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IMemorandumOfChequeUpdateLogRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IMisPersonRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IMOA_StampsRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IMOC_ChequesRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IModelColorRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IModelPriceRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IOtherDistributorRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IOtherRetailerRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IPartyRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IProductBrandRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IProductMasterWdsRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IProductRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IRetailerDistributionRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IRetailerInfoRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IRetailerOrderDetailRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IDistributorOrderLogRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IRetailerOrderRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IRetailerUpdateLogRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IRoleRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\ISalesRepresentativeRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\ISalesTeamRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\ISalesZoneRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\ISendSmsLogRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\ISubMenuRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\ITargetRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\ITaxIdentitiesUpdateLogRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\ITaxIdentityRepostory.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IThanaRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\ITradeLicensesUpdateLogRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\ITradeLicensRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IUnit.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IUserRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IValueAddedTaxesRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IValueAddedTaxesUpdateLogRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IVarificationApprovalRepostitory.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IVarificationEntityRepository.cs" />
+    <Compile Include="Infrastructure\Repositories\RepositoryInterfaces\IZoneRepository.cs" />
+    <Compile Include="Infrastructure\Services\ServiceClasses\AdminService.cs" />
+    <Compile Include="Infrastructure\Services\ServiceClasses\AuthService.cs" />
+    <Compile Include="Infrastructure\Services\ServiceClasses\CommonService.cs" />
+    <Compile Include="Infrastructure\Services\ServiceClasses\DashboardService.cs" />
+    <Compile Include="Infrastructure\Services\ServiceClasses\DealerService.cs" />
+    <Compile Include="Infrastructure\Services\ServiceClasses\DocumentService.cs" />
+    <Compile Include="Infrastructure\Services\ServiceClasses\ManagementService.cs" />
+    <Compile Include="Infrastructure\Services\ServiceClasses\RetailerService.cs" />
+    <Compile Include="Infrastructure\Services\ServiceInterfaces\IAdminService.cs" />
+    <Compile Include="Infrastructure\Services\ServiceInterfaces\IAuthService.cs" />
+    <Compile Include="Infrastructure\Services\ServiceInterfaces\ICommonService.cs" />
+    <Compile Include="Infrastructure\Services\ServiceInterfaces\IDashboardService.cs" />
+    <Compile Include="Infrastructure\Services\ServiceInterfaces\IDealerService.cs" />
+    <Compile Include="Infrastructure\Services\ServiceInterfaces\IDocumentService.cs" />
+    <Compile Include="Infrastructure\Services\ServiceInterfaces\IManagementService.cs" />
+    <Compile Include="Infrastructure\Services\ServiceInterfaces\IRetailerService.cs" />
+    <Compile Include="Models\AjaxResponseModel.cs" />
+    <Compile Include="Models\BankSolvencyModel.cs" />
+    <Compile Include="Models\ChangePasswordModel.cs" />
+    <Compile Include="Models\CheckListApprovalPendingModel.cs" />
+    <Compile Include="Models\DashboardImageModel.cs" />
+    <Compile Include="Models\DashboardSalesAndActivationCountModel.cs" />
+    <Compile Include="Models\DealerDistributionModel.cs" />
+    <Compile Include="Models\DealerPriceModel.cs" />
+    <Compile Include="Models\DistributorCheckListModel.cs" />
+    <Compile Include="Models\DistributorDoaDetailModel.cs" />
+    <Compile Include="Models\DistributorDoaQuantityModel.cs" />
+    <Compile Include="Models\DistributorOthersInformationModel.cs" />
+    <Compile Include="Models\DistributorPersonalInformationModel.cs" />
+    <Compile Include="Models\DistrictModel.cs" />
+    <Compile Include="Models\ExtendedLimitModel.cs" />
+    <Compile Include="Models\ImeiDeliveryModel.cs" />
+    <Compile Include="Models\IncentiveDistributionModel.cs" />
+    <Compile Include="Models\LogisticsOrderModel.cs" />
+    <Compile Include="Models\MemorandumOfAgreementModel.cs" />
+    <Compile Include="Models\MemorandumOfChequeModel.cs" />
+    <Compile Include="Models\MOA_StapmsModel.cs" />
+    <Compile Include="Models\MOC_ChequesModel.cs" />
+    <Compile Include="Models\ModelPriceModel.cs" />
+    <Compile Include="Models\PermissionModel.cs" />
+    <Compile Include="Models\RetailerDistributionModel.cs" />
+    <Compile Include="Models\RetailerInfoModel.cs" />
+    <Compile Include="Models\RetailerOrderDetailModel.cs" />
+    <Compile Include="Models\RetailerOrderModel.cs" />
+    <Compile Include="Models\RetailerStockReportSearchBoxModel.cs" />
+    <Compile Include="Models\RetailerUpdateModel.cs" />
+    <Compile Include="Models\RoleModel.cs" />
+    <Compile Include="Models\SalesRepresentativeModel.cs" />
+    <Compile Include="Models\TargetModel.cs" />
+    <Compile Include="Models\TaxIdentityModel.cs" />
+    <Compile Include="Models\TopMobileModel.cs" />
+    <Compile Include="Models\TradeLicensModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\ValueAddedTaxModel.cs" />
+    <Compile Include="Models\VarificationApprovalModel.cs" />
+    <Compile Include="Models\VarificationEntityModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AreaWiseTopBrand.cs" />
+    <Compile Include="ViewModels\DistributorDoaDetailViewModel.cs" />
+    <Compile Include="ViewModels\VmAvailabilityBroadcast.cs" />
+    <Compile Include="ViewModels\VmDashboardCard.cs" />
+    <Compile Include="ViewModels\VmDashboardImage.cs" />
+    <Compile Include="ViewModels\vmDealerAndRetailerStock.cs" />
+    <Compile Include="ViewModels\VmDealerSalesReport.cs" />
+    <Compile Include="ViewModels\VmDealerStockAdd.cs" />
+    <Compile Include="ViewModels\VmDistributorDocVerificationList.cs" />
+    <Compile Include="ViewModels\vmDistributorOrder.cs" />
+    <Compile Include="ViewModels\vmDistributorOrderDetail.cs" />
+    <Compile Include="ViewModels\vmDistributors.cs" />
+    <Compile Include="ViewModels\VmImeiDelivery.cs" />
+    <Compile Include="ViewModels\VmPrintProductIssue.cs" />
+    <Compile Include="ViewModels\VmProductIssue.cs" />
+    <Compile Include="ViewModels\VmProductReturn.cs" />
+    <Compile Include="ViewModels\VmRetailerOrder.cs" />
+    <Compile Include="ViewModels\VmRetailerOrders.cs" />
+    <Compile Include="ViewModels\vmRetailerStatusCount.cs" />
+    <Compile Include="ViewModels\VmRetailerStock.cs" />
+    <Compile Include="ViewModels\VmSrReport.cs" />
+    <Compile Include="ViewModels\vmSRStatusCount.cs" />
+    <Compile Include="ViewModels\VmSrWiseSales.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="amcharts4\charts.js" />
+    <Content Include="amcharts4\core.js" />
+    <Content Include="amcharts4\deps\canvg.js" />
+    <Content Include="amcharts4\deps\pdfmake.js" />
+    <Content Include="amcharts4\deps\xlsx.js" />
+    <Content Include="amcharts4\examples\javascript\100%25-stacked-column-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\100%25-stacked-column-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\100%25-stacked-column-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\adding-live-data\index.css" />
+    <Content Include="amcharts4\examples\javascript\adding-live-data\index.html" />
+    <Content Include="amcharts4\examples\javascript\adding-live-data\index.js" />
+    <Content Include="amcharts4\examples\javascript\amcharts3\index.css" />
+    <Content Include="amcharts4\examples\javascript\amcharts3\index.html" />
+    <Content Include="amcharts4\examples\javascript\amcharts3\index.js" />
+    <Content Include="amcharts4\examples\javascript\amcharts3\v3.js" />
+    <Content Include="amcharts4\examples\javascript\animating-along-the-line-series\index.css" />
+    <Content Include="amcharts4\examples\javascript\animating-along-the-line-series\index.html" />
+    <Content Include="amcharts4\examples\javascript\animating-along-the-line-series\index.js" />
+    <Content Include="amcharts4\examples\javascript\bar-chart-race\index.css" />
+    <Content Include="amcharts4\examples\javascript\bar-chart-race\index.html" />
+    <Content Include="amcharts4\examples\javascript\bar-chart-race\index.js" />
+    <Content Include="amcharts4\examples\javascript\base\index.css" />
+    <Content Include="amcharts4\examples\javascript\base\index.html" />
+    <Content Include="amcharts4\examples\javascript\base\index.js" />
+    <Content Include="amcharts4\examples\javascript\bubble-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\bubble-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\bubble-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\candlestick-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\candlestick-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\candlestick-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\changing-series-apppearance\index.css" />
+    <Content Include="amcharts4\examples\javascript\changing-series-apppearance\index.html" />
+    <Content Include="amcharts4\examples\javascript\changing-series-apppearance\index.js" />
+    <Content Include="amcharts4\examples\javascript\changing-tree-map-data\index.css" />
+    <Content Include="amcharts4\examples\javascript\changing-tree-map-data\index.html" />
+    <Content Include="amcharts4\examples\javascript\changing-tree-map-data\index.js" />
+    <Content Include="amcharts4\examples\javascript\chord-diagram-non-ribbon\index.css" />
+    <Content Include="amcharts4\examples\javascript\chord-diagram-non-ribbon\index.html" />
+    <Content Include="amcharts4\examples\javascript\chord-diagram-non-ribbon\index.js" />
+    <Content Include="amcharts4\examples\javascript\chord-diagram\index.css" />
+    <Content Include="amcharts4\examples\javascript\chord-diagram\index.html" />
+    <Content Include="amcharts4\examples\javascript\chord-diagram\index.js" />
+    <Content Include="amcharts4\examples\javascript\chord-friends-kisses\index.css" />
+    <Content Include="amcharts4\examples\javascript\chord-friends-kisses\index.html" />
+    <Content Include="amcharts4\examples\javascript\chord-friends-kisses\index.js" />
+    <Content Include="amcharts4\examples\javascript\chord-friends-kisses\whokissed.png" />
+    <Content Include="amcharts4\examples\javascript\clock\index.css" />
+    <Content Include="amcharts4\examples\javascript\clock\index.html" />
+    <Content Include="amcharts4\examples\javascript\clock\index.js" />
+    <Content Include="amcharts4\examples\javascript\column-chart-with-axis-break\index.css" />
+    <Content Include="amcharts4\examples\javascript\column-chart-with-axis-break\index.html" />
+    <Content Include="amcharts4\examples\javascript\column-chart-with-axis-break\index.js" />
+    <Content Include="amcharts4\examples\javascript\column-chart-with-images-as-bullets\chandler.jpg" />
+    <Content Include="amcharts4\examples\javascript\column-chart-with-images-as-bullets\index.css" />
+    <Content Include="amcharts4\examples\javascript\column-chart-with-images-as-bullets\index.html" />
+    <Content Include="amcharts4\examples\javascript\column-chart-with-images-as-bullets\index.js" />
+    <Content Include="amcharts4\examples\javascript\column-chart-with-images-as-bullets\joey.jpg" />
+    <Content Include="amcharts4\examples\javascript\column-chart-with-images-as-bullets\monica.jpg" />
+    <Content Include="amcharts4\examples\javascript\column-chart-with-images-as-bullets\phoebe.jpg" />
+    <Content Include="amcharts4\examples\javascript\column-chart-with-images-as-bullets\rachel.jpg" />
+    <Content Include="amcharts4\examples\javascript\column-chart-with-images-as-bullets\ross.jpg" />
+    <Content Include="amcharts4\examples\javascript\columns-with-pies-inside\index.css" />
+    <Content Include="amcharts4\examples\javascript\columns-with-pies-inside\index.html" />
+    <Content Include="amcharts4\examples\javascript\columns-with-pies-inside\index.js" />
+    <Content Include="amcharts4\examples\javascript\countries-morphing-to-pie-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\countries-morphing-to-pie-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\countries-morphing-to-pie-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\curved-column-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\curved-column-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\curved-column-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\cylinder-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\cylinder-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\cylinder-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\data-grouping-50K\index.css" />
+    <Content Include="amcharts4\examples\javascript\data-grouping-50K\index.html" />
+    <Content Include="amcharts4\examples\javascript\data-grouping-50K\index.js" />
+    <Content Include="amcharts4\examples\javascript\date-based-radar\index.css" />
+    <Content Include="amcharts4\examples\javascript\date-based-radar\index.html" />
+    <Content Include="amcharts4\examples\javascript\date-based-radar\index.js" />
+    <Content Include="amcharts4\examples\javascript\day-night-map\index.css" />
+    <Content Include="amcharts4\examples\javascript\day-night-map\index.html" />
+    <Content Include="amcharts4\examples\javascript\day-night-map\index.js" />
+    <Content Include="amcharts4\examples\javascript\donut-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\donut-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\donut-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\drag-and-change-values\index.css" />
+    <Content Include="amcharts4\examples\javascript\drag-and-change-values\index.html" />
+    <Content Include="amcharts4\examples\javascript\drag-and-change-values\index.js" />
+    <Content Include="amcharts4\examples\javascript\dragging-pie-slices\index.css" />
+    <Content Include="amcharts4\examples\javascript\dragging-pie-slices\index.html" />
+    <Content Include="amcharts4\examples\javascript\dragging-pie-slices\index.js" />
+    <Content Include="amcharts4\examples\javascript\drill-down-map\index.css" />
+    <Content Include="amcharts4\examples\javascript\drill-down-map\index.html" />
+    <Content Include="amcharts4\examples\javascript\drill-down-map\index.js" />
+    <Content Include="amcharts4\examples\javascript\drill-down-tree-map\index.css" />
+    <Content Include="amcharts4\examples\javascript\drill-down-tree-map\index.html" />
+    <Content Include="amcharts4\examples\javascript\drill-down-tree-map\index.js" />
+    <Content Include="amcharts4\examples\javascript\drill-down-tree-map\logos\acura.png" />
+    <Content Include="amcharts4\examples\javascript\drill-down-tree-map\logos\audi.png" />
+    <Content Include="amcharts4\examples\javascript\drill-down-tree-map\logos\bmw.png" />
+    <Content Include="amcharts4\examples\javascript\drill-down-tree-map\logos\buick.png" />
+    <Content Include="amcharts4\examples\javascript\drill-down-tree-map\logos\cadillac.png" />
+    <Content Include="amcharts4\examples\javascript\drill-down-tree-map\logos\chevrolet.png" />
+    <Content Include="amcharts4\examples\javascript\drill-down-tree-map\logos\chrysler.png" />
+    <Content Include="amcharts4\examples\javascript\drill-down-tree-map\logos\dodge.png" />
+    <Content Include="amcharts4\examples\javascript\drill-down-tree-map\logos\ford.png" />
+    <Content Include="amcharts4\examples\javascript\drill-down-tree-map\logos\gmc.png" />
+    <Content Include="amcharts4\examples\javascript\drill-down-tree-map\logos\honda.png" />
+    <Content Include="amcharts4\examples\javascript\drill-down-tree-map\logos\hyundai.png" />
+    <Content Include="amcharts4\examples\javascript\drill-down-tree-map\logos\infiniti.png" />
+    <Content Include="amcharts4\examples\javascript\drill-down-tree-map\logos\jeep.png" />
+    <Content Include="amcharts4\examples\javascript\drill-down-tree-map\logos\kia.png" />
+    <Content Include="amcharts4\examples\javascript\drill-down-tree-map\logos\lexus.png" />
+    <Content Include="amcharts4\examples\javascript\drill-down-tree-map\logos\lincoln.png" />
+    <Content Include="amcharts4\examples\javascript\drill-down-tree-map\logos\mazda.png" />
+    <Content Include="amcharts4\examples\javascript\drill-down-tree-map\logos\mercedes-benz.png" />
+    <Content Include="amcharts4\examples\javascript\drill-down-tree-map\logos\mitsubishi.png" />
+    <Content Include="amcharts4\examples\javascript\drill-down-tree-map\logos\nissan.png" />
+    <Content Include="amcharts4\examples\javascript\drill-down-tree-map\logos\other.png" />
+    <Content Include="amcharts4\examples\javascript\drill-down-tree-map\logos\subaru.png" />
+    <Content Include="amcharts4\examples\javascript\drill-down-tree-map\logos\toyota.png" />
+    <Content Include="amcharts4\examples\javascript\drill-down-tree-map\logos\volkswagen.png" />
+    <Content Include="amcharts4\examples\javascript\dumbbell-plot-horizontal\index.css" />
+    <Content Include="amcharts4\examples\javascript\dumbbell-plot-horizontal\index.html" />
+    <Content Include="amcharts4\examples\javascript\dumbbell-plot-horizontal\index.js" />
+    <Content Include="amcharts4\examples\javascript\dumbbell-plot\index.css" />
+    <Content Include="amcharts4\examples\javascript\dumbbell-plot\index.html" />
+    <Content Include="amcharts4\examples\javascript\dumbbell-plot\index.js" />
+    <Content Include="amcharts4\examples\javascript\duration-axis\index.css" />
+    <Content Include="amcharts4\examples\javascript\duration-axis\index.html" />
+    <Content Include="amcharts4\examples\javascript\duration-axis\index.js" />
+    <Content Include="amcharts4\examples\javascript\error-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\error-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\error-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\fill-between-lines-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\fill-between-lines-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\fill-between-lines-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\force-directed-creating-links\index.css" />
+    <Content Include="amcharts4\examples\javascript\force-directed-creating-links\index.html" />
+    <Content Include="amcharts4\examples\javascript\force-directed-creating-links\index.js" />
+    <Content Include="amcharts4\examples\javascript\force-directed-network\index.css" />
+    <Content Include="amcharts4\examples\javascript\force-directed-network\index.html" />
+    <Content Include="amcharts4\examples\javascript\force-directed-network\index.js" />
+    <Content Include="amcharts4\examples\javascript\force-directed-tree-expandable\index.css" />
+    <Content Include="amcharts4\examples\javascript\force-directed-tree-expandable\index.html" />
+    <Content Include="amcharts4\examples\javascript\force-directed-tree-expandable\index.js" />
+    <Content Include="amcharts4\examples\javascript\force-directed-tree\index.css" />
+    <Content Include="amcharts4\examples\javascript\force-directed-tree\index.html" />
+    <Content Include="amcharts4\examples\javascript\force-directed-tree\index.js" />
+    <Content Include="amcharts4\examples\javascript\funnel-chart-horizontal\index.css" />
+    <Content Include="amcharts4\examples\javascript\funnel-chart-horizontal\index.html" />
+    <Content Include="amcharts4\examples\javascript\funnel-chart-horizontal\index.js" />
+    <Content Include="amcharts4\examples\javascript\funnel-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\funnel-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\funnel-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\gantt-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\gantt-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\gantt-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\gauge-with-bands\index.css" />
+    <Content Include="amcharts4\examples\javascript\gauge-with-bands\index.html" />
+    <Content Include="amcharts4\examples\javascript\gauge-with-bands\index.js" />
+    <Content Include="amcharts4\examples\javascript\geo-heat-map\index.css" />
+    <Content Include="amcharts4\examples\javascript\geo-heat-map\index.html" />
+    <Content Include="amcharts4\examples\javascript\geo-heat-map\index.js" />
+    <Content Include="amcharts4\examples\javascript\heat-map-circles\index.css" />
+    <Content Include="amcharts4\examples\javascript\heat-map-circles\index.html" />
+    <Content Include="amcharts4\examples\javascript\heat-map-circles\index.js" />
+    <Content Include="amcharts4\examples\javascript\heat-map-radar\index.css" />
+    <Content Include="amcharts4\examples\javascript\heat-map-radar\index.html" />
+    <Content Include="amcharts4\examples\javascript\heat-map-radar\index.js" />
+    <Content Include="amcharts4\examples\javascript\heat-map\index.css" />
+    <Content Include="amcharts4\examples\javascript\heat-map\index.html" />
+    <Content Include="amcharts4\examples\javascript\heat-map\index.js" />
+    <Content Include="amcharts4\examples\javascript\horizontally-stacked-axes\index.css" />
+    <Content Include="amcharts4\examples\javascript\horizontally-stacked-axes\index.html" />
+    <Content Include="amcharts4\examples\javascript\horizontally-stacked-axes\index.js" />
+    <Content Include="amcharts4\examples\javascript\line-different-ups-downs\index.css" />
+    <Content Include="amcharts4\examples\javascript\line-different-ups-downs\index.html" />
+    <Content Include="amcharts4\examples\javascript\line-different-ups-downs\index.js" />
+    <Content Include="amcharts4\examples\javascript\map-line-gauge-mix\bang.png" />
+    <Content Include="amcharts4\examples\javascript\map-line-gauge-mix\index.css" />
+    <Content Include="amcharts4\examples\javascript\map-line-gauge-mix\index.html" />
+    <Content Include="amcharts4\examples\javascript\map-line-gauge-mix\index.js" />
+    <Content Include="amcharts4\examples\javascript\map-line-gauge-mix\rocket.svg" />
+    <Content Include="amcharts4\examples\javascript\morphing-countries\index.css" />
+    <Content Include="amcharts4\examples\javascript\morphing-countries\index.html" />
+    <Content Include="amcharts4\examples\javascript\morphing-countries\index.js" />
+    <Content Include="amcharts4\examples\javascript\multiple-axes-date-based-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\multiple-axes-date-based-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\multiple-axes-date-based-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\multiple-series-map-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\multiple-series-map-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\multiple-series-map-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\non-chart-usage\index.css" />
+    <Content Include="amcharts4\examples\javascript\non-chart-usage\index.html" />
+    <Content Include="amcharts4\examples\javascript\non-chart-usage\index.js" />
+    <Content Include="amcharts4\examples\javascript\ohlc-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\ohlc-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\ohlc-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\packed-circles\index.css" />
+    <Content Include="amcharts4\examples\javascript\packed-circles\index.html" />
+    <Content Include="amcharts4\examples\javascript\packed-circles\index.js" />
+    <Content Include="amcharts4\examples\javascript\pictorial-bar-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\pictorial-bar-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\pictorial-bar-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\pictorial-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\pictorial-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\pictorial-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\pictorial-stacked-chart-horizontal\index.css" />
+    <Content Include="amcharts4\examples\javascript\pictorial-stacked-chart-horizontal\index.html" />
+    <Content Include="amcharts4\examples\javascript\pictorial-stacked-chart-horizontal\index.js" />
+    <Content Include="amcharts4\examples\javascript\pictorial-stacked-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\pictorial-stacked-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\pictorial-stacked-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\polar-area-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\polar-area-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\polar-area-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\population-pyramid\index.css" />
+    <Content Include="amcharts4\examples\javascript\population-pyramid\index.html" />
+    <Content Include="amcharts4\examples\javascript\population-pyramid\index.js" />
+    <Content Include="amcharts4\examples\javascript\pyramid-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\pyramid-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\pyramid-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\radar-chart-with-axis-break\index.css" />
+    <Content Include="amcharts4\examples\javascript\radar-chart-with-axis-break\index.html" />
+    <Content Include="amcharts4\examples\javascript\radar-chart-with-axis-break\index.js" />
+    <Content Include="amcharts4\examples\javascript\radar-timeline-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\radar-timeline-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\radar-timeline-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\radial-bar-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\radial-bar-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\radial-bar-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\real-time-data-sorting\index.css" />
+    <Content Include="amcharts4\examples\javascript\real-time-data-sorting\index.html" />
+    <Content Include="amcharts4\examples\javascript\real-time-data-sorting\index.js" />
+    <Content Include="amcharts4\examples\javascript\rotating-globe-with-circles\index.css" />
+    <Content Include="amcharts4\examples\javascript\rotating-globe-with-circles\index.html" />
+    <Content Include="amcharts4\examples\javascript\rotating-globe-with-circles\index.js" />
+    <Content Include="amcharts4\examples\javascript\rotating-globe\index.css" />
+    <Content Include="amcharts4\examples\javascript\rotating-globe\index.html" />
+    <Content Include="amcharts4\examples\javascript\rotating-globe\index.js" />
+    <Content Include="amcharts4\examples\javascript\sankey-diagram-with-animated-bullets\index.css" />
+    <Content Include="amcharts4\examples\javascript\sankey-diagram-with-animated-bullets\index.html" />
+    <Content Include="amcharts4\examples\javascript\sankey-diagram-with-animated-bullets\index.js" />
+    <Content Include="amcharts4\examples\javascript\semi-circle-donut-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\semi-circle-donut-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\semi-circle-donut-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\simple-3D-pie-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\simple-3D-pie-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\simple-3D-pie-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\simple-bar-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\simple-bar-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\simple-bar-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\simple-column-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\simple-column-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\simple-column-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\simple-gauge\index.css" />
+    <Content Include="amcharts4\examples\javascript\simple-gauge\index.html" />
+    <Content Include="amcharts4\examples\javascript\simple-gauge\index.js" />
+    <Content Include="amcharts4\examples\javascript\simple-line-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\simple-line-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\simple-line-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\simple-map-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\simple-map-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\simple-map-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\simple-pie-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\simple-pie-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\simple-pie-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\simple-radar-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\simple-radar-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\simple-radar-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\simple-sankey-diagram\index.css" />
+    <Content Include="amcharts4\examples\javascript\simple-sankey-diagram\index.html" />
+    <Content Include="amcharts4\examples\javascript\simple-sankey-diagram\index.js" />
+    <Content Include="amcharts4\examples\javascript\simple-tree-map\index.css" />
+    <Content Include="amcharts4\examples\javascript\simple-tree-map\index.html" />
+    <Content Include="amcharts4\examples\javascript\simple-tree-map\index.js" />
+    <Content Include="amcharts4\examples\javascript\stacked-3D-column-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\stacked-3D-column-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\stacked-3D-column-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\stacked-area-radar-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\stacked-area-radar-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\stacked-area-radar-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\stacked-column-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\stacked-column-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\stacked-column-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\step-count-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\step-count-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\step-count-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\step-line-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\step-line-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\step-line-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\step-line-no-risers-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\step-line-no-risers-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\step-line-no-risers-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\stock-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\stock-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\stock-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\stock-comparing-values\index.css" />
+    <Content Include="amcharts4\examples\javascript\stock-comparing-values\index.html" />
+    <Content Include="amcharts4\examples\javascript\stock-comparing-values\index.js" />
+    <Content Include="amcharts4\examples\javascript\sunburst\index.css" />
+    <Content Include="amcharts4\examples\javascript\sunburst\index.html" />
+    <Content Include="amcharts4\examples\javascript\sunburst\index.js" />
+    <Content Include="amcharts4\examples\javascript\syncing-cursors-and-zoom\index.css" />
+    <Content Include="amcharts4\examples\javascript\syncing-cursors-and-zoom\index.html" />
+    <Content Include="amcharts4\examples\javascript\syncing-cursors-and-zoom\index.js" />
+    <Content Include="amcharts4\examples\javascript\timeline\bent-gantt-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\timeline\bent-gantt-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\timeline\bent-gantt-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\timeline\custom-shape-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\timeline\custom-shape-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\timeline\custom-shape-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\timeline\fishbone-timeline\index.css" />
+    <Content Include="amcharts4\examples\javascript\timeline\fishbone-timeline\index.html" />
+    <Content Include="amcharts4\examples\javascript\timeline\fishbone-timeline\index.js" />
+    <Content Include="amcharts4\examples\javascript\timeline\infinity-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\timeline\infinity-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\timeline\infinity-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\timeline\infinity-chart\moon.png" />
+    <Content Include="amcharts4\examples\javascript\timeline\road-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\timeline\road-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\timeline\road-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\timeline\serpentine-gantt-horizontal\index.css" />
+    <Content Include="amcharts4\examples\javascript\timeline\serpentine-gantt-horizontal\index.html" />
+    <Content Include="amcharts4\examples\javascript\timeline\serpentine-gantt-horizontal\index.js" />
+    <Content Include="amcharts4\examples\javascript\timeline\serpentine-step-line\index.css" />
+    <Content Include="amcharts4\examples\javascript\timeline\serpentine-step-line\index.html" />
+    <Content Include="amcharts4\examples\javascript\timeline\serpentine-step-line\index.js" />
+    <Content Include="amcharts4\examples\javascript\timeline\serpentine-timeline\index.css" />
+    <Content Include="amcharts4\examples\javascript\timeline\serpentine-timeline\index.html" />
+    <Content Include="amcharts4\examples\javascript\timeline\serpentine-timeline\index.js" />
+    <Content Include="amcharts4\examples\javascript\timeline\serpentine-timeline\monica.jpg" />
+    <Content Include="amcharts4\examples\javascript\timeline\serpentine-timeline\rachel.jpg" />
+    <Content Include="amcharts4\examples\javascript\timeline\spiral-bar-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\timeline\spiral-bar-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\timeline\spiral-bar-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\timeline\spiral-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\timeline\spiral-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\timeline\spiral-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\timeline\spiral-gantt-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\timeline\spiral-gantt-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\timeline\spiral-gantt-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\timeline\stadium-track-chart\chandler.jpg" />
+    <Content Include="amcharts4\examples\javascript\timeline\stadium-track-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\timeline\stadium-track-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\timeline\stadium-track-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\timeline\stadium-track-chart\joey.jpg" />
+    <Content Include="amcharts4\examples\javascript\timeline\stadium-track-chart\monica.jpg" />
+    <Content Include="amcharts4\examples\javascript\timeline\stadium-track-chart\phoebe.jpg" />
+    <Content Include="amcharts4\examples\javascript\timeline\stadium-track-chart\rachel.jpg" />
+    <Content Include="amcharts4\examples\javascript\timeline\stadium-track-chart\ross.jpg" />
+    <Content Include="amcharts4\examples\javascript\timeline\timeline\dance.svg" />
+    <Content Include="amcharts4\examples\javascript\timeline\timeline\index.css" />
+    <Content Include="amcharts4\examples\javascript\timeline\timeline\index.html" />
+    <Content Include="amcharts4\examples\javascript\timeline\timeline\index.js" />
+    <Content Include="amcharts4\examples\javascript\timeline\timeline\timeline0.svg" />
+    <Content Include="amcharts4\examples\javascript\timeline\timeline\timeline1.svg" />
+    <Content Include="amcharts4\examples\javascript\timeline\timeline\timeline2.svg" />
+    <Content Include="amcharts4\examples\javascript\timeline\timeline\timeline3.svg" />
+    <Content Include="amcharts4\examples\javascript\timeline\timeline\timeline4.svg" />
+    <Content Include="amcharts4\examples\javascript\timeline\timeline\timeline5.svg" />
+    <Content Include="amcharts4\examples\javascript\timeline\timeline\timeline6.svg" />
+    <Content Include="amcharts4\examples\javascript\timeline\timeline\timeline7.svg" />
+    <Content Include="amcharts4\examples\javascript\triangle-column-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\triangle-column-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\triangle-column-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\variable-angle-radar-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\variable-angle-radar-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\variable-angle-radar-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\variable-height-3D-pie-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\variable-height-3D-pie-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\variable-height-3D-pie-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\variable-radius-pie-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\variable-radius-pie-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\variable-radius-pie-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\venn-diagram-with-patterns\index.css" />
+    <Content Include="amcharts4\examples\javascript\venn-diagram-with-patterns\index.html" />
+    <Content Include="amcharts4\examples\javascript\venn-diagram-with-patterns\index.js" />
+    <Content Include="amcharts4\examples\javascript\venn-diagram\index.css" />
+    <Content Include="amcharts4\examples\javascript\venn-diagram\index.html" />
+    <Content Include="amcharts4\examples\javascript\venn-diagram\index.js" />
+    <Content Include="amcharts4\examples\javascript\vertical-sankey-diagram\index.css" />
+    <Content Include="amcharts4\examples\javascript\vertical-sankey-diagram\index.html" />
+    <Content Include="amcharts4\examples\javascript\vertical-sankey-diagram\index.js" />
+    <Content Include="amcharts4\examples\javascript\vertically-stacked-axes\index.css" />
+    <Content Include="amcharts4\examples\javascript\vertically-stacked-axes\index.html" />
+    <Content Include="amcharts4\examples\javascript\vertically-stacked-axes\index.js" />
+    <Content Include="amcharts4\examples\javascript\waterfall-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\waterfall-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\waterfall-chart\index.js" />
+    <Content Include="amcharts4\examples\javascript\word-cloud-changing-data\index.css" />
+    <Content Include="amcharts4\examples\javascript\word-cloud-changing-data\index.html" />
+    <Content Include="amcharts4\examples\javascript\word-cloud-changing-data\index.js" />
+    <Content Include="amcharts4\examples\javascript\word-cloud\index.css" />
+    <Content Include="amcharts4\examples\javascript\word-cloud\index.html" />
+    <Content Include="amcharts4\examples\javascript\word-cloud\index.js" />
+    <Content Include="amcharts4\examples\javascript\work-hours-map\index.css" />
+    <Content Include="amcharts4\examples\javascript\work-hours-map\index.html" />
+    <Content Include="amcharts4\examples\javascript\work-hours-map\index.js" />
+    <Content Include="amcharts4\examples\javascript\xy-error-chart\index.css" />
+    <Content Include="amcharts4\examples\javascript\xy-error-chart\index.html" />
+    <Content Include="amcharts4\examples\javascript\xy-error-chart\index.js" />
+    <Content Include="amcharts4\examples\json\candlestick-series\index.css" />
+    <Content Include="amcharts4\examples\json\candlestick-series\index.html" />
+    <Content Include="amcharts4\examples\json\candlestick-series\index.js" />
+    <Content Include="amcharts4\examples\json\changing-series-apppearance\index.css" />
+    <Content Include="amcharts4\examples\json\changing-series-apppearance\index.html" />
+    <Content Include="amcharts4\examples\json\changing-series-apppearance\index.js" />
+    <Content Include="amcharts4\examples\json\columns-with-pies-inside\index.css" />
+    <Content Include="amcharts4\examples\json\columns-with-pies-inside\index.html" />
+    <Content Include="amcharts4\examples\json\columns-with-pies-inside\index.js" />
+    <Content Include="amcharts4\examples\json\multiple-series-map-chart\index.css" />
+    <Content Include="amcharts4\examples\json\multiple-series-map-chart\index.html" />
+    <Content Include="amcharts4\examples\json\multiple-series-map-chart\index.js" />
+    <Content Include="amcharts4\examples\json\simple-3D-pie-chart\index.css" />
+    <Content Include="amcharts4\examples\json\simple-3D-pie-chart\index.html" />
+    <Content Include="amcharts4\examples\json\simple-3D-pie-chart\index.js" />
+    <Content Include="amcharts4\examples\json\simple-bar-chart\index.css" />
+    <Content Include="amcharts4\examples\json\simple-bar-chart\index.html" />
+    <Content Include="amcharts4\examples\json\simple-bar-chart\index.js" />
+    <Content Include="amcharts4\examples\json\simple-column-chart\index.css" />
+    <Content Include="amcharts4\examples\json\simple-column-chart\index.html" />
+    <Content Include="amcharts4\examples\json\simple-column-chart\index.js" />
+    <Content Include="amcharts4\examples\json\simple-gauge\index.css" />
+    <Content Include="amcharts4\examples\json\simple-gauge\index.html" />
+    <Content Include="amcharts4\examples\json\simple-gauge\index.js" />
+    <Content Include="amcharts4\examples\json\simple-line-chart\index.css" />
+    <Content Include="amcharts4\examples\json\simple-line-chart\index.html" />
+    <Content Include="amcharts4\examples\json\simple-line-chart\index.js" />
+    <Content Include="amcharts4\examples\json\simple-map-chart\index.css" />
+    <Content Include="amcharts4\examples\json\simple-map-chart\index.html" />
+    <Content Include="amcharts4\examples\json\simple-map-chart\index.js" />
+    <Content Include="amcharts4\examples\json\simple-pie-chart-rounded-corners\index.css" />
+    <Content Include="amcharts4\examples\json\simple-pie-chart-rounded-corners\index.html" />
+    <Content Include="amcharts4\examples\json\simple-pie-chart-rounded-corners\index.js" />
+    <Content Include="amcharts4\examples\json\simple-pie-chart\index.css" />
+    <Content Include="amcharts4\examples\json\simple-pie-chart\index.html" />
+    <Content Include="amcharts4\examples\json\simple-pie-chart\index.js" />
+    <Content Include="amcharts4\examples\json\simple-radar-chart\index.css" />
+    <Content Include="amcharts4\examples\json\simple-radar-chart\index.html" />
+    <Content Include="amcharts4\examples\json\simple-radar-chart\index.js" />
+    <Content Include="amcharts4\examples\json\simple-sankey-diagram\index.css" />
+    <Content Include="amcharts4\examples\json\simple-sankey-diagram\index.html" />
+    <Content Include="amcharts4\examples\json\simple-sankey-diagram\index.js" />
+    <Content Include="amcharts4\examples\json\simple-tree-map\index.css" />
+    <Content Include="amcharts4\examples\json\simple-tree-map\index.html" />
+    <Content Include="amcharts4\examples\json\simple-tree-map\index.js" />
+    <Content Include="amcharts4\examples\json\timeline\dance.svg" />
+    <Content Include="amcharts4\examples\json\timeline\index.css" />
+    <Content Include="amcharts4\examples\json\timeline\index.html" />
+    <Content Include="amcharts4\examples\json\timeline\index.js" />
+    <Content Include="amcharts4\examples\json\timeline\timeline0.svg" />
+    <Content Include="amcharts4\examples\json\timeline\timeline1.svg" />
+    <Content Include="amcharts4\examples\json\timeline\timeline2.svg" />
+    <Content Include="amcharts4\examples\json\timeline\timeline3.svg" />
+    <Content Include="amcharts4\examples\json\timeline\timeline4.svg" />
+    <Content Include="amcharts4\examples\json\timeline\timeline5.svg" />
+    <Content Include="amcharts4\examples\json\timeline\timeline6.svg" />
+    <Content Include="amcharts4\examples\json\timeline\timeline7.svg" />
+    <Content Include="amcharts4\lang\ar.js" />
+    <Content Include="amcharts4\lang\bs_BA.js" />
+    <Content Include="amcharts4\lang\ca_ES.js" />
+    <Content Include="amcharts4\lang\cs_CZ.js" />
+    <Content Include="amcharts4\lang\da_DK.js" />
+    <Content Include="amcharts4\lang\de_CH.js" />
+    <Content Include="amcharts4\lang\de_DE.js" />
+    <Content Include="amcharts4\lang\el_GR.js" />
+    <Content Include="amcharts4\lang\en.js" />
+    <Content Include="amcharts4\lang\en_CA.js" />
+    <Content Include="amcharts4\lang\en_US.js" />
+    <Content Include="amcharts4\lang\es_ES.js" />
+    <Content Include="amcharts4\lang\et_EE.js" />
+    <Content Include="amcharts4\lang\fi_FI.js" />
+    <Content Include="amcharts4\lang\fr_FR.js" />
+    <Content Include="amcharts4\lang\he_IL.js" />
+    <Content Include="amcharts4\lang\hi_IN.js" />
+    <Content Include="amcharts4\lang\hr_HR.js" />
+    <Content Include="amcharts4\lang\hu_HU.js" />
+    <Content Include="amcharts4\lang\id_ID.js" />
+    <Content Include="amcharts4\lang\it_IT.js" />
+    <Content Include="amcharts4\lang\ja_JP.js" />
+    <Content Include="amcharts4\lang\ko_KR.js" />
+    <Content Include="amcharts4\lang\lt_LT.js" />
+    <Content Include="amcharts4\lang\lv_LV.js" />
+    <Content Include="amcharts4\lang\nb_NO.js" />
+    <Content Include="amcharts4\lang\nl_NL.js" />
+    <Content Include="amcharts4\lang\pl_PL.js" />
+    <Content Include="amcharts4\lang\pt_BR.js" />
+    <Content Include="amcharts4\lang\pt_PT.js" />
+    <Content Include="amcharts4\lang\ro_RO.js" />
+    <Content Include="amcharts4\lang\ru_RU.js" />
+    <Content Include="amcharts4\lang\sl_SL.js" />
+    <Content Include="amcharts4\lang\sr_RS.js" />
+    <Content Include="amcharts4\lang\sv_SE.js" />
+    <Content Include="amcharts4\lang\th_TH.js" />
+    <Content Include="amcharts4\lang\tr_TR.js" />
+    <Content Include="amcharts4\lang\uk_UA.js" />
+    <Content Include="amcharts4\lang\vi_VN.js" />
+    <Content Include="amcharts4\lang\zh_Hans.js" />
+    <Content Include="amcharts4\lang\zh_Hant.js" />
+    <Content Include="amcharts4\maps.js" />
+    <Content Include="amcharts4\plugins\annotation.js" />
+    <Content Include="amcharts4\plugins\bullets.js" />
+    <Content Include="amcharts4\plugins\forceDirected.js" />
+    <Content Include="amcharts4\plugins\overlapBuster.js" />
+    <Content Include="amcharts4\plugins\regression.js" />
+    <Content Include="amcharts4\plugins\sliceGrouper.js" />
+    <Content Include="amcharts4\plugins\sunburst.js" />
+    <Content Include="amcharts4\plugins\timeline.js" />
+    <Content Include="amcharts4\plugins\venn.js" />
+    <Content Include="amcharts4\plugins\wordCloud.js" />
+    <Content Include="amcharts4\themes\amcharts.js" />
+    <Content Include="amcharts4\themes\amchartsdark.js" />
+    <Content Include="amcharts4\themes\animated.js" />
+    <Content Include="amcharts4\themes\dark.js" />
+    <Content Include="amcharts4\themes\dataviz.js" />
+    <Content Include="amcharts4\themes\frozen.js" />
+    <Content Include="amcharts4\themes\kelly.js" />
+    <Content Include="amcharts4\themes\material.js" />
+    <Content Include="amcharts4\themes\microchart.js" />
+    <Content Include="amcharts4\themes\moonrisekingdom.js" />
+    <Content Include="amcharts4\themes\patterns.js" />
+    <Content Include="amcharts4\themes\spiritedaway.js" />
+    <Content Include="assets\images\308066.jpg" />
+    <Content Include="assets\images\308075.jpg" />
+    <Content Include="assets\images\avatar-1.jpg" />
+    <Content Include="assets\images\avatar-2.jpg" />
+    <Content Include="assets\images\avatar-3.jpg" />
+    <Content Include="assets\images\avatar-4.jpg" />
+    <Content Include="assets\images\avatar-5.jpg" />
+    <Content Include="assets\images\bitbucket.png" />
+    <Content Include="assets\images\card-img-1.jpg" />
+    <Content Include="assets\images\card-img-2.jpg" />
+    <Content Include="assets\images\card-img-3.jpg" />
+    <Content Include="assets\images\card-img.jpg" />
+    <Content Include="assets\images\down-arrow.png" />
+    <Content Include="assets\images\drag-indicator.png" />
+    <Content Include="assets\images\dribbble.png" />
+    <Content Include="assets\images\dropbox.png" />
+    <Content Include="assets\images\eco-product-img-1.png" />
+    <Content Include="assets\images\eco-product-img-2.png" />
+    <Content Include="assets\images\eco-product-img-3.png" />
+    <Content Include="assets\images\eco-product-img-4.png" />
+    <Content Include="assets\images\eco-slider-img-1.png" />
+    <Content Include="assets\images\eco-slider-img-2.png" />
+    <Content Include="assets\images\eco-slider-img-3.png" />
+    <Content Include="assets\images\error-img.png" />
+    <Content Include="assets\images\github.png" />
+    <Content Include="assets\images\loader.svg" />
+    <Content Include="assets\images\logo.png" />
+    <Content Include="assets\images\mail_chimp.png" />
+    <Content Include="assets\images\product-pic-2.jpg" />
+    <Content Include="assets\images\product-pic-3.jpg" />
+    <Content Include="assets\images\product-pic-4.jpg" />
+    <Content Include="assets\images\product-pic.jpg" />
+    <Content Include="assets\images\slack.png" />
+    <Content Include="assets\images\switch.png" />
+    <Content Include="assets\libs\css\style.css" />
+    <Content Include="assets\libs\js\dashboard-ecommerce.js" />
+    <Content Include="assets\libs\js\dashboard-finance.js" />
+    <Content Include="assets\libs\js\dashboard-influencer.js" />
+    <Content Include="assets\libs\js\dashboard-sales.js" />
+    <Content Include="assets\libs\js\gmaps.min.js" />
+    <Content Include="assets\libs\js\google_map.js" />
+    <Content Include="assets\libs\js\jvectormap.custom.js" />
+    <Content Include="assets\libs\js\main-js.js" />
+    <Content Include="assets\vendor\bootstrap-colorpicker\%40claviska\jquery-minicolors\jquery.minicolors.css" />
+    <Content Include="assets\vendor\bootstrap-colorpicker\%40claviska\jquery-minicolors\jquery.minicolors.min.js" />
+    <Content Include="assets\vendor\bootstrap-colorpicker\%40claviska\jquery-minicolors\jquery.minicolors.png" />
+    <Content Include="assets\vendor\bootstrap-colorpicker\jquery-asColorPicker\dist\jquery-asColorPicker.min.js" />
+    <Content Include="assets\vendor\bootstrap-colorpicker\jquery-asColor\dist\jquery-asColor.min.js" />
+    <Content Include="assets\vendor\bootstrap-colorpicker\jquery-asGradient\dist\jquery-asGradient.js" />
+    <Content Include="assets\vendor\bootstrap-select\css\bootstrap-select.css" />
+    <Content Include="assets\vendor\bootstrap-select\js\bootstrap-select.js" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="assets\vendor\bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="assets\vendor\charts\c3charts\c3.css" />
+    <Content Include="assets\vendor\charts\c3charts\c3.min.js" />
+    <Content Include="assets\vendor\charts\c3charts\C3chartjs.js" />
+    <Content Include="assets\vendor\charts\c3charts\d3-5.4.0.min.js" />
+    <Content Include="assets\vendor\charts\chartist-bundle\chartist-plugin-threshold.js" />
+    <Content Include="assets\vendor\charts\chartist-bundle\chartist.css" />
+    <Content Include="assets\vendor\charts\chartist-bundle\chartist.min.js" />
+    <Content Include="assets\vendor\charts\chartist-bundle\Chartistjs.js" />
+    <Content Include="assets\vendor\charts\charts-bundle\Chart.bundle.js" />
+    <Content Include="assets\vendor\charts\charts-bundle\chartjs.js" />
+    <Content Include="assets\vendor\charts\morris-bundle\morris.css" />
+    <Content Include="assets\vendor\charts\morris-bundle\morris.js" />
+    <Content Include="assets\vendor\charts\morris-bundle\morrisjs.html" />
+    <Content Include="assets\vendor\charts\morris-bundle\Morrisjs.js" />
+    <Content Include="assets\vendor\charts\morris-bundle\raphael.min.js" />
+    <Content Include="assets\vendor\charts\sparkline\jquery.sparkline.js" />
+    <Content Include="assets\vendor\charts\sparkline\spark-js.js" />
+    <Content Include="assets\vendor\cropper\dist\cropper-int.js" />
+    <Content Include="assets\vendor\cropper\dist\cropper.min.css" />
+    <Content Include="assets\vendor\cropper\dist\cropper.min.js" />
+    <Content Include="assets\vendor\custom-js\jquery.multi-select.html" />
+    <Content Include="assets\vendor\datatables\css\buttons.bootstrap4.css" />
+    <Content Include="assets\vendor\datatables\css\dataTables.bootstrap4.css" />
+    <Content Include="assets\vendor\datatables\css\fixedHeader.bootstrap4.css" />
+    <Content Include="assets\vendor\datatables\css\select.bootstrap4.css" />
+    <Content Include="assets\vendor\datatables\js\buttons.bootstrap4.min.js" />
+    <Content Include="assets\vendor\datatables\js\data-table.js" />
+    <Content Include="assets\vendor\datatables\js\dataTables.bootstrap4.min.js" />
+    <Content Include="assets\vendor\datepicker\datepicker.js" />
+    <Content Include="assets\vendor\datepicker\moment.js" />
+    <Content Include="assets\vendor\datepicker\tempusdominus-bootstrap-4.css" />
+    <Content Include="assets\vendor\datepicker\tempusdominus-bootstrap-4.js" />
+    <Content Include="assets\vendor\daterangepicker\daterangepicker.css" />
+    <Content Include="assets\vendor\dropzone\dropzone.js" />
+    <Content Include="assets\vendor\fonts\circular-std\style.css" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flag-icon.min.css" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ad.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ae.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\af.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ag.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ai.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\al.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\am.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ao.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\aq.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ar.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\as.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\at.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\au.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\aw.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ax.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\az.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ba.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\bb.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\bd.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\be.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\bf.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\bg.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\bh.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\bi.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\bj.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\bl.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\bm.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\bn.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\bo.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\bq.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\br.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\bs.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\bt.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\bv.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\bw.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\by.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\bz.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ca.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\cc.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\cd.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\cf.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\cg.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ch.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ci.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ck.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\cl.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\cm.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\cn.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\co.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\cr.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\cu.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\cv.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\cw.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\cx.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\cy.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\cz.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\de.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\dj.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\dk.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\dm.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\do.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\dz.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ec.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ee.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\eg.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\eh.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\er.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\es.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\et.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\fi.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\fj.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\fk.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\fm.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\fo.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\fr.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ga.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\gb.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\gd.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ge.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\gf.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\gg.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\gh.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\gi.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\gl.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\gm.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\gn.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\gp.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\gq.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\gr.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\gs.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\gt.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\gu.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\gw.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\gy.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\hk.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\hm.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\hn.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\hr.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ht.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\hu.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\id.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ie.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\il.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\im.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\in.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\io.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\iq.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ir.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\is.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\it.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\je.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\jm.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\jo.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\jp.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ke.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\kg.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\kh.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ki.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\km.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\kn.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\kp.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\kr.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\kw.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ky.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\kz.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\la.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\lb.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\lc.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\li.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\lk.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\lr.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ls.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\lt.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\lu.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\lv.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ly.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ma.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\mc.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\md.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\me.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\mf.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\mg.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\mh.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\mk.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ml.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\mm.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\mn.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\mo.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\mp.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\mq.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\mr.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ms.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\mt.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\mu.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\mv.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\mw.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\mx.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\my.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\mz.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\na.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\nc.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ne.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\nf.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ng.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ni.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\nl.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\no.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\np.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\nr.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\nu.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\nz.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\om.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\pa.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\pe.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\pf.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\pg.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ph.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\pk.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\pl.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\pm.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\pn.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\pr.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ps.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\pt.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\pw.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\py.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\qa.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\re.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ro.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\rs.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ru.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\rw.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\sa.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\sb.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\sc.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\sd.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\se.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\sg.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\sh.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\si.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\sj.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\sk.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\sl.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\sm.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\sn.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\so.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\sr.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ss.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\st.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\sv.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\sx.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\sy.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\sz.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\tc.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\td.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\tf.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\tg.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\th.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\tj.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\tk.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\tl.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\tm.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\tn.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\to.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\tr.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\tt.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\tv.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\tw.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\tz.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ua.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ug.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\um.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\us.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\uy.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\uz.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\va.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\vc.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ve.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\vg.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\vi.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\vn.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\vu.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\wf.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ws.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\ye.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\yt.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\za.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\zm.svg" />
+    <Content Include="assets\vendor\fonts\flag-icon-css\flags\zw.svg" />
+    <Content Include="assets\vendor\fonts\fontawesome\css\fontawesome-all.css" />
+    <Content Include="assets\vendor\fonts\fontawesome\webfonts\fa-brands-400.html" />
+    <Content Include="assets\vendor\fonts\fontawesome\webfonts\fa-brands-400.svg" />
+    <Content Include="assets\vendor\fonts\fontawesome\webfonts\fa-regular-400.html" />
+    <Content Include="assets\vendor\fonts\fontawesome\webfonts\fa-regular-400.svg" />
+    <Content Include="assets\vendor\fonts\fontawesome\webfonts\fa-solid-900.html" />
+    <Content Include="assets\vendor\fonts\fontawesome\webfonts\fa-solid-900.svg" />
+    <Content Include="assets\vendor\fonts\material-design-iconic-font\css\materialdesignicons.min.css" />
+    <Content Include="assets\vendor\fonts\material-design-iconic-font\fonts\materialdesignicons-webfontdc99.html" />
+    <Content Include="assets\vendor\fonts\material-design-iconic-font\fonts\materialdesignicons-webfontdc99.svg" />
+    <Content Include="assets\vendor\fonts\simple-line-icons\css\simple-line-icons.css" />
+    <Content Include="assets\vendor\fonts\simple-line-icons\fonts\Simple-Line-Icons4c82.html" />
+    <Content Include="assets\vendor\fonts\simple-line-icons\fonts\Simple-Line-Icons4c82.svg" />
+    <Content Include="assets\vendor\fonts\themify-icons\fonts\themify9f24.svg" />
+    <Content Include="assets\vendor\fonts\themify-icons\themify-icons.css" />
+    <Content Include="assets\vendor\fonts\weather-icons\css\weather-icons.min.css" />
+    <Content Include="assets\vendor\full-calendar\css\fullcalendar.css" />
+    <Content Include="assets\vendor\full-calendar\css\fullcalendar.print.css" />
+    <Content Include="assets\vendor\full-calendar\js\calendar.js" />
+    <Content Include="assets\vendor\full-calendar\js\fullcalendar.js" />
+    <Content Include="assets\vendor\full-calendar\js\jquery-ui.min.js" />
+    <Content Include="assets\vendor\full-calendar\js\moment.min.js" />
+    <Content Include="assets\vendor\gauge\gauge.js" />
+    <Content Include="assets\vendor\gauge\gauge.min.js" />
+    <Content Include="assets\vendor\inputmask\css\inputmask.css" />
+    <Content Include="assets\vendor\inputmask\js\jquery.inputmask.bundle.js" />
+    <Content Include="assets\vendor\jquery\jquery-3.3.1.min.js" />
+    <Content Include="assets\vendor\jvectormap\jquery-jvectormap-2.0.2.css" />
+    <Content Include="assets\vendor\jvectormap\jquery-jvectormap-2.0.2.min.js" />
+    <Content Include="assets\vendor\jvectormap\jquery-jvectormap-au-mill.js" />
+    <Content Include="assets\vendor\jvectormap\jquery-jvectormap-in-mill.js" />
+    <Content Include="assets\vendor\jvectormap\jquery-jvectormap-uk-mill-en.js" />
+    <Content Include="assets\vendor\jvectormap\jquery-jvectormap-us-aea-en.js" />
+    <Content Include="assets\vendor\jvectormap\jquery-jvectormap-world-mill-en.js" />
+    <Content Include="assets\vendor\multi-select\css\multi-select.css" />
+    <Content Include="assets\vendor\multi-select\js\jquery.multi-select.js" />
+    <Content Include="assets\vendor\parsley\parsley.js" />
+    <Content Include="assets\vendor\select2\css\select2.css" />
+    <Content Include="assets\vendor\select2\js\select2.min.js" />
+    <Content Include="assets\vendor\shortable-nestable\jquery.nestable.js" />
+    <Content Include="assets\vendor\shortable-nestable\sort-nest.js" />
+    <Content Include="assets\vendor\shortable-nestable\Sortable.min.js" />
+    <Content Include="assets\vendor\slimscroll\jquery.slimscroll.js" />
+    <Content Include="assets\vendor\summernote\css\summernote-bs4.css" />
+    <Content Include="assets\vendor\summernote\js\summernote-bs4.js" />
+    <Content Include="assets\vendor\timeline\img\cd-icon-location.svg" />
+    <Content Include="assets\vendor\timeline\img\cd-icon-movie.svg" />
+    <Content Include="assets\vendor\timeline\img\cd-icon-picture.svg" />
+    <Content Include="assets\vendor\timeline\js\main.js" />
+    <Content Include="assets\vendor\vector-map\jqvmap.css" />
+    <Content Include="Content\animate.css" />
+    <Content Include="Content\animsition.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap_4.css" />
+    <Content Include="Content\buttons.dataTables.min.css" />
+    <Content Include="Content\dataTables.bootstrap4.min.css" />
+    <Content Include="Content\daterangepicker.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\hamburgers.min.css" />
+    <Content Include="Content\images\ajax-loader.gif" />
+    <Content Include="Content\images\cellular-phone.png" />
+    <Content Include="Content\images\favicon.ico" />
+    <Content Include="Content\images\images\loader1.gif" />
+    <Content Include="Content\images\images\loader10.gif" />
+    <Content Include="Content\images\images\loader11.gif" />
+    <Content Include="Content\images\images\loader12.gif" />
+    <Content Include="Content\images\images\loader13.gif" />
+    <Content Include="Content\images\images\loader14.gif" />
+    <Content Include="Content\images\images\loader16.gif" />
+    <Content Include="Content\images\images\loader17.gif" />
+    <Content Include="Content\images\images\loader2.gif" />
+    <Content Include="Content\images\images\loader3.gif" />
+    <Content Include="Content\images\images\loader4.gif" />
+    <Content Include="Content\images\images\loader5.gif" />
+    <Content Include="Content\images\images\loader6.gif" />
+    <Content Include="Content\images\images\loader7.gif" />
+    <Content Include="Content\images\images\loader8.gif" />
+    <Content Include="Content\images\images\loader9.gif" />
+    <Content Include="Content\images\images\PreLoader10.gif" />
+    <Content Include="Content\images\images\PreLoader8.gif" />
+    <Content Include="Content\images\map-marker.png" />
+    <Content Include="Content\images\Marcel_New_Logo.png" />
+    <Content Include="Content\images\mobile-phone.png" />
+    <Content Include="Content\images\PreLoader10.gif" />
+    <Content Include="Content\images\PreLoader8.gif" />
+    <Content Include="Content\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\images\Walton_Mobile_logo.png" />
+    <Content Include="Content\images\Walton_Mobile_logo_W.png" />
+    <Content Include="Content\iziToast.min.css" />
+    <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\jquery-ui.structure.css" />
+    <Content Include="Content\jquery-ui.theme.css" />
+    <Content Include="Content\jquery.dataTables.min.css" />
+    <Content Include="Content\main.css" />
+    <Content Include="Content\PopupOnload.css" />
+    <Content Include="Content\PreloaderCustom.css" />
+    <Content Include="Content\select2.min.css" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="Content\toastr.min.css" />
+    <Content Include="Content\util.css" />
+    <Content Include="DAL\WdsEntities\WdsModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WdsModel.edmx</DependentUpon>
+      <LastGenOutput>WdsModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DAL\WdsEntities\WdsModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WdsModel.edmx</DependentUpon>
+      <LastGenOutput>WdsModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\admin_dashboard_charts.js" />
+    <Content Include="Scripts\animsition.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="assets\vendor\fonts\circular-std\CircularStd-Black.woff" />
+    <Content Include="assets\vendor\fonts\circular-std\CircularStd-BlackItalic.woff" />
+    <Content Include="assets\vendor\fonts\circular-std\CircularStd-Bold.woff" />
+    <Content Include="assets\vendor\fonts\circular-std\CircularStd-BoldItalic.woff" />
+    <Content Include="assets\vendor\fonts\circular-std\CircularStd-Book.woff" />
+    <Content Include="assets\vendor\fonts\circular-std\CircularStd-BookItalic.woff" />
+    <Content Include="assets\vendor\fonts\circular-std\CircularStd-Medium.woff" />
+    <Content Include="assets\vendor\fonts\circular-std\CircularStd-MediumItalic.woff" />
+    <Content Include="assets\vendor\fonts\fontawesome\webfonts\fa-brands-400.eot" />
+    <Content Include="assets\vendor\fonts\fontawesome\webfonts\fa-brands-400.ttf" />
+    <Content Include="assets\vendor\fonts\fontawesome\webfonts\fa-brands-400.woff" />
+    <Content Include="assets\vendor\fonts\fontawesome\webfonts\fa-brands-400d41d.eot" />
+    <Content Include="assets\vendor\fonts\fontawesome\webfonts\fa-regular-400.eot" />
+    <Content Include="assets\vendor\fonts\fontawesome\webfonts\fa-regular-400.ttf" />
+    <Content Include="assets\vendor\fonts\fontawesome\webfonts\fa-regular-400.woff" />
+    <Content Include="assets\vendor\fonts\fontawesome\webfonts\fa-regular-400d41d.eot" />
+    <Content Include="assets\vendor\fonts\fontawesome\webfonts\fa-solid-900.eot" />
+    <Content Include="assets\vendor\fonts\fontawesome\webfonts\fa-solid-900.ttf" />
+    <Content Include="assets\vendor\fonts\fontawesome\webfonts\fa-solid-900.woff" />
+    <Content Include="assets\vendor\fonts\fontawesome\webfonts\fa-solid-900d41d.eot" />
+    <Content Include="assets\vendor\fonts\material-design-iconic-font\fonts\materialdesignicons-webfontd41d.eot" />
+    <Content Include="assets\vendor\fonts\material-design-iconic-font\fonts\materialdesignicons-webfontdc99.eot" />
+    <Content Include="assets\vendor\fonts\material-design-iconic-font\fonts\materialdesignicons-webfontdc99.ttf" />
+    <Content Include="assets\vendor\fonts\material-design-iconic-font\fonts\materialdesignicons-webfontdc99.woff" />
+    <Content Include="assets\vendor\fonts\simple-line-icons\fonts\Simple-Line-Icons4c82.eot" />
+    <Content Include="assets\vendor\fonts\simple-line-icons\fonts\Simple-Line-Icons4c82.ttf" />
+    <Content Include="assets\vendor\fonts\simple-line-icons\fonts\Simple-Line-Icons4c82.woff" />
+    <Content Include="assets\vendor\fonts\simple-line-icons\fonts\Simple-Line-Iconsd41d.eot" />
+    <Content Include="assets\vendor\fonts\themify-icons\fonts\themify.ttf" />
+    <Content Include="assets\vendor\fonts\themify-icons\fonts\themify.woff" />
+    <Content Include="assets\vendor\fonts\themify-icons\fonts\themify9f24.eot" />
+    <Content Include="assets\vendor\fonts\themify-icons\fonts\themifyd41d.eot" />
+    <Content Include="assets\vendor\fonts\weather-icons\fonts\weathericons-regular-webfont.eot" />
+    <Content Include="assets\vendor\summernote\editor-fonts\summernote4c4d.eot" />
+    <Content Include="assets\vendor\summernote\editor-fonts\summernote4c4d.ttf" />
+    <Content Include="assets\vendor\summernote\editor-fonts\summernote4c4d.woff" />
+    <Content Include="assets\vendor\summernote\editor-fonts\summernoted41d.eot" />
+    <Content Include="Scripts\buttons.html5.min.js" />
+    <Content Include="Scripts\countdowntime.js" />
+    <Content Include="Scripts\CustomScripts\jQuery.print.min.js" />
+    <Content Include="Scripts\CustomScripts\RetailerOrder.js" />
+    <Content Include="Scripts\dataTables.bootstrap4.min.js" />
+    <Content Include="Scripts\dataTables.buttons.min.js" />
+    <Content Include="Scripts\date-format-custom.js" />
+    <Content Include="Scripts\daterangepicker.js" />
+    <Content Include="amcharts4\CHANGELOG.md" />
+    <Content Include="amcharts4\charts.js.map" />
+    <Content Include="amcharts4\core.js.map" />
+    <Content Include="amcharts4\deps\canvg.js.map" />
+    <Content Include="amcharts4\deps\pdfmake.js.map" />
+    <Content Include="amcharts4\deps\xlsx.js.map" />
+    <Content Include="amcharts4\examples\javascript\100%25-stacked-column-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\adding-live-data\README.md" />
+    <Content Include="amcharts4\examples\javascript\amcharts3\README.md" />
+    <Content Include="amcharts4\examples\javascript\animating-along-the-line-series\README.md" />
+    <Content Include="amcharts4\examples\javascript\bar-chart-race\README.md" />
+    <Content Include="amcharts4\examples\javascript\base\README.md" />
+    <Content Include="amcharts4\examples\javascript\bubble-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\candlestick-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\changing-series-apppearance\README.md" />
+    <Content Include="amcharts4\examples\javascript\changing-tree-map-data\README.md" />
+    <Content Include="amcharts4\examples\javascript\chord-diagram-non-ribbon\README.md" />
+    <Content Include="amcharts4\examples\javascript\chord-diagram\README.md" />
+    <Content Include="amcharts4\examples\javascript\chord-friends-kisses\README.md" />
+    <Content Include="amcharts4\examples\javascript\clock\README.md" />
+    <Content Include="amcharts4\examples\javascript\column-chart-with-axis-break\README.md" />
+    <Content Include="amcharts4\examples\javascript\column-chart-with-images-as-bullets\README.md" />
+    <Content Include="amcharts4\examples\javascript\columns-with-pies-inside\README.md" />
+    <Content Include="amcharts4\examples\javascript\countries-morphing-to-pie-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\curved-column-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\cylinder-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\data-grouping-50K\README.md" />
+    <Content Include="amcharts4\examples\javascript\date-based-radar\README.md" />
+    <Content Include="amcharts4\examples\javascript\day-night-map\README.md" />
+    <Content Include="amcharts4\examples\javascript\donut-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\drag-and-change-values\README.md" />
+    <Content Include="amcharts4\examples\javascript\dragging-pie-slices\README.md" />
+    <Content Include="amcharts4\examples\javascript\drill-down-map\README.md" />
+    <Content Include="amcharts4\examples\javascript\drill-down-tree-map\README.md" />
+    <Content Include="amcharts4\examples\javascript\dumbbell-plot-horizontal\README.md" />
+    <Content Include="amcharts4\examples\javascript\dumbbell-plot\README.md" />
+    <Content Include="amcharts4\examples\javascript\duration-axis\README.md" />
+    <Content Include="amcharts4\examples\javascript\error-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\fill-between-lines-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\force-directed-creating-links\README.md" />
+    <Content Include="amcharts4\examples\javascript\force-directed-network\README.md" />
+    <Content Include="amcharts4\examples\javascript\force-directed-tree-expandable\README.md" />
+    <Content Include="amcharts4\examples\javascript\force-directed-tree\README.md" />
+    <Content Include="amcharts4\examples\javascript\funnel-chart-horizontal\README.md" />
+    <Content Include="amcharts4\examples\javascript\funnel-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\gantt-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\gauge-with-bands\README.md" />
+    <Content Include="amcharts4\examples\javascript\geo-heat-map\README.md" />
+    <Content Include="amcharts4\examples\javascript\heat-map-circles\README.md" />
+    <Content Include="amcharts4\examples\javascript\heat-map-radar\README.md" />
+    <Content Include="amcharts4\examples\javascript\heat-map\README.md" />
+    <Content Include="amcharts4\examples\javascript\horizontally-stacked-axes\README.md" />
+    <Content Include="amcharts4\examples\javascript\line-different-ups-downs\README.md" />
+    <Content Include="amcharts4\examples\javascript\map-line-gauge-mix\README.md" />
+    <Content Include="amcharts4\examples\javascript\morphing-countries\README.md" />
+    <Content Include="amcharts4\examples\javascript\multiple-axes-date-based-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\multiple-series-map-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\non-chart-usage\README.md" />
+    <Content Include="amcharts4\examples\javascript\ohlc-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\packed-circles\README.md" />
+    <Content Include="amcharts4\examples\javascript\pictorial-bar-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\pictorial-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\pictorial-stacked-chart-horizontal\README.md" />
+    <Content Include="amcharts4\examples\javascript\pictorial-stacked-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\polar-area-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\population-pyramid\README.md" />
+    <Content Include="amcharts4\examples\javascript\pyramid-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\radar-chart-with-axis-break\README.md" />
+    <Content Include="amcharts4\examples\javascript\radar-timeline-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\radial-bar-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\real-time-data-sorting\README.md" />
+    <Content Include="amcharts4\examples\javascript\rotating-globe-with-circles\README.md" />
+    <Content Include="amcharts4\examples\javascript\rotating-globe\README.md" />
+    <Content Include="amcharts4\examples\javascript\sankey-diagram-with-animated-bullets\README.md" />
+    <Content Include="amcharts4\examples\javascript\semi-circle-donut-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\simple-3D-pie-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\simple-bar-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\simple-column-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\simple-gauge\README.md" />
+    <Content Include="amcharts4\examples\javascript\simple-line-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\simple-map-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\simple-pie-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\simple-radar-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\simple-sankey-diagram\README.md" />
+    <Content Include="amcharts4\examples\javascript\simple-tree-map\README.md" />
+    <Content Include="amcharts4\examples\javascript\stacked-3D-column-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\stacked-area-radar-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\stacked-column-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\step-count-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\step-line-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\step-line-no-risers-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\stock-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\stock-comparing-values\README.md" />
+    <Content Include="amcharts4\examples\javascript\sunburst\README.md" />
+    <Content Include="amcharts4\examples\javascript\syncing-cursors-and-zoom\README.md" />
+    <Content Include="amcharts4\examples\javascript\timeline\bent-gantt-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\timeline\custom-shape-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\timeline\fishbone-timeline\README.md" />
+    <Content Include="amcharts4\examples\javascript\timeline\infinity-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\timeline\road-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\timeline\serpentine-gantt-horizontal\README.md" />
+    <Content Include="amcharts4\examples\javascript\timeline\serpentine-step-line\README.md" />
+    <Content Include="amcharts4\examples\javascript\timeline\serpentine-timeline\README.md" />
+    <Content Include="amcharts4\examples\javascript\timeline\spiral-bar-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\timeline\spiral-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\timeline\spiral-gantt-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\timeline\stadium-track-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\timeline\timeline\README.md" />
+    <Content Include="amcharts4\examples\javascript\triangle-column-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\variable-angle-radar-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\variable-height-3D-pie-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\variable-radius-pie-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\venn-diagram-with-patterns\README.md" />
+    <Content Include="amcharts4\examples\javascript\venn-diagram\README.md" />
+    <Content Include="amcharts4\examples\javascript\vertical-sankey-diagram\README.md" />
+    <Content Include="amcharts4\examples\javascript\vertically-stacked-axes\README.md" />
+    <Content Include="amcharts4\examples\javascript\waterfall-chart\README.md" />
+    <Content Include="amcharts4\examples\javascript\word-cloud-changing-data\README.md" />
+    <Content Include="amcharts4\examples\javascript\word-cloud\README.md" />
+    <Content Include="amcharts4\examples\javascript\work-hours-map\README.md" />
+    <Content Include="amcharts4\examples\javascript\xy-error-chart\README.md" />
+    <Content Include="amcharts4\examples\json\candlestick-series\README.md" />
+    <Content Include="amcharts4\examples\json\changing-series-apppearance\README.md" />
+    <Content Include="amcharts4\examples\json\columns-with-pies-inside\README.md" />
+    <Content Include="amcharts4\examples\json\multiple-series-map-chart\README.md" />
+    <Content Include="amcharts4\examples\json\simple-3D-pie-chart\README.md" />
+    <Content Include="amcharts4\examples\json\simple-bar-chart\README.md" />
+    <Content Include="amcharts4\examples\json\simple-column-chart\README.md" />
+    <Content Include="amcharts4\examples\json\simple-gauge\README.md" />
+    <Content Include="amcharts4\examples\json\simple-line-chart\README.md" />
+    <Content Include="amcharts4\examples\json\simple-map-chart\README.md" />
+    <Content Include="amcharts4\examples\json\simple-pie-chart-rounded-corners\README.md" />
+    <Content Include="amcharts4\examples\json\simple-pie-chart\README.md" />
+    <Content Include="amcharts4\examples\json\simple-radar-chart\README.md" />
+    <Content Include="amcharts4\examples\json\simple-sankey-diagram\README.md" />
+    <Content Include="amcharts4\examples\json\simple-tree-map\README.md" />
+    <Content Include="amcharts4\examples\json\timeline\README.md" />
+    <Content Include="amcharts4\lang\ar.js.map" />
+    <Content Include="amcharts4\lang\bs_BA.js.map" />
+    <Content Include="amcharts4\lang\ca_ES.js.map" />
+    <Content Include="amcharts4\lang\cs_CZ.js.map" />
+    <Content Include="amcharts4\lang\da_DK.js.map" />
+    <Content Include="amcharts4\lang\de_CH.js.map" />
+    <Content Include="amcharts4\lang\de_DE.js.map" />
+    <Content Include="amcharts4\lang\el_GR.js.map" />
+    <Content Include="amcharts4\lang\en.js.map" />
+    <Content Include="amcharts4\lang\en_CA.js.map" />
+    <Content Include="amcharts4\lang\en_US.js.map" />
+    <Content Include="amcharts4\lang\es_ES.js.map" />
+    <Content Include="amcharts4\lang\et_EE.js.map" />
+    <Content Include="amcharts4\lang\fi_FI.js.map" />
+    <Content Include="amcharts4\lang\fr_FR.js.map" />
+    <Content Include="amcharts4\lang\he_IL.js.map" />
+    <Content Include="amcharts4\lang\hi_IN.js.map" />
+    <Content Include="amcharts4\lang\hr_HR.js.map" />
+    <Content Include="amcharts4\lang\hu_HU.js.map" />
+    <Content Include="amcharts4\lang\id_ID.js.map" />
+    <Content Include="amcharts4\lang\it_IT.js.map" />
+    <Content Include="amcharts4\lang\ja_JP.js.map" />
+    <Content Include="amcharts4\lang\ko_KR.js.map" />
+    <Content Include="amcharts4\lang\lt_LT.js.map" />
+    <Content Include="amcharts4\lang\lv_LV.js.map" />
+    <Content Include="amcharts4\lang\nb_NO.js.map" />
+    <Content Include="amcharts4\lang\nl_NL.js.map" />
+    <Content Include="amcharts4\lang\pl_PL.js.map" />
+    <Content Include="amcharts4\lang\pt_BR.js.map" />
+    <Content Include="amcharts4\lang\pt_PT.js.map" />
+    <Content Include="amcharts4\lang\ro_RO.js.map" />
+    <Content Include="amcharts4\lang\ru_RU.js.map" />
+    <Content Include="amcharts4\lang\sl_SL.js.map" />
+    <Content Include="amcharts4\lang\sr_RS.js.map" />
+    <Content Include="amcharts4\lang\sv_SE.js.map" />
+    <Content Include="amcharts4\lang\th_TH.js.map" />
+    <Content Include="amcharts4\lang\tr_TR.js.map" />
+    <Content Include="amcharts4\lang\uk_UA.js.map" />
+    <Content Include="amcharts4\lang\vi_VN.js.map" />
+    <Content Include="amcharts4\lang\zh_Hans.js.map" />
+    <Content Include="amcharts4\lang\zh_Hant.js.map" />
+    <Content Include="amcharts4\LICENSE" />
+    <Content Include="amcharts4\LICENSE-3RD-PARTY.md" />
+    <Content Include="amcharts4\maps.js.map" />
+    <Content Include="amcharts4\plugins\annotation.js.map" />
+    <Content Include="amcharts4\plugins\bullets.js.map" />
+    <Content Include="amcharts4\plugins\forceDirected.js.map" />
+    <Content Include="amcharts4\plugins\overlapBuster.js.map" />
+    <Content Include="amcharts4\plugins\regression.js.map" />
+    <Content Include="amcharts4\plugins\sliceGrouper.js.map" />
+    <Content Include="amcharts4\plugins\sunburst.js.map" />
+    <Content Include="amcharts4\plugins\timeline.js.map" />
+    <Content Include="amcharts4\plugins\venn.js.map" />
+    <Content Include="amcharts4\plugins\wordCloud.js.map" />
+    <Content Include="amcharts4\README.md" />
+    <Content Include="amcharts4\themes\amcharts.js.map" />
+    <Content Include="amcharts4\themes\amchartsdark.js.map" />
+    <Content Include="amcharts4\themes\animated.js.map" />
+    <Content Include="amcharts4\themes\dark.js.map" />
+    <Content Include="amcharts4\themes\dataviz.js.map" />
+    <Content Include="amcharts4\themes\frozen.js.map" />
+    <Content Include="amcharts4\themes\kelly.js.map" />
+    <Content Include="amcharts4\themes\material.js.map" />
+    <Content Include="amcharts4\themes\microchart.js.map" />
+    <Content Include="amcharts4\themes\moonrisekingdom.js.map" />
+    <Content Include="amcharts4\themes\patterns.js.map" />
+    <Content Include="amcharts4\themes\spiritedaway.js.map" />
+    <Content Include="Content\toastr.scss" />
+    <Content Include="Content\toastr.less" />
+    <EntityDeploy Include="DAL\WdsEntities\WdsModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>WdsModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="DAL\WdsEntities\WdsModel.edmx.diagram">
+      <DependentUpon>WdsModel.edmx</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\Online-Server-mds.pubxml" />
+    <None Include="Properties\PublishProfiles\Online-Server.pubxml" />
+    <None Include="Properties\PublishProfiles\Self.pubxml" />
+    <None Include="Properties\PublishProfiles\WDS-123.pubxml" />
+    <None Include="Properties\PublishProfiles\WDS-91.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Scripts\jquery-1.12.4.intellisense.js" />
+    <Content Include="Scripts\iziToast.min.js" />
+    <Content Include="Scripts\jquery-1.12.4.js" />
+    <Content Include="Scripts\jquery-1.12.4.min.js" />
+    <Content Include="Scripts\jquery-1.12.4.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-3.2.1.min.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jszip.min.js" />
+    <Content Include="Scripts\main.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\pdfmake.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\PopupOnload.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\select2.min.js" />
+    <Content Include="Scripts\sum%28%29.js" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
+    <Content Include="Scripts\vfs_fonts.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Theme-Content\css\battery-style.css" />
+    <Content Include="Theme-Content\css\bootstrap.min.css" />
+    <Content Include="Theme-Content\css\calendar.css" />
+    <Content Include="Theme-Content\css\chosen-bootstrap.css" />
+    <Content Include="Theme-Content\css\chosen.css" />
+    <Content Include="Theme-Content\css\clndr.css" />
+    <Content Include="Theme-Content\css\custom.css" />
+    <Content Include="Theme-Content\css\custom_1.css" />
+    <Content Include="Theme-Content\css\datatable-custom.css" />
+    <Content Include="Theme-Content\css\dataTables-2.2.4.tableTools.min.css" />
+    <Content Include="Theme-Content\css\examples.css" />
+    <Content Include="Theme-Content\css\font-awesome.css" />
+    <Content Include="Theme-Content\css\graph.css" />
+    <Content Include="Theme-Content\css\iziToast.min.css" />
+    <Content Include="Theme-Content\css\jquery-ui-1.12.1.css" />
+    <Content Include="Theme-Content\css\jquery.dataTables-1.10.9.css" />
+    <Content Include="Theme-Content\css\main.css" />
+    <Content Include="Theme-Content\css\owl.carousel.css" />
+    <Content Include="Theme-Content\css\Search-Box.css" />
+    <Content Include="Theme-Content\css\style.css" />
+    <Content Include="Theme-Content\css\swipebox.css" />
+    <Content Include="Theme-Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Theme-Content\images\404.png" />
+    <Content Include="Theme-Content\images\arr.png" />
+    <Content Include="Theme-Content\images\complogo.png" />
+    <Content Include="Theme-Content\images\dark.png" />
+    <Content Include="Theme-Content\images\ga.jpg" />
+    <Content Include="Theme-Content\images\ga1.jpg" />
+    <Content Include="Theme-Content\images\ga2.jpg" />
+    <Content Include="Theme-Content\images\ga3.jpg" />
+    <Content Include="Theme-Content\images\ga4.jpg" />
+    <Content Include="Theme-Content\images\ga5.jpg" />
+    <Content Include="Theme-Content\images\ga6.jpg" />
+    <Content Include="Theme-Content\images\ga7.jpg" />
+    <Content Include="Theme-Content\images\ga8.jpg" />
+    <Content Include="Theme-Content\images\icons.svg" />
+    <Content Include="Theme-Content\images\in.jpg" />
+    <Content Include="Theme-Content\images\in1.jpg" />
+    <Content Include="Theme-Content\images\in10.jpg" />
+    <Content Include="Theme-Content\images\in11.jpg" />
+    <Content Include="Theme-Content\images\in2.jpg" />
+    <Content Include="Theme-Content\images\in3.jpg" />
+    <Content Include="Theme-Content\images\in4.jpg" />
+    <Content Include="Theme-Content\images\in5.jpg" />
+    <Content Include="Theme-Content\images\in6.jpg" />
+    <Content Include="Theme-Content\images\in7.jpg" />
+    <Content Include="Theme-Content\images\in8.jpg" />
+    <Content Include="Theme-Content\images\in9.jpg" />
+    <Content Include="Theme-Content\images\iziToast.min.css" />
+    <Content Include="Theme-Content\images\link.png" />
+    <Content Include="Theme-Content\images\lo.png" />
+    <Content Include="Theme-Content\images\na.jpg" />
+    <Content Include="Theme-Content\images\na1.jpg" />
+    <Content Include="Theme-Content\images\na2.jpg" />
+    <Content Include="Theme-Content\images\pic3.jpg" />
+    <Content Include="Theme-Content\images\pr.jpg" />
+    <Content Include="Theme-Content\images\search.png" />
+    <Content Include="Theme-Content\images\tick1.png" />
+    <Content Include="Theme-Content\images\user.png" />
+    <Content Include="Theme-Content\images\wo.jpg" />
+    <Content Include="Theme-Content\js\bootstrap.min.js" />
+    <Content Include="Theme-Content\js\buttons.colVis.min.js" />
+    <Content Include="Theme-Content\js\buttons.flash.min.js" />
+    <Content Include="Theme-Content\js\buttons.html5.min.js" />
+    <Content Include="Theme-Content\js\buttons.print.min.js" />
+    <Content Include="Theme-Content\js\Chart.js" />
+    <Content Include="Theme-Content\js\chosen.jquery.min.js" />
+    <Content Include="Theme-Content\js\clndr.js" />
+    <Content Include="Theme-Content\js\custom.js" />
+    <Content Include="Theme-Content\js\data.js" />
+    <Content Include="Theme-Content\js\datatableAverage.js" />
+    <Content Include="Theme-Content\js\dataTables.buttons.min.js" />
+    <Content Include="Theme-Content\js\dataTables.foundation.min.js" />
+    <Content Include="Theme-Content\js\gmaps.js" />
+    <Content Include="Theme-Content\js\iziToast.min.js" />
+    <Content Include="Theme-Content\js\jquery-1.9.1.min.js" />
+    <Content Include="Theme-Content\js\jquery-ui-1.12.1.js" />
+    <Content Include="Theme-Content\js\jquery.calendario.js" />
+    <Content Include="Theme-Content\js\jquery.dataTable-1.10.9.min.js" />
+    <Content Include="Theme-Content\js\jquery.flot.js" />
+    <Content Include="Theme-Content\js\jquery.flot.pie.js" />
+    <Content Include="Theme-Content\js\jquery.flot.selection.js" />
+    <Content Include="Theme-Content\js\jquery.flot.stack.js" />
+    <Content Include="Theme-Content\js\jquery.metisMenu.js" />
+    <Content Include="Theme-Content\js\jquery.min.js" />
+    <Content Include="Theme-Content\js\jquery.nicescroll.js" />
+    <Content Include="Theme-Content\js\jquery.slimscroll.min.js" />
+    <Content Include="Theme-Content\js\jquery.swipebox.min.js" />
+    <Content Include="Theme-Content\js\jszip.min.js" />
+    <Content Include="Theme-Content\js\moment-2.2.1.js" />
+    <Content Include="Theme-Content\js\owl.carousel.js" />
+    <Content Include="Theme-Content\js\Page-Level-Js\ChargerReport.js" />
+    <Content Include="Theme-Content\js\Page-Level-Js\fixedheader.js" />
+    <Content Include="Theme-Content\js\pdfmake.min.js" />
+    <Content Include="Theme-Content\js\pie-chart.js" />
+    <Content Include="Theme-Content\js\screenfull.js" />
+    <Content Include="Theme-Content\js\scripts.js" />
+    <Content Include="Theme-Content\js\site.js" />
+    <Content Include="Theme-Content\js\skycons.js" />
+    <Content Include="Theme-Content\js\underscore-min.js" />
+    <Content Include="Theme-Content\js\vfs_fonts.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Auth\Login.cshtml" />
+    <Content Include="Views\Auth\CreateUser.cshtml" />
+    <Content Include="Views\Dealer\CreateRetailer.cshtml" />
+    <Content Include="Views\Dealer\Retailers.cshtml" />
+    <Content Include="Views\Dealer\EditRetailer.cshtml" />
+    <Content Include="Views\Retailer\RetailerOrder.cshtml" />
+    <Content Include="Views\Dashboard\SaDashboard.cshtml" />
+    <Content Include="Views\Dashboard\AdminDashboard.cshtml" />
+    <Content Include="Views\Dashboard\DealerDashboard.cshtml" />
+    <Content Include="Views\Dashboard\RetailerDashboard.cshtml" />
+    <Content Include="Views\Shared\_RetailerOrderDetail.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Collection.cshtml" />
+    <Content Include="Views\Dealer\RetailerOrderList.cshtml" />
+    <Content Include="Views\Dealer\OrderDetail.cshtml" />
+    <Content Include="Views\Dealer\ProductIssue.cshtml" />
+    <Content Include="Views\Dealer\ProductReturn.cshtml" />
+    <Content Include="Views\Shared\_RetailerProductReturn.cshtml" />
+    <Content Include="Views\Dealer\CreateSr.cshtml" />
+    <Content Include="Views\Dealer\SrList.cshtml" />
+    <Content Include="Views\Dealer\EditSr.cshtml" />
+    <Content Include="Views\Shared\_LeftSideBar.cshtml" />
+    <Content Include="Views\Dashboard\AdminUpload.cshtml" />
+    <Content Include="Views\Dealer\SalesReport.cshtml" />
+    <Content Include="Views\Admin\UploadList.cshtml" />
+    <Content Include="Views\Shared\_DbTotalRetailerSalesDaily.cshtml" />
+    <Content Include="Views\Shared\_DbTotalRetailerSalesMonthly.cshtml" />
+    <Content Include="Views\Shared\_DbTotalRetailerActivationDaily.cshtml" />
+    <Content Include="Views\Shared\_DbTotalRetailerActivationMonthly.cshtml" />
+    <Content Include="webfonts\fa-solid-900.ttf" />
+    <Content Include="webfonts\fa-solid-900.woff" />
+    <Content Include="Views\Dealer\StockReport.cshtml" />
+    <Content Include="Views\Admin\RetailerApprovalPendingList.cshtml" />
+    <Content Include="Views\Admin\SrPendingList.cshtml" />
+    <Content Include="Views\Dealer\Print.cshtml" />
+    <Content Include="Views\Dealer\AddStock.cshtml" />
+    <Content Include="Views\Dashboard\AsmDashboard.cshtml" />
+    <Content Include="Views\Dealer\SrReport.cshtml" />
+    <Content Include="Views\Dealer\RetailerStockReport.cshtml" />
+    <Content Include="Views\Dealer\SrSalesReport.cshtml" />
+    <Content Include="Views\Admin\CreateIncentive.cshtml" />
+    <Content Include="Views\Admin\IncentiveList.cshtml" />
+    <Content Include="Views\Dealer\ProductReceive.cshtml" />
+    <Content Include="Views\Admin\CreateTarget.cshtml" />
+    <Content Include="Views\Admin\Targets.cshtml" />
+    <Content Include="Views\Admin\DistributorSalesReport.cshtml" />
+    <Content Include="Views\Admin\RetailerDeactivationList.cshtml" />
+    <Content Include="Views\Admin\SRDeactivationList.cshtml" />
+    <Content Include="Views\Admin\DistributorAchievement.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Auth\AuthFailed.cshtml" />
+    <Content Include="Views\Auth\ChangePassword.cshtml" />
+    <Content Include="Views\Auth\ChangeSuccess.cshtml" />
+    <Content Include="Views\Common\ImeiSearch.cshtml" />
+    <Content Include="Theme-Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Theme-Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Theme-Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Theme-Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Theme-Content\fonts\FontAwesome.otf" />
+    <Content Include="Theme-Content\fonts\Montserrat-Regular.ttf" />
+    <Content Include="Theme-Content\fonts\Muli-Regular.ttf" />
+    <Content Include="Views\Admin\RetailerIncentive.cshtml" />
+    <Content Include="Views\Admin\SRIncentive.cshtml" />
+    <Content Include="Views\ChartAndGraphTest\Index.cshtml" />
+    <Content Include="Views\Management\MarketShare.cshtml" />
+    <Content Include="Views\Dashboard\ManagementDashboard.cshtml" />
+    <Content Include="Views\Management\RetailerInformations.cshtml" />
+    <Content Include="Views\Dealer\DealerStock.cshtml" />
+    <Content Include="Views\Retailer\RetailerStockData.cshtml" />
+    <Content Include="Views\Dealer\SRReportData.cshtml" />
+    <Content Include="Views\Dealer\PrintRetailer.cshtml" />
+    <Content Include="Views\Dashboard\GeneralInfoDashboard.cshtml" />
+    <Content Include="Views\Tso\LogisticOrder.cshtml" />
+    <Content Include="Views\Shared\_DistributorOrderDetail.cshtml" />
+    <Content Include="Views\Admin\SRIncentiveAdminReport.cshtml" />
+    <Content Include="Views\Tso\GetAllLogisticOrder.cshtml" />
+    <Content Include="Views\Admin\ExtendLimit.cshtml" />
+    <Content Include="Views\Admin\RetailerUpdateRequests.cshtml" />
+    <Content Include="Views\Admin\CreateDistributors.cshtml" />
+    <Content Include="Views\Admin\DistributorList.cshtml" />
+    <Content Include="Views\Admin\AvailabiltyBrodcast.cshtml" />
+    <Content Include="Views\Billing\AllRetailerList.cshtml" />
+    <Content Include="Views\Billing\AllSrList.cshtml" />
+    <Content Include="Views\Admin\EditIncentive.cshtml" />
+    <Content Include="Views\Document\CreateDistributorCheckList.cshtml" />
+    <Content Include="Views\Shared\_moa.cshtml" />
+    <Content Include="Views\Dealer\_MOA.cshtml" />
+    <Content Include="Views\Shared\_moc.cshtml" />
+    <Content Include="Views\Shared\_bs.cshtml" />
+    <Content Include="Views\Shared\_tin.cshtml" />
+    <Content Include="Views\Shared\_vat.cshtml" />
+    <Content Include="Views\Shared\_trade.cshtml" />
+    <Content Include="Views\Shared\_distother.cshtml" />
+    <Content Include="Views\Document\CheckListApprovalPending.cshtml" />
+    <Content Include="Views\Shared\_moa_stamp.cshtml" />
+    <Content Include="Views\Document\DistributorPersonalInfo.cshtml" />
+    <Content Include="Views\Shared\_distributorPersonalInfo.cshtml" />
+    <Content Include="Views\Document\VerificatonPending.cshtml" />
+    <Content Include="Views\Document\BillFilesDetails.cshtml" />
+    <Content Include="Views\Shared\_moc_cheque.cshtml" />
+    <Content Include="Views\Dealer\DoaIndex.cshtml" />
+    <Content Include="Views\Shared\_DistributorDoaDetails.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Content\Uploads\" />
+    <Folder Include="RdlcReports\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>5970</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:5893/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

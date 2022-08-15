@@ -1,0 +1,67 @@
+﻿@using WDS.Models
+@model IEnumerable<WDS.Models.PermissionModel>
+@{ 
+    string companyName = "";
+    if (Session["company"] != null)
+    {
+        companyName = Session["company"] as string;
+    }
+    string fullName = "";
+    if (companyName.ToLower().Equals("walton"))
+    {
+        fullName = "Walton Dist. System";
+    }
+    else if (companyName.ToLower().Equals("marcel"))
+    {
+        fullName = "Marcel Dist. System";
+    }
+}
+<div class="nav-left-sidebar sidebar-dark">
+    <div class="menu-list">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav flex-column">
+                    <li class="nav-divider">
+                        @fullName
+                    </li>
+                    @if (Session["permissions"] != null)
+                    {
+                        var permissions = (List<PermissionModel>)Session["permissions"];
+                        var menuCnt = 0;
+                        string manuename = "#submenu-";
+                        foreach (var permission in permissions)
+                        {
+                            menuCnt = menuCnt + 1;
+                            var final = manuename + menuCnt;
+                            var areaControl = "myMenue" + menuCnt;
+                            <li class="nav-item ">
+                                <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#@areaControl" aria-controls="@areaControl"><i class="fa fa-fw fa-user-circle"></i>@permission.MainMenu.MainMenuName <span class="badge badge-success">6</span></a>
+                                <div id="@areaControl" class="collapse submenu" style="">
+                                    <ul class="nav flex-column">
+                                        @foreach (var nav_item in permission.SubMenus)
+                                        {
+                                            if (nav_item.IsMenu == true)
+                                            {
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="@Url.Action(nav_item.ActionName, nav_item.ControllerName)">@nav_item.SubMenuName</a>
+                                                </li>
+                                            }
+
+                                        }
+                                    </ul>
+                                </div>
+                            </li>
+
+                        }
+                    }
+
+                    
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>

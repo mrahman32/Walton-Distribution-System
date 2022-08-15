@@ -1,0 +1,153 @@
+﻿
+@{
+    ViewBag.Title = "RetailerIncentive";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-header">Retailer Incentive</div>
+            <div class="card-body">
+                    <div class="form-group row">
+                        <label class="col-lg-3 col-form-label text-sm-right">From Date</label>
+                        <div class="col-lg-6">
+                            <input type="text" class="form-control datepicker" id="fromDate" readonly />
+                        </div>
+                    </div>
+
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label text-sm-right">To Date</label>
+                    <div class="col-lg-6">
+                        <input type="text" class="form-control datepicker" id="toDate" readonly />
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-3 col-form-label text-sm-right">Distributor Type</label>
+                    <div class="col-lg-6">
+                        @Html.DropDownList("DistributorType", new SelectList(ViewBag.DistributorTypes, "Value", "Text"), new { @class = "selectpicker show-tick form-control", @id = "DistributorType", data_live_search = "true", })
+
+                    </div>
+                </div>
+               
+
+                <div class="form-group row">
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-6">
+                            <input type="button" class="btn btn-outline-info" value="Submit" id="btnSubmit" />
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-header">List</div>
+            <div class="card-body">
+                <table class="table table-bordered" id="retailerIncentiveTable">
+                    <thead>
+                        <tr>
+                            <th>SL</th>
+                            <th>Dealer Name</th>
+                            <th>Dealer Code</th>
+                            <th>Zone</th>
+                            <th>RetailerName</th>
+                            <th>RetailerAddress</th>
+                            <th>PhoneNumber</th>
+                            <th>PaymentNumber</th>
+                            <th>Quantity</th>
+                            <th>RetailerIncentive</th>
+                            <th>Deduction</th>
+                            <th>FinalAmount</th>
+                        </tr>
+                    </thead>
+                    <tbody id="retailerIncentiveTableBody"></tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<link href="~/Content/iziToast.min.css" rel="stylesheet" />
+<script src="~/Scripts/iziToast.min.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $(".datepicker").datepicker({
+                dateFormat: 'yy-mm-dd'
+            });
+        })
+        $("#btnSubmit").click(function () {
+            $('#retailerIncentiveTable').DataTable().destroy();
+            $("#retailerIncentiveTableBody").html("");
+            var fromDate = $("#fromDate").val();
+            var toDate = $("#toDate").val();
+            var dType = $("#DistributorType").val();
+            if (fromDate != "" && toDate != "") {
+                var dataList = JSON.stringify({ fromDate: fromDate, toDate: toDate });
+                $.ajax({
+                    type: 'GET',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    url: '@Url.Action("GetRetailerIncentive", "Admin")',
+                    data: { fromDate: fromDate, toDate: toDate, dType:dType },
+                    success: function (data) {
+                        if (data.length > 0) {
+                            $('#retailerIncentiveTable').DataTable().destroy();
+                            var dataList = data.length;
+                            $("#retailerIncentiveTableBody").html("");
+                            for (var i = 0; i < dataList; i++) {
+                                $("#retailerIncentiveTableBody").append('<tr>' +
+                                    '<td>' + (i+1) + '</td>' +
+                                    '<td>' + data[i].DistributorNameCellCom + '</td>' +
+                                    '<td>' + data[i].DigitechCode + '</td>' +
+                                    '<td>' + data[i].Zone + '</td>' +
+                                    '<td>' + data[i].RetailerName + '</td>' +
+                                    '<td>' + data[i].RetailerAddress + '</td>' +
+                                    '<td>' + data[i].PhoneNumber + '</td>' +
+                                    '<td>' + data[i].PaymentNumber + '</td>' +
+                                    '<td>' + data[i].Quantity + '</td>' +
+                                    '<td>' + data[i].RetailerIncentive + '</td>' +
+                                    '<td>' + data[i].Deduction + '</td>' +
+                                    '<td>' + data[i].FinalAmount + '</td>' +
+                                    '</tr>');
+                            }
+                            var table = $('#retailerIncentiveTable').DataTable();
+
+                            new $.fn.dataTable.Buttons(table, {
+                                buttons: [
+                                    { extend: 'excel', className: 'excelBtn', title: 'Retailer Incentive', text: 'Click For Excel Export' }
+                                ]
+                            });
+
+                            table.buttons(0, null).container().prependTo(
+                                table.table().container()
+                            );
+                        } else {
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'No Data Found!.',
+                                position: 'topCenter',
+                            });
+                        }
+                    }
+                });
+            } else {
+                iziToast.error({
+                    title: 'Error',
+                    message: 'Select Date!.',
+                    position: 'topCenter',
+                });
+            }
+            
+        });
+    </script>
+
+
+
+
+

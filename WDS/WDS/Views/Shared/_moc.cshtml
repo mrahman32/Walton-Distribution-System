@@ -1,0 +1,235 @@
+﻿@model WDS.Models.DistributorCheckListModel
+
+
+@using (Html.BeginForm("CreateMOC", "Document", FormMethod.Post, new { id = "CreateMOC", enctype = "multipart/form-data" }))
+{
+    <div class="col-lg-12">
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.DealerCode)
+        @Html.HiddenFor(model => model.IsCreationApproved)
+        @Html.HiddenFor(model => model.CreationApprovedBy)
+        @Html.HiddenFor(model => model.CreationApprovedDate)
+        @Html.HiddenFor(model => model.IsTheDealerBlocked)
+        @Html.HiddenFor(model => model.IsTemporaryOpen)
+        @Html.HiddenFor(model => model.TempOpenDate)
+        @Html.HiddenFor(model => model.TempExpireDate)
+        @Html.HiddenFor(model => model.AddedBy)
+        @Html.HiddenFor(model => model.AddedDate)
+        @Html.HiddenFor(model => model.UpdatedBy)
+        @Html.HiddenFor(model => model.UpdatedDate)
+        @Html.HiddenFor(model => model.UpdateName)
+
+
+        @Html.HiddenFor(model => model.MemorandumOfChequeModel.Id)
+        @Html.HiddenFor(model => model.MemorandumOfChequeModel.CheckListId)
+        @Html.HiddenFor(model => model.MemorandumOfChequeModel.AddedBy)
+        @Html.HiddenFor(model => model.MemorandumOfChequeModel.AddedDate)
+        @Html.HiddenFor(model => model.MemorandumOfChequeModel.UpdatedBy)
+        @Html.HiddenFor(model => model.MemorandumOfChequeModel.UpdatedDate)
+        @Html.HiddenFor(model => model.MemorandumOfChequeModel.ChequeAttachment)
+
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Stamp No<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(model => model.MemorandumOfChequeModel.StampNo, new { @class = "form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.MemorandumOfChequeModel.StampNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Stamp Type</label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(model => model.MemorandumOfChequeModel.StampType, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MemorandumOfChequeModel.StampType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Purchase Date<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(model => model.MemorandumOfChequeModel.PurchaseDate, new { @class = "ddPicker form-control", @readonly = "readonly", required = "required" })
+                @Html.ValidationMessageFor(model => model.MemorandumOfChequeModel.PurchaseDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Vendor ID<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(model => model.MemorandumOfChequeModel.VendorId, new { @class = "form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.MemorandumOfChequeModel.VendorId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Cheque Date</label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(model => model.MemorandumOfChequeModel.ChequeDate, new { @class = "ddPicker form-control" })
+                @Html.ValidationMessageFor(model => model.MemorandumOfChequeModel.VendorId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Bank Name<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.DropDownListFor(model => model.MemorandumOfChequeModel.BankId, new SelectList(ViewBag.Banks, "Value", "Text"), "Select", new
+                {
+                    @class = "selectpicker show-tick form-control",
+                    data_live_search = "true",
+                    //onchange = "submit();",
+                    required = "required"
+
+                })
+                @Html.ValidationMessageFor(model => model.MemorandumOfChequeModel.BankId, "", new { @class = "text-danger" })
+            </div>
+            
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Branch<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.DropDownListFor(model => model.MemorandumOfChequeModel.BranchId, new SelectList(ViewBag.Branches, "Value", "Text"), "Select", new
+                                {
+                                    @class = "selectpicker show-tick form-control",
+                                    data_live_search = "true",
+                                    //onchange = "submit();",
+                                    required = "required"
+
+                                })
+                @Html.ValidationMessageFor(model => model.MemorandumOfChequeModel.BranchId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Account No<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(model => model.MemorandumOfChequeModel.AccountNo, new { @class = "form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.MemorandumOfChequeModel.AccountNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Account Name</label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(model => model.MemorandumOfChequeModel.AccountName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MemorandumOfChequeModel.AccountName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Account Statement</label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(m => m.MemorandumOfChequeModel.AccountStatementFileBase, new { type = "file", @class = "form-control", accept = "image/x-png,image/gif,image/jpeg" })
+                @Html.ValidationMessageFor(model => model.MemorandumOfChequeModel.AccountStatementFileBase, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-lg-3">
+                <div class="col-lg-3">
+                    @*<img src="@Url.Content(@Model.CmnUserModel.WebServerUrl)" class="img-responsive img-rounded" alt="@Model.CmnUserModel.UserFullName">*@
+                    <img alt="" class="img-responsive img-rounded" src="@Model.MemorandumOfChequeModel.AccountStatementWebUrl" style="display: block;max-width:100px;max-height:100px;width: auto; height: auto; " />
+                </div>
+            </div>
+        </div>
+
+        @*<div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Cheue No</label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(model => model.MemorandumOfChequeModel.CheueNo, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MemorandumOfChequeModel.CheueNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+       
+
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Cheque Amount</label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(model => model.MemorandumOfChequeModel.Amount, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MemorandumOfChequeModel.Amount, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Signed MIRC (YES/NO)<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.DropDownListFor(model => model.MemorandumOfChequeModel.MICR, new List<SelectListItem>
+                                                    {
+                                                        new SelectListItem { Text = "YES", Value = "true"},
+                                                        new SelectListItem { Text = "NO", Value = "false"},
+                                                    }, "Select", new { @class = "selectpicker show-tick form-control", required = "required" })
+                @Html.ValidationMessageFor(model => model.MemorandumOfChequeModel.MICR, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @*<div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Cheque Attachment</label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(m => m.MemorandumOfChequeModel.CheckAttachmentFile, new { type = "file", @class = "form-control", accept = "image/x-png,image/gif,image/jpeg" })
+                @Html.ValidationMessageFor(model => model.MemorandumOfChequeModel.CheckAttachmentFile, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-lg-3">
+                <div class="col-lg-3">
+                   
+                    <img alt="" class="img-responsive img-rounded" src="@Model.MemorandumOfChequeModel.ChequeAttachmentWebUrl" style="display: block;max-width:100px;max-height:100px;width: auto; height: auto; " />
+                </div>
+            </div>
+        </div>*@
+        
+        <button type="button" class="btn btn-warning btn-sm" id="btnAddCheque">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            <span style="font-weight: bold">Add Cheque</span>
+        </button>
+
+        <br />
+        <br />
+
+        
+        <div class="form-group row">
+
+            <table class="table table-bordered" id="tbl_moc_checque">
+                <thead>
+                    <tr>
+                        <th>Cheque No.</th>
+                        <th>Amount</th>
+                        <th>Upload Cheque</th>
+                    </tr>
+                </thead>
+                <tbody id="tbl_moc_checque_body">
+                    @if (Model != null && Model.MemorandumOfChequeModel.MocChequesModels.Count > 0)
+                    {
+                        foreach (var stamp in Model.MemorandumOfChequeModel.MocChequesModels)
+                        {
+                            Html.RenderPartial("~/Views/Shared/_moc_cheque.cshtml", stamp);
+                        }
+                    }
+                </tbody>
+            </table>
+
+        </div>
+
+
+        
+        @if (Model != null && !Model.IsApprover)
+        {
+            <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right"></label>
+            <div class="col-lg-6 text-right">
+                <button type="submit" id="btnMocSave" class="btn btn-outline-success"><i class="fas fa-save"></i>&nbsp;Save</button>
+            </div>
+        </div>
+        }
+        
+        
+
+        
+    </div>
+
+    <script type="text/javascript">
+        $(".ddPicker").datepicker({ dateFormat: 'mm-dd-yy', changeMonth:true, changeYear:true, yearRange:"-100:+00" })
+            .on('keypress paste', function (e) {
+                e.preventDefault();
+                return false;
+            });
+        $("#btnAddCheque").on('click', function () {
+            $('.fa-plus').attr('hidden', true);
+            $.post('@Url.Action("GetChequePartial", "Document")', {}, function (data) {
+                $('#tbl_moc_checque_body').append(data);
+                $('.fa-plus').attr('hidden', false);
+                $('.spinner-border').attr('hidden', true);
+            });
+        });
+        
+    </script>
+}

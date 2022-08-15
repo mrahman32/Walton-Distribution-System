@@ -1,0 +1,170 @@
+﻿@model WDS.Models.IncentiveDistributionModel
+
+@{
+    ViewBag.Title = "CreateIncentive";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="container-fluid">
+
+    @if (TempData["message"] != null)
+    {
+        var msgType = TempData["messageType"];
+        var msg = TempData["message"];
+        if ((int)msgType == 1)
+        {
+            TempData["message"] = null;
+            TempData["messageType"] = 0;
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Message: </strong> @msg
+                <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </a>
+            </div>
+
+        }
+        else if ((int)msgType == 2)
+        {
+            TempData["message"] = null;
+            TempData["messageType"] = 0;
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Message: </strong> @msg
+                <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </a>
+            </div>
+
+        }
+        else if ((int)msgType == 3)
+        {
+            TempData["message"] = null;
+            TempData["messageType"] = 0;
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Message: </strong> @msg
+                <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </a>
+            </div>
+        }
+    }
+
+
+
+
+
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-header">Create New Incentive</div>
+                <div class="card-body">
+                    @using (Html.BeginForm("EditIncentive", "Admin", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        @Html.HiddenFor(model=>model.Id)
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">Title</label>
+                            <div class="col-lg-6">
+                                @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">Model</label>
+                            <div class="col-lg-6">
+
+                                @Html.DropDownListFor(model => model.ModelName, new SelectList(ViewBag.ModelList, "Value", "Text"), "Select", new
+                                {
+                                    @class = "selectpicker show-tick form-control",
+                                    data_live_search = "true",
+                                    //onchange = "LoadModel('" + @Url.Action("GetModel", "Retailer") + "')",
+
+                                })
+                                @Html.ValidationMessageFor(model => model.ModelName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">Incentive Amount</label>
+                            <div class="col-lg-6">
+                                @Html.TextBoxFor(model => model.TotalIncentiveAmount, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.TotalIncentiveAmount, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">For Dealer</label>
+                            <div class="col-lg-6">
+                                @Html.TextBoxFor(model => model.DealerAmount, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.DealerAmount, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">For Retailer</label>
+                            <div class="col-lg-6">
+                                @Html.TextBoxFor(model => model.RetailerAmount, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.RetailerAmount, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">For SR</label>
+                            <div class="col-lg-6">
+                                @Html.TextBoxFor(model => model.SRAmount, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.SRAmount, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">From</label>
+                            <div class="col-lg-6">
+                                @Html.TextBoxFor(model => model.StartDate, new { @class = "form-control datepicker" })
+                                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">To</label>
+                            <div class="col-lg-6">
+                                @Html.TextBoxFor(model => model.EndDate, new { @class = "form-control datepicker" })
+                                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label text-sm-right">Remarks</label>
+                            <div class="col-lg-6">
+                                @Html.TextBoxFor(model => model.Remarks, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group row">
+                            <div class="col-lg-3"></div>
+                            <div class="col-lg-6">
+                                <input type="submit" value="Submit" class="btn btn-outline-success" />
+                            </div>
+                        </div>
+
+
+
+
+                    }
+                    @Html.ActionLink("Back to List", "IncentiveList")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(function () {
+            $(".datepicker").datepicker({
+                dateFormat: 'yy-mm-dd'
+            });
+        })
+    </script>
+
+}

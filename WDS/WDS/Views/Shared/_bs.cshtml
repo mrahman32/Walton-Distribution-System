@@ -1,0 +1,134 @@
+﻿@model WDS.Models.DistributorCheckListModel
+
+
+@using (Html.BeginForm("CreateBS", "Document", FormMethod.Post, new { id = "CreateBS", enctype = "multipart/form-data", onsubmit = "return validateForm()" }))
+{
+    <div class="col-lg-12">
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.DealerCode)
+        @Html.HiddenFor(model => model.IsCreationApproved)
+        @Html.HiddenFor(model => model.CreationApprovedBy)
+        @Html.HiddenFor(model => model.CreationApprovedDate)
+        @Html.HiddenFor(model => model.IsTheDealerBlocked)
+        @Html.HiddenFor(model => model.IsTemporaryOpen)
+        @Html.HiddenFor(model => model.TempOpenDate)
+        @Html.HiddenFor(model => model.TempExpireDate)
+        @Html.HiddenFor(model => model.AddedBy)
+        @Html.HiddenFor(model => model.AddedDate)
+        @Html.HiddenFor(model => model.UpdatedBy)
+        @Html.HiddenFor(model => model.UpdatedDate)
+        @Html.HiddenFor(model => model.UpdateName)
+
+
+
+        @Html.HiddenFor(model => model.BankSolvencyModel.Id)
+        @Html.HiddenFor(model => model.BankSolvencyModel.CheckListId)
+        @Html.HiddenFor(model => model.BankSolvencyModel.AddedBy)
+        @Html.HiddenFor(model => model.BankSolvencyModel.AddedDate)
+        @Html.HiddenFor(model => model.BankSolvencyModel.UpdatedBy)
+        @Html.HiddenFor(model => model.BankSolvencyModel.UpdatedDate)
+
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Solvency Date<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(model => model.BankSolvencyModel.SolvencyDate, new { @class = "ddPicker form-control", @readonly = "readonly", required = "required" })
+                @Html.ValidationMessageFor(model => model.BankSolvencyModel.SolvencyDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Bank Name<i class="fas fa-asterisk" style="color: red"></i></label>
+            <div class="col-lg-6">
+                @Html.DropDownListFor(model => model.BankSolvencyModel.BankId, new SelectList(ViewBag.Banks, "Value", "Text"), "Select", new
+                {
+                    @class = "selectpicker show-tick form-control",
+                    data_live_search = "true",
+                    //onchange = "submit();",
+                    required = "required"
+
+                })
+                @Html.ValidationMessageFor(model => model.BankSolvencyModel.BankId, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Branch</label>
+            <div class="col-lg-6">
+                @Html.DropDownListFor(model => model.BankSolvencyModel.BranchId, new SelectList(ViewBag.Branches, "Value", "Text"), "Select", new
+                                {
+                                    @class = "selectpicker show-tick form-control",
+                                    data_live_search = "true",
+                                    //onchange = "submit();",
+
+                                })
+                @Html.ValidationMessageFor(model => model.BankSolvencyModel.BranchId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Agreement End Date</label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(model => model.BankSolvencyModel.AccountNo, new { @class = "ddPicker form-control", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.BankSolvencyModel.AccountNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Stamp No</label>
+            <div class="col-lg-6">
+                @Html.TextBoxFor(model => model.BankSolvencyModel.AccountName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.BankSolvencyModel.AccountName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right">Business Address</label>
+            <div class="col-lg-6">
+
+                @Html.TextAreaFor(model => model.BankSolvencyModel.BusinessAddress, 5, 1, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.BankSolvencyModel.BusinessAddress, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+
+
+
+
+
+        @if (Model != null && !Model.IsApprover)
+            {
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label text-sm-right"></label>
+            <div class="col-lg-6 text-right">
+                <button type="submit" id="btnBsSave" class="btn btn-outline-success"><i class="fas fa-save"></i>&nbsp;Save</button>
+            </div>
+        </div>
+        }
+
+
+    </div>
+
+    <script type="text/javascript">
+        //document.getElementById("CreateBS").addEventListener("submit", validateForm);
+        $(function () {
+            $(".ddPicker").datepicker({ dateFormat: 'mm-dd-yy', changeMonth: true, changeYear: true, yearRange: "-100:+00" })
+                .on('keypress paste', function (e) {
+                    e.preventDefault();
+                    return false;
+                });
+        });
+
+        //function validateForm(e) {
+        //    //e.preventDefault();
+        //    debugger;
+
+
+
+
+        //    var solvencyDate = document.forms["CreateBS"]["BankSolvencyModel_SolvencyDate"].value;
+        //    if (solvencyDate == "") {
+        //        alert("Name must be filled out");
+        //        return false;
+        //    }
+        //}
+
+    </script>
+}

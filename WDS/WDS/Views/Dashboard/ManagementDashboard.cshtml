@@ -1,0 +1,373 @@
+﻿@{
+    ViewBag.Title = "ManagementDashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .ui-datepicker-calendar {
+        display: none;
+    }
+
+    .chart {
+        width: 100%;
+        height: 500px;
+    }
+</style>
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <div class="card-header">Create New</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <label class="col-lg-4 col-form-label text-sm-right">Priod</label>
+                            <div class="col-lg-6">
+                                <input class="form-control datepicker" id="Priod" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                            <label class="col-lg-4 col-form-label text-sm-right">Zone</label>
+                            <div class="col-lg-6">
+                                @Html.DropDownList("Zone", ViewBag.AllZoneList as List<SelectListItem>, new { @class = "selectpicker show-tick form-control", data_live_search = "true", id = "zone" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+
+                        <div class="form-group row">
+                            @*<label class="col-lg-3 col-form-label text-sm-right">Brand</label>
+                                <div class="col-lg-6">
+                                    @Html.DropDownList("Brand", ViewBag.AllBrandList as List<SelectListItem>, new { @class = "selectpicker show-tick form-control", data_live_search = "true", id = "brand" })
+                                </div>*@
+                            <button class="btn btn-default" id="btnSubmit">Search</button>
+                        </div>
+
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    
+                    <div class="col-md-6">
+                        <div class="card" style="border-radius: 20px; background-color:whitesmoke">
+                            <div class="card-body">
+                                <div class="rotate">
+                                    <div>
+                                        <h2 id="tMarketSize">321654</h2>
+                                    </div>
+                                </div>
+                                <h4 class="text-uppercase text-right">Total Market Size</h4>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card" style="border-radius: 20px; background-color:whitesmoke">
+                            <div class="card-body">
+                                <div>
+                                    <h2 id="wMarketSize">321654</h2>
+                                </div>
+                                <h4 class="text-uppercase text-right">Walton Market Size</h4>
+
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>AREA WISE TOP BRAND</h5>
+                        <div id="AreaWiseTopBrand" class="chart">
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-8">
+                        <h5>AREA WISE WALTON MARKET SHARE</h5>
+                        <div id="AreaWiseWaltonMarketShare" class="chart">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5>AREA WISE Sales Value</h5>
+                        <div id="AreaWisseSalesValue" class="chart">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/dataviz.js"></script>
+    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $("#Priod").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                dateFormat: 'MM yy',
+                onClose: function (dateText, inst) {
+                    $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+                }
+            });
+
+            GenerateCharts('', '');
+            GenerateMarketSizeTiles('', '');
+
+            $('#btnSubmit').on('click',
+                function () {
+                    var period = $('#Priod').val();
+                    var zone = $('#zone').val();
+                    var zoneTxt = $("#zone option:selected").text();
+                    GenerateMarketSizeTiles(period, zone);
+                    GenerateCharts(period, zone, zoneTxt);
+
+                });
+
+        });
+
+        function GenerateMarketSizeTiles(period, zone) {
+            $.ajax({
+                type: 'POST',
+
+                url: '@Url.Action("GetMarketSizeTilesData", "Management")',
+                dataType: 'json',
+                data: { period: period, zone: zone },
+                success: function (data) {
+                    if (data.length > 0) {
+                        $('#tMarketSize').html(data[0].TotalSize);
+                        $('#wMarketSize').html(data[0].WaltonSize);
+                    } else {
+                        $('#tMarketSize').html('No Data Found');
+                        $('#wMarketSize').html('No Data Found');
+                    }
+                    
+                }
+            });
+        }
+
+
+        function GenerateCharts(period, zone, zoneTxt) {
+            var dt = { period: period, zone: zone }
+            am4core.ready(function () {
+                function am4themes_dataviz(target) {
+                    if (target instanceof am4core.ColorSet) {
+                        target.list = [
+                            am4core.color("#1BA68D"),
+                            am4core.color("#E7DA4F"),
+                            am4core.color("#E77624"),
+                            am4core.color("#DF3520"),
+                            am4core.color("#64297B"),
+                            am4core.color("#232555")
+                        ];
+                    }
+                }
+
+                // Themes begin
+                am4core.useTheme(am4themes_dataviz);
+
+                am4core.useTheme(am4themes_animated);
+                // Themes end
+
+                // Create chart instance
+
+                $.ajax({
+                    type: 'POST',
+
+                    url: '@Url.Action("AreaWiseTopBrandData", "Management")',
+                    dataType: 'json',
+                    data: { period: period, zone: zone },
+                    success: function (data) {
+                        debugger;
+                        var val = JSON.stringify(data);
+                        console.log(val);
+
+                        var chart = am4core.create("AreaWiseTopBrand", am4charts.XYChart);
+
+
+                        var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
+                        categoryAxis.renderer.grid.template.location = 0;
+                        categoryAxis.dataFields.category = "BrandName";
+                        categoryAxis.renderer.minGridDistance = 1;
+                        categoryAxis.renderer.inversed = true;
+                        categoryAxis.renderer.grid.template.disabled = true;
+
+                        var valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
+                        valueAxis.min = 0;
+
+                        var series = chart.series.push(new am4charts.ColumnSeries());
+                        series.dataFields.categoryY = "BrandName";
+                        series.dataFields.valueX = "ShareAmount";
+                        series.tooltipText = "{valueX.value}";
+                        series.tooltip.pointerOrientation = "vertical";
+
+                        series.tooltip.label.interactionsEnabled = true;
+
+
+                        series.columns.template.strokeOpacity = 0;
+                        series.columns.template.column.cornerRadiusBottomRight = 5;
+                        series.columns.template.column.cornerRadiusTopRight = 5;
+
+                        var labelBullet = series.bullets.push(new am4charts.LabelBullet());
+                        labelBullet.label.horizontalCenter = "center";
+                        labelBullet.label.dx = 10;
+                        // labelBullet.label.text = "{values.valueX.workingValue.formatNumber('#.0as')}";
+                        labelBullet.label.text = "{valueX.value}";
+                        labelBullet.locationX = 1;
+                        labelBullet.label.fill = am4core.color("#fff");
+
+                        // as by default columns of the same series are of the same color, we add adapter which takes colors from chart.colors color set
+                        series.columns.template.adapter.add("fill",
+                            function (fill, target) {
+                                return chart.colors.getIndex(target.dataItem.index);
+                            });
+
+                        var mapData = [];
+                        data.forEach(function (d) {
+                            // Push a new object to our new array with an appropriate id
+                            mapData.push(Object.assign({ "BrandName": d.BrandName, "ShareAmount": d.ShareAmount }));
+                        });
+                        categoryAxis.sortBySeries = series;
+
+                        chart.data = mapData;
+                        chart.cursor = new am4charts.XYCursor();
+                        chart.cursor.maxTooltipDistance = -1;
+                    }
+                });
+
+
+                $.ajax({
+                    type: 'POST',
+
+                    url: '@Url.Action("GetAreaWiseWaltonMarketShare", "Management")',
+                    dataType: 'json',
+                    data: { period: period, zone: zone },
+                    success: function (data) {
+                        debugger;
+                        var val = JSON.stringify(data);
+                        console.log(val);
+
+                        // Create chart instance
+                        var chart1 = am4core.create("AreaWisseSalesValue", am4charts.XYChart);
+
+                        // Add data
+
+                        var mapData = [];
+                        data.forEach(function (d) {
+                            // Push a new object to our new array with an appropriate id
+                            mapData.push(Object.assign({ "ZoneName": d.ZoneName, "AllBrand": d.AllBrand, "Walton": d.Walton }));
+                        });
+                        chart1.data = mapData;
+
+                        chart1.legend = new am4charts.Legend();
+                        chart1.legend.position = "right";
+                        chart1.cursor = new am4charts.XYCursor();
+                        chart1.cursor.maxTooltipDistance = -1;
+                        // Create axes
+                        var categoryAxis = chart1.yAxes.push(new am4charts.CategoryAxis());
+                        categoryAxis.dataFields.category = "ZoneName";
+                        categoryAxis.renderer.grid.template.opacity = 10;
+
+                        var valueAxis = chart1.xAxes.push(new am4charts.ValueAxis());
+                        valueAxis.min = 0;
+                        valueAxis.renderer.grid.template.opacity = 10;
+                        valueAxis.renderer.ticks.template.strokeOpacity = 5;
+                        valueAxis.renderer.ticks.template.stroke = am4core.color("#495C43");
+                        valueAxis.renderer.ticks.template.length = 50;
+                        valueAxis.renderer.line.strokeOpacity = 5;
+                        valueAxis.renderer.baseGrid.disabled = true;
+                        valueAxis.renderer.minGridDistance = 100;
+
+                        // Create series
+                        function createSeries(field, name) {
+                            var series = chart1.series.push(new am4charts.ColumnSeries());
+                            series.dataFields.valueX = field;
+                            series.dataFields.categoryY = "ZoneName";
+                            series.stacked = true;
+                            series.name = name;
+                            series.tooltipText = "{valueX.value}";
+                            series.tooltip.pointerOrientation = "vertical";
+
+                            series.tooltip.label.interactionsEnabled = true;
+                            var labelBullet = series.bullets.push(new am4charts.LabelBullet());
+                            labelBullet.locationX = 0.5;
+                            labelBullet.label.text = "{valueX}";
+                            labelBullet.label.fill = am4core.color("#fff");
+                        }
+
+                        createSeries("AllBrand", "ALL BRAND");
+                        createSeries("Walton", "WALTON");
+                        ////////////////////////////////--------------------------
+                    }
+                });
+
+                /////////////////////////////////----------------
+
+
+                $.ajax({
+                    type: 'POST',
+
+                    url: '@Url.Action("GetAreaWisePieData", "Management")',
+                    dataType: 'json',
+                    data: { period: period, zone: zone, zoneTxt: zoneTxt },
+                    success: function (data) {
+                        var val = JSON.stringify(data);
+                        console.log(val);
+
+                        // Create chart instance
+                        var chart2 = am4core.create("AreaWiseWaltonMarketShare", am4charts.PieChart);
+
+                        var mapData = [];
+                        data.forEach(function (d) {
+                            // Push a new object to our new array with an appropriate id
+                            mapData.push(Object.assign({ "ZoneName": d.ZoneName, "Walton": d.Walton, "ZoneStatus": d.ZoneStatus }));
+                        });
+                        chart2.data = mapData;
+                        // Add data
+                        //chart2.data = [{
+                        //        "country": "DHAKA-EAST",
+                        //        "litres": 501.9
+                        //    }, {
+                        //        "country": "DHAKA-SOUTH",
+                        //        "litres": 301.9
+                        //    }, {
+                        //        "country": "DHAKA-NORTH",
+                        //        "litres": 201.1
+                        //    }
+                        //];
+
+                        // Add and configure Series
+                        var pieSeries = chart2.series.push(new am4charts.PieSeries());
+                        pieSeries.dataFields.value = "Walton";
+                        pieSeries.dataFields.category = "ZoneName";
+                        pieSeries.slices.template.stroke = am4core.color("#fff");
+                        pieSeries.slices.template.strokeOpacity = 1;
+                        pieSeries.slices.template.propertyFields.isActive = "ZoneStatus";
+                        // This creates initial animation
+                        pieSeries.hiddenState.properties.opacity = 1;
+                        pieSeries.hiddenState.properties.endAngle = -90;
+                        pieSeries.hiddenState.properties.startAngle = -90;
+
+                        chart2.hiddenState.properties.radius = am4core.percent(0);
+                    }
+                });
+
+
+            });
+        }
+
+
+
+    </script>
+

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<WDS.DAL.WdsEntities.SalesRepresentative>
+@{
+    ViewBag.Title = "AllSrList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-header">SR LIST</div>
+                <div class="card-body">
+                    <table class="table table-striped table-bordered" id="sample_1">
+                        <thead>
+                            <tr>
+                                <th>Dealer Code</th>
+                                <th>SR Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Payment No.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Any())
+                            {
+                                foreach (var model in Model)
+                                {
+                                    <tr>
+                                        @Html.HiddenFor(modelItem => model.Id)
+                                        <td>@Html.DisplayFor(modelItem => model.DealerCode)</td>
+                                        <td>@Html.DisplayFor(modelItem => model.Name)</td>
+                                        <td>@Html.DisplayFor(modelItem => model.Email)</td>
+                                        <td>@Html.DisplayFor(modelItem => model.Phone)</td>
+                                        <td>@Html.DisplayFor(modelItem => model.PaymentNumber)</td>
+
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(function () {
+        //$('#sample_1').DataTable();
+        var table = $('#sample_1').DataTable();
+
+        new $.fn.dataTable.Buttons(table, {
+            buttons: [
+                { extend: 'excel', className: 'excelBtn', title: 'Data export SR List', text: 'Click For Excel Export' }
+            ]
+        });
+
+        table.buttons(0, null).container().prependTo(
+            table.table().container()
+        );
+    });
+</script>

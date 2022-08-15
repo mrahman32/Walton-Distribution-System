@@ -1,0 +1,162 @@
+﻿@model WDS.Models.RetailerInfoModel
+@{
+    ViewBag.Title = "PrintRetailer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    .borderless td, .borderless th {
+        border: none;
+    }
+
+    body {
+        color: black;
+    }
+</style>
+<div class="container" id="printData">
+
+    <table class="table borderless" style="align-content: center; width: 100%">
+        <thead>
+            <tr>
+
+                <th style="width: 20%">
+                </th>
+                <th style="font-size: 25px;text-align: center; width: 60%">
+                    <img src="~/Content/images/Walton_Mobile_logo_W.png" />
+                    <h1>Walton Mobile</h1>
+                    <h3>Retailer Registration Form</h3>
+                </th>
+                <th style="width: 20%;">
+                    @*<div style="width: 50%; height: 100px; border: 1px solid black;margin-left:100px;">
+
+                            <p style="text-align:center;">image</p>
+                        </div>*@
+                </th>
+            </tr>
+        </thead>
+    </table>
+    <table class="table table-bordered" style="align-content: center; width: 100%">
+        <tbody>
+            <tr>
+                <th colspan="4" style="font-size: 25px;text-align: center; width: 60%">
+                    <h4>Dealer Information</h4>
+                </th>
+
+            </tr>
+            <tr>
+
+                <th style="width: 20%">Dealer Name:</th>
+                <th colspan="3" style="font-size: 15px;text-align: center; width: 30%">
+                    @Model.DistributorName
+                </th>
+
+            </tr>
+            <tr>
+
+                <th style="width: 20%">Dealer Code:</th>
+                <th style="font-size: 15px;text-align: center; width: 30%">
+                    @Model.DistributorCode
+                </th>
+                <th style="width: 20%">Zone:</th>
+                <th style="font-size: 15px;text-align: center; width: 30%">
+                    @Model.Zone
+                </th>
+            </tr>
+        </tbody>
+
+    </table>
+    <br />
+    <div style="width: 20%; height: 30px; border: 1px solid black;">
+        <h4 style="margin: 3px; text-align:center">Retailer Information</h4>
+
+    </div>
+    <br/>
+
+    <table class="borderless">
+        <tbody>
+            <tr><td>Retailer Name:</td><td>@Model.RetailerName</td></tr>
+            <tr><td>Owner Name:</td><td>@Model.OwnerName</td></tr>
+            <tr><td>Address:</td><td>@Model.RetailerAddress</td></tr>
+            <tr><td>Contact No:</td><td>@Model.PhoneNumber</td></tr>
+        <tr><td>Payment No:</td><td>@Model.PaymentNumber</td></tr>
+            <tr><td>Payment Type:</td><td>@Model.PaymentNumberType</td></tr>
+            <tr><td>Monthly Total Sale:</td><td>@Model.TotalSale</td></tr>
+            <tr><td>Highest Selling Brand:</td><td>@Model.BrandName</td></tr>
+            <tr><td>Division:</td><td>@Model.Division</td></tr>
+            <tr><td>District:</td><td>@Model.District</td></tr>
+            <tr><td>Thana:</td><td>@Model.ThanaName</td></tr>
+        </tbody>
+    </table>
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    <table class="table borderless" style="align-content: center; width: 100%">
+        <tbody>
+            <tr>
+                <td>
+                    <p style="text-align:center;border-top:1px solid">Retailer</p>
+                </td>
+                <td>
+                 
+                    <p style="text-align:center;border-top:1px solid">
+                        Dealer
+                    </p>
+                </td>
+                <td>
+                    <p style="text-align:center;border-top:1px solid">
+                        TSO
+                    </p>
+                </td>
+                <td>
+                    <p style="text-align:center;border-top:1px solid">
+                        ASM
+                    </p>
+                </td>
+                <td>
+                    <p style="text-align:center;border-top:1px solid">
+                        RSM
+                    </p>
+                </td>
+                <td>
+                    <p style="text-align:center;border-top:1px solid">
+                        NSM/DNSM
+                    </p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+   
+</div>
+<br />
+<div class="container">
+    <input type="button" value="Print" id="printbtn" class="btn btn-success">
+</div>
+
+
+
+
+<script src="~/Scripts/CustomScripts/jQuery.print.min.js"></script>
+<script>
+    window.addEventListener('contextmenu', function (e) {
+        // do something here...
+        e.preventDefault();
+    }, false);
+    $(function () {
+        $('#printbtn').click(function () {
+            $('#printData').print();
+
+        });
+    });
+
+
+    function printDiv() {
+        var divContents = document.getElementById("divData").innerHTML;
+        var a = window.open('', '', 'height=500, width=500');
+        a.document.write('<html>');
+        a.document.write('<body > <h1>Div contents are <br>');
+        a.document.write(divContents);
+        a.document.write('</body></html>');
+        a.document.close();
+        a.print();
+    }
+
+</script>

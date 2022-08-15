@@ -1,0 +1,753 @@
+﻿@model WDS.ViewModels.VmProductIssue
+@{
+    ViewBag.Title = "ProductIssue";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+
+
+
+
+
+
+    table {
+        width: 100%;
+    }
+    thead, tbody tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+    tbody {
+        display: block;
+        overflow-y: auto;
+        table-layout: fixed;
+        max-height: 200px;
+    }
+</style>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-header">Product Issue to Retailer</div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-form-label text-sm-right">Retailer Name</label>
+                        <div class="col-lg-4">
+                            @Html.DropDownListFor(model => model.RetailerId, new SelectList(ViewBag.Retailers, "Value", "Text"), "Select", new
+                            {
+                                @class = "selectpicker show-tick form-control",
+                                data_live_search = "true",
+                                //onchange = "LoadModel('" + @Url.Action("GetModel", "Retailer") + "')",
+
+                            })
+                            @Html.ValidationMessageFor(model => model.RetailerId, "", new { @class = "text-danger" })
+                        </div>
+                        <label class="col-lg-2 col-form-label text-sm-right">SR Name</label>
+                        <div class="col-lg-4">
+                            @Html.DropDownListFor(model => model.SalesRepresentativeId, new SelectList(ViewBag.SalesRepresentativeSelectList, "Value", "Text"), "Select", new
+                            {
+                                @class = "selectpicker show-tick form-control",
+                                data_live_search = "true",
+                                //onchange = "LoadModel('" + @Url.Action("GetModel", "Retailer") + "')",
+
+                            })
+                            @Html.ValidationMessageFor(model => model.RetailerId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-form-label text-sm-right">Sale Date</label>
+                        <div class="col-lg-4">
+                            @Html.TextBoxFor(model => model.SaleDate, new {@class = "datepicker form-control", @readonly="readonly"})
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="card col-lg-6">
+                            <div class="card">
+                                <div class="card-header">Scanned IMEI List</div>
+                                <div class="card-body">
+                                    <div class="form-group row">
+                                        <input type="text" class="form-control" id="txtScan" placeholder="Scan Here" />
+                                    </div>
+                                    <div class="form-group row">
+                                        <table class="table table-bordered table-scrollable" id="imeiIssueTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Model</th>
+                                                    <th>IMEI One</th>
+                                                    <th>IMEI Two</th>
+                                                    <th>Color</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="issueTableBody"></tbody>
+                                        </table>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="card col-lg-6">
+                            <div class="card">
+                                <div class="card-header">Models</div>
+                                <button type="button" class="btn btn-primary">
+                                    Total Quantity <span class="badge bg-secondary" id="totaltxtQty"></span>
+                                </button>
+                                <div class="card-body">
+                                    <div class="form-group row">
+                                        <table class="table table-bordered  table-scrollable" id="issueModels">
+                                            <thead>
+                                                <tr>
+                                                    <th>Model</th>
+                                                    <th>Color</th>
+                                                    <th>Quantity</th>
+                                                    <th>Unit Price</th>
+                                                    <th>Total</th>
+                                                    <th>D.Type</th>
+                                                    <th>D. Amnt</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="isssueModelBody"></tbody>
+                                        </table>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group row" hidden="hidden">
+                                                <label class="col-lg-6 col-form-label text-sm-right">Payment Type</label>
+                                                <div class="col-lg-6">
+                                                    @Html.DropDownListFor(model => model.PaymentType, new List<SelectListItem>
+                                                    {
+                                                        new SelectListItem { Text = "Full", Value = "FULL"},
+                                                        new SelectListItem { Text = "Due", Value = "DUE"},
+                                                        new SelectListItem { Text = "Partial", Value = "PARTIAL"}
+                                                    }, "Select", new { @class = "selectpicker show-tick form-control" })
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group row" hidden="hidden">
+                                                <label class="col-lg-6 col-form-label text-sm-right">Payment Amnt</label>
+                                                <div class="col-lg-6">
+                                                    @Html.TextBoxFor(model => model.PaymentAmount, new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group row">
+                                                @*<button class="btn btn-outline-success" id="btnIssue">Save</button>*@
+                                                
+                                                
+                                                <button class="btn btn-outline-success" id="btnIssue">Save</button>
+                                                @*<button class="btn btn-outline-success" id="btnIssueTest">Save</button>*@
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="row">
+                                                <label class="col-lg-6 col-form-label text-sm-right">Grand Total</label>
+                                                <div class="col-lg-6"><input type="number" id="GrandTotal" class="form-control" /></div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    
+    $( window ).on( "load", function () {
+        document.getElementById("txtScan").focus();
+        qtyAllSum();
+
+        $('#RetailerId').on('change', function() {
+            document.getElementById("txtScan").focus();
+        });
+        $('#SalesRepresentativeId').on('change', function () {
+            document.getElementById("txtScan").focus();
+        });
+        
+
+        var serverDate = new Date($('#SaleDate').val());
+        var backDate = new Date(serverDate.getFullYear(), serverDate.getMonth(), serverDate.getDate() - 2);
+        //var diffTime = Math.abs(date - new Date());
+        //var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        //alert(diffTime + " milliseconds");
+        //alert(diffDays + " days");
+
+        
+        $("#SaleDate").datepicker({ dateFormat: 'mm-dd-yy', maxDate: serverDate, minDate: backDate })
+            .datepicker("setDate", serverDate)
+            .on('keypress paste', function (e) {
+            e.preventDefault();
+            return false;
+        });
+
+
+
+        $('#txtScan').keyup(function () {
+            //debugger;
+            if ($(this).val().length == 15) {
+                var mimei = $('#txtScan').val();
+                var retailerId = $('#RetailerId').val();
+
+                if (retailerId === "" || retailerId == undefined) {
+                    alert("Please Select a Retailer");
+                    $('#txtScan').val('');
+                    document.getElementById("txtScan").focus();
+                    return false;
+                }
+
+
+                $.ajax({
+                    url: '@Url.Action("GetImeiInformation", "Dealer")', //Changed For test
+                    type: 'Post',
+                    //data: JSON.stringify({ statusList: packagingQcList }),
+                    data: JSON.stringify({ imei: mimei, retailerId: retailerId }),
+                    dataType: 'json',
+                    async: false,
+                    contentType: 'application/json',
+                    success: function (result) {
+                        if (result.Success) {
+                            console.log(result);
+                            CheckValidity(result.Data);
+                        } else {
+                            alert(result.Message);
+                            $('#txtScan').val('');
+                            document.getElementById("txtScan").focus();
+                        }
+
+
+                    },
+                    error: function (result, textStatus, jqXHR) {
+                        //iziToast.error({
+                        //    timeout: 2000,
+                        //    imageWidth: 150,
+                        //    position: 'center',
+                        //    title: 'Error',
+                        //    message: result
+                        //});
+
+                        //return false;
+                    }
+                });
+
+
+            } else {
+                //iziToast.error({
+                //    timeout: 2000,
+                //    imageWidth: 150,
+                //    position: 'center',
+                //    title: 'Error',
+                //    message: "Invalid Imei Number!"
+                //});
+
+                return false;
+            }
+            return false;
+        });
+
+
+        $(document).on("keyup", "input[name=discount]", function () {
+            var quantity = $(this).val();
+            SumTotal();
+
+
+        });
+
+
+        $(document).on("change", "select[name=discountType]", function () {
+            var quantity = $(this).val();
+            SumTotal();
+
+
+        });
+
+        $(document).on("keyup", "input[name=PaymentAmount]", function () {
+            var pType = $('#PaymentType').val();
+            var total = parseFloat($('#GrandTotal').val());
+            if (pType.length === 0) {
+                $('#PaymentAmount').val(0);
+                alert("Please Select a Payment Type");
+            } else {
+                var paymentAmount = parseFloat($('#PaymentAmount').val());
+                if (paymentAmount >= total) {
+                    $('#PaymentAmount').val(0);
+                    alert("Payment Amount Can not be equal or greater then Grand Total in Partial Payment.");
+                }
+            }
+        });
+
+        $('#PaymentType').on('change', function () {
+            var pType = $(this).val();
+            var total = $('#GrandTotal').val();
+
+            if (pType === "FULL") {
+                $('#PaymentAmount').val(total);
+                $('#PaymentAmount').prop("disabled", true);
+            }
+            else if (pType === "DUE") {
+                $('#PaymentAmount').val(0);
+                $('#PaymentAmount').prop("disabled", true);
+            }
+            else if (pType === "PARTIAL") {
+                $('#PaymentAmount').val(0);
+                $('#PaymentAmount').prop("disabled", false);
+            }
+
+            $('#PaymentAmount').focus();
+        });
+
+
+
+        $('#btnIssue').on('click', function (e) {
+            var me = $(this);
+            e.preventDefault();
+            //$("#btnIssue").hide();
+            //$('#btnIssue').prop('disabled', true);
+            //document.getElementById("btnIssue").disabled = true;
+            //$("#loader").show();
+            var saleDate = new Date($('#SaleDate').val());
+            //var d = new Date(saleDate);
+            //if (Object.prototype.toString.call(d) === "[object Date]") {
+            //    // it is a date
+            //    if (isNaN(d.getTime())) {  // d.valueOf() could also work
+            //        alert('date is not valid');
+            //    } else {
+            //        alert('date is valid');
+            //    }
+            //} else {
+            //    alert('not a date');
+            //}
+
+            var vmProductIssue = {};
+            vmProductIssue.RetailerId = $('#RetailerId').val();
+            vmProductIssue.SalesRepresentativeId = $('#SalesRepresentativeId').val();
+            vmProductIssue.GrandTotal = $('#GrandTotal').val();
+            vmProductIssue.PaymentType = null;//$('#PaymentType').val();
+            vmProductIssue.PaymentAmount = 0;//$('#PaymentAmount').val();
+            vmProductIssue.SaleDate = saleDate;
+            if (vmProductIssue.RetailerId === "" || vmProductIssue.RetailerId == undefined) {
+                alert("Please Select Retailer");
+                $('#btnIssue').prop('disabled', false);
+                //$("#loader").hide();
+                document.getElementById("btnIssue").disabled = false;
+                $("#btnIssue").show();
+                return false;
+            }
+            if (vmProductIssue.SalesRepresentativeId === "" || vmProductIssue.RetailerId === SalesRepresentativeId) {
+                alert("Please Select SR");
+                $('#btnIssue').prop('disabled', false);
+                //$("#loader").hide();
+                document.getElementById("btnIssue").disabled = false;
+                $("#btnIssue").show();
+                return false;
+            }
+            //if (vmProductIssue.PaymentType.length <= 0) {
+            //    alert("Please Select A Payment Type.");
+            //    return false;
+            //}
+            //if (vmProductIssue.PaymentType === "PARTIAL" && parseFloat(vmProductIssue.PaymentAmount) <= 0) {
+            //    alert("Payment Amount Is not Valid");
+            //    return false;
+            //}
+            var imeiDeliveryModels = [];
+
+            var tableElem = window.document.getElementById("imeiIssueTable");
+            var tableBody = tableElem.getElementsByTagName("tbody").item(0);
+            var i;
+            var howManyRows = tableBody.rows.length;
+            if (howManyRows <= 0) {
+                alert("No IMEI found in the table !!!");
+                $('#btnIssue').prop('disabled', false);
+                //$("#loader").hide();
+                document.getElementById("btnIssue").disabled = false;
+                $("#btnIssue").show();
+                return false;
+            }
+            for (i = 0; i < (howManyRows) ; i++) {
+                var imeiDeliveryModel = {};
+
+                var thisTrElem = tableBody.rows[i];
+                var modelName = thisTrElem.cells[0].childNodes.item(0).data;
+
+                var imeiOne = thisTrElem.cells[1].childNodes.item(0).data;
+                var imeiTwo = thisTrElem.cells[2].childNodes.item(0).data;
+                var col = thisTrElem.cells[3].childNodes.item(0).data;
+                imeiDeliveryModel.Model = modelName;
+                imeiDeliveryModel.Color = col;
+                imeiDeliveryModel.ImeiOne = imeiOne;
+                imeiDeliveryModel.ImeiTwo = imeiTwo;
+
+                imeiDeliveryModels.push(imeiDeliveryModel);
+
+            }
+            vmProductIssue.ImeiDeliveryModels = imeiDeliveryModels;
+
+
+            var retailerOrderDetails = [];
+            var tblIssueModel = window.document.getElementById("issueModels");
+            var tbody = tblIssueModel.getElementsByTagName("tbody").item(0);
+            var j;
+            var rows = tbody.rows.length;
+            if (rows <= 0) {
+                alert("No Model and price information found in the table !!!");
+                $('#btnIssue').prop('disabled', false);
+                //$("#loader").hide();
+
+                document.getElementById("btnIssue").disabled = false;
+                $("#btnIssue").show();
+                return false;
+            }
+            for (j = 0; j < (rows) ; j++) {
+                var retailerOrderDetail = {};
+
+                var tr = tbody.rows[j];
+                var model = tr.cells[0].childNodes.item(0).data;
+                var color = tr.cells[1].childNodes.item(0).data;
+                var quantity = tr.cells[2].childNodes.item(0).data;
+                var unitPrice = tr.cells[3].childNodes.item(0).data;
+                var tPrice = tr.cells[4].childNodes.item(0).data;
+                var discountType = tr.cells[5].children[0].value;
+                var discount = tr.cells[6].children[0].value;
+                retailerOrderDetail.Model = model;
+                retailerOrderDetail.OrderQuantity = quantity;
+                retailerOrderDetail.GivenQuantity = quantity;
+                retailerOrderDetail.UnitPrice = unitPrice;
+                retailerOrderDetail.OrderTotalPrice = tPrice;
+                retailerOrderDetail.DiscountType = discountType;
+                retailerOrderDetail.Discount = discount;
+                retailerOrderDetail.Color = color;
+
+                retailerOrderDetails.push(retailerOrderDetail);
+
+            }
+            vmProductIssue.RetailerOrderDetails = retailerOrderDetails;
+
+
+            //console.log(vmProductIssue);
+
+            $.ajax({
+                url: '@Url.Action("ProductIssue", "Dealer")', //Changed For test
+                type: 'Post',
+                //data: JSON.stringify({ statusList: packagingQcList }),
+                data: JSON.stringify({ vmProductIssue: vmProductIssue }),
+                dataType: 'json',
+                contentType: 'application/json',
+
+                beforeSend: function () {
+                    $('#cover-spin').show();
+                    //document.getElementById("btnIssue").disabled = true;
+                },
+                success: function (data) {
+                    alert(data.Message);
+
+                    var id = parseInt(data.Data);
+                    if (id > 0) {
+                        window.location.reload();
+                        //window.location.href = url;
+                        var reDirUrl = '@Url.Action("Print", "Dealer", new { })?oid=' + data.Data;
+                        window.open(reDirUrl).focus();
+                        //$('#btnIssue').prop('disabled', false);
+                        //$("#loader").hide();
+                        //document.getElementById("btnIssue").disabled = false;
+                        //$("#btnIssue").show();
+                    } else {
+                        window.location.reload();
+                        $('#cover-spin').hide();
+                    }
+
+
+                },
+                complete: function() {
+                    $('#cover-spin').hide();
+                },
+                error: function (result, textStatus, jqXHR) {
+                    $('#cover-spin').hide();
+                    //iziToast.error({
+                    //    timeout: 2000,
+                    //    imageWidth: 150,
+                    //    position: 'center',
+                    //    title: 'Error',
+                    //    message: result
+                    //});
+
+                    //return false;
+                }
+            });
+
+
+
+
+            @*var url = '@Url.Action("ProductIssue", "Dealer")';
+            $.post(url, { vmProductIssue: vmProductIssue }, function (data) {
+                alert(data.Message);
+
+
+                window.location.reload();
+                //window.location.href = url;
+                var reDirUrl = '@Url.Action("Print", "Dealer", new { })?oid=' + data.Data;
+                window.open(reDirUrl).focus();
+                $('#btnIssue').prop('disabled', false);
+                $("#loader").hide();
+            });*@
+        });
+    });
+    function SumTotal() {
+        var tblDelivery = window.document.getElementById("issueModels");
+        var tblDeliveryBody = tblDelivery.getElementsByTagName("tbody").item(0);
+        var j;
+        var deliveryRow = tblDeliveryBody.rows.length;
+        var modelQ = 0;
+        var isImeiExist = false;
+        if (deliveryRow > 0) {
+            var grandTotal = 0;
+            for (j = 0; j < (deliveryRow); j++) {
+
+                var deliveryTr = tblDeliveryBody.rows[j];
+                var model = deliveryTr.cells[0].childNodes.item(0).data;
+                var color = deliveryTr.cells[1].childNodes.item(0).data;
+                var quantity = deliveryTr.cells[2].childNodes.item(0).data;
+                var unitPrice = deliveryTr.cells[3].childNodes.item(0).data;
+                var total = parseInt(deliveryTr.cells[4].childNodes.item(0).data);
+                var discountType = deliveryTr.cells[5].children[0].value;
+                var discount = parseInt(deliveryTr.cells[6].children[0].value);
+                var sub = 0;
+
+                if (discountType === "$") {
+                    sub = total - discount;
+                }
+                else if (discountType === "%") {
+                    var discountPercentAmount = total * (discount / 100);
+                    sub = total - discountPercentAmount;
+                }
+                grandTotal = grandTotal + sub;
+                $('#GrandTotal').val(grandTotal);
+
+
+                console.log(grandTotal);
+
+
+            }
+        } else {
+            $('#GrandTotal').val(0);
+        }
+    }
+
+
+    function CheckValidity(detail) {
+        var deliveryModel;
+        var tblDelivery = window.document.getElementById("imeiIssueTable");
+        var tblDeliveryBody = tblDelivery.getElementsByTagName("tbody").item(0);
+        var j;
+        var deliveryRow = tblDeliveryBody.rows.length;
+        var modelQ = 0;
+        var isImeiExist = false;
+        if (deliveryRow > 0) {
+
+            for (j = 0; j < (deliveryRow) ; j++) {
+
+                var deliveryTr = tblDeliveryBody.rows[j];
+                deliveryModel = deliveryTr.cells[0].childNodes.item(0).data;
+                var imeiOne = deliveryTr.cells[1].childNodes.item(0).data;
+                if (imeiOne === detail.ImeiOne) {
+                    isImeiExist = true;
+                    break;
+                }
+            }
+
+            if (isImeiExist) {
+                alert("This IMEI already exist in the delivery table");
+                $('#txtScan').val('');
+                document.getElementById("txtScan").focus();
+                return false;
+            } else {
+                var row = '<tr><td class="model">' + detail.Model + '</td><td class="imei_one">' + detail.ImeiOne + '</td><td class=imei_two>' + detail.ImeiTwo + '</td><td class="color">' + detail.Color + '</td>' +
+                    '<td><input type="button" value="Remove" class="btn btn-outline-danger" onclick="RemoveRow($(this))"/></td>' +
+                    '</tr>';
+                $('#issueTableBody').append(row);
+
+                $('#txtScan').val('');
+                document.getElementById("txtScan").focus();
+                AddModelTable(detail.Model, detail.Color);
+                SumTotal();
+                qtyAllSum();
+            }
+        } else {
+            var row = '<tr><td class="model">' + detail.Model + '</td><td class="imei_one">' + detail.ImeiOne + '</td><td class=imei_two>' + detail.ImeiTwo + '</td><td class="color">' + detail.Color + '</td>' +
+                '<td><input type="button" value="Remove" class="btn btn-outline-danger" onclick="RemoveRow($(this))"/></td>' +
+                '</tr>';
+            $('#issueTableBody').append(row);
+            $('#txtScan').val('');
+            document.getElementById("txtScan").focus();
+            AddModelTable(detail.Model, detail.Color);
+            SumTotal();
+            qtyAllSum();
+        }
+    }
+
+    function AddModelTable(model, color) {
+        var tblDelivery = window.document.getElementById("issueModels");
+        var tblDeliveryBody = tblDelivery.getElementsByTagName("tbody").item(0);
+        var j;
+        var deliveryRow = tblDeliveryBody.rows.length;
+        var isModelFound = false;
+        if (deliveryRow > 0) {
+            for (j = 0; j < (deliveryRow) ; j++) {
+
+                var deliveryTr = tblDeliveryBody.rows[j];
+                var rowModel = deliveryTr.cells[0].childNodes.item(0).data;
+                var rowColor = deliveryTr.cells[1].childNodes.item(0).data;
+                var rowQuantity = parseInt(deliveryTr.cells[2].childNodes.item(0).data);
+                var unitPrice = parseInt(deliveryTr.cells[3].childNodes.item(0).data);
+                if ((rowModel === model && rowColor === color) || (rowModel === model && rowColor === "null" && color === null)) {
+                    isModelFound = true;
+                    rowQuantity = rowQuantity + 1;
+                    deliveryTr.cells[2].childNodes.item(0).data = rowQuantity;
+
+                    var total = rowQuantity * unitPrice;
+                    deliveryTr.cells[4].childNodes.item(0).data = total;
+                }
+            }
+            if (!isModelFound) {
+                $.ajax({
+                    url: '@Url.Action("GetModelPrice", "Dealer")', //Changed For test
+                    type: 'Post',
+                    //data: JSON.stringify({ statusList: packagingQcList }),
+                    data: JSON.stringify({ model: model }),
+                    dataType: 'json',
+                    async: false,
+                    contentType: 'application/json',
+                    success: function (result) {
+
+                        var row = '<tr>' +
+                            '<td>' + model + '</td>' +
+                            '<td>' + color + '</td>' +
+                            '<td>1</td>' +
+                            '<td>' + result.Price + '</td>' +
+                            '<td>' + result.Price + '</td>' +
+                            '<td>' +
+                            '<select class="form-control" name="discountType">' +
+                            '<option value="$">$</option>' +
+                            '<option value="%">%</option>' +
+                            '</select>' +
+                            '</td>' +
+                            '<td><input type="number" class="discount form-control" value="0" name="discount"/></td>' +
+                            '</tr>';
+                        $('#isssueModelBody').append(row);
+                    },
+                    error: function (result, textStatus, jqXHR) {
+
+                    }
+                });
+
+            }
+        } else {
+            $.ajax({
+                url: '@Url.Action("GetModelPrice", "Dealer")', //Changed For test
+                type: 'Post',
+                //data: JSON.stringify({ statusList: packagingQcList }),
+                data: JSON.stringify({ model: model }),
+                dataType: 'json',
+                async: false,
+                contentType: 'application/json',
+                success: function (result) {
+
+                    var row = '<tr>' +
+                        '<td>' + model + '</td>' +
+                        '<td>' + color + '</td>' +
+                        '<td>1</td>' +
+                        '<td>' + result.Price + '</td>' +
+                        '<td>' + result.Price + '</td>' +
+                        '<td>' +
+                        '<select class="form-control"  name="discountType">' +
+                        '<option value="$">$</option>' +
+                        '<option value="%">%</option>' +
+                        '</select>' +
+                        '</td>' +
+                        '<td><input type="number" class="discount form-control" value="0" name="discount"/></td>' +
+                        '</tr>';
+                    $('#isssueModelBody').append(row);
+                },
+                error: function (result, textStatus, jqXHR) {
+
+                }
+            });
+        }
+    }
+
+
+    function RemoveRow(ths)
+    {
+        var thisRow = ths.closest('tr');
+        var model = ths.closest('tr').find('.model').text();
+        var color = ths.closest('tr').find('.color').text();
+        remove_model_from_summery_table(model, color);
+        console.log(model + '------' + color);
+
+        thisRow.remove();
+        SumTotal();
+        qtyAllSum();
+    }
+
+
+    function remove_model_from_summery_table(model, color) {
+        var tblDelivery = window.document.getElementById("issueModels");
+        var tblDeliveryBody = tblDelivery.getElementsByTagName("tbody").item(0);
+        var j;
+        var deliveryRow = tblDeliveryBody.rows.length;
+        var isModelFound = false;
+        if (deliveryRow > 0) {
+            for (j = 0; j < (deliveryRow) ; j++) {
+
+                var deliveryTr = tblDeliveryBody.rows[j];
+                var rowModel = deliveryTr.cells[0].childNodes.item(0).data;
+                var rowColor = deliveryTr.cells[1].childNodes.item(0).data;
+                var rowQuantity = parseInt(deliveryTr.cells[2].childNodes.item(0).data);
+                var unitPrice = parseInt(deliveryTr.cells[3].childNodes.item(0).data);
+
+
+
+                if (rowModel === model && rowColor === color && rowQuantity > 1) {
+                    rowQuantity = rowQuantity - 1;
+                    deliveryTr.cells[2].childNodes.item(0).data = rowQuantity;
+
+                    var total = rowQuantity * unitPrice;
+                    deliveryTr.cells[4].childNodes.item(0).data = total;
+                    break;
+                } else if (rowModel === model && rowColor === color && rowQuantity === 1) {
+                    deliveryTr.remove();
+                    break;
+                }
+            }
+
+        }
+    }
+
+    function qtyAllSum() {
+        var tottxtQty = 0;
+        $("#isssueModelBody tr").each(function () {
+            var value = parseInt($(this).find('td:eq(2)').text());
+            if (!isNaN(value)) {
+                tottxtQty += value;
+            }
+        });
+        $("#totaltxtQty").text(tottxtQty);
+
+    }
+</script>

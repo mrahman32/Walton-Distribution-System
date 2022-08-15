@@ -1,0 +1,107 @@
+﻿@model  WDS.ViewModels.VmRetailerStock
+@{
+    ViewBag.Title = "RetailerStockReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/sum().js"></script>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-header">Retailer Stock</div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label class="col-lg-2 col-form-label text-sm-right">Retailer Name</label>
+                        <div class="col-lg-4">
+                            @Html.DropDownListFor(model => model.RetailerId, new SelectList(ViewBag.Retailers, "Value", "Text"), "Select", new
+                            {
+                                @class = "selectpicker show-tick form-control",
+                                data_live_search = "true",
+                                onchange = "document.location.href = '../Dealer/RetailerStockReport?retailerId=' + this.options[this.selectedIndex].value;"
+
+                            })
+                            @Html.ValidationMessageFor(model => model.RetailerId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <table class="table table-bordered" id="stockTable">
+                        <thead>
+                            <tr>
+                                @*<th>Id</th>*@
+                                <th>Retailer Name</th>
+                                <th>Address</th>
+                                <th>Model</th>
+                                <th>Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody id="stockTableBody" class="stockTableBody">
+                        @if (Model.StpRetailerStockResults.Any())
+                        {
+                            foreach (var item in Model.StpRetailerStockResults)
+                            {
+                                <tr>
+                                    @*<td>@item.RetailerId</td>*@
+                                    <td>@item.RetailerName</td>
+                                    <td>@item.RetailerAddress</td>
+                                    <td>@item.Model</td>
+                                    <td>@item.StockCount</td>
+                                </tr>
+                            }
+                        }
+
+                        </tbody>
+                        <tfoot><th></th><th></th><th></th><th></th></tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function() {
+        //$('#stockTable').DataTable();
+
+
+        //var table = $('#stockTable').DataTable();
+        //alert(table.column(3).data().sum());
+
+        $('#stockTable').dataTable({
+            
+            "footerCallback": function (row, data, start, end, display) {
+                var api = this.api(), data;
+
+                // Remove the formatting to get integer data for summation
+                var intVal = function (i) {
+                    return typeof i === 'string' ?
+                        i.replace(/[\$,]/g, '') * 1 :
+                        typeof i === 'number' ?
+                        i : 0;
+                };
+
+                // Total over all pages
+                total = api
+                    .column(3)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                // Total over this page
+                pageTotal = api
+                    .column(3, { page: 'current' })
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
+
+                // Update footer
+                $(api.column(2).footer()).html('Total');
+                $(api.column(3).footer()).html(
+                    pageTotal + ' (' + total + ' total)'
+                );
+            }
+        });
+    });
+
+</script>
+

@@ -1,0 +1,1046 @@
+﻿@{
+    ViewBag.Title = "GeneralInfoDashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    body.modal-open {
+        overflow: auto;
+    }
+
+    .modal-footer {
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .modal-dialog {
+        height: 100vh !important;
+        display: flex;
+        overflow-y: initial !important;
+    }
+
+    .modal-content {
+        width: auto !important;
+        margin: auto !important;
+        height: fit-content !important;
+    }
+
+    .modal-body {
+        height: 550px;
+        width: 950px;
+        overflow-y: auto;
+        overflow-x: auto;
+    }
+</style>
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-header">General Dashboard</div>
+                <div class="card-body">
+                    <div class="form-group row">
+
+                        <label class=" col-lg-1 text-sm-right">Start Date:</label>
+                        <div class="col-lg-2">
+                            <input class="datepicker form-control" data-date-format="dd/mm/yyyy" id="startDate" autocomplete="off" placeholder="Start Date">
+                        </div>
+                        <label class=" col-lg-1 text-sm-right">End Date:</label>
+                        <div class="col-lg-2">
+                            <input class="datepicker form-control" data-date-format="dd/mm/yyyy" id="endDate" autocomplete="off" placeholder="End Date">
+                        </div>
+                        <label class=" col-lg-1 text-sm-right">Zone:</label>
+                        <div class="col-lg-2">
+                            @Html.DropDownList("zone", new SelectList(ViewBag.Zones, "Value", "Text"), new { @class = "selectpicker show-tick form-control", @id = "zone", data_live_search = "true", })
+                        </div>
+
+                    </div>
+                    <div class="from-group row">
+                        <label class=" col-lg-1 text-sm-right">Dealer:</label>
+                        <div class="col-lg-2">
+                            @Html.DropDownList("dealer", new SelectList(ViewBag.Dealers, "Value", "Text"), new { @class = "selectpicker show-tick form-control", @id = "dealer", data_live_search = "true", })
+                        </div>
+
+                        <label class=" col-lg-1 text-sm-right">Model</label>
+                        <div class="col-lg-2">
+                            @Html.DropDownList("model", new SelectList(ViewBag.modelList, "Value", "Text"), new { @class = "selectpicker show-tick form-control", @id = "model", data_live_search = "true"})
+                        </div>
+                        <label class=" col-lg-1 text-sm-right">Category:</label>
+                        <div class="col-md-2" style="width:520%">
+                            <select class="form-control" id="category">
+                                <option value="0">--All--</option>
+                                <option value="Smart">Smart Phone</option>
+                                <option value="Feature">Feature Phone</option>
+                            </select>
+                        </div>
+
+                        <div class="col-lg-2 text-left">
+                            <input type="button" class="btn btn-info" value="Submit" id="btnSubmit" />
+                        </div>
+
+
+                    </div>
+                    <br />
+                    <div class="row">
+
+                        <div class="col-lg-6">
+                            <h6 style="text-align:center">SR STATUS</h6>
+                            <table class="table table-bordered" id="SRQtyTable">
+                                <thead>
+                                    <tr>
+                                        <th>ACTIVE QTY</th>
+                                        <th>IN ACTIVE QTY</th>
+                                        <th style="text-align:center"><button class="btn btn-danger" id="btnSrLoad"><i class="fa fa-recycle"></i></button></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="SRQtyTableBody" style="display:none">
+                                    <tr>
+                                        <td><h2 id="txtsrActive"></h2></td>
+                                        <td><h2 id="txtsrinActive"></h2></td>
+                                        <td style="text-align:center"><button class="btn btn-info" id="btnSrDetails"><i class="fa fa-bars"></i></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-lg-6">
+                            <h6 style="text-align:center">RETAILER STATUS</h6>
+                            <table class="table table-bordered" id="RetailerQtyTable">
+                                <thead>
+                                    <tr>
+                                        <th>ACTIVE QTY</th>
+                                        <th>IN ACTIVE QTY</th>
+                                        <th style="text-align:center"><button class="btn btn-danger" id="btnRetailerLoad"><i class="fa fa-recycle"></i></button></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="RertailerQtyTableBody" style="display:none">
+                                    <tr>
+                                        <td><h2 id="txtretailerActive"></h2></td>
+                                        <td><h2 id="txtretailerInActive"></h2></td>
+                                        <td style="text-align:center"><button class="btn btn-info" id="btnretailerDetails"><i class="fa fa-bars"></i></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <br />
+                    
+                    <br/>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <table class="table table-bordered" id="DealerStockTable">
+                                <thead>
+                                    <tr>
+                                        <th>SL</th>
+                                        <th>Category</th>
+                                        <th>Sales QTY</th>
+                                        <th>Sales Value</th>
+                                        <th>Present Stock</th>
+                                        <th>Present Stock Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="DealerStockTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-header">MIS Info <button class="btn btn-info" id="btnMisDetail"><i class="fa fa-bars"></i></button></div>
+                <div class="card-body">
+                    <div class="col-lg-12">
+                        <table class="table table-bordered" id="misTable">
+                            <thead>
+                            <tr>
+                                <th>Dealer Name</th>
+                                <th>Dealer Code</th>
+                                <th>Zone</th>
+                                <th>MIS Name</th>
+                                <th>Mobile No.</th>
+                                <th>Payment No.</th>
+                            </tr>
+                            </thead>
+                            <tbody id="misTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-header">Sales Representative Incentive Info</div>
+                <div class="card-body">
+                    <div class="from-group row">
+                        <label class=" col-lg-1 text-sm-right">Dealer:</label>
+                        <div class="col-lg-2">
+                            @Html.DropDownList("dealerIncentive", new SelectList(ViewBag.Dealers, "Value", "Text"), new { @class = "selectpicker show-tick form-control", @id = "dealerIncentive", data_live_search = "true", })
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <table class="table table-bordered" id="srIncentiveTable">
+                                <thead>
+                                    <tr>
+                                        <th>Dealer Name</th>
+                                        <th>Dealer Code</th>
+                                        <th>Zone</th>
+                                        <th>Name</th>
+                                        <th>Phone</th>
+                                        <th>Payment Number</th>
+                                        <th>Payment Type</th>
+                                        <th>Quantity</th>
+                                        @*<th>Total Incentive</th>*@
+                                        <th>Deduction</th>
+                                        <th>Incentive (Last three months)</th>
+                                        <th>Incentive (Last three months average)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="srIncentiveInfo"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*<div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="SRstatusModelDetails" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                </div>
+                <div class="modal-body scrollable">
+                    <div class="row">
+                        <h5>Active List</h5>
+                        <table class="table table-bordered" id="activeSrTable">
+                            <thead><tr><th>SL</th><th>Name</th><th>Phone</th><th>PaymentNumberType</th><th>PaymentNumber</th><th>DealerCode</th>
+
+                                </tr></thead>
+                            <tbody id="activeSrTableBody"></tbody>
+                        </table>
+                    </div>
+                    <hr />
+                    <div class="row">
+                            <h5 class="text-center">InActive List</h5><br />
+                            <table class="table table-bordered" id="inactiveSrTable">
+                                <thead>
+                                    <tr>
+                                        <th>SL</th>
+                                        <th>Name</th>
+                                        <th>Phone</th>
+                                        <th>PaymentNumberType</th>
+                                        <th>PaymentNumber</th>
+                                        <th>DealerCode</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody id="inactiveSrTableBody"></tbody>
+                            </table>
+                    </div>
+
+                </div>
+                <div class="modal-footer"></div>
+            </div>
+        </div>
+    </div>*@
+
+@*<div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="retailerstatusModelDetails" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                </div>
+                <div class="modal-body scrollable">
+                    <div class="row">
+                        <h5>Active List</h5>
+                        <table class="table table-bordered" id="activeReTable">
+                            <thead><tr>
+                                       <th>#</th>
+                                <th>DistributorName</th>
+                                <th>DistributorCode</th>
+                                <th>RetailerName</th>
+                                <th>OwnerName</th>
+                                <th>RetailerAddress</th>
+                                <th>PhoneNumber</th>
+                                <th>PaymentNumberType</th>
+                                <th>PaymentNumber</th>
+
+                                </tr></thead>
+                            <tbody id="activeReTableBody"></tbody>
+                        </table>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <h5>InActive List</h5>
+                        <table class="table table-bordered" id="inactiveReTable">
+                            <thead><tr>
+                                <th>#</th>
+                                       <th>DistributorName</th>
+                                       <th>DistributorCode</th>
+                                       <th>RetailerName</th>
+                                       <th>OwnerName</th>
+                                       <th>RetailerAddress</th>
+                                       <th>PhoneNumber</th>
+                                       <th>PaymentNumberType</th>
+                                       <th>PaymentNumber</th>
+
+                                </tr></thead>
+                            <tbody id="inactiveReTableBody"></tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="modal-footer"></div>
+            </div>
+        </div>
+    </div>*@
+<div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="SRstatusModelDetails" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                </button>
+            </div>
+            <div class="modal-body scrollable">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="card">
+                            <div class="card-header"><h5>Active List</h5></div>
+                            <div class="card-body">
+
+                                <table class="table table-bordered" id="activeSrTable">
+                                    <thead>
+                                        <tr>
+                                            <th>SL</th>
+                                            <th>Name</th>
+                                            <th>Phone</th>
+                                            <th>PaymentNumberType</th>
+                                            <th>PaymentNumber</th>
+                                            <th>DealerCode</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody id="activeSrTableBody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="card">
+                            <div class="card-header"><h5>InActive List</h5></div>
+                            <div class="card-body">
+
+                                <table class="table table-bordered" id="inactiveSrTable">
+                                    <thead>
+                                        <tr>
+                                            <th>SL</th>
+                                            <th>Name</th>
+                                            <th>Phone</th>
+                                            <th>PaymentNumberType</th>
+                                            <th>PaymentNumber</th>
+                                            <th>DealerCode</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="inactiveSrTableBody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<div aria-hidden="true" aria-labelledby="myModalLabel" class="modal fade" id="retailerstatusModelDetails" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                </button>
+            </div>
+            <div class="modal-body scrollable">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="card">
+                            <div class="card-header"><h5>Active List</h5></div>
+                            <div class="card-body">
+
+                                <table class="table table-bordered table-responsive" id="activeReTable">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>DistributorName</th>
+                                            <th>DistributorCode</th>
+                                            <th>RetailerName</th>
+                                            <th>OwnerName</th>
+                                            <th>RetailerAddress</th>
+                                            <th>Upazila</th>
+                                            <th>PhoneNumber</th>
+                                            <th>PaymentNumberType</th>
+                                            <th>PaymentNumber</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody id="activeReTableBody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="card">
+                            <div class="card-header"><h5>InActive List</h5></div>
+                            <div class="card-body">
+
+                                <table class="table table-bordered table-responsive" id="inactiveReTable">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>DistributorName</th>
+                                            <th>DistributorCode</th>
+                                            <th>RetailerName</th>
+                                            <th>OwnerName</th>
+                                            <th>RetailerAddress</th>
+                                            <th>Upazila</th>
+                                            <th>PhoneNumber</th>
+                                            <th>PaymentNumberType</th>
+                                            <th>PaymentNumber</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody id="inactiveReTableBody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/date-format-custom.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+        var fristpageLoad = true;
+
+        $(".datepicker").datepicker({
+            dateFormat: 'yy-mm-dd'
+        });
+        var ourDate = new Date();
+        var ourDate2 = new Date();
+
+        //Change it so that it is 30 days in the past.
+        var firstDateOfMonth = new Date(ourDate.getFullYear(), ourDate.getMonth(), 1);//ourDate.getDate() - 30;
+        ourDate.setDate(firstDateOfMonth);
+
+        var yesterday = ourDate2.getDate() - 1;
+        ourDate2.setDate(yesterday);
+
+        var firstDate = format_date(firstDateOfMonth, 'yyyy-MM-dd');
+        var currentDate = format_date(ourDate2, 'yyyy-MM-dd');
+
+        //$('#startDate').val(ourDate.toJSON().slice(0, 10));
+        //$('#endDate').val(ourDate2.toJSON().slice(0, 10));
+
+        $('#startDate').val(firstDate);
+        $('#endDate').val(currentDate);
+
+        var startDate = $("#startDate").val();
+        var endDate = $("#endDate").val();
+        var excelTitle = 'Dealer Sales And Stock Report ' + startDate + ' To ' + endDate;
+
+        //getAllValueByUserParameter(startDate, endDate, "0", "0", "0", excelTitle); //pageLoad Data Load 1 month
+
+        $('#zone').on('change', function () {
+            debugger;
+            var zoneValue = $(this).val();
+            var datalist = JSON.stringify({ zoneId: zoneValue });
+            $.ajax({
+                type: 'POST',
+                //contentType: 'application/json',
+                dataType: 'json',
+                url: '@Url.Action("GetZoneWiseDistributors", "Dashboard")',
+                data: { zoneId: zoneValue },
+                success: function (result) {
+                    $('#dealer').empty();
+                    //$("#dealer").selectpicker("refresh");
+                    for (var i = 0; i < result.length; i++) {
+                        $('#dealer').append('<option value="' + result[i].Value + '">' + result[i].Text + '</option>');
+                    }
+                    $("#dealer").selectpicker("refresh");
+                }
+            });
+
+
+        });
+
+
+
+        $("#btnSrLoad").on('click', function () {
+            var zoneId = $('#zone').val();
+            var dealerId = $('#dealer').val();
+            var startDate = $("#startDate").val();
+            var endDate = $("#endDate").val();
+            var date1 = new Date(startDate);
+            var date2 = new Date(endDate);
+            $.ajax({
+                type: 'POST',
+                //contentType: 'application/json',
+                dataType: 'json',
+                url: '@Url.Action("SRStatusData", "Dashboard")',
+                data: { zoneId: zoneId, dealerId: dealerId, startDate: startDate, endDate: endDate },
+                success: function (result) {
+                    $("#txtsrActive").text(result.ActiveSr);
+                    $("#txtsrinActive").text(result.inActiveSr);
+                    $("#SRQtyTableBody").show();
+
+                }
+            });
+
+        });
+
+        $("#btnRetailerLoad").on('click', function () {
+            var zoneId = $('#zone').val();
+            var dealerId = $('#dealer').val();
+            var startDate = $("#startDate").val();
+            var endDate = $("#endDate").val();
+            var date1 = new Date(startDate);
+            var date2 = new Date(endDate);
+            $.ajax({
+                type: 'POST',
+                //contentType: 'application/json',
+                dataType: 'json',
+                url: '@Url.Action("RetailerStatusData", "Dashboard")',
+                data: { zoneId: zoneId, dealerId: dealerId, startDate: startDate, endDate: endDate },
+                success: function (data) {
+
+                    $("#txtretailerActive").text(data.ActiveRetailer);
+                    $("#txtretailerInActive").text(data.inActiveRetailer);
+                    $("#RertailerQtyTableBody").show();
+
+                }
+            });
+        });
+
+        $("#btnMisDetail").on('click', function () {
+
+            var zoneId = $('#zone').val();
+            var dealerId = $('#dealer').val();
+            var startDate = $("#startDate").val();
+            var endDate = $("#endDate").val();
+            var date1 = new Date(startDate);
+            var date2 = new Date(endDate);
+            $.ajax({
+                type: 'POST',
+                //contentType: 'application/json',
+                dataType: 'json',
+                url: '@Url.Action("GetMisDetail", "Dashboard")',
+                data: { zoneId: zoneId, dealerId: dealerId },
+                success: function (data) {
+                    var misTable = $('#misTable').DataTable();
+                    misTable.destroy();
+                    $('#misTableBody').empty();
+
+                    if (data != null) {
+                        
+                        
+                        for (var i = 0; i < data.length; i++) {
+                            $("#misTableBody").append('<tr>' +
+                               '<td>' + data[i].DealerName + '</td>' +
+                                '<td>' + data[i].DealerDigitechCode + '</td>' +
+                                '<td>' + data[i].Zone + '</td>' +
+                                '<td>' + data[i].MisName + '</td>' +
+                                '<td>' + data[i].MobileNumber + '</td>' +
+                                '<td>' + data[i].PaymentNumber + '</td>' +
+                                '</tr>');
+                        }
+
+
+                        var table = $('#misTable').DataTable();
+
+                        new $.fn.dataTable.Buttons(table, {
+                            buttons: [
+                                { extend: 'excel', className: 'excelBtn', title: 'Active SR', text: 'Click For Excel Export' }
+                            ]
+                        });
+
+                        table.buttons(0, null).container().prependTo(
+                            table.table().container()
+                        );
+                    } else {
+                        alert("Data Not Found");
+
+                    }
+
+                }
+            });
+
+        });
+
+
+        $("#btnSrDetails").on('click', function () {
+
+            var zoneId = $('#zone').val();
+            var dealerId = $('#dealer').val();
+            var startDate = $("#startDate").val();
+            var endDate = $("#endDate").val();
+            var date1 = new Date(startDate);
+            var date2 = new Date(endDate);
+            $.ajax({
+                type: 'POST',
+                //contentType: 'application/json',
+                dataType: 'json',
+                url: '@Url.Action("GetAllSrActiveAndInActiveDetailsData", "Dashboard")',
+                data: { zoneId: zoneId, dealerId: dealerId, startDate: startDate, endDate: endDate },
+                success: function (data) {
+                    var inActive = $('#inactiveSrTable').DataTable();
+                    inActive.destroy();
+                    var active = $('#activeSrTable').DataTable();
+                    active.destroy();
+                    $('#inactiveSrTableBody').empty();
+                    $('#activeSrTableBody').empty();
+
+                    if (data != null) {
+                        var aData = data.activeData == null ? 0 : data.activeData.length;
+                        var inaData = data.inactiveData == null ? 0 : data.inactiveData.length;
+                        if (aData > 0) {
+                            var activetbl = $('#activeSrTable').DataTable();
+                            activetbl.destroy();
+                            $('#activeSrTableBody').empty();
+                            for (var i = 0; i < aData; i++) {
+                                $("#activeSrTableBody").append('<tr>' +
+                                     '<td>' +
+                                     (i + 1) +
+                                     '</td>' +
+                                     '<td  style="width: 25%">' +
+                                    data.activeData[i].Name +
+                                     '</td>' +
+                                     '<td>' +
+                                    data.activeData[i].Phone +
+                                     '</td>' +
+                                     '<td>' +
+                                    data.activeData[i].PaymentNumberType +
+                                     '</td>' +
+                                     '<td>' +
+                                    data.activeData[i].PaymentNumber +
+                                     '</td>' +
+                                    '<td>' +
+                                    data.activeData[i].DealerCode +
+                                     '</td>' +
+                                     '</tr>');
+                            } 
+
+
+                            var table = $('#activeSrTable').DataTable();
+
+                            new $.fn.dataTable.Buttons(table, {
+                                buttons: [
+                                    { extend: 'excel', className: 'excelBtn', title: 'Active SR', text: 'Click For Excel Export' }
+                                ]
+                            });
+
+                            table.buttons(0, null).container().prependTo(
+                                table.table().container()
+                            );
+                        }
+
+                        if (inaData > 0) {
+                            var inaTable = $('#inactiveSrTable').DataTable();
+                            inaTable.destroy();
+                            $('#inactiveSrTableBody').empty();
+                            for (var i = 0; i < inaData; i++) {
+                                $("#inactiveSrTableBody").append('<tr>' +
+                                     '<td>' +
+                                     (i + 1) +
+                                     '</td>' +
+                                     '<td  style="width: 25%">' +
+                                    data.inactiveData[i].Name +
+                                     '</td>' +
+                                     '<td>' +
+                                    data.inactiveData[i].Phone +
+                                     '</td>' +
+                                     '<td>' +
+                                    data.inactiveData[i].PaymentNumberType +
+                                     '</td>' +
+                                     '<td>' +
+                                    data.inactiveData[i].PaymentNumber +
+                                     '</td>' +
+                                    '<td>' +
+                                    data.inactiveData[i].DealerCode +
+                                     '</td>' +
+                                    '</tr>');
+                            }
+                            var inasTable = $('#inactiveSrTable').DataTable();
+
+                            new $.fn.dataTable.Buttons(inasTable, {
+                                buttons: [
+                                    { extend: 'excel', className: 'excelBtn', title: 'InActive SR', text: 'Click For Excel Export' }
+                                ]
+                            });
+
+                            inasTable.buttons(0, null).container().prependTo(
+                                inasTable.table().container()
+                            );
+
+                        }
+
+                    } else {
+                        alert("Data Not Found");
+
+                    }
+                    $("#SRstatusModelDetails").modal('show');
+
+                }
+            });
+
+        });
+
+        $("#btnretailerDetails").on('click', function () {
+
+            var zoneId = $('#zone').val();
+            var dealerId = $('#dealer').val();
+            var startDate = $("#startDate").val();
+            var endDate = $("#endDate").val();
+            var date1 = new Date(startDate);
+            var date2 = new Date(endDate);
+            $.ajax({
+                type: 'POST',
+                //contentType: 'application/json',
+                dataType: 'json',
+                url: '@Url.Action("GetAllRetailerActiveAndInActiveDetailsData", "Dashboard")',
+                data: { zoneId: zoneId, dealerId: dealerId, startDate: startDate, endDate: endDate },
+                success: function (data) {
+                    var tblInactive = $('#inactiveReTable').DataTable();
+                    tblInactive.destroy();
+                    $('#inactiveReTableBody').empty();
+
+
+                    var tblActive = $('#activeReTable').DataTable();
+                    tblActive.destroy();
+                    $('#activeReTableBody').empty();
+
+
+                    if (data != null) {
+                        var aData = data.activeData == null ? 0 : data.activeData.length;
+                        var inaData = data.inactiveData == null ? 0 : data.inactiveData.length;
+                        if (aData > 0) {
+                            var activetbl = $('#activeReTable').DataTable();
+                            activetbl.destroy();
+                            $('#activeReTableBody').empty();
+                            for (var i = 0; i < aData; i++) {
+                                $("#activeReTableBody").append('<tr>' +
+                                     '<td>' +
+                                     (i + 1) +
+                                     '</td>' +
+                                     '<td  style="width: 25%">' +
+                                    data.activeData[i].DistributorName +
+                                     '</td>' +
+                                     '<td>' +
+                                    data.activeData[i].DistributorCode +
+                                     '</td>' +
+                                     '<td>' +
+                                    data.activeData[i].RetailerName +
+                                     '</td>' +
+                                     '<td>' +
+                                    data.activeData[i].OwnerName +
+                                     '</td>' +
+                                    '<td>' +
+                                    data.activeData[i].RetailerAddress +
+                                     '</td>' +
+                                     '<td>' +
+                                     data.activeData[i].ThanaName +
+                                     '</td>' +
+                                       '<td>' +
+                                    data.activeData[i].PhoneNumber +
+                                     '</td>' +
+                                     '<td>' +
+                                    data.activeData[i].PaymentNumberType +
+                                     '</td>' +
+                                     '<td>' +
+                                    data.activeData[i].PaymentNumber +
+                                     '</td>' +
+
+                                     '</tr>');
+                            }
+
+
+                            var table = $('#activeReTable').DataTable();
+
+                            new $.fn.dataTable.Buttons(table, {
+                                buttons: [
+                                    { extend: 'excel', className: 'excelBtn', title: 'Active Retailer', text: 'Click For Excel Export' }
+                                ]
+                            });
+
+                            table.buttons(0, null).container().prependTo(
+                                table.table().container()
+                            );
+                        }
+
+                        if (inaData > 0) {
+                            var inaTable = $('#inactiveReTable').DataTable();
+                            inaTable.destroy();
+                            $('#inactiveReTableBody').empty();
+                            for (var i = 0; i < inaData; i++) {
+                                $("#inactiveReTableBody").append('<tr>' +
+                                     '<td>' +
+                                     (i + 1) +
+                                     '</td>' +
+                                     '<td  style="width: 25%">' +
+                                    data.inactiveData[i].DistributorName +
+                                     '</td>' +
+                                     '<td>' +
+                                    data.inactiveData[i].DistributorCode +
+                                     '</td>' +
+                                     '<td>' +
+                                    data.inactiveData[i].RetailerName +
+                                     '</td>' +
+                                     '<td>' +
+                                    data.inactiveData[i].OwnerName +
+                                     '</td>' +
+                                    '<td>' +
+                                    data.inactiveData[i].RetailerAddress +
+                                     '</td>' +
+                                     '<td>' +
+                                     data.inactiveData[i].ThanaName +
+                                     '</td>' +
+                                       '<td>' +
+                                    data.inactiveData[i].PhoneNumber +
+                                     '</td>' +
+                                     '<td>' +
+                                    data.inactiveData[i].PaymentNumberType +
+                                     '</td>' +
+                                     '<td>' +
+                                    data.inactiveData[i].PaymentNumber +
+                                     '</td>' +
+
+                                    '</tr>');
+                            }
+                            var inasTable = $('#inactiveReTable').DataTable();
+
+                            new $.fn.dataTable.Buttons(inasTable, {
+                                buttons: [
+                                    { extend: 'excel', className: 'excelBtn', title: 'InActive Retailer', text: 'Click For Excel Export' }
+                                ]
+                            });
+
+                            inasTable.buttons(0, null).container().prependTo(
+                                inasTable.table().container()
+                            );
+
+                        }
+
+                    } else {
+                        alert("Data Not Found");
+
+                    }
+                    $("#retailerstatusModelDetails").modal('show');
+
+                }
+            });
+
+        });
+
+
+
+        $("#btnSubmit").on('click', function () {
+            document.getElementById('btnSubmit').value = 'Please Wait!.';
+            document.getElementById('btnSubmit').style.backgroundColor = "#FF0000";
+            $('#DealerStockTable').DataTable().destroy();
+            $("#DealerStockTableBody").html("");
+
+
+            var startDate = $("#startDate").val();
+            var endDate = $("#endDate").val();
+            var model = $("#model").val();
+            var dealer = $("#dealer").val();
+            var category = $("#category").val();
+            var zone = $('#zone').val();
+            var excelTitle = 'Dealer Sales And Stock Report ' + startDate + ' To ' + endDate;
+
+            getAllValueByUserParameter(startDate, endDate, dealer, model, category, excelTitle, zone);
+
+        });
+
+        $("#dealerIncentive").on("change", function () {
+            var dealerCode = $(this).val();
+            $('#srIncentiveTable').DataTable().destroy();
+            $("#srIncentiveInfo").html("");
+            fill_sr_incentive_table(dealerCode);
+        });
+    });
+    function fill_sr_incentive_table(dealerCode) {
+        debugger;
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json',
+            dataType: 'json',
+            url: '@Url.Action("GetSrIncentiveDetail", "Dashboard")',
+            data: JSON.stringify({ dealerCode: dealerCode }),
+            //async: true,
+            success: function (data) {
+
+
+                if (data.length > 0) {
+                    $('#srIncentiveTable').DataTable().destroy();
+                    $("#srIncentiveInfo").html("");
+
+                    var dataList = data.length;
+
+                    for (var i = 0; i < dataList; i++) {
+
+                        $("#srIncentiveInfo").append('<tr>' +
+
+                                 '<td>' + data[i].DistributorNameCellCom + '</td>' +
+                                 '<td>' + data[i].DigitechCode + '</td>' +
+                                 '<td>' + data[i].Zone + '</td>' +
+                                 '<td>' + data[i].Name + '</td>' +
+                                 '<td>' + data[i].Phone + '</td>' +
+                                 '<td>' + data[i].PaymentNumber + '</td>' +
+                                 '<td>' + data[i].PaymentNumberType + '</td>' +
+                                 '<td>' + data[i].Quantity + '</td>' +
+                                 //'<td>' + data[i].SRIncentive + '</td>' +
+                                 '<td>' + data[i].Deduction + '</td>' +
+                                 '<td>' + data[i].FinalAmount + '</td>' +
+                                 '<td>' + data[i].Average + '</td>' +
+                            '</tr>');
+                    }
+                    var table = $('#srIncentiveTable').DataTable();
+
+                    new $.fn.dataTable.Buttons(table, {
+                        buttons: [
+                            { extend: 'excel', className: 'excelBtn', title: '', text: 'Click For Excel Export' }
+                        ]
+                    });
+
+                    table.buttons(0, null).container().prependTo(
+                        table.table().container()
+                    );
+                } else {
+                    iziToast.error({
+                        title: 'Error',
+                        message: 'No Data Found!.',
+                        position: 'topCenter',
+                    });
+
+                }
+            }
+        });
+    }
+    function getAllValueByUserParameter(startDate, endDate, dealer, model, category, excelTitle, zone) {
+
+        var date1 = new Date(startDate);
+        var date2 = new Date(endDate);
+        var dayBetween = date2.getTime() - date1.getTime();
+
+        var Difference_In_Days = dayBetween / (1000 * 3600 * 24);
+
+
+        var modelItem = {
+            'StartDate': startDate,
+            'EndDate': endDate,
+            'Dealer': dealer,
+            'Model': model,
+            'Category': category,
+            'ZoneId': zone
+        };
+
+        if (startDate !== "" && endDate !== "") {
+            if (Difference_In_Days <= 90) {
+                var dataList = JSON.stringify({ objvmDealerAndRetailerStock: modelItem });
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    url: '@Url.Action("DealerStockData", "Dashboard")',
+                    data: dataList,
+                    // async: true,
+                    beforeSend: function () {
+                        $('#cover-spin').show();
+                    },
+                    success: function (data) {
+                        document.getElementById('btnSubmit').value = 'Submit';
+                        document.getElementById('btnSubmit').style.backgroundColor = "#25d5f2";
+                        if (data.length > 0) {
+                            $('#DealerStockTable').DataTable().destroy();
+                            $("#DealerStockTableBody").html("");
+
+                            var dataList = data.length;
+
+                            for (var i = 0; i < dataList; i++) {
+
+                                $("#DealerStockTableBody").append('<tr>' +
+                                       '<td>' + (i + 1) + '</td>' +
+                                         '<td>' + data[i].ProductyType + '</td>' +
+                                       '<td>' + data[i].SalesQuantity + '</td>' +
+                                       '<td>' + data[i].SalesValue + '</td>' +
+                                      '<td>' + data[i].PresentStock + '</td>' +
+                                      '<td>' + data[i].StockValue + '</td>' +
+                                    '</tr>');
+                            }
+                            var table = $('#DealerStockTable').DataTable();
+
+                            new $.fn.dataTable.Buttons(table, {
+                                buttons: [
+                                    { extend: 'excel', className: 'excelBtn', title: excelTitle, text: 'Click For Excel Export' }
+                                ]
+                            });
+
+                            table.buttons(0, null).container().prependTo(
+                                table.table().container()
+                            );
+                            $('#cover-spin').hide();
+                        } else {
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'No Data Found!.',
+                                position: 'topCenter',
+                            });
+                            $('#cover-spin').hide();
+
+                        }
+                        $('#cover-spin').hide();
+                    }
+                });
+
+            } else {
+                alert("At a time, you can be select only three(3) months!.");
+                document.getElementById('btnSubmit').value = 'Submit';
+                document.getElementById('btnSubmit').style.backgroundColor = "#25d5f2";
+                $('#cover-spin').hide();
+            }
+
+        } else {
+            alert("Select Date!");
+            document.getElementById('btnSubmit').value = 'Submit';
+            document.getElementById('btnSubmit').style.backgroundColor = "#25d5f2";
+            $('#cover-spin').hide();
+        }
+    }
+</script>

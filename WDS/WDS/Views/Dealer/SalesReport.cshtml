@@ -1,0 +1,173 @@
+﻿
+@{
+    ViewBag.Title = "SalesReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                <div class="card-header">Sales Report</div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <div class="form-group row">
+                            <label class=" col-lg-2 text-sm-right">Start Date:</label>
+                            <div class="col-lg-3">
+                                <input class="datepicker form-control" data-date-format="dd/mm/yyyy" id="startDate" autocomplete="off">
+                            </div>
+                            <label class=" col-lg-2 text-sm-right">End Date:</label>
+                            <div class="col-lg-3">
+                                <input class="datepicker form-control" data-date-format="dd/mm/yyyy" id="endDate" autocomplete="off">
+                            </div>
+                            <div class="col-lg-2">
+                                <button class="btn btn-outline-success btn-sm" id="btnSearch">Search</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <table class="table table-bordered" id="tbl_sales_report">
+                        <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Order Date</th>
+                            <th>Model</th>
+                            <th>Retailer Name</th>
+                            <th>Retailer Addedress</th>
+                            <th>Retailer Phone</th>
+                            <th>Order Quantity</th>
+                            @*<th>Action</th>*@
+                        </tr>
+                        </thead>
+                        <tbody id="tcBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        //$(".datepicker").datepicker();
+        $("#tbl_sales_report").DataTable();
+
+       
+
+
+        $(".datepicker").datepicker({
+            dateFormat: 'yy-mm-dd'
+        });
+
+        $("#btnSearch").on('click', function () {
+            $('#tbl_sales_report').DataTable().destroy();
+            $("#tcBody").html("");
+
+
+            var startDate = $("#startDate").val();
+            var endDate = $("#endDate").val();
+            if (startDate !== "" && endDate !== "") {
+                var dataList = JSON.stringify({ startDate: startDate, endDate: endDate });
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    url: '@Url.Action("SalesReport", "Dealer")',
+                    data: dataList,
+                    success: function (data) {
+                        if (data.length > 0) {
+                            $('#tbl_sales_report').DataTable().destroy();
+                            $("#tcBody").html("");
+
+                            var dataList = data.length;
+                            
+                            for (var i = 0; i < dataList; i++) {
+                                var dateString = data[i].OrderDate;
+                                var seconds = parseInt(dateString.replace(/\/Date\(([0-9]+)[^+]\//i, "$1"));
+                                var date = new Date(seconds);
+                                date = formatDate(date);
+                                $("#tcBody").append('<tr>' +
+                                    '<td>' + data[i].OrderId + '</td>' +
+                                    '<td>' + date + '</td>' +
+                                    '<td>' + data[i].Model + '</td>' +
+                                    '<td>' + data[i].RetailerName + '</td>' +
+                                    '<td>' + data[i].RetailerAddress + '</td>' +
+                                    '<td>' + data[i].RetailerPhone + '</td>' +
+                                    '<td>' + data[i].OrderQuantity + '</td>' +  
+                                    '</tr>');
+                            }
+                            var table = $('#tbl_sales_report').DataTable();
+
+                            new $.fn.dataTable.Buttons(table, {
+                                buttons: [
+                                    { extend: 'excel', className: 'excelBtn', title: 'Sales Report', text: 'Excel Export' }
+                                ]
+                            });
+
+                            table.buttons(0, null).container().prependTo(
+                                table.table().container()
+                            );
+                        } else {
+                            iziToast.error({
+                                title: 'Error',
+                                message: 'No Data Found!.',
+                                position: 'topCenter',
+                            });
+                        }
+                    }
+                });
+            }
+            
+        });
+    });
+    
+    function formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+        return [day, month, year].join('-');
+    }
+    
+    function exportTableToExcel(tableId, filename){
+        var downloadLink;
+        var dataType = 'application/vnd.ms-excel';
+        var tableSelect = document.getElementById(tableId);
+        var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+    
+        // Specify file name
+        filename = filename?filename+'.xls':'excel_data.xls';
+    
+        // Create download link element
+        downloadLink = document.createElement("a");
+    
+        document.body.appendChild(downloadLink);
+    
+        if(navigator.msSaveOrOpenBlob){
+            var blob = new Blob(['\ufeff', tableHTML], {
+                type: dataType
+            });
+            navigator.msSaveOrOpenBlob( blob, filename);
+        }else{
+            // Create a link to the file
+            downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+    
+            // Setting the file name
+            downloadLink.download = filename;
+        
+            //triggering the function
+            downloadLink.click();
+        }
+    }
+
+    var tableToExcel = (function() {
+        var uri = 'data:application/vnd.ms-excel;base64,', template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><meta http-equiv="content-type" content="text/plain; charset=UTF-8"/></head><body><table>{table}</table></body></html>', base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) }, format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
+        return function(table, name) {
+            if (!table.nodeType) table = document.getElementById(table);
+            var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
+            window.location.href = uri + base64(format(template, ctx));
+        };
+    })();
+</script>
